@@ -1,0 +1,85 @@
+{% comment %} On Paper — Best sellers (Lumos). Eyebrow + heading + grilla de productos de una colección. {% endcomment %}
+<section class="op-best u-section full-width" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; background-color: var(--swatch--light-100, #ffffff)" {{ section.shopify_attributes }}>
+  <div class="op-best_contain u-container">
+    <header class="op-best_head">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="op-best_eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <div class="op-best_heading" role="heading" aria-level="2">{{ section.settings.heading }}</div>
+      {%- endif -%}
+    </header>
+
+    {%- assign col = section.settings.collection -%}
+    {%- assign limit = section.settings.products_count -%}
+    <div class="op-best_grid">
+      {%- if col != blank and col.products.size > 0 -%}
+        {%- for product in col.products limit: limit -%}
+          <article class="op-best_card">
+            <a href="{{ product.url }}" class="op-best_media" aria-label="{{ product.title }}">
+              {%- if product.featured_image -%}
+                {{ product.featured_image | image_url: width: 900 | image_tag: alt: product.title, class: 'op-best_img', widths: '300,500,700,900', sizes: '(min-width: 750px) 30vw, 90vw', loading: 'lazy' }}
+              {%- else -%}
+                <div class="op-best_img op-best_img--ph"></div>
+              {%- endif -%}
+            </a>
+            <h3 class="op-best_title">{{ product.title }}</h3>
+            {%- if product.price > 0 -%}
+              <p class="op-best_price"><em>from</em> {{ product.price | money }}</p>
+            {%- endif -%}
+            {%- if section.settings.cta_label != blank -%}
+              <a href="{{ product.url }}" class="op-best_cta">{{ section.settings.cta_label }}</a>
+            {%- endif -%}
+          </article>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..limit) -%}
+          <article class="op-best_card">
+            <a href="#" class="op-best_media"><div class="op-best_img op-best_img--ph"></div></a>
+            <h3 class="op-best_title">Producto {{ i }}</h3>
+            <p class="op-best_price"><em>from</em> $0.00 mxn</p>
+            {%- if section.settings.cta_label != blank -%}<a href="#" class="op-best_cta">{{ section.settings.cta_label }}</a>{%- endif -%}
+          </article>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .op-best_head { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 70ch; margin-inline: auto; margin-bottom: var(--_spacing---space--7); }
+  .op-best_eyebrow { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; opacity: 0.7; margin-bottom: var(--_spacing---space--5); }
+  .op-best_heading { font-family: var(--_typography---font--primary-family); font-size: clamp(1.5rem, 1rem + 2vw, 2.2rem); line-height: 1.2; }
+  .op-best_heading p { margin: 0; }
+  .op-best_heading em { font-style: italic; color: var(--swatch--brand-300, #b0b094); }
+  .op-best_grid { display: grid; grid-template-columns: repeat(var(--op-best-cols, 3), 1fr); gap: var(--_spacing---space--6); }
+  .op-best_media { display: block; aspect-ratio: 1 / 1.05; overflow: hidden; }
+  .op-best_img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms ease; }
+  .op-best_media:hover .op-best_img { transform: scale(1.04); }
+  .op-best_img--ph { background-color: color-mix(in srgb, var(--_theme---text) 10%, transparent); }
+  .op-best_title { font-family: var(--_typography---font--primary-family); font-size: 1.15rem; font-weight: 400; margin-top: var(--_spacing---space--5); margin-bottom: var(--_spacing---space--3); }
+  .op-best_price { font-size: 0.92rem; opacity: 0.75; margin-top: 0; }
+  .op-best_price em { font-style: italic; }
+  .op-best_cta { display: inline-block; margin-top: var(--_spacing---space--5); font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.74rem; color: var(--_theme---text); text-decoration: none; background-color: color-mix(in srgb, var(--_theme---text) 8%, transparent); border-radius: 2rem; padding: 0.7rem 1.6rem; transition: background-color 300ms; }
+  .op-best_cta:hover { background-color: color-mix(in srgb, var(--_theme---text) 16%, transparent); }
+  @media (max-width: 990px) { .op-best_grid { --op-best-cols: 2; } }
+  @media (max-width: 600px) { .op-best_grid { --op-best-cols: 1; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "On Paper Best sellers",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 200, "step": 4, "default": 96, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 200, "step": 4, "default": 96, "unit": "px" },
+    { "type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "Best sellers" },
+    { "type": "richtext", "id": "heading", "label": "Título", "default": "<p>Enduring, personal, <em>unforgettable.</em></p>" },
+    { "type": "collection", "id": "collection", "label": "Colección" },
+    { "type": "range", "id": "products_count", "label": "Número de productos", "min": 2, "max": 8, "step": 1, "default": 3 },
+    { "type": "text", "id": "cta_label", "label": "Texto del botón", "default": "Shop now" }
+  ],
+  "presets": [{ "name": "On Paper Best sellers" }]
+}
+{% endschema %}

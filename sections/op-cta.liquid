@@ -1,0 +1,62 @@
+{% comment %} On Paper — CTA centrado (Lumos). Título + párrafo + botón, centrado. {% endcomment %}
+<section class="op-cta u-section full-width {{ section.settings.theme }}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; background-color: {% if section.settings.bg_color != blank %}{{ section.settings.bg_color }}{% else %}var(--swatch--sand-300, #e5e1d9){% endif %}" {{ section.shopify_attributes }}>
+  <div class="op-cta_contain u-container">
+    <div class="op-cta_content" style="--op-cta-hw: {{ section.settings.heading_width }}ch; --op-cta-bw: {{ section.settings.body_width }}ch">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="op-cta_eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <div class="op-cta_heading" role="heading" aria-level="2">{{ section.settings.heading }}</div>
+      {%- endif -%}
+      {%- if section.settings.body != blank -%}
+        <div class="op-cta_body">{{ section.settings.body }}</div>
+      {%- endif -%}
+      {%- if section.settings.cta_label != blank -%}
+        <a class="op-cta_btn" href="{{ section.settings.cta_link | default: '#' }}">{{ section.settings.cta_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .op-cta_content { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .op-cta_eyebrow { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; opacity: 0.7; margin-bottom: var(--_spacing---space--5); }
+  .op-cta_heading { max-width: var(--op-cta-hw, 24ch); margin-inline: auto; font-family: var(--_typography---font--primary-family); font-style: italic; font-size: clamp(1.5rem, 1rem + 2vw, 2.1rem); line-height: 1.2; color: var(--_theme---text); }
+  .op-cta_heading p { margin: 0; }
+  .op-cta_body { max-width: var(--op-cta-bw, 52ch); margin-inline: auto; margin-top: var(--_spacing---space--5); }
+  .op-cta_body p { margin: 0; }
+  .op-cta_btn {
+    display: inline-block; margin-top: var(--_spacing---space--6);
+    font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem;
+    color: var(--_theme---text); text-decoration: none;
+    background-color: color-mix(in srgb, var(--_theme---text) 8%, transparent);
+    border: 0.0625rem solid color-mix(in srgb, var(--_theme---text) 22%, transparent);
+    border-radius: 2rem; padding: 0.85rem 2rem; transition: background-color 300ms;
+  }
+  .op-cta_btn:hover { background-color: color-mix(in srgb, var(--_theme---text) 16%, transparent); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "On Paper CTA",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 240, "step": 4, "default": 120, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 240, "step": 4, "default": 120, "unit": "px" },
+    { "type": "select", "id": "theme", "label": "Tema", "options": [
+      { "value": "u-theme-light", "label": "Claro" },
+      { "value": "u-theme-dark", "label": "Oscuro" }
+    ], "default": "u-theme-light" },
+    { "type": "color", "id": "bg_color", "label": "Color de fondo (opcional)" },
+    { "type": "range", "id": "heading_width", "label": "Ancho del título (caracteres)", "min": 14, "max": 50, "step": 1, "default": 24, "unit": "ch" },
+    { "type": "range", "id": "body_width", "label": "Ancho del párrafo (caracteres)", "min": 30, "max": 70, "step": 1, "default": 52, "unit": "ch" },
+    { "type": "text", "id": "eyebrow", "label": "Etiqueta (opcional)" },
+    { "type": "richtext", "id": "heading", "label": "Título (itálica)", "default": "<p>Proyectos Personalizados</p>" },
+    { "type": "richtext", "id": "body", "label": "Texto", "default": "<p>En On Paper cada cliente tiene un lugar especial: entendemos lo importante que es confiar en quien plasma tus recuerdos. Por eso, nuestro trabajo está hecho con atención, cariño y dedicación. ¡Escríbenos para hacer realidad tu idea!</p>" },
+    { "type": "text", "id": "cta_label", "label": "Texto del botón", "default": "Let's work together" },
+    { "type": "url", "id": "cta_link", "label": "Link del botón" }
+  ],
+  "presets": [{ "name": "On Paper CTA" }]
+}
+{% endschema %}

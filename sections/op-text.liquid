@@ -1,0 +1,39 @@
+{% comment %} On Paper — Texto (Lumos). Párrafo centrado reutilizable, ancho ajustable. {% endcomment %}
+<section class="op-text u-section {{ section.settings.theme }}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" {{ section.shopify_attributes }}>
+  <div class="op-text_contain u-container">
+    <div class="op-text_content" style="--op-text-cw: {{ section.settings.content_width }}ch; text-align: {{ section.settings.align }}">
+      {%- if section.settings.body != blank -%}
+        <div class="op-text_body">{{ section.settings.body }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .op-text_content { max-width: var(--op-text-cw, 70ch); margin-inline: auto; }
+  .op-text_body p { margin: 0; }
+  .op-text_body p + p { margin-top: var(--_spacing---space--4); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "On Paper Texto",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 200, "step": 4, "default": 64, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 200, "step": 4, "default": 96, "unit": "px" },
+    { "type": "range", "id": "content_width", "label": "Ancho del contenido (caracteres)", "min": 30, "max": 90, "step": 1, "default": 70, "unit": "ch" },
+    { "type": "select", "id": "align", "label": "Alineación", "options": [
+      { "value": "center", "label": "Centrado" },
+      { "value": "left", "label": "Izquierda" }
+    ], "default": "center" },
+    { "type": "select", "id": "theme", "label": "Tema", "options": [
+      { "value": "u-theme-light", "label": "Claro" },
+      { "value": "u-theme-dark", "label": "Oscuro" }
+    ], "default": "u-theme-light" },
+    { "type": "richtext", "id": "body", "label": "Texto", "default": "<p>Creemos en la belleza de lo hecho a mano. Diseñamos y producimos proyectos de variedad, siempre con atención al detalle porque cada historia merece ser contada de manera única. Nos inspiran las texturas, los papeles, los colores y el diseño editorial, creando objetos que despierten emociones y conserven recuerdos para toda la vida.</p>" }
+  ],
+  "presets": [{ "name": "On Paper Texto" }]
+}
+{% endschema %}

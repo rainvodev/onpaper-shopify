@@ -1,0 +1,11 @@
+{
+  "type": "header",
+  "name": "t:general.header",
+  "sections": {
+    "header": {
+      "type": "op-header",
+      "settings": {}
+    }
+  },
+  "order": ["header"]
+}

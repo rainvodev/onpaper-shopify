@@ -1,0 +1,133 @@
+{% comment %} On Paper — Galería (Lumos). Mosaico de 3 columnas (la del medio desfasada) + disco "Send message" que sigue el cursor. {% endcomment %}
+{%- assign grid_tag = 'div' -%}
+{%- if section.settings.disc_link != blank -%}{%- assign grid_tag = 'a' -%}{%- endif -%}
+<section class="op-gallery u-section full-width" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; background-color: var(--swatch--sand-300, #e5e1d9); --op-gallery-gap: {{ section.settings.gap }}px; --op-gallery-offset: {{ section.settings.col2_offset }}px" {{ section.shopify_attributes }}>
+  <div class="op-gallery_contain u-container">
+    {%- if section.settings.heading != blank -%}
+      <div class="op-gallery_heading" role="heading" aria-level="2">{{ section.settings.heading }}</div>
+    {%- endif -%}
+    <{{ grid_tag }} class="op-gallery_grid" data-follow {% if section.settings.disc_link != blank %}href="{{ section.settings.disc_link }}" aria-label="{{ section.settings.disc_label }}"{% endif %}>
+      {%- assign gallery_cols = "1,2,3" | split: "," -%}
+      {%- for col in gallery_cols -%}
+        <div class="op-gallery_col op-gallery_col--{{ col }}">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.column == col -%}
+              <figure class="op-gallery_item op-gallery_item--{{ block.settings.ratio }}" {{ block.shopify_attributes }}>
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 1000 | image_tag: alt: block.settings.image.alt, class: 'op-gallery_img', widths: '300,500,700,1000', sizes: '(min-width: 750px) 33vw, 90vw', loading: 'lazy' }}
+                {%- else -%}
+                  <div class="op-gallery_img op-gallery_img--ph"></div>
+                {%- endif -%}
+              </figure>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+      {%- if section.settings.disc_label != blank -%}
+        <span class="op-gallery_disc" aria-hidden="true">{{ section.settings.disc_label }}</span>
+      {%- endif -%}
+    </{{ grid_tag }}>
+  </div>
+</section>
+
+{% stylesheet %}
+  .op-gallery_heading { text-align: center; font-family: var(--_typography---font--primary-family); font-size: clamp(1.4rem, 1rem + 1.8vw, 2rem); margin-bottom: var(--_spacing---space--6); }
+  .op-gallery_heading p { margin: 0; }
+  .op-gallery_grid { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--op-gallery-gap, 16px); align-items: start; text-decoration: none; color: inherit; }
+  .op-gallery_col { display: flex; flex-direction: column; gap: var(--op-gallery-gap, 16px); }
+  .op-gallery_col--2 { margin-top: var(--op-gallery-offset, 64px); }
+  .op-gallery_item { overflow: hidden; margin: 0; }
+  .op-gallery_img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 700ms ease; }
+  .op-gallery_item:hover .op-gallery_img { transform: scale(1.03); }
+  .op-gallery_item--wide .op-gallery_img { aspect-ratio: 4 / 3; }
+  .op-gallery_item--square .op-gallery_img { aspect-ratio: 1 / 1; }
+  .op-gallery_item--tall .op-gallery_img { aspect-ratio: 3 / 4; }
+  .op-gallery_item--portrait .op-gallery_img { aspect-ratio: 3 / 5; }
+  .op-gallery_img--ph { background-color: color-mix(in srgb, var(--_theme---text) 12%, transparent); aspect-ratio: 4 / 3; }
+  /* Disco "Send message" que sigue el cursor */
+  .op-gallery_grid[data-follow] { cursor: none; }
+  .op-gallery_disc {
+    position: absolute; left: 28%; top: 22%; transform: translate(-50%, -50%);
+    display: grid; place-items: center; text-align: center;
+    width: 7.5rem; height: 7.5rem; border-radius: 50%;
+    background-color: rgba(245,245,239,0.7); backdrop-filter: blur(6px);
+    color: #5f604e; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.72rem; line-height: 1.3;
+    pointer-events: none; transition: left 120ms ease-out, top 120ms ease-out; z-index: 3;
+  }
+  @media (hover: none) { .op-gallery_grid[data-follow] { cursor: pointer; } }
+  @media (max-width: 700px) {
+    .op-gallery_grid { grid-template-columns: 1fr; }
+    .op-gallery_col--2 { margin-top: 0; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  document.querySelectorAll('.op-gallery_grid[data-follow]').forEach(function (grid) {
+    var disc = grid.querySelector('.op-gallery_disc');
+    if (!disc || window.matchMedia('(hover: none)').matches) return;
+    grid.addEventListener('pointermove', function (e) {
+      var r = grid.getBoundingClientRect();
+      disc.style.left = (e.clientX - r.left) + 'px';
+      disc.style.top = (e.clientY - r.top) + 'px';
+    });
+    grid.addEventListener('pointerleave', function () {
+      disc.style.left = '';
+      disc.style.top = '';
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "On Paper Galería",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 18,
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 200, "step": 4, "default": 64, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 200, "step": 4, "default": 96, "unit": "px" },
+    { "type": "richtext", "id": "heading", "label": "Título (opcional)" },
+    { "type": "range", "id": "gap", "label": "Separación", "min": 0, "max": 40, "step": 2, "default": 16, "unit": "px" },
+    { "type": "range", "id": "col2_offset", "label": "Desfase columna central", "min": 0, "max": 200, "step": 4, "default": 72, "unit": "px" },
+    { "type": "header", "content": "Disco que sigue el cursor" },
+    { "type": "text", "id": "disc_label", "label": "Texto del disco", "default": "Send message" },
+    { "type": "url", "id": "disc_link", "label": "Link del disco / galería" }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Imagen",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagen" },
+        { "type": "select", "id": "column", "label": "Columna", "options": [
+          { "value": "1", "label": "Izquierda" },
+          { "value": "2", "label": "Centro" },
+          { "value": "3", "label": "Derecha" }
+        ], "default": "1" },
+        { "type": "select", "id": "ratio", "label": "Proporción", "options": [
+          { "value": "wide", "label": "Horizontal (4:3)" },
+          { "value": "square", "label": "Cuadrada" },
+          { "value": "tall", "label": "Vertical (3:4)" },
+          { "value": "portrait", "label": "Retrato (3:5)" }
+        ], "default": "wide" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "On Paper Galería",
+    "blocks": [
+      { "type": "image", "settings": { "column": "1", "ratio": "wide" } },
+      { "type": "image", "settings": { "column": "1", "ratio": "wide" } },
+      { "type": "image", "settings": { "column": "1", "ratio": "wide" } },
+      { "type": "image", "settings": { "column": "1", "ratio": "wide" } },
+      { "type": "image", "settings": { "column": "2", "ratio": "square" } },
+      { "type": "image", "settings": { "column": "2", "ratio": "wide" } },
+      { "type": "image", "settings": { "column": "2", "ratio": "portrait" } },
+      { "type": "image", "settings": { "column": "2", "ratio": "wide" } },
+      { "type": "image", "settings": { "column": "3", "ratio": "wide" } },
+      { "type": "image", "settings": { "column": "3", "ratio": "wide" } },
+      { "type": "image", "settings": { "column": "3", "ratio": "wide" } }
+    ]
+  }]
+}
+{% endschema %}

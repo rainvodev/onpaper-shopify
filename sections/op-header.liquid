@@ -1,0 +1,82 @@
+{% comment %} On Paper — Header (Lumos). Overlay transparente sobre el hero en la Home; sólido en el resto. {% endcomment %}
+{% liquid
+  assign is_home = false
+  if template.name == 'index'
+    assign is_home = true
+  endif
+%}
+<header class="op-header full-width{% if is_home %} is-overlay u-theme-dark{% endif %}" {{ section.shopify_attributes }}>
+  <div class="op-header_contain u-container">
+    <div class="op-header_layout">
+      <a href="{{ routes.root_url }}" class="op-header_logo" aria-label="{{ shop.name }}">
+        {%- if section.settings.logo != blank -%}
+          {{ section.settings.logo | image_url: width: 400 | image_tag: alt: shop.name, class: 'op-header_logo_img', widths: '160,240,400' }}
+        {%- else -%}
+          <span class="op-header_logo_text">onpaper</span>
+        {%- endif -%}
+      </a>
+
+      <nav class="op-header_nav" aria-label="Principal">
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}" class="op-header_link">{{ link.title }}</a>
+        {%- endfor -%}
+      </nav>
+
+      <div class="op-header_actions">
+        {%- if localization.available_countries.size > 1 -%}
+          {%- form 'localization', class: 'op-loc' -%}
+            <select name="country_code" class="op-loc_select" aria-label="País / moneda" onchange="this.form.submit()">
+              {%- for country in localization.available_countries -%}
+                <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>{{ country.currency.iso_code }}</option>
+              {%- endfor -%}
+            </select>
+          {%- endform -%}
+        {%- endif -%}
+
+        {%- if localization.available_languages.size > 1 -%}
+          {%- form 'localization', class: 'op-loc' -%}
+            <select name="language_code" class="op-loc_select" aria-label="Idioma" onchange="this.form.submit()">
+              {%- for language in localization.available_languages -%}
+                <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>{{ language.iso_code | upcase }}</option>
+              {%- endfor -%}
+            </select>
+          {%- endform -%}
+        {%- endif -%}
+
+        <a href="{{ routes.cart_url }}" class="op-header_cart" aria-label="Carrito">
+          Cart ({{ cart.item_count }})
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% stylesheet %}
+  .op-header { background-color: var(--_theme---background); border-bottom: 0.0625rem solid var(--_theme---border); }
+  .op-header.is-overlay { position: absolute; top: 0; left: 0; right: 0; z-index: 10; background-color: transparent; border-bottom: 0; }
+  .op-header_contain { padding-top: var(--_spacing---space--4); padding-bottom: var(--_spacing---space--4); }
+  .op-header_layout { display: flex; align-items: center; justify-content: space-between; gap: var(--_spacing---space--5); }
+  .op-header_logo { text-decoration: none; color: currentColor; display: inline-flex; align-items: center; }
+  .op-header_logo_img { width: 8rem; height: auto; }
+  .op-header_logo_text { font-family: var(--_typography---font--primary-family); font-size: 1.6rem; letter-spacing: -0.01em; }
+  .op-header_nav { display: var(--none-medium, flex); gap: var(--_spacing---space--5); }
+  .op-header_link, .op-loc_select, .op-header_cart {
+    font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem;
+    color: currentColor; text-decoration: none;
+  }
+  .op-header_actions { display: flex; align-items: center; gap: var(--_spacing---space--4); }
+  .op-loc { display: inline-flex; }
+  .op-loc_select { background-color: transparent; border: 0; cursor: pointer; color: currentColor; }
+  .op-loc_select option { color: #111; }
+  .op-header_cart { white-space: nowrap; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Encabezado On Paper",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo (opcional; si está vacío se usa el wordmark)" },
+    { "type": "link_list", "id": "menu", "label": "Menú", "default": "main-menu" }
+  ]
+}
+{% endschema %}

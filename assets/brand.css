@@ -1,0 +1,32 @@
+/* On Paper — tokens de marca (extraídos del diseño Adobe XD, modo spec, jun-2026)
+   sobre Lumos. Fuentes: Source Serif Pro (display + cuerpo), Marcellus (labels mayúsculas).
+   Ink/acento #5F604E (olive) · secundario #B0B094 · crema #F5F5EF · blanco #FFFFFF. */
+:root{
+  --swatch--brand-500:#5F604E;
+  --swatch--light-100:#ffffff;   /* blanco */
+  --swatch--light-200:#f5f5ef;   /* crema (About / fondo base) */
+  --swatch--sand-300:#e5e1d9;    /* arena cálida (CTA Proyectos Personalizados) */
+  --_typography---font--primary-family:"Source Serif Pro", Georgia, "Times New Roman", serif;
+  --_typography---font--secondary-family:"Source Serif Pro", Georgia, "Times New Roman", serif;
+  --font-label:"Marcellus", Georgia, serif; /* eyebrows / nav / etiquetas */
+}
+/* Tema claro: cremas + tinta olive */
+:root, .u-theme-light{
+  --_theme---background:#f5f5ef;
+  --_theme---background-2:#ffffff;
+  --_theme---text:#5f604e;
+  --_theme---heading-accent:#5f604e;
+  --_theme---border:color-mix(in srgb, #5f604e 16%, transparent);
+}
+/* Tema oscuro (hero sobre imagen): texto crema, acento sage */
+.u-theme-dark{
+  --_theme---background:#2a2a24;
+  --_theme---background-2:#3a3a31;
+  --_theme---text:#f5f5ef;
+  --_theme---heading-accent:#b0b094;
+  --_theme---border:color-mix(in srgb, #f5f5ef 22%, transparent);
+}
+/* El diseño NO usa mayúsculas en títulos */
+[class*="u-text-style-display"], [class*="u-text-style-h"]{ text-transform:none; }
+/* Eyebrows / etiquetas en Marcellus mayúsculas */
+.u-eyebrow-text, .u-text-style-tagline{ font-family:var(--font-label); text-transform:uppercase; letter-spacing:.08em; }

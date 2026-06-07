@@ -1,0 +1,49 @@
+{
+  "sections": {
+    "main": {
+      "type": "op-hero",
+      "blocks": {
+        "slide-1": { "type": "slide", "settings": {} },
+        "slide-2": { "type": "slide", "settings": {} },
+        "slide-3": { "type": "slide", "settings": {} }
+      },
+      "block_order": ["slide-1", "slide-2", "slide-3"],
+      "settings": {}
+    },
+    "about": { "type": "op-about", "settings": {} },
+    "bookcase": {
+      "type": "op-bookcase",
+      "blocks": {
+        "img-1": { "type": "image", "settings": {} },
+        "img-2": { "type": "image", "settings": {} },
+        "img-3": { "type": "image", "settings": {} },
+        "img-4": { "type": "image", "settings": {} }
+      },
+      "block_order": ["img-1", "img-2", "img-3", "img-4"],
+      "settings": {}
+    },
+    "about_note": { "type": "op-text", "settings": {} },
+    "collection_banner": { "type": "op-collection-banner", "settings": {} },
+    "bestsellers": { "type": "op-bestsellers", "settings": {} },
+    "cta": { "type": "op-cta", "settings": {} },
+    "gallery": {
+      "type": "op-gallery",
+      "blocks": {
+        "g1": { "type": "image", "settings": { "column": "1", "ratio": "wide" } },
+        "g2": { "type": "image", "settings": { "column": "1", "ratio": "wide" } },
+        "g3": { "type": "image", "settings": { "column": "1", "ratio": "wide" } },
+        "g4": { "type": "image", "settings": { "column": "1", "ratio": "wide" } },
+        "g5": { "type": "image", "settings": { "column": "2", "ratio": "square" } },
+        "g6": { "type": "image", "settings": { "column": "2", "ratio": "wide" } },
+        "g7": { "type": "image", "settings": { "column": "2", "ratio": "portrait" } },
+        "g8": { "type": "image", "settings": { "column": "2", "ratio": "wide" } },
+        "g9": { "type": "image", "settings": { "column": "3", "ratio": "wide" } },
+        "g10": { "type": "image", "settings": { "column": "3", "ratio": "wide" } },
+        "g11": { "type": "image", "settings": { "column": "3", "ratio": "wide" } }
+      },
+      "block_order": ["g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8", "g9", "g10", "g11"],
+      "settings": {}
+    }
+  },
+  "order": ["main", "about", "bookcase", "about_note", "collection_banner", "bestsellers", "cta", "gallery"]
+}

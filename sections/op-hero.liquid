@@ -1,0 +1,115 @@
+{% comment %} On Paper — Hero slideshow full-bleed (Lumos). Título rich text (multilínea + itálica), tag "More of us", indicadores. {% endcomment %}
+<section class="op-hero_wrap u-section full-width u-theme-dark" data-autoplay="{{ section.settings.autoplay }}" {{ section.shopify_attributes }}>
+  <div class="op-hero_slides">
+    {%- for block in section.blocks -%}
+      <div class="op-hero_slide{% if forloop.first %} is-active{% endif %}" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+          {{ block.settings.image | image_url: width: 3000 | image_tag: class: 'op-hero_slide_img', loading: 'eager', sizes: '100vw', widths: '800, 1200, 1800, 2400, 3000' }}
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+    <div class="op-hero_overlay" style="opacity: {{ section.settings.overlay | divided_by: 100.0 }}"></div>
+  </div>
+
+  <div class="op-hero_more"><span class="op-hero_more_text">More of us</span></div>
+
+  <div class="op-hero_contain">
+    <div class="op-hero_content u-margin-trim" style="--op-hero-cw: {{ section.settings.content_width }}ch">
+      <div class="op-hero_title" role="heading" aria-level="1">{{ section.settings.heading }}</div>
+      {%- if section.settings.subheading != blank -%}
+        <p class="op-hero_text u-text-style-main">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+      {%- if section.settings.cta_label != blank -%}
+        <a class="op-hero_btn" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}" data-trigger="hover focus">{{ section.settings.cta_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if section.blocks.size > 1 -%}
+    <div class="op-hero_dots">
+      {%- for block in section.blocks -%}
+        <button type="button" class="op-hero_dot{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Slide {{ forloop.index }}"></button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% stylesheet %}
+  .op-hero_wrap { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: clip; }
+  .op-hero_slides, .op-hero_overlay { position: absolute; inset: 0; }
+  .op-hero_slide { position: absolute; inset: 0; opacity: 0; transition: opacity 900ms ease; }
+  .op-hero_slide.is-active { opacity: 1; }
+  .op-hero_slide_img { width: 100%; height: 100%; object-fit: cover; }
+  .op-hero_overlay { background-color: #1d1c17; pointer-events: none; }
+  .op-hero_contain { position: relative; z-index: 2; width: 100%; max-width: var(--page-width, 90rem); margin-inline: auto; padding-inline: var(--page-margin, 1.5rem); }
+  .op-hero_content { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: var(--op-hero-cw, 40ch); margin-inline: auto; }
+  .op-hero_title { font-family: var(--_typography---font--primary-family); font-size: clamp(1.5rem, 1rem + 2.2vw, 2.25rem); line-height: 1.2; }
+  .op-hero_title p { margin: 0; }
+  .op-hero_title em, .op-hero_title i { font-style: italic; }
+  .op-hero_text { margin-top: var(--_spacing---space--3); }
+  .op-hero_btn {
+    margin-top: var(--_spacing---space--5); padding: var(--_spacing---space--3) var(--_spacing---space--6);
+    border-radius: var(--radius--round);
+    background-color: rgba(255, 255, 255, 0.14);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    border: 0.0625rem solid rgba(255, 255, 255, 0.35); color: currentColor;
+    font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem;
+    transition: background-color 300ms;
+  }
+  .op-hero_btn:hover, .op-hero_btn:focus-visible { background-color: rgba(255, 255, 255, 0.26); }
+  .op-hero_more { position: absolute; left: var(--page-margin, 2rem); bottom: 0; z-index: 2; height: 12rem; display: flex; align-items: flex-start; gap: 0.7rem; }
+  .op-hero_more::before { content: ""; width: 0.0625rem; align-self: stretch; background-color: rgba(255, 255, 255, 0.55); }
+  .op-hero_more_text { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.7rem; }
+  .op-hero_dots { position: absolute; bottom: var(--_spacing---space--6); left: 50%; transform: translateX(-50%); z-index: 2; display: flex; gap: 0.75rem; }
+  .op-hero_dot { width: 2.25rem; height: 0.0625rem; border: 0; padding: 0; cursor: pointer; background-color: rgba(255, 255, 255, 0.4); transition: background-color 300ms; }
+  .op-hero_dot.is-active { background-color: rgba(255, 255, 255, 0.9); }
+{% endstylesheet %}
+
+{% javascript %}
+  document.querySelectorAll('.op-hero_wrap').forEach((hero) => {
+    if (hero.dataset.heroInit) return;
+    hero.dataset.heroInit = 'true';
+    const slides = hero.querySelectorAll('.op-hero_slide');
+    const dots = hero.querySelectorAll('.op-hero_dot');
+    if (slides.length < 2) return;
+    let i = 0, timer = null;
+    const speed = (parseInt(hero.dataset.autoplay, 10) || 0) * 1000;
+    const show = (n) => {
+      i = (n + slides.length) % slides.length;
+      slides.forEach((s, k) => s.classList.toggle('is-active', k === i));
+      dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
+    };
+    dots.forEach((d) => d.addEventListener('click', () => { show(parseInt(d.dataset.index, 10)); restart(); }));
+    const restart = () => {
+      if (timer) clearInterval(timer);
+      if (speed > 0 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        timer = setInterval(() => show(i + 1), speed);
+      }
+    };
+    restart();
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "On Paper Hero",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "range", "id": "overlay", "label": "Oscurecer imagen (%)", "min": 0, "max": 80, "step": 5, "default": 35, "unit": "%" },
+    { "type": "range", "id": "autoplay", "label": "Autoplay (seg, 0 = off)", "min": 0, "max": 10, "step": 1, "default": 6, "unit": "s" },
+    { "type": "range", "id": "content_width", "label": "Ancho del contenido (caracteres)", "min": 20, "max": 70, "step": 1, "default": 40, "unit": "ch" },
+    { "type": "richtext", "id": "heading", "label": "Título (multilínea; itálica donde quieras)", "default": "<p>Crafted with passion,</p><p><em>designed for a lifetime.</em></p>" },
+    { "type": "text", "id": "subheading", "label": "Subtítulo (opcional; el hero del diseño no lleva)" },
+    { "type": "text", "id": "cta_label", "label": "Texto del botón", "default": "Shop now" },
+    { "type": "url", "id": "cta_link", "label": "Link del botón" }
+  ],
+  "blocks": [
+    { "type": "slide", "name": "Slide", "settings": [ { "type": "image_picker", "id": "image", "label": "Imagen" } ] }
+  ],
+  "presets": [
+    { "name": "On Paper Hero", "blocks": [ { "type": "slide" }, { "type": "slide" }, { "type": "slide" } ] }
+  ]
+}
+{% endschema %}

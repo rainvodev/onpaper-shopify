@@ -1,0 +1,43 @@
+{% comment %} On Paper — About (Lumos). Eyebrow + título itálico + párrafo de intro, centrado. La tira de imágenes y el texto inferior son secciones propias (op-bookcase, op-text). {% endcomment %}
+<section class="op-about u-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" {{ section.shopify_attributes }}>
+  <div class="op-about_contain u-container">
+    <div class="op-about_content u-margin-trim" style="--op-about-hw: {{ section.settings.heading_width }}ch; --op-about-bw: {{ section.settings.body_width }}ch">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="op-about_eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <div class="op-about_heading" role="heading" aria-level="2">{{ section.settings.heading }}</div>
+      {%- endif -%}
+      {%- if section.settings.body != blank -%}
+        <div class="op-about_body">{{ section.settings.body }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .op-about_content { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .op-about_eyebrow { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; color: var(--_theme---text); opacity: 0.7; margin-bottom: var(--_spacing---space--5); }
+  .op-about_heading { max-width: var(--op-about-hw, 30ch); margin-inline: auto; font-family: var(--_typography---font--primary-family); font-style: italic; font-size: clamp(1.5rem, 1rem + 2vw, 2rem); line-height: 1.25; color: var(--swatch--brand-300, #b0b094); }
+  .op-about_heading p { margin: 0; }
+  .op-about_body { max-width: var(--op-about-bw, 56ch); margin-inline: auto; margin-top: var(--_spacing---space--5); }
+  .op-about_body p { margin: 0; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "On Paper About",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 200, "step": 4, "default": 96, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 200, "step": 4, "default": 64, "unit": "px" },
+    { "type": "range", "id": "heading_width", "label": "Ancho del título (caracteres)", "min": 16, "max": 60, "step": 1, "default": 30, "unit": "ch" },
+    { "type": "range", "id": "body_width", "label": "Ancho del párrafo (caracteres)", "min": 30, "max": 80, "step": 1, "default": 56, "unit": "ch" },
+    { "type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "About us" },
+    { "type": "richtext", "id": "heading", "label": "Título (itálica)", "default": "<p><em>Because your moments are meant to be celebrated.</em></p>" },
+    { "type": "richtext", "id": "body", "label": "Texto", "default": "<p>En On Paper creemos que los recuerdos más bonitos merecen guardarse con intención. Somos una marca mexicana de diseño personalizado especializada en transformar momentos especiales en objetos impresos únicos y significativos.</p>" }
+  ],
+  "presets": [{ "name": "On Paper About" }]
+}
+{% endschema %}
