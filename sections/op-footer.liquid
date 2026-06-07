@@ -1,4 +1,4 @@
-{% comment %} On Paper — Footer (Lumos). Wordmark + Whatsapp + columnas de enlaces + contacto + redes. {% endcomment %}
+{% comment %} On Paper — Footer (Lumos). Wordmark/logo + menús (izq) + Whatsapp/contacto/redes (der). Fondo degradado difuminado. {% endcomment %}
 <footer class="op-footer full-width u-theme-dark" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" {{ section.shopify_attributes }}>
   {%- if section.settings.bg_image != blank -%}
     {{ section.settings.bg_image | image_url: width: 2400 | image_tag: alt: '', class: 'op-footer_bg', widths: '800,1200,1800,2400', sizes: '100vw', loading: 'lazy' }}
@@ -13,78 +13,104 @@
       {%- endif -%}
     </div>
 
-    <div class="op-footer_cols">
-      {%- if section.settings.menu_1 != blank -%}
-        <nav class="op-footer_col" aria-label="{{ section.settings.menu_1.title }}">
-          {%- for link in section.settings.menu_1.links -%}
-            <a href="{{ link.url }}" class="op-footer_link">{{ link.title }}</a>
-          {%- endfor -%}
-        </nav>
-      {%- endif -%}
-      {%- if section.settings.menu_2 != blank -%}
-        <nav class="op-footer_col" aria-label="{{ section.settings.menu_2.title }}">
-          {%- for link in section.settings.menu_2.links -%}
-            <a href="{{ link.url }}" class="op-footer_link">{{ link.title }}</a>
-          {%- endfor -%}
-        </nav>
-      {%- endif -%}
-
-      <div class="op-footer_col op-footer_contact">
-        {%- if section.settings.contact_heading != blank -%}<p class="op-footer_chead">{{ section.settings.contact_heading }}</p>{%- endif -%}
-        {%- if section.settings.phone != blank -%}<p class="op-footer_citem">{{ section.settings.phone }}</p>{%- endif -%}
-        {%- if section.settings.email != blank -%}<a class="op-footer_link" href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>{%- endif -%}
+    <div class="op-footer_lower">
+      <div class="op-footer_links">
+        {%- if section.settings.menu_1 != blank -%}
+          <nav class="op-footer_col" aria-label="{{ section.settings.menu_1.title }}">
+            {%- for link in section.settings.menu_1.links -%}
+              <a href="{{ link.url }}" class="op-footer_link">{{ link.title }}</a>
+            {%- endfor -%}
+          </nav>
+        {%- endif -%}
+        {%- if section.settings.menu_2 != blank -%}
+          <nav class="op-footer_col" aria-label="{{ section.settings.menu_2.title }}">
+            {%- for link in section.settings.menu_2.links -%}
+              <a href="{{ link.url }}" class="op-footer_link">{{ link.title }}</a>
+            {%- endfor -%}
+          </nav>
+        {%- endif -%}
       </div>
 
-      <div class="op-footer_col op-footer_social">
-        {%- if section.settings.social_heading != blank -%}<p class="op-footer_chead">{{ section.settings.social_heading }}</p>{%- endif -%}
-        {%- if section.settings.instagram != blank -%}
-          <a class="op-footer_soc" href="{{ section.settings.instagram }}" aria-label="Instagram" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-            <span>{{ section.settings.instagram_label | default: 'Instagram' }}</span>
+      <div class="op-footer_aside">
+        {%- if section.settings.whatsapp_url != blank -%}
+          <a class="op-footer_whatsapp" href="{{ section.settings.whatsapp_url }}" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.15-1.7-.84-2-.94-.27-.1-.46-.15-.65.15-.2.3-.76.94-.93 1.13-.17.2-.34.22-.63.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.34.45-.5.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.65-1.57-.9-2.15-.23-.56-.47-.48-.65-.5h-.55c-.2 0-.5.07-.77.37-.27.3-1.02 1-1.02 2.42 0 1.43 1.04 2.8 1.19 3 .15.2 2.05 3.12 4.96 4.38.7.3 1.24.48 1.66.61.7.22 1.33.19 1.83.12.56-.08 1.7-.7 1.95-1.36.24-.67.24-1.24.17-1.36-.07-.12-.27-.2-.56-.34zM12 2a10 10 0 0 0-8.6 15.07L2 22l5.05-1.32A10 10 0 1 0 12 2z"/></svg>
+            <span>{{ section.settings.whatsapp_label | default: 'Whatsapp' }}</span>
           </a>
         {%- endif -%}
-        {%- if section.settings.pinterest != blank -%}
-          <a class="op-footer_soc" href="{{ section.settings.pinterest }}" aria-label="Pinterest" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9.5 19.5c-.4-1.5-.2-3 .2-4.5l1.2-5"/><path d="M8.5 10.5c0-2 1.7-3.5 3.8-3.5 2 0 3.4 1.3 3.4 3.2 0 2.2-1.2 3.9-2.9 3.9-.9 0-1.6-.7-1.4-1.6"/></svg>
-            <span>{{ section.settings.pinterest_label | default: 'Pinterest' }}</span>
-          </a>
-        {%- endif -%}
-        {%- if section.settings.facebook != blank -%}
-          <a class="op-footer_soc" href="{{ section.settings.facebook }}" aria-label="Facebook" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 8.5h2V5.5h-2c-1.7 0-3 1.3-3 3v2H9v3h2v6h3v-6h2.2l.3-3H14v-1.5c0-.6.4-1 1-1z"/></svg>
-            <span>{{ section.settings.facebook_label | default: 'Facebook' }}</span>
-          </a>
-        {%- endif -%}
+        <div class="op-footer_meta">
+          <div class="op-footer_col op-footer_contact">
+            {%- if section.settings.contact_heading != blank -%}<p class="op-footer_chead">{{ section.settings.contact_heading }}</p>{%- endif -%}
+            {%- if section.settings.phone != blank -%}<p class="op-footer_citem">{{ section.settings.phone }}</p>{%- endif -%}
+            {%- if section.settings.email != blank -%}<a class="op-footer_link op-footer_link--lower" href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>{%- endif -%}
+          </div>
+
+          <div class="op-footer_col op-footer_social">
+            {%- if section.settings.social_heading != blank -%}<p class="op-footer_chead">{{ section.settings.social_heading }}</p>{%- endif -%}
+            {%- if section.settings.instagram != blank -%}
+              <a class="op-footer_soc" href="{{ section.settings.instagram }}" aria-label="Instagram" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                <span>{{ section.settings.instagram_label | default: 'Instagram' }}</span>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.pinterest != blank -%}
+              <a class="op-footer_soc" href="{{ section.settings.pinterest }}" aria-label="Pinterest" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 19.5c-.4-1.5-.2-3 .2-4.5l1.2-5"/><path d="M8.5 10.5c0-2 1.7-3.5 3.8-3.5 2 0 3.4 1.3 3.4 3.2 0 2.2-1.2 3.9-2.9 3.9-.9 0-1.6-.7-1.4-1.6"/></svg>
+                <span>{{ section.settings.pinterest_label | default: 'Pinterest' }}</span>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.facebook != blank -%}
+              <a class="op-footer_soc" href="{{ section.settings.facebook }}" aria-label="Facebook" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14 8.5h2V5.5h-2c-1.7 0-3 1.3-3 3v2H9v3h2v6h3v-6h2.2l.3-3H14v-1.5c0-.6.4-1 1-1z"/></svg>
+                <span>{{ section.settings.facebook_label | default: 'Facebook' }}</span>
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
       </div>
     </div>
-
-    {%- if section.settings.whatsapp_url != blank -%}
-      <a class="op-footer_whatsapp" href="{{ section.settings.whatsapp_url }}" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.7-.84-2-.94-.27-.1-.46-.15-.65.15-.2.3-.76.94-.93 1.13-.17.2-.34.22-.63.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.34.45-.5.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.65-1.57-.9-2.15-.23-.56-.47-.48-.65-.5h-.55c-.2 0-.5.07-.77.37-.27.3-1.02 1-1.02 2.42 0 1.43 1.04 2.8 1.19 3 .15.2 2.05 3.12 4.96 4.38.7.3 1.24.48 1.66.61.7.22 1.33.19 1.83.12.56-.08 1.7-.7 1.95-1.36.24-.67.24-1.24.17-1.36-.07-.12-.27-.2-.56-.34zM12 2a10 10 0 0 0-8.6 15.07L2 22l5.05-1.32A10 10 0 1 0 12 2z"/></svg>
-        <span>{{ section.settings.whatsapp_label | default: 'Whatsapp' }}</span>
-      </a>
-    {%- endif -%}
   </div>
 </footer>
 
 {% stylesheet %}
-  .op-footer { position: relative; background-color: var(--op-footer-bg, #2a2a24); color: var(--_theme---text); overflow: hidden; isolation: isolate; }
-  .op-footer_bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: grayscale(0.2) brightness(0.6) blur(2px); }
-  .op-footer_veil { position: absolute; inset: 0; background-color: rgba(20,20,16,0.55); z-index: -1; }
+  .op-footer {
+    position: relative; isolation: isolate; overflow: hidden; color: var(--_theme---text);
+    background-color: #2b2b26;
+    background-image:
+      radial-gradient(42% 60% at 18% 28%, rgba(206,202,190,0.20), transparent 70%),
+      radial-gradient(50% 55% at 78% 62%, rgba(184,180,168,0.16), transparent 72%),
+      radial-gradient(38% 42% at 58% 16%, rgba(150,148,138,0.10), transparent 70%);
+  }
+  .op-footer_bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; filter: grayscale(0.2) brightness(0.6) blur(2px); }
+  .op-footer_veil { position: absolute; inset: 0; background-color: rgba(20,20,16,0.5); z-index: 1; }
+  .op-footer_contain { position: relative; z-index: 2; }
   .op-footer_brand { text-align: center; margin-bottom: var(--_spacing---space--8); }
   .op-footer_logo { width: 12rem; height: auto; }
   .op-footer_wordmark { font-family: var(--_typography---font--primary-family); font-size: clamp(2.5rem, 1.5rem + 5vw, 5rem); letter-spacing: -0.02em; }
-  .op-footer_cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--_spacing---space--6); }
-  .op-footer_col { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .op-footer_lower { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--_spacing---space--7); flex-wrap: wrap; }
+  .op-footer_links { display: flex; gap: var(--_spacing---space--7); }
+  .op-footer_aside { display: flex; flex-direction: column; align-items: flex-end; gap: var(--_spacing---space--6); }
+  .op-footer_meta { display: flex; gap: var(--_spacing---space--7); }
+
+  .op-footer_col { display: flex; flex-direction: column; gap: 0.5rem; min-width: 9rem; border-top: 0.0625rem solid rgba(255,255,255,0.28); padding-top: var(--_spacing---space--4); }
   .op-footer_link { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.78rem; color: currentColor; text-decoration: none; opacity: 0.85; transition: opacity 250ms; }
-  .op-footer_link:hover { opacity: 1; }
-  .op-footer_chead { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.78rem; opacity: 0.6; }
+  .op-footer_link--lower { text-transform: none; letter-spacing: 0; font-family: inherit; font-size: 0.85rem; }
+  .op-footer_link:hover, .op-footer_soc:hover { opacity: 1; }
+  .op-footer_chead { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.74rem; opacity: 0.6; }
   .op-footer_citem { font-size: 0.85rem; opacity: 0.85; }
   .op-footer_soc { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: currentColor; text-decoration: none; opacity: 0.85; transition: opacity 250ms; }
-  .op-footer_soc:hover { opacity: 1; }
-  .op-footer_whatsapp { position: absolute; right: var(--page-margin, 2rem); bottom: calc(var(--page-margin, 2rem) + 1rem); display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.78rem; color: currentColor; text-decoration: none; background-color: rgba(255,255,255,0.12); backdrop-filter: blur(8px); border: 0.0625rem solid rgba(255,255,255,0.3); border-radius: 2rem; padding: 0.7rem 1.4rem; }
-  @media (max-width: 990px) { .op-footer_cols { grid-template-columns: repeat(2, 1fr); } .op-footer_whatsapp { position: static; margin-top: var(--_spacing---space--6); display: inline-flex; } }
-  @media (max-width: 600px) { .op-footer_cols { grid-template-columns: 1fr; } }
+  .op-footer_whatsapp { align-self: flex-end; display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.78rem; color: currentColor; text-decoration: none; background-color: rgba(255,255,255,0.12); backdrop-filter: blur(8px); border: 0.0625rem solid rgba(255,255,255,0.3); border-radius: 2rem; padding: 0.7rem 1.4rem; transition: background-color 250ms; }
+  .op-footer_whatsapp:hover { background-color: rgba(255,255,255,0.2); }
+
+  @media (max-width: 990px) {
+    .op-footer_lower { flex-direction: column; gap: var(--_spacing---space--7); }
+    .op-footer_aside { align-items: flex-start; }
+    .op-footer_whatsapp { align-self: flex-start; }
+  }
+  @media (max-width: 600px) {
+    .op-footer_links, .op-footer_meta { flex-direction: column; gap: var(--_spacing---space--6); }
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -94,9 +120,9 @@
     { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 240, "step": 4, "default": 120, "unit": "px" },
     { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 240, "step": 4, "default": 80, "unit": "px" },
     { "type": "header", "content": "Marca" },
-    { "type": "image_picker", "id": "logo", "label": "Logo (opcional)" },
+    { "type": "image_picker", "id": "logo", "label": "Logo (sube aquí el wordmark circular del XD)" },
     { "type": "text", "id": "wordmark", "label": "Wordmark (si no hay logo)", "default": "onpaper" },
-    { "type": "image_picker", "id": "bg_image", "label": "Imagen de fondo (opcional)" },
+    { "type": "image_picker", "id": "bg_image", "label": "Imagen de fondo (opcional; si no, degradado)" },
     { "type": "header", "content": "Enlaces" },
     { "type": "link_list", "id": "menu_1", "label": "Menú 1 (Products / Collections / Others)" },
     { "type": "link_list", "id": "menu_2", "label": "Menú 2 (FAQ / Legales)" },
@@ -105,7 +131,7 @@
     { "type": "text", "id": "phone", "label": "Teléfono", "default": "(81) 3563 9939" },
     { "type": "text", "id": "email", "label": "Email", "default": "taller@onpaper.mx" },
     { "type": "header", "content": "Redes" },
-    { "type": "text", "id": "social_heading", "label": "Encabezado", "default": "@onpaper.mx" },
+    { "type": "text", "id": "social_heading", "label": "Encabezado", "default": "@linktr.ee" },
     { "type": "url", "id": "instagram", "label": "Instagram URL" },
     { "type": "text", "id": "instagram_label", "label": "Instagram etiqueta", "default": "@onpaper.mx" },
     { "type": "url", "id": "pinterest", "label": "Pinterest URL" },
