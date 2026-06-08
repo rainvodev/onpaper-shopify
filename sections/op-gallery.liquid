@@ -39,6 +39,9 @@
   .op-gallery_img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 700ms ease; }
   .op-gallery_item:hover .op-gallery_img { transform: scale(1.03); }
   .op-gallery_item--wide .op-gallery_img { aspect-ratio: 4 / 3; }
+  .op-gallery_item--wide32 .op-gallery_img { aspect-ratio: 3 / 2; }
+  .op-gallery_item--wide169 .op-gallery_img { aspect-ratio: 16 / 9; }
+  .op-gallery_item--pano .op-gallery_img { aspect-ratio: 21 / 9; }
   .op-gallery_item--square .op-gallery_img { aspect-ratio: 1 / 1; }
   .op-gallery_item--tall .op-gallery_img { aspect-ratio: 3 / 4; }
   .op-gallery_item--portrait .op-gallery_img { aspect-ratio: 3 / 5; }
@@ -103,7 +106,10 @@
         ], "default": "1" },
         { "type": "select", "id": "ratio", "label": "Proporción", "options": [
           { "value": "wide", "label": "Horizontal (4:3)" },
-          { "value": "square", "label": "Cuadrada" },
+          { "value": "wide32", "label": "Horizontal media (3:2)" },
+          { "value": "wide169", "label": "Horizontal baja (16:9)" },
+          { "value": "pano", "label": "Panorámica (21:9)" },
+          { "value": "square", "label": "Cuadrada (1:1)" },
           { "value": "tall", "label": "Vertical (3:4)" },
           { "value": "portrait", "label": "Retrato (3:5)" }
         ], "default": "wide" }
