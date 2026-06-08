@@ -63,19 +63,27 @@
       "blocks": {
         "img-1": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/bookcase-1.png"
+          }
         },
         "img-2": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/bookcase-2.png"
+          }
         },
         "img-3": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/bookcase-3.png"
+          }
         },
         "img-4": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/bookcase-4.png"
+          }
         }
       },
       "block_order": [
