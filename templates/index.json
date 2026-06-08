@@ -207,7 +207,7 @@
         "g8": {
           "type": "image",
           "settings": {
-            "column": "2",
+            "column": "3",
             "ratio": "wide"
           }
         },
@@ -251,7 +251,6 @@
         "padding_bottom": 96,
         "heading": "",
         "gap": 16,
-        "col2_offset": 72,
         "disc_label": "Send message",
         "disc_link": ""
       }
