@@ -1,0 +1,282 @@
+{% comment %} On Paper — Página de producto (Lumos). Galería + info + personalización + relacionados, calcado del XD. {% endcomment %}
+{%- assign current = product.selected_or_first_available_variant -%}
+<section class="op-product u-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" {{ section.shopify_attributes }}>
+  <div class="op-product_contain u-container">
+    <div class="op-product_layout">
+
+      <div class="op-product_media">
+        {%- if product.featured_media -%}
+          <div class="op-product_main">
+            {{ product.featured_media | image_url: width: 1400 | image_tag: alt: product.featured_media.alt | default: product.title, class: 'op-product_mainimg', id: 'opMainImg', widths: '500,800,1100,1400', sizes: '(min-width: 750px) 50vw, 100vw' }}
+          </div>
+          {%- if product.media.size > 1 -%}
+            <div class="op-product_thumbs">
+              {%- for media in product.media -%}
+                <button type="button" class="op-product_thumb{% if forloop.first %} is-active{% endif %}" data-full="{{ media | image_url: width: 1400 }}" aria-label="Ver imagen {{ forloop.index }}">
+                  {{ media | image_url: width: 240 | image_tag: alt: media.alt | default: product.title, class: 'op-product_thumbimg', widths: '120,240', loading: 'lazy' }}
+                </button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        {%- else -%}
+          <div class="op-product_main"><div class="op-product_mainimg op-product_mainimg--ph"></div></div>
+        {%- endif -%}
+      </div>
+
+      <div class="op-product_info">
+        {%- if product.collections.size > 0 -%}
+          {%- assign bcol = product.collections.first -%}
+          <a class="op-product_eyebrow" href="{{ bcol.url }}">{{ bcol.title }}</a>
+        {%- endif -%}
+        <h1 class="op-product_title">{{ product.title }}</h1>
+        <div class="op-product_price" id="opPrice">
+          {%- if product.compare_at_price > product.price -%}
+            <span class="op-product_price-now">{{ current.price | money }}</span>
+            <s class="op-product_price-was">{{ product.compare_at_price | money }}</s>
+          {%- else -%}
+            {{ current.price | money }}
+          {%- endif -%}
+        </div>
+
+        {%- if product.description != blank -%}
+          <div class="op-product_desc rte">{{ product.description }}</div>
+        {%- endif -%}
+
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'accordion' -%}
+            <details class="op-product_acc" {{ block.shopify_attributes }}>
+              <summary class="op-product_acc-sum">{{ block.settings.heading }}</summary>
+              <div class="op-product_acc-body rte">{{ block.settings.content }}</div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- form 'product', product, id: 'opProductForm', class: 'op-product_form' -%}
+          <input type="hidden" name="id" value="{{ current.id }}" id="opVariantId">
+
+          {%- unless product.has_only_default_variant -%}
+            <div class="op-product_options">
+              {%- for option in product.options_with_values -%}
+                <label class="op-product_opt">
+                  <span class="op-product_opt-label">{{ option.name }}</span>
+                  <select class="op-product_select" data-option-index="{{ forloop.index0 }}">
+                    {%- for value in option.values -%}
+                      <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+                    {%- endfor -%}
+                  </select>
+                </label>
+              {%- endfor -%}
+            </div>
+          {%- endunless -%}
+
+          {%- if section.settings.personalize_heading != blank -%}
+            <p class="op-product_personalize">{{ section.settings.personalize_heading }}</p>
+          {%- endif -%}
+
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'field_text' -%}
+                <label class="op-product_field" {{ block.shopify_attributes }}>
+                  <span class="op-product_field-label">{{ block.settings.label }}</span>
+                  <input type="text" name="properties[{{ block.settings.label }}]" placeholder="{{ block.settings.placeholder }}" {% if block.settings.required %}required{% endif %}>
+                </label>
+              {%- when 'field_textarea' -%}
+                <label class="op-product_field" {{ block.shopify_attributes }}>
+                  <span class="op-product_field-label">{{ block.settings.label }}</span>
+                  <textarea name="properties[{{ block.settings.label }}]" rows="3" placeholder="{{ block.settings.placeholder }}"></textarea>
+                </label>
+              {%- when 'field_url' -%}
+                <label class="op-product_field" {{ block.shopify_attributes }}>
+                  <span class="op-product_field-label">{{ block.settings.label }}</span>
+                  <input type="url" name="properties[{{ block.settings.label }}]" placeholder="{{ block.settings.placeholder }}">
+                </label>
+              {%- when 'field_select' -%}
+                {%- assign opts = block.settings.options | split: ',' -%}
+                <label class="op-product_field" {{ block.shopify_attributes }}>
+                  <span class="op-product_field-label">{{ block.settings.label }}</span>
+                  <select class="op-product_select" name="properties[{{ block.settings.label }}]">
+                    {%- for o in opts -%}<option value="{{ o | strip | escape }}">{{ o | strip }}</option>{%- endfor -%}
+                  </select>
+                </label>
+              {%- when 'note' -%}
+                <p class="op-product_note" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+            {%- endcase -%}
+          {%- endfor -%}
+
+          <label class="op-product_field op-product_qty">
+            <span class="op-product_field-label">Cantidad</span>
+            <input type="number" name="quantity" value="1" min="1" inputmode="numeric">
+          </label>
+
+          <button type="submit" name="add" class="op-product_add" {% unless current.available %}disabled{% endunless %}>
+            <span>{% if current.available %}{{ section.settings.add_label | default: 'Agregar al carrito' }}{% else %}Agotado{% endif %}</span>
+          </button>
+          {{ form | payment_button }}
+        {%- endform -%}
+      </div>
+    </div>
+
+    {%- assign related = product.collections.first.products | default: collections.all.products -%}
+    {%- if related and related.size > 1 -%}
+      <div class="op-product_related">
+        <h2 class="op-product_related-h">{{ section.settings.related_heading | default: 'You may also like…' }}</h2>
+        <div class="op-product_related-grid">
+          {%- assign shown = 0 -%}
+          {%- for p in related -%}
+            {%- if p.id != product.id and shown < 3 -%}
+              {%- assign shown = shown | plus: 1 -%}
+              <article class="op-product_rel">
+                <a href="{{ p.url }}" class="op-product_rel-media">
+                  {%- if p.featured_image -%}
+                    {{ p.featured_image | image_url: width: 700 | image_tag: alt: p.title, class: 'op-product_rel-img', widths: '300,500,700', sizes: '(min-width: 750px) 30vw, 90vw', loading: 'lazy' }}
+                  {%- else -%}<div class="op-product_rel-img op-product_rel-img--ph"></div>{%- endif -%}
+                </a>
+                <h3 class="op-product_rel-title">{{ p.title }}</h3>
+                {%- if p.price > 0 -%}<p class="op-product_rel-price"><em>from</em> {{ p.price | money }}</p>{%- endif -%}
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .op-product_layout { display: grid; grid-template-columns: 1fr 1fr; gap: var(--_spacing---space--8); align-items: start; }
+  .op-product_main { overflow: hidden; }
+  .op-product_mainimg { width: 100%; height: auto; display: block; aspect-ratio: 4 / 5; object-fit: cover; }
+  .op-product_mainimg--ph { background-color: color-mix(in srgb, var(--_theme---text) 10%, transparent); }
+  .op-product_thumbs { display: flex; gap: var(--_spacing---space--3); margin-top: var(--_spacing---space--3); flex-wrap: wrap; }
+  .op-product_thumb { width: 5rem; height: 5rem; padding: 0; border: 0.0625rem solid transparent; background: none; cursor: pointer; overflow: hidden; }
+  .op-product_thumb.is-active { border-color: var(--_theme---text); }
+  .op-product_thumbimg { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .op-product_eyebrow { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.72rem; opacity: 0.7; text-decoration: none; color: currentColor; }
+  .op-product_title { font-family: var(--_typography---font--primary-family); font-size: clamp(1.6rem, 1.1rem + 1.8vw, 2.3rem); line-height: 1.15; margin-top: var(--_spacing---space--3); }
+  .op-product_price { font-size: 1.15rem; margin-top: var(--_spacing---space--3); }
+  .op-product_price-was { opacity: 0.5; margin-left: 0.5rem; }
+  .op-product_desc { margin-top: var(--_spacing---space--5); max-width: 60ch; }
+  .op-product_desc p { margin: 0 0 0.75em; }
+  .op-product_acc { border-top: 0.0625rem solid var(--_theme---border); }
+  .op-product_acc:first-of-type { margin-top: var(--_spacing---space--6); }
+  .op-product_acc-sum { cursor: pointer; padding: var(--_spacing---space--4) 0; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem; list-style: none; display: flex; justify-content: space-between; }
+  .op-product_acc-sum::after { content: "+"; }
+  .op-product_acc[open] .op-product_acc-sum::after { content: "\2013"; }
+  .op-product_acc-body { padding-bottom: var(--_spacing---space--4); font-size: 0.92rem; opacity: 0.85; }
+  .op-product_personalize { font-family: var(--_typography---font--primary-family); font-size: 1.1rem; margin-top: var(--_spacing---space--6); margin-bottom: var(--_spacing---space--3); }
+  .op-product_options, .op-product_form { display: block; }
+  .op-product_opt, .op-product_field { display: flex; flex-direction: column; gap: 0.4rem; margin-top: var(--_spacing---space--4); }
+  .op-product_opt-label, .op-product_field-label { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.72rem; opacity: 0.7; }
+  .op-product_select, .op-product_field input, .op-product_field textarea { font-family: inherit; font-size: 1rem; color: var(--_theme---text); background-color: transparent; border: 0.0625rem solid var(--_theme---border); border-radius: 2rem; padding: 0.8rem 1.1rem; width: 100%; }
+  .op-product_field textarea { border-radius: 1rem; resize: vertical; }
+  .op-product_qty input { width: 8rem; }
+  .op-product_note { font-size: 0.8rem; font-style: italic; opacity: 0.6; margin-top: var(--_spacing---space--3); }
+  .op-product_add { width: 100%; margin-top: var(--_spacing---space--5); font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.82rem; color: var(--_theme---text); background-color: transparent; border: 0.0625rem solid var(--_theme---text); border-radius: 2rem; padding: 1rem 2rem; cursor: pointer; transition: background-color 250ms, color 250ms; }
+  .op-product_add:hover { background-color: var(--_theme---text); color: var(--_theme---background); }
+  .op-product_add[disabled] { opacity: 0.5; cursor: not-allowed; }
+  .op-product_form .shopify-payment-button { margin-top: var(--_spacing---space--3); }
+  .op-product_related { margin-top: var(--_spacing---space--8); }
+  .op-product_related-h { font-family: var(--_typography---font--primary-family); font-style: italic; font-size: clamp(1.3rem, 1rem + 1.4vw, 1.8rem); margin-bottom: var(--_spacing---space--6); }
+  .op-product_related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--_spacing---space--6); }
+  .op-product_rel-media { display: block; aspect-ratio: 1 / 1.05; overflow: hidden; }
+  .op-product_rel-img { width: 100%; height: 100%; object-fit: cover; }
+  .op-product_rel-img--ph { background-color: color-mix(in srgb, var(--_theme---text) 10%, transparent); }
+  .op-product_rel-title { font-family: var(--_typography---font--primary-family); font-size: 1.05rem; font-weight: 400; margin-top: var(--_spacing---space--4); margin-bottom: var(--_spacing---space--2); }
+  .op-product_rel-price { font-size: 0.88rem; opacity: 0.75; }
+  .op-product_rel-price em { font-style: italic; }
+  @media (max-width: 900px) {
+    .op-product_layout { grid-template-columns: 1fr; gap: var(--_spacing---space--6); }
+    .op-product_related-grid { grid-template-columns: 1fr; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  document.querySelectorAll('.op-product').forEach(function (root) {
+    var main = root.querySelector('#opMainImg');
+    root.querySelectorAll('.op-product_thumb').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (main && btn.dataset.full) { main.src = btn.dataset.full; main.srcset = ''; }
+        root.querySelectorAll('.op-product_thumb').forEach(function (b) { b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+      });
+    });
+
+    var form = root.querySelector('#opProductForm');
+    if (!form || typeof window.opVariants === 'undefined') return;
+    var idInput = form.querySelector('#opVariantId');
+    var priceEl = root.querySelector('#opPrice');
+    var addBtn = form.querySelector('.op-product_add');
+    var selects = form.querySelectorAll('.op-product_select[data-option-index]');
+    function money(cents) { return '$' + (cents / 100).toLocaleString('es-MX', { minimumFractionDigits: 2 }) + ' MXN'; }
+    function update() {
+      var chosen = [];
+      selects.forEach(function (s) { chosen[parseInt(s.dataset.optionIndex, 10)] = s.value; });
+      var match = window.opVariants.find(function (v) { return v.options.every(function (o, i) { return o === chosen[i]; }); });
+      if (!match) return;
+      if (idInput) idInput.value = match.id;
+      if (priceEl) priceEl.textContent = money(match.price);
+      if (addBtn) {
+        addBtn.disabled = !match.available;
+        addBtn.querySelector('span').textContent = match.available ? (addBtn.dataset.add || 'Agregar al carrito') : 'Agotado';
+      }
+    }
+    selects.forEach(function (s) { s.addEventListener('change', update); });
+  });
+{% endjavascript %}
+
+<script>
+  window.opVariants = {{ product.variants | json }};
+</script>
+
+{% schema %}
+{
+  "name": "On Paper Producto",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 200, "step": 4, "default": 64, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 200, "step": 4, "default": 96, "unit": "px" },
+    { "type": "text", "id": "personalize_heading", "label": "Encabezado de personalización", "default": "Personaliza tu producto" },
+    { "type": "text", "id": "add_label", "label": "Texto botón agregar", "default": "Agregar al carrito" },
+    { "type": "text", "id": "related_heading", "label": "Título relacionados", "default": "You may also like…" }
+  ],
+  "blocks": [
+    { "type": "accordion", "name": "Acordeón (Details/Shipping)", "settings": [
+      { "type": "text", "id": "heading", "label": "Título", "default": "Details" },
+      { "type": "richtext", "id": "content", "label": "Contenido", "default": "<p>Detalles del producto.</p>" }
+    ]},
+    { "type": "field_text", "name": "Campo de texto", "settings": [
+      { "type": "text", "id": "label", "label": "Etiqueta", "default": "Título de portada" },
+      { "type": "text", "id": "placeholder", "label": "Placeholder" },
+      { "type": "checkbox", "id": "required", "label": "Obligatorio", "default": false }
+    ]},
+    { "type": "field_textarea", "name": "Campo de notas", "settings": [
+      { "type": "text", "id": "label", "label": "Etiqueta", "default": "Notas" },
+      { "type": "text", "id": "placeholder", "label": "Placeholder" }
+    ]},
+    { "type": "field_url", "name": "Campo de link", "settings": [
+      { "type": "text", "id": "label", "label": "Etiqueta", "default": "Link de fotos (opcional)" },
+      { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "Ingresa el URL" }
+    ]},
+    { "type": "field_select", "name": "Campo de selección", "settings": [
+      { "type": "text", "id": "label", "label": "Etiqueta", "default": "Número de fotos" },
+      { "type": "text", "id": "options", "label": "Opciones (separadas por coma)", "default": "0-30 fotos, 31-60 fotos, 61-90 fotos" }
+    ]},
+    { "type": "note", "name": "Nota", "settings": [
+      { "type": "text", "id": "text", "label": "Texto", "default": "*En caso de agregar fotos, solo se aceptan links en Google Drive o WeTransfer." }
+    ]}
+  ],
+  "presets": [{
+    "name": "On Paper Producto",
+    "blocks": [
+      { "type": "accordion", "settings": { "heading": "Details" } },
+      { "type": "accordion", "settings": { "heading": "Shipping & taxes" } },
+      { "type": "field_text", "settings": { "label": "Título de portada" } },
+      { "type": "field_text", "settings": { "label": "Título de lomo (opcional)" } },
+      { "type": "field_select", "settings": { "label": "Número de fotos" } },
+      { "type": "field_url", "settings": { "label": "Link de fotos (opcional)" } },
+      { "type": "note", "settings": {} }
+    ]
+  }]
+}
+{% endschema %}
