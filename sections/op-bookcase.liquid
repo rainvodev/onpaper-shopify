@@ -2,7 +2,7 @@
 <section class="op-bookcase u-section full-width" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" {{ section.shopify_attributes }}>
   {%- assign strip_tag = 'div' -%}
   {%- if section.settings.strip_link != blank -%}{%- assign strip_tag = 'a' -%}{%- endif -%}
-  <{{ strip_tag }} class="op-bookcase_strip" data-follow style="--op-bookcase-cols: {{ section.blocks.size | at_least: 1 }}; --op-bookcase-ratio: {{ section.settings.ratio }}" {% if section.settings.strip_link != blank %}href="{{ section.settings.strip_link }}" aria-label="{{ section.settings.strip_label }}"{% endif %}>
+  <{{ strip_tag }} class="op-bookcase_strip" data-cursor-follow style="--op-bookcase-cols: {{ section.blocks.size | at_least: 1 }}; --op-bookcase-ratio: {{ section.settings.ratio }}" {% if section.settings.strip_link != blank %}href="{{ section.settings.strip_link }}" aria-label="{{ section.settings.strip_label }}"{% endif %}>
     {%- for block in section.blocks -%}
       <div class="op-bookcase_cell" {{ block.shopify_attributes }}>
         {%- if block.settings.image != blank -%}
@@ -13,7 +13,7 @@
       </div>
     {%- endfor -%}
     {%- if section.settings.strip_label != blank -%}
-      <span class="op-bookcase_disc" aria-hidden="true">{{ section.settings.strip_label }}</span>
+      <span class="op-bookcase_disc" data-cursor-disc aria-hidden="true">{{ section.settings.strip_label }}</span>
     {%- endif -%}
   </{{ strip_tag }}>
 </section>
@@ -25,32 +25,18 @@
   .op-bookcase_img--ph { background-color: color-mix(in srgb, var(--_theme---text) 10%, transparent); }
   .op-bookcase_strip:hover .op-bookcase_img { transform: scale(1.03); }
   .op-bookcase_disc {
-    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    position: absolute; top: 0; left: 0; /* posición vía transform (JS, lerp) */
     display: grid; place-items: center; text-align: center;
     width: 8.5rem; height: 8.5rem; border-radius: 50%;
     background-color: rgba(245,245,239,0.65); backdrop-filter: blur(6px);
     color: #5f604e; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.74rem;
-    pointer-events: none; transition: left 120ms ease-out, top 120ms ease-out, opacity 250ms; z-index: 3;
+    pointer-events: none; z-index: 3;
+    opacity: 0; transition: opacity 280ms ease; will-change: transform, opacity;
   }
-  @media (hover: none) { .op-bookcase_strip { cursor: pointer; } .op-bookcase_disc { left: 50%; top: 50%; } }
+  .op-bookcase_disc.is-active { opacity: 1; }
+  @media (hover: none) { .op-bookcase_strip { cursor: pointer; } }
   @media (max-width: 600px) { .op-bookcase_strip { grid-template-columns: repeat(2, 1fr); } }
 {% endstylesheet %}
-
-{% javascript %}
-  document.querySelectorAll('.op-bookcase_strip[data-follow]').forEach(function (strip) {
-    var disc = strip.querySelector('.op-bookcase_disc');
-    if (!disc || window.matchMedia('(hover: none)').matches) return;
-    strip.addEventListener('pointermove', function (e) {
-      var r = strip.getBoundingClientRect();
-      disc.style.left = (e.clientX - r.left) + 'px';
-      disc.style.top = (e.clientY - r.top) + 'px';
-    });
-    strip.addEventListener('pointerleave', function () {
-      disc.style.left = '';
-      disc.style.top = '';
-    });
-  });
-{% endjavascript %}
 
 {% schema %}
 {

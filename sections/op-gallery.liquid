@@ -6,7 +6,7 @@
     {%- if section.settings.heading != blank -%}
       <div class="op-gallery_heading" role="heading" aria-level="2">{{ section.settings.heading }}</div>
     {%- endif -%}
-    <{{ grid_tag }} class="op-gallery_grid" data-follow {% if section.settings.disc_link != blank %}href="{{ section.settings.disc_link }}" aria-label="{{ section.settings.disc_label }}"{% endif %}>
+    <{{ grid_tag }} class="op-gallery_grid" data-cursor-follow {% if section.settings.disc_link != blank %}href="{{ section.settings.disc_link }}" aria-label="{{ section.settings.disc_label }}"{% endif %}>
       {%- assign gallery_cols = "1,2,3" | split: "," -%}
       {%- for col in gallery_cols -%}
         <div class="op-gallery_col op-gallery_col--{{ col }}">
@@ -24,7 +24,7 @@
         </div>
       {%- endfor -%}
       {%- if section.settings.disc_label != blank -%}
-        <span class="op-gallery_disc" aria-hidden="true">{{ section.settings.disc_label }}</span>
+        <span class="op-gallery_disc" data-cursor-disc aria-hidden="true">{{ section.settings.disc_label }}</span>
       {%- endif -%}
     </{{ grid_tag }}>
   </div>
@@ -47,16 +47,18 @@
   .op-gallery_item--portrait .op-gallery_img { aspect-ratio: 3 / 5; }
   .op-gallery_img--ph { background-color: color-mix(in srgb, var(--_theme---text) 12%, transparent); aspect-ratio: 4 / 3; }
   /* Disco "Send message" que sigue el cursor */
-  .op-gallery_grid[data-follow] { cursor: none; }
+  .op-gallery_grid[data-cursor-follow] { cursor: none; }
   .op-gallery_disc {
-    position: absolute; left: 28%; top: 22%; transform: translate(-50%, -50%);
+    position: absolute; top: 0; left: 0; /* posición vía transform (JS, lerp) */
     display: grid; place-items: center; text-align: center;
     width: 7.5rem; height: 7.5rem; border-radius: 50%;
     background-color: rgba(245,245,239,0.7); backdrop-filter: blur(6px);
     color: #5f604e; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.72rem; line-height: 1.3;
-    pointer-events: none; transition: left 120ms ease-out, top 120ms ease-out; z-index: 3;
+    pointer-events: none; z-index: 3;
+    opacity: 0; transition: opacity 280ms ease; will-change: transform, opacity;
   }
-  @media (hover: none) { .op-gallery_grid[data-follow] { cursor: pointer; } }
+  .op-gallery_disc.is-active { opacity: 1; }
+  @media (hover: none) { .op-gallery_grid[data-cursor-follow] { cursor: pointer; } }
   @media (max-width: 700px) {
     .op-gallery_grid { grid-template-columns: 1fr; }
   }
