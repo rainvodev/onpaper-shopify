@@ -26,6 +26,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
     {{ 'lumos.css' | asset_url | stylesheet_tag }}
     {{ 'brand.css' | asset_url | stylesheet_tag }}
+    {% # Lenis smooth scroll (vendorizado) %}
+    {{ 'lenis.css' | asset_url | stylesheet_tag }}
 
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
@@ -39,5 +41,22 @@
     {{ content_for_layout }}
 
     {% sections 'footer-group' %}
+
+    {% # Lenis smooth scroll — init global (respeta reduced-motion; off en el editor) %}
+    <script src="{{ 'lenis.min.js' | asset_url }}" defer></script>
+    <script>
+      (function () {
+        if (window.Shopify && window.Shopify.designMode) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        function start() {
+          if (typeof Lenis === 'undefined') { return setTimeout(start, 50); }
+          var lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+          function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+          requestAnimationFrame(raf);
+          window.lenis = lenis;
+        }
+        start();
+      })();
+    </script>
   </body>
 </html>
