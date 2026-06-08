@@ -1,7 +1,7 @@
-{% comment %} On Paper — Galería (Lumos). Mosaico de 3 columnas (la del medio desfasada) + disco "Send message" que sigue el cursor. {% endcomment %}
+{% comment %} On Paper — Galería (Lumos). Mosaico de 3 columnas alineadas arriba (masonry por altura de imagen) + disco "Send message" que sigue el cursor. {% endcomment %}
 {%- assign grid_tag = 'div' -%}
 {%- if section.settings.disc_link != blank -%}{%- assign grid_tag = 'a' -%}{%- endif -%}
-<section class="op-gallery u-section full-width" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; background-color: var(--swatch--sand-300, #e5e1d9); --op-gallery-gap: {{ section.settings.gap }}px; --op-gallery-offset: {{ section.settings.col2_offset }}px" {{ section.shopify_attributes }}>
+<section class="op-gallery u-section full-width" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; background-color: var(--swatch--sand-300, #e5e1d9); --op-gallery-gap: {{ section.settings.gap }}px" {{ section.shopify_attributes }}>
   <div class="op-gallery_contain u-container">
     {%- if section.settings.heading != blank -%}
       <div class="op-gallery_heading" role="heading" aria-level="2">{{ section.settings.heading }}</div>
@@ -35,7 +35,6 @@
   .op-gallery_heading p { margin: 0; }
   .op-gallery_grid { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--op-gallery-gap, 16px); align-items: start; text-decoration: none; color: inherit; }
   .op-gallery_col { display: flex; flex-direction: column; gap: var(--op-gallery-gap, 16px); }
-  .op-gallery_col--2 { margin-top: var(--op-gallery-offset, 64px); }
   .op-gallery_item { overflow: hidden; margin: 0; }
   .op-gallery_img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 700ms ease; }
   .op-gallery_item:hover .op-gallery_img { transform: scale(1.03); }
@@ -57,7 +56,6 @@
   @media (hover: none) { .op-gallery_grid[data-follow] { cursor: pointer; } }
   @media (max-width: 700px) {
     .op-gallery_grid { grid-template-columns: 1fr; }
-    .op-gallery_col--2 { margin-top: 0; }
   }
 {% endstylesheet %}
 
@@ -87,8 +85,7 @@
     { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 200, "step": 4, "default": 64, "unit": "px" },
     { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 200, "step": 4, "default": 96, "unit": "px" },
     { "type": "richtext", "id": "heading", "label": "Título (opcional)" },
-    { "type": "range", "id": "gap", "label": "Separación", "min": 0, "max": 40, "step": 2, "default": 16, "unit": "px" },
-    { "type": "range", "id": "col2_offset", "label": "Desfase columna central", "min": 0, "max": 200, "step": 4, "default": 72, "unit": "px" },
+    { "type": "range", "id": "gap", "label": "Separación", "min": 0, "max": 40, "step": 2, "default": 12, "unit": "px" },
     { "type": "header", "content": "Disco que sigue el cursor" },
     { "type": "text", "id": "disc_label", "label": "Texto del disco", "default": "Send message" },
     { "type": "url", "id": "disc_link", "label": "Link del disco / galería" }
