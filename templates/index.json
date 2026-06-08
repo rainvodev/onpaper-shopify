@@ -173,7 +173,7 @@
           "type": "image",
           "settings": {
             "column": "1",
-            "ratio": "wide"
+            "ratio": "pano"
           }
         },
         "g4": {
@@ -201,31 +201,24 @@
           "type": "image",
           "settings": {
             "column": "2",
-            "ratio": "portrait"
+            "ratio": "tall"
           }
         },
         "g8": {
           "type": "image",
           "settings": {
             "column": "3",
-            "ratio": "wide"
+            "ratio": "wide169"
           }
         },
         "g9": {
           "type": "image",
           "settings": {
             "column": "3",
-            "ratio": "wide"
+            "ratio": "tall"
           }
         },
         "g10": {
-          "type": "image",
-          "settings": {
-            "column": "3",
-            "ratio": "wide"
-          }
-        },
-        "g11": {
           "type": "image",
           "settings": {
             "column": "3",
@@ -243,8 +236,7 @@
         "g7",
         "g8",
         "g9",
-        "g10",
-        "g11"
+        "g10"
       ],
       "settings": {
         "padding_top": 64,
