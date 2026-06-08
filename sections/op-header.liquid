@@ -5,7 +5,7 @@
     assign is_home = true
   endif
 %}
-<header class="op-header full-width{% if is_home %} is-overlay u-theme-dark{% endif %}" {{ section.shopify_attributes }}>
+<header class="op-header full-width{% if is_home %} is-overlay u-theme-dark{% endif %}" data-reveal="down" data-reveal-load style="--reveal-delay: 200ms" {{ section.shopify_attributes }}>
   <div class="op-header_contain u-container">
     <div class="op-header_layout">
       <a href="{{ routes.root_url }}" class="op-header_logo" aria-label="{{ shop.name }}">

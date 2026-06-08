@@ -28,6 +28,8 @@
     {{ 'brand.css' | asset_url | stylesheet_tag }}
     {% # Lenis smooth scroll (vendorizado) %}
     {{ 'lenis.css' | asset_url | stylesheet_tag }}
+    {% # Reveal animations %}
+    {{ 'op-anim.css' | asset_url | stylesheet_tag }}
 
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
@@ -45,6 +47,7 @@
     {% # Lenis smooth scroll — init global (respeta reduced-motion; off en el editor) %}
     <script src="{{ 'lenis.min.js' | asset_url }}" defer></script>
     <script src="{{ 'op-cursor-follow.js' | asset_url }}" defer></script>
+    <script src="{{ 'op-reveal.js' | asset_url }}" defer></script>
     <script>
       (function () {
         if (window.Shopify && window.Shopify.designMode) return;

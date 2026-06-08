@@ -3,10 +3,10 @@
   <div class="op-best_contain u-container">
     <header class="op-best_head">
       {%- if section.settings.eyebrow != blank -%}
-        <p class="op-best_eyebrow">{{ section.settings.eyebrow }}</p>
+        <p class="op-best_eyebrow" data-reveal style="--reveal-delay: 0ms">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
       {%- if section.settings.heading != blank -%}
-        <div class="op-best_heading" role="heading" aria-level="2">{{ section.settings.heading }}</div>
+        <div class="op-best_heading" role="heading" aria-level="2" data-reveal style="--reveal-delay: 120ms">{{ section.settings.heading }}</div>
       {%- endif -%}
     </header>
 
@@ -15,7 +15,7 @@
     <div class="op-best_grid">
       {%- if col != blank -%}
         {%- for product in col.products limit: limit -%}
-          <article class="op-best_card">
+          <article class="op-best_card" data-reveal style="--reveal-delay: {{ forloop.index0 | times: 110 }}ms">
             <a href="{{ product.url }}" class="op-best_media" aria-label="{{ product.title }}">
               {%- if product.featured_image -%}
                 {{ product.featured_image | image_url: width: 900 | image_tag: alt: product.title, class: 'op-best_img', widths: '300,500,700,900', sizes: '(min-width: 750px) 30vw, 90vw', loading: 'lazy' }}
@@ -37,7 +37,7 @@
         {%- endif -%}
       {%- else -%}
         {%- for i in (1..limit) -%}
-          <article class="op-best_card">
+          <article class="op-best_card" data-reveal style="--reveal-delay: {{ forloop.index0 | times: 110 }}ms">
             <a href="#" class="op-best_media"><div class="op-best_img op-best_img--ph"></div></a>
             <h3 class="op-best_title">Producto {{ i }}</h3>
             <p class="op-best_price"><em>from</em> $0.00 mxn</p>

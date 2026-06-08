@@ -11,22 +11,22 @@
     <div class="op-hero_overlay" style="opacity: {{ section.settings.overlay | divided_by: 100.0 }}"></div>
   </div>
 
-  <div class="op-hero_more"><span class="op-hero_more_text">More of us</span></div>
+  <div class="op-hero_more" data-reveal="fade" data-reveal-load style="--reveal-delay: 750ms"><span class="op-hero_more_text">More of us</span></div>
 
   <div class="op-hero_contain">
     <div class="op-hero_content u-margin-trim" style="--op-hero-cw: {{ section.settings.content_width }}ch">
-      <div class="op-hero_title" role="heading" aria-level="1">{{ section.settings.heading }}</div>
+      <div class="op-hero_title" role="heading" aria-level="1" data-reveal data-reveal-load style="--reveal-delay: 150ms">{{ section.settings.heading }}</div>
       {%- if section.settings.subheading != blank -%}
-        <p class="op-hero_text u-text-style-main">{{ section.settings.subheading }}</p>
+        <p class="op-hero_text u-text-style-main" data-reveal data-reveal-load style="--reveal-delay: 300ms">{{ section.settings.subheading }}</p>
       {%- endif -%}
       {%- if section.settings.cta_label != blank -%}
-        <a class="op-hero_btn" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}" data-trigger="hover focus">{{ section.settings.cta_label }}</a>
+        <a class="op-hero_btn" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}" data-trigger="hover focus" data-reveal data-reveal-load style="--reveal-delay: 450ms">{{ section.settings.cta_label }}</a>
       {%- endif -%}
     </div>
   </div>
 
   {%- if section.blocks.size > 1 -%}
-    <div class="op-hero_dots">
+    <div class="op-hero_dots" data-reveal="fade" data-reveal-load style="--reveal-delay: 900ms">
       {%- for block in section.blocks -%}
         <button type="button" class="op-hero_dot{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Slide {{ forloop.index }}"></button>
       {%- endfor -%}
@@ -63,12 +63,21 @@
   .op-hero_dots { position: absolute; bottom: var(--_spacing---space--6); left: 50%; transform: translateX(-50%); z-index: 2; display: flex; gap: 0.75rem; }
   .op-hero_dot { width: 2.25rem; height: 0.0625rem; border: 0; padding: 0; cursor: pointer; background-color: rgba(255, 255, 255, 0.4); transition: background-color 300ms; }
   .op-hero_dot.is-active { background-color: rgba(255, 255, 255, 0.9); }
+
+  /* Animaciones de carga (sin afectar a quien pidió reduce) */
+  @media (prefers-reduced-motion: no-preference) {
+    .op-hero_slide_img { transform: scale(1.06); transition: transform 1.8s cubic-bezier(0.22, 0.61, 0.36, 1); }
+    .op-hero_wrap.is-loaded .op-hero_slide.is-active .op-hero_slide_img { transform: scale(1); }
+    .op-hero_more::before { transform: scaleY(0); transform-origin: top; transition: transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1); transition-delay: var(--reveal-delay, 0ms); }
+    .op-hero_more.is-in::before { transform: scaleY(1); }
+  }
 {% endstylesheet %}
 
 {% javascript %}
   document.querySelectorAll('.op-hero_wrap').forEach((hero) => {
     if (hero.dataset.heroInit) return;
     hero.dataset.heroInit = 'true';
+    requestAnimationFrame(function () { requestAnimationFrame(function () { hero.classList.add('is-loaded'); }); });
     const slides = hero.querySelectorAll('.op-hero_slide');
     const dots = hero.querySelectorAll('.op-hero_dot');
     if (slides.length < 2) return;

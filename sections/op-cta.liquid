@@ -3,16 +3,16 @@
   <div class="op-cta_contain u-container">
     <div class="op-cta_content" style="--op-cta-hw: {{ section.settings.heading_width }}ch; --op-cta-bw: {{ section.settings.body_width }}ch">
       {%- if section.settings.eyebrow != blank -%}
-        <p class="op-cta_eyebrow">{{ section.settings.eyebrow }}</p>
+        <p class="op-cta_eyebrow" data-reveal style="--reveal-delay: 0ms">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
       {%- if section.settings.heading != blank -%}
-        <div class="op-cta_heading" role="heading" aria-level="2">{{ section.settings.heading }}</div>
+        <div class="op-cta_heading" role="heading" aria-level="2" data-reveal style="--reveal-delay: 100ms">{{ section.settings.heading }}</div>
       {%- endif -%}
       {%- if section.settings.body != blank -%}
-        <div class="op-cta_body">{{ section.settings.body }}</div>
+        <div class="op-cta_body" data-reveal style="--reveal-delay: 200ms">{{ section.settings.body }}</div>
       {%- endif -%}
       {%- if section.settings.cta_label != blank -%}
-        <a class="op-cta_btn" href="{{ section.settings.cta_link | default: '#' }}">{{ section.settings.cta_label }}</a>
+        <a class="op-cta_btn" href="{{ section.settings.cta_link | default: '#' }}" data-reveal style="--reveal-delay: 300ms">{{ section.settings.cta_label }}</a>
       {%- endif -%}
     </div>
   </div>

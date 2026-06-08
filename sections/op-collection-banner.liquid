@@ -10,10 +10,10 @@
   <div class="op-cbanner_contain u-container">
     <div class="op-cbanner_content">
       {%- if section.settings.heading != blank -%}
-        <div class="op-cbanner_heading" role="heading" aria-level="2">{{ section.settings.heading }}</div>
+        <div class="op-cbanner_heading" role="heading" aria-level="2" data-reveal style="--reveal-delay: 0ms">{{ section.settings.heading }}</div>
       {%- endif -%}
       {%- if section.settings.cta_label != blank -%}
-        <a class="op-cbanner_cta" href="{{ section.settings.cta_link | default: '#' }}">{{ section.settings.cta_label }}</a>
+        <a class="op-cbanner_cta" href="{{ section.settings.cta_link | default: '#' }}" data-reveal style="--reveal-delay: 150ms">{{ section.settings.cta_label }}</a>
       {%- endif -%}
     </div>
   </div>

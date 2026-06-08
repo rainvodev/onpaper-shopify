@@ -3,7 +3,7 @@
   <div class="op-text_contain u-container">
     <div class="op-text_content" style="--op-text-cw: {{ section.settings.content_width }}ch; text-align: {{ section.settings.align }}">
       {%- if section.settings.body != blank -%}
-        <div class="op-text_body">{{ section.settings.body }}</div>
+        <div class="op-text_body" data-reveal>{{ section.settings.body }}</div>
       {%- endif -%}
     </div>
   </div>

@@ -5,7 +5,7 @@
     <div class="op-footer_veil"></div>
   {%- endif -%}
   <div class="op-footer_contain u-container">
-    <div class="op-footer_brand">
+    <div class="op-footer_brand" data-reveal="fade">
       {%- if section.settings.logo != blank -%}
         {{ section.settings.logo | image_url: width: 600 | image_tag: alt: shop.name, class: 'op-footer_logo', widths: '240,400,600' }}
       {%- else -%}
@@ -21,7 +21,7 @@
       {%- endif -%}
     </div>
 
-    <div class="op-footer_lower">
+    <div class="op-footer_lower" data-reveal style="--reveal-delay: 120ms">
       <div class="op-footer_links">
         {%- if section.settings.menu_1 != blank -%}
           <nav class="op-footer_col" aria-label="{{ section.settings.menu_1.title }}">
