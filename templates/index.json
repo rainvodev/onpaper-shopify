@@ -131,7 +131,7 @@
         "padding_bottom": 96,
         "eyebrow": "Best sellers",
         "heading": "<p>Enduring, personal, <em>unforgettable.</em></p>",
-        "collection": "",
+        "collection": "frontpage",
         "products_count": 3,
         "cta_label": "Shop now"
       }
