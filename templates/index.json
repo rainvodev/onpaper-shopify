@@ -1,49 +1,262 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "op-hero",
       "blocks": {
-        "slide-1": { "type": "slide", "settings": {} },
-        "slide-2": { "type": "slide", "settings": {} },
-        "slide-3": { "type": "slide", "settings": {} }
+        "slide_adVHqi": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/hero.png"
+          }
+        },
+        "slide-1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/hero-2.png"
+          }
+        },
+        "slide-2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/hero-3.png"
+          }
+        }
       },
-      "block_order": ["slide-1", "slide-2", "slide-3"],
-      "settings": {}
+      "block_order": [
+        "slide_adVHqi",
+        "slide-1",
+        "slide-2"
+      ],
+      "settings": {
+        "overlay": 35,
+        "autoplay": 6,
+        "content_width": 40,
+        "heading": "<p>Crafted with passion, <em>designed for a lifetime.</em></p>",
+        "subheading": "",
+        "cta_label": "Shop now",
+        "cta_link": ""
+      }
     },
-    "about": { "type": "op-about", "settings": {} },
+    "about": {
+      "type": "op-about",
+      "settings": {
+        "padding_top": 96,
+        "padding_bottom": 64,
+        "heading_width": 30,
+        "body_width": 56,
+        "eyebrow": "About us",
+        "heading": "<p><em>Because your moments are meant to be celebrated.</em></p>",
+        "body": "<p>En On Paper creemos que los recuerdos más bonitos merecen guardarse con intención. Somos una marca mexicana de diseño personalizado especializada en transformar momentos especiales en objetos impresos únicos y significativos.</p>"
+      }
+    },
     "bookcase": {
       "type": "op-bookcase",
       "blocks": {
-        "img-1": { "type": "image", "settings": {} },
-        "img-2": { "type": "image", "settings": {} },
-        "img-3": { "type": "image", "settings": {} },
-        "img-4": { "type": "image", "settings": {} }
+        "img-1": {
+          "type": "image",
+          "settings": {}
+        },
+        "img-2": {
+          "type": "image",
+          "settings": {}
+        },
+        "img-3": {
+          "type": "image",
+          "settings": {}
+        },
+        "img-4": {
+          "type": "image",
+          "settings": {}
+        }
       },
-      "block_order": ["img-1", "img-2", "img-3", "img-4"],
-      "settings": {}
+      "block_order": [
+        "img-1",
+        "img-2",
+        "img-3",
+        "img-4"
+      ],
+      "settings": {
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "ratio": "0.8",
+        "strip_label": "Book case",
+        "strip_link": ""
+      }
     },
-    "about_note": { "type": "op-text", "settings": {} },
-    "collection_banner": { "type": "op-collection-banner", "settings": {} },
-    "bestsellers": { "type": "op-bestsellers", "settings": {} },
-    "cta": { "type": "op-cta", "settings": {} },
+    "about_note": {
+      "type": "op-text",
+      "settings": {
+        "padding_top": 64,
+        "padding_bottom": 96,
+        "content_width": 70,
+        "align": "center",
+        "theme": "u-theme-light",
+        "body": "<p>Creemos en la belleza de lo hecho a mano. Diseñamos y producimos proyectos de variedad, siempre con atención al detalle porque cada historia merece ser contada de manera única. Nos inspiran las texturas, los papeles, los colores y el diseño editorial, creando objetos que despierten emociones y conserven recuerdos para toda la vida.</p>"
+      }
+    },
+    "collection_banner": {
+      "type": "op-collection-banner",
+      "settings": {
+        "padding_top": 200,
+        "padding_bottom": 200,
+        "image": "shopify://shop_images/banner-photobook.png",
+        "overlay": 25,
+        "heading_width": 30,
+        "heading": "<p>Get to know our <em>Photobook Collections.</em></p>",
+        "cta_label": "Shop now",
+        "cta_link": ""
+      }
+    },
+    "bestsellers": {
+      "type": "op-bestsellers",
+      "settings": {
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "eyebrow": "Best sellers",
+        "heading": "<p>Enduring, personal, <em>unforgettable.</em></p>",
+        "collection": "",
+        "products_count": 3,
+        "cta_label": "Shop now"
+      }
+    },
+    "cta": {
+      "type": "op-cta",
+      "settings": {
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "theme": "u-theme-light",
+        "bg_color": "",
+        "heading_width": 24,
+        "body_width": 52,
+        "eyebrow": "",
+        "heading": "<p>Proyectos Personalizados</p>",
+        "body": "<p>En On Paper cada cliente tiene un lugar especial: entendemos lo importante que es confiar en quien plasma tus recuerdos. Por eso, nuestro trabajo está hecho con atención, cariño y dedicación. ¡Escríbenos para hacer realidad tu idea!</p>",
+        "cta_label": "Let's work together",
+        "cta_link": ""
+      }
+    },
     "gallery": {
       "type": "op-gallery",
       "blocks": {
-        "g1": { "type": "image", "settings": { "column": "1", "ratio": "wide" } },
-        "g2": { "type": "image", "settings": { "column": "1", "ratio": "wide" } },
-        "g3": { "type": "image", "settings": { "column": "1", "ratio": "wide" } },
-        "g4": { "type": "image", "settings": { "column": "1", "ratio": "wide" } },
-        "g5": { "type": "image", "settings": { "column": "2", "ratio": "square" } },
-        "g6": { "type": "image", "settings": { "column": "2", "ratio": "wide" } },
-        "g7": { "type": "image", "settings": { "column": "2", "ratio": "portrait" } },
-        "g8": { "type": "image", "settings": { "column": "2", "ratio": "wide" } },
-        "g9": { "type": "image", "settings": { "column": "3", "ratio": "wide" } },
-        "g10": { "type": "image", "settings": { "column": "3", "ratio": "wide" } },
-        "g11": { "type": "image", "settings": { "column": "3", "ratio": "wide" } }
+        "g1": {
+          "type": "image",
+          "settings": {
+            "column": "1",
+            "ratio": "wide"
+          }
+        },
+        "g2": {
+          "type": "image",
+          "settings": {
+            "column": "1",
+            "ratio": "wide"
+          }
+        },
+        "g3": {
+          "type": "image",
+          "settings": {
+            "column": "1",
+            "ratio": "wide"
+          }
+        },
+        "g4": {
+          "type": "image",
+          "settings": {
+            "column": "1",
+            "ratio": "wide"
+          }
+        },
+        "g5": {
+          "type": "image",
+          "settings": {
+            "column": "2",
+            "ratio": "square"
+          }
+        },
+        "g6": {
+          "type": "image",
+          "settings": {
+            "column": "2",
+            "ratio": "wide"
+          }
+        },
+        "g7": {
+          "type": "image",
+          "settings": {
+            "column": "2",
+            "ratio": "portrait"
+          }
+        },
+        "g8": {
+          "type": "image",
+          "settings": {
+            "column": "2",
+            "ratio": "wide"
+          }
+        },
+        "g9": {
+          "type": "image",
+          "settings": {
+            "column": "3",
+            "ratio": "wide"
+          }
+        },
+        "g10": {
+          "type": "image",
+          "settings": {
+            "column": "3",
+            "ratio": "wide"
+          }
+        },
+        "g11": {
+          "type": "image",
+          "settings": {
+            "column": "3",
+            "ratio": "wide"
+          }
+        }
       },
-      "block_order": ["g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8", "g9", "g10", "g11"],
-      "settings": {}
+      "block_order": [
+        "g1",
+        "g2",
+        "g3",
+        "g4",
+        "g5",
+        "g6",
+        "g7",
+        "g8",
+        "g9",
+        "g10",
+        "g11"
+      ],
+      "settings": {
+        "padding_top": 64,
+        "padding_bottom": 96,
+        "heading": "",
+        "gap": 16,
+        "col2_offset": 72,
+        "disc_label": "Send message",
+        "disc_link": ""
+      }
     }
   },
-  "order": ["main", "about", "bookcase", "about_note", "collection_banner", "bestsellers", "cta", "gallery"]
+  "order": [
+    "main",
+    "about",
+    "bookcase",
+    "about_note",
+    "collection_banner",
+    "bestsellers",
+    "cta",
+    "gallery"
+  ]
 }
