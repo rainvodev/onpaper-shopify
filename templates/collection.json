@@ -10,7 +10,7 @@
 {
   "sections": {
     "main": {
-      "type": "collection",
+      "type": "op-collection",
       "settings": {}
     }
   },

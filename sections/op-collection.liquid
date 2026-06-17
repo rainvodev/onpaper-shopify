@@ -1,0 +1,99 @@
+{% comment %} On Paper — Colección (Lumos). Encabezado centrado + grid de productos estilo editorial. {% endcomment %}
+<section class="op-collection u-section full-width" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; background-color: var(--swatch--sand-300, #e7e3d8)" {{ section.shopify_attributes }}>
+  <div class="op-collection_contain u-container">
+    <header class="op-collection_head">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="op-collection_eyebrow" data-reveal style="--reveal-delay: 0ms">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <div class="op-collection_heading" role="heading" aria-level="1" data-reveal style="--reveal-delay: 120ms">{{ section.settings.heading }}</div>
+      {%- endif -%}
+    </header>
+
+    {%- assign cols = section.settings.columns -%}
+    {% paginate collection.products by section.settings.products_per_page %}
+      <div class="op-collection_grid" style="--op-collection-cols: {{ cols }}; --op-collection-ratio: {{ section.settings.ratio }}">
+        {%- for product in collection.products -%}
+          <article class="op-collection_card" data-reveal style="--reveal-delay: {{ forloop.index0 | modulo: cols | times: 100 }}ms">
+            <a href="{{ product.url }}" class="op-collection_media" aria-label="{{ product.title }}">
+              {%- if product.featured_image -%}
+                {{ product.featured_image | image_url: width: 900 | image_tag: alt: product.title, class: 'op-collection_img', widths: '300,500,700,900', sizes: '(min-width: 990px) 30vw, (min-width: 600px) 45vw, 90vw', loading: 'lazy' }}
+              {%- else -%}
+                <div class="op-collection_img op-collection_img--ph"></div>
+              {%- endif -%}
+            </a>
+            <h3 class="op-collection_title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+            {%- if product.price > 0 -%}
+              <p class="op-collection_price">
+                {%- if product.price_varies -%}<em>from</em> {% endif -%}{{ product.price_min | money }}
+              </p>
+            {%- endif -%}
+          </article>
+        {%- else -%}
+          {%- if request.design_mode -%}
+            <p class="op-collection_empty">Esta colección no tiene productos visibles en la tienda. Publica los productos (estado Activo) y asegúrate de que estén dentro de la colección.</p>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="op-collection_pager" aria-label="Paginación">
+          {%- if paginate.previous -%}
+            <a class="op-collection_pagelink" href="{{ paginate.previous.url }}" rel="prev">Anterior</a>
+          {%- endif -%}
+          <span class="op-collection_pageinfo">{{ paginate.current_page }} / {{ paginate.pages }}</span>
+          {%- if paginate.next -%}
+            <a class="op-collection_pagelink" href="{{ paginate.next.url }}" rel="next">Siguiente</a>
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+    {% endpaginate %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .op-collection_head { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 70ch; margin-inline: auto; margin-bottom: var(--_spacing---space--8); }
+  .op-collection_eyebrow { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; opacity: 0.7; margin-bottom: var(--_spacing---space--5); }
+  .op-collection_heading { font-family: var(--_typography---font--primary-family); font-style: italic; font-size: clamp(1.7rem, 1.1rem + 2.2vw, 2.6rem); line-height: 1.18; }
+  .op-collection_heading p { margin: 0; }
+  .op-collection_grid { display: grid; grid-template-columns: repeat(var(--op-collection-cols, 3), 1fr); gap: var(--_spacing---space--6) var(--_spacing---space--6); row-gap: var(--_spacing---space--8); }
+  .op-collection_empty { grid-column: 1 / -1; text-align: center; font-size: 0.9rem; opacity: 0.7; padding: var(--_spacing---space--6); border: 0.0625rem dashed color-mix(in srgb, var(--_theme---text) 30%, transparent); }
+  .op-collection_media { display: block; aspect-ratio: var(--op-collection-ratio, 4 / 5); overflow: hidden; }
+  .op-collection_img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms ease; }
+  .op-collection_media:hover .op-collection_img { transform: scale(1.04); }
+  .op-collection_img--ph { background-color: color-mix(in srgb, var(--_theme---text) 10%, transparent); }
+  .op-collection_title { font-family: var(--_typography---font--primary-family); font-size: 1.15rem; font-weight: 400; margin-top: var(--_spacing---space--5); margin-bottom: var(--_spacing---space--3); }
+  .op-collection_title a { color: currentColor; text-decoration: none; }
+  .op-collection_price { font-size: 0.92rem; opacity: 0.75; margin-top: 0; }
+  .op-collection_price em { font-style: italic; }
+  .op-collection_pager { display: flex; align-items: center; justify-content: center; gap: var(--_spacing---space--6); margin-top: var(--_spacing---space--8); }
+  .op-collection_pagelink { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.74rem; color: currentColor; text-decoration: none; opacity: 0.8; transition: opacity 250ms; }
+  .op-collection_pagelink:hover { opacity: 1; }
+  .op-collection_pageinfo { font-size: 0.8rem; opacity: 0.6; }
+  @media (max-width: 990px) { .op-collection_grid { --op-collection-cols: 2; } }
+  @media (max-width: 600px) { .op-collection_grid { --op-collection-cols: 1; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Colección On Paper",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 200, "step": 4, "default": 96, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 200, "step": 4, "default": 96, "unit": "px" },
+    { "type": "header", "content": "Encabezado" },
+    { "type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "On Paper Shop" },
+    { "type": "richtext", "id": "heading", "label": "Título", "default": "<p>Get to know our products</p>" },
+    { "type": "header", "content": "Grid" },
+    { "type": "range", "id": "columns", "label": "Columnas (desktop)", "min": 2, "max": 4, "step": 1, "default": 3 },
+    { "type": "select", "id": "ratio", "label": "Proporción de imagen", "options": [
+      { "value": "3 / 4", "label": "3:4" },
+      { "value": "4 / 5", "label": "4:5" },
+      { "value": "5 / 6", "label": "5:6" },
+      { "value": "1 / 1", "label": "1:1" }
+    ], "default": "4 / 5" },
+    { "type": "range", "id": "products_per_page", "label": "Productos por página", "min": 4, "max": 36, "step": 1, "default": 12 }
+  ]
+}
+{% endschema %}
