@@ -13,7 +13,26 @@
   "sections": {
     "footer": {
       "type": "op-footer",
-      "settings": {}
+      "settings": {
+        "padding_top": 100,
+        "padding_bottom": 64,
+        "min_height": 640,
+        "menu_1": "footer",
+        "menu_2": "main-menu",
+        "contact_heading": "contacto",
+        "phone": "(81) 1611 1838",
+        "email": "taller@onpaper.mx",
+        "social_heading": "@linktr.ee",
+        "social_url": "",
+        "instagram": "",
+        "instagram_label": "@onpaper.mx",
+        "pinterest": "",
+        "pinterest_label": "onpaper",
+        "facebook": "",
+        "facebook_label": "on paper",
+        "whatsapp_url": "",
+        "whatsapp_label": "Whatsapp"
+      }
     }
   },
   "order": [
