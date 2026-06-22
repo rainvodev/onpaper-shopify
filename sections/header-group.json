@@ -14,18 +14,48 @@
     "header": {
       "type": "op-header",
       "blocks": {
-        "nav_item_hcdkgD": {
+        "nav_item_MNJwq7": {
+          "type": "nav_item",
+          "settings": {
+            "group": "products",
+            "collection": "photobook-tradicional",
+            "label": "Photobook Tradicional",
+            "link": ""
+          }
+        },
+        "nav_item_r6n6Rm": {
           "type": "nav_item",
           "settings": {
             "group": "products",
             "collection": "",
+            "label": "Test 2",
+            "link": ""
+          }
+        },
+        "nav_item_WRfrQy": {
+          "type": "nav_item",
+          "settings": {
+            "group": "products",
+            "collection": "",
+            "label": "Test 3",
+            "link": ""
+          }
+        },
+        "nav_item_zqHLxq": {
+          "type": "nav_item",
+          "settings": {
+            "group": "collections",
+            "collection": "best-sellers",
             "label": "",
             "link": ""
           }
         }
       },
       "block_order": [
-        "nav_item_hcdkgD"
+        "nav_item_MNJwq7",
+        "nav_item_r6n6Rm",
+        "nav_item_WRfrQy",
+        "nav_item_zqHLxq"
       ],
       "settings": {
         "products_label": "Products",
