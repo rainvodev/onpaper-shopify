@@ -1,12 +1,15 @@
-{% comment %} On Paper — Header (Lumos). Overlay transparente sobre el hero en la Home; sólido en el resto. {% endcomment %}
+{% comment %} On Paper — Header (Lumos). Barra + mega-menú (Products/Collections con panel a ~50vh,
+  lista izquierda + 3 productos derecha que cambian al hover). Others = link simple. Drawer en móvil. {% endcomment %}
 {% liquid
   assign is_home = false
   if template.name == 'index'
     assign is_home = true
   endif
+  assign groups = 'products,collections' | split: ','
 %}
-<header class="op-header full-width{% if is_home %} is-overlay u-theme-dark{% endif %}" data-reveal="down" data-reveal-load style="--reveal-delay: 200ms" {{ section.shopify_attributes }}>
-  <div class="op-header_contain u-container">
+<header class="op-header full-width{% if is_home %} is-overlay u-theme-dark{% endif %}" data-op-header data-reveal="down" data-reveal-load
+  style="--reveal-delay: 200ms; --op-panel-h: {{ section.settings.panel_height | default: 50 }}vh; --op-feat-ratio: {{ section.settings.feature_ratio | default: '4 / 3' }}" {{ section.shopify_attributes }}>
+  <div class="op-header_bar u-container">
     <div class="op-header_layout">
       <a href="{{ routes.root_url }}" class="op-header_logo" aria-label="{{ shop.name }}">
         {%- if section.settings.logo != blank -%}
@@ -17,9 +20,14 @@
       </a>
 
       <nav class="op-header_nav" aria-label="Principal">
-        {%- for link in section.settings.menu.links -%}
-          <a href="{{ link.url }}" class="op-header_link">{{ link.title }}</a>
+        {%- for g in groups -%}
+          <button type="button" class="op-header_link op-header_trigger" data-op-trigger="{{ g }}" aria-expanded="false" aria-controls="op-panel-{{ g }}">
+            {%- if g == 'products' -%}{{ section.settings.products_label | default: 'Products' }}{%- else -%}{{ section.settings.collections_label | default: 'Collections' }}{%- endif -%}
+          </button>
         {%- endfor -%}
+        {%- if section.settings.others_link != blank -%}
+          <a href="{{ section.settings.others_link }}" class="op-header_link">{{ section.settings.others_label | default: 'Others' }}</a>
+        {%- endif -%}
       </nav>
 
       <div class="op-header_actions">
@@ -32,7 +40,6 @@
             </select>
           {%- endform -%}
         {%- endif -%}
-
         {%- if localization.available_languages.size > 1 -%}
           {%- form 'localization', class: 'op-loc' -%}
             <select name="language_code" class="op-loc_select" aria-label="Idioma" onchange="this.form.submit()">
@@ -44,31 +51,172 @@
         {%- endif -%}
 
         <a href="{{ routes.cart_url }}" class="op-header_cart" aria-label="Carrito">
-          Cart ({{ cart.item_count }})
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span>Cart ({{ cart.item_count }})</span>
         </a>
+
+        <button type="button" class="op-header_burger" data-op-burger aria-label="Menú" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
       </div>
+    </div>
+  </div>
+
+  {%- comment -%} Paneles desktop {%- endcomment -%}
+  {%- for g in groups -%}
+    <div class="op-header_panel" id="op-panel-{{ g }}" data-op-panel="{{ g }}">
+      <div class="op-header_panelgrid u-container">
+        <div class="op-header_menucol">
+          {%- liquid
+            if g == 'products'
+              assign eyebrow = section.settings.products_eyebrow
+              assign eyebrow_link = section.settings.products_eyebrow_link
+            else
+              assign eyebrow = section.settings.collections_eyebrow
+              assign eyebrow_link = section.settings.collections_eyebrow_link
+            endif
+          -%}
+          {%- if eyebrow != blank -%}
+            {%- if eyebrow_link != blank -%}
+              <a class="op-header_eyebrow op-header_eyebrow--link" href="{{ eyebrow_link }}">{{ eyebrow }}</a>
+            {%- else -%}
+              <p class="op-header_eyebrow">{{ eyebrow }}</p>
+            {%- endif -%}
+          {%- endif -%}
+          <ul class="op-header_menulist">
+            {%- assign idx = 0 -%}
+            {%- for block in section.blocks -%}
+              {%- if block.settings.group == g -%}
+                {%- assign item_url = block.settings.collection.url | default: block.settings.link | default: '#' -%}
+                {%- assign item_label = block.settings.label | default: block.settings.collection.title -%}
+                <li>
+                  <a class="op-header_menulink{% if idx == 0 %} is-active{% endif %}" data-op-item="{{ g }}-{{ idx }}" href="{{ item_url }}" {{ block.shopify_attributes }}>{{ item_label }}</a>
+                </li>
+                {%- assign idx = idx | plus: 1 -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if idx == 0 and request.design_mode -%}
+              <li class="op-header_empty">Agrega items de menú (bloques) para "{{ g }}".</li>
+            {%- endif -%}
+          </ul>
+        </div>
+
+        <div class="op-header_feature">
+          {%- assign idx = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.settings.group == g -%}
+              <div class="op-header_featuregroup{% if idx == 0 %} is-active{% endif %}" data-op-feature="{{ g }}-{{ idx }}">
+                {%- assign col = block.settings.collection -%}
+                {%- if col != blank and col.products.size > 0 -%}
+                  {%- for product in col.products limit: 3 -%}
+                    <a class="op-header_pcard" href="{{ product.url }}">
+                      <span class="op-header_pmedia">
+                        {%- if product.featured_image -%}
+                          {{ product.featured_image | image_url: width: 600 | image_tag: alt: product.title, class: 'op-header_pimg', widths: '200,300,450,600', sizes: '20vw', loading: 'lazy' }}
+                        {%- else -%}
+                          <span class="op-header_pimg op-header_pimg--ph"></span>
+                        {%- endif -%}
+                      </span>
+                      <span class="op-header_pname">{{ product.title }}</span>
+                    </a>
+                  {%- endfor -%}
+                {%- elsif request.design_mode -%}
+                  <p class="op-header_empty">Elige una colección con productos publicados en este item.</p>
+                {%- endif -%}
+              </div>
+              {%- assign idx = idx | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endfor -%}
+
+  {%- comment -%} Drawer móvil {%- endcomment -%}
+  <div class="op-header_drawer" data-op-drawer>
+    <div class="op-header_drawerinner u-container">
+      {%- for g in groups -%}
+        <details class="op-header_acc">
+          <summary class="op-header_accsum">{%- if g == 'products' -%}{{ section.settings.products_label | default: 'Products' }}{%- else -%}{{ section.settings.collections_label | default: 'Collections' }}{%- endif -%}</summary>
+          <ul class="op-header_acclist">
+            {%- for block in section.blocks -%}
+              {%- if block.settings.group == g -%}
+                {%- assign item_url = block.settings.collection.url | default: block.settings.link | default: '#' -%}
+                {%- assign item_label = block.settings.label | default: block.settings.collection.title -%}
+                <li><a class="op-header_acclink" href="{{ item_url }}">{{ item_label }}</a></li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </details>
+      {%- endfor -%}
+      {%- if section.settings.others_link != blank -%}
+        <a class="op-header_accroot" href="{{ section.settings.others_link }}">{{ section.settings.others_label | default: 'Others' }}</a>
+      {%- endif -%}
     </div>
   </div>
 </header>
 
 {% stylesheet %}
-  .op-header { background-color: var(--_theme---background); border-bottom: 0.0625rem solid var(--_theme---border); }
-  .op-header.is-overlay { position: absolute; top: 0; left: 0; right: 0; z-index: 10; background-color: transparent; border-bottom: 0; }
-  .op-header_contain { padding-top: var(--_spacing---space--4); padding-bottom: var(--_spacing---space--4); }
+  .op-header { position: relative; z-index: 50; background-color: var(--_theme---background); border-bottom: 0.0625rem solid var(--_theme---border); }
+  .op-header.is-overlay { position: absolute; top: 0; left: 0; right: 0; background-color: transparent; border-bottom: 0; }
+  .op-header.is-menu-open { background-color: var(--swatch--light-200, #f5f5ef); color: var(--swatch--brand-500, #5f604e); border-bottom-color: var(--_theme---border); }
+  .op-header_bar { padding-top: var(--_spacing---space--4); padding-bottom: var(--_spacing---space--4); position: relative; z-index: 2; }
   .op-header_layout { display: flex; align-items: center; justify-content: space-between; gap: var(--_spacing---space--5); }
   .op-header_logo { text-decoration: none; color: currentColor; display: inline-flex; align-items: center; }
   .op-header_logo_img { width: 8rem; height: auto; }
   .op-header_logo_text { font-family: var(--_typography---font--primary-family); font-size: 1.6rem; letter-spacing: -0.01em; }
-  .op-header_nav { display: var(--none-medium, flex); gap: var(--_spacing---space--5); }
-  .op-header_link, .op-loc_select, .op-header_cart {
+  .op-header_nav { display: flex; gap: var(--_spacing---space--6); }
+  .op-header_link, .op-loc_select, .op-header_cart, .op-header_accsum, .op-header_accroot, .op-header_eyebrow, .op-header_acclink {
     font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem;
     color: currentColor; text-decoration: none;
   }
+  .op-header_trigger { background: none; border: 0; cursor: pointer; padding: 0; position: relative; }
+  .op-header_trigger::after { content: ""; position: absolute; left: 0; right: 0; bottom: -0.35rem; height: 0.0625rem; background-color: currentColor; transform: scaleX(0); transform-origin: left; transition: transform 250ms ease; }
+  .op-header_trigger:hover::after, .op-header_trigger.is-active::after { transform: scaleX(1); }
   .op-header_actions { display: flex; align-items: center; gap: var(--_spacing---space--4); }
   .op-loc { display: inline-flex; }
   .op-loc_select { background-color: transparent; border: 0; cursor: pointer; color: currentColor; }
   .op-loc_select option { color: #111; }
-  .op-header_cart { white-space: nowrap; }
+  .op-header_cart { display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
+  .op-header_burger { display: none; background: none; border: 0; cursor: pointer; color: currentColor; padding: 0; }
+
+  /* Paneles */
+  .op-header_panel { position: absolute; left: 0; right: 0; top: 100%; z-index: 1; background-color: var(--swatch--light-200, #f5f5ef); color: var(--swatch--brand-500, #5f604e); border-bottom: 0.0625rem solid var(--_theme---border); box-shadow: 0 1.5rem 2rem -1.5rem rgba(0,0,0,0.18); height: var(--op-panel-h, 50vh); visibility: hidden; opacity: 0; transform: translateY(-0.5rem); pointer-events: none; transition: opacity 280ms ease, transform 280ms ease, visibility 0s linear 280ms; }
+  .op-header_panel.is-open { visibility: visible; opacity: 1; transform: translateY(0); pointer-events: auto; transition: opacity 280ms ease, transform 280ms ease; }
+  .op-header_panelgrid { display: grid; grid-template-columns: minmax(13rem, 1fr) 2.4fr; gap: var(--_spacing---space--8); height: 100%; padding-top: var(--_spacing---space--7); padding-bottom: var(--_spacing---space--7); align-content: start; overflow: auto; }
+  .op-header_eyebrow { opacity: 0.55; margin-bottom: var(--_spacing---space--5); }
+  .op-header_eyebrow--link:hover { opacity: 0.9; }
+  .op-header_menulist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--_spacing---space--3); }
+  .op-header_menulink { font-family: var(--_typography---font--primary-family); font-size: 1.02rem; color: currentColor; text-decoration: none; opacity: 0.7; transition: opacity 200ms; display: inline-block; border-bottom: 0.0625rem solid transparent; padding-bottom: 0.1rem; }
+  .op-header_menulink:hover, .op-header_menulink.is-active { opacity: 1; border-bottom-color: currentColor; }
+  .op-header_feature { position: relative; }
+  .op-header_featuregroup { display: none; grid-template-columns: repeat(3, 1fr); gap: var(--_spacing---space--6); }
+  .op-header_featuregroup.is-active { display: grid; }
+  .op-header_pcard { text-decoration: none; color: currentColor; display: block; }
+  .op-header_pmedia { display: block; aspect-ratio: var(--op-feat-ratio, 4 / 3); overflow: hidden; }
+  .op-header_pimg { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms ease; }
+  .op-header_pcard:hover .op-header_pimg { transform: scale(1.04); }
+  .op-header_pimg--ph { display: block; background-color: color-mix(in srgb, currentColor 12%, transparent); }
+  .op-header_pname { display: block; margin-top: var(--_spacing---space--4); font-family: var(--_typography---font--primary-family); font-size: 0.95rem; }
+  .op-header_empty { font-size: 0.85rem; opacity: 0.7; }
+
+  /* Drawer móvil */
+  .op-header_drawer { position: absolute; left: 0; right: 0; top: 100%; background-color: var(--swatch--light-200, #f5f5ef); color: var(--swatch--brand-500, #5f604e); border-bottom: 0.0625rem solid var(--_theme---border); display: none; }
+  .op-header_drawer.is-open { display: block; }
+  .op-header_drawerinner { padding-top: var(--_spacing---space--6); padding-bottom: var(--_spacing---space--6); display: flex; flex-direction: column; gap: var(--_spacing---space--4); }
+  .op-header_acc { border-bottom: 0.0625rem solid var(--_theme---border); }
+  .op-header_accsum { cursor: pointer; list-style: none; padding: var(--_spacing---space--4) 0; }
+  .op-header_accsum::-webkit-details-marker { display: none; }
+  .op-header_acclist { list-style: none; margin: 0; padding: 0 0 var(--_spacing---space--4); display: flex; flex-direction: column; gap: var(--_spacing---space--3); }
+  .op-header_acclink { font-family: var(--_typography---font--primary-family); text-transform: none; letter-spacing: 0; font-size: 1rem; opacity: 0.8; }
+  .op-header_accroot { padding: var(--_spacing---space--4) 0; }
+
+  @media (max-width: 990px) {
+    .op-header_nav { display: none; }
+    .op-header_panel { display: none; }
+    .op-header_burger { display: inline-flex; }
+  }
+  .op-no-scroll { overflow: hidden; }
 {% endstylesheet %}
 
 {% schema %}
@@ -76,7 +224,40 @@
   "name": "Encabezado On Paper",
   "settings": [
     { "type": "image_picker", "id": "logo", "label": "Logo (opcional; si está vacío se usa el wordmark)" },
-    { "type": "link_list", "id": "menu", "label": "Menú", "default": "main-menu" }
+    { "type": "header", "content": "Navegación" },
+    { "type": "text", "id": "products_label", "label": "Etiqueta Products", "default": "Products" },
+    { "type": "text", "id": "collections_label", "label": "Etiqueta Collections", "default": "Collections" },
+    { "type": "text", "id": "others_label", "label": "Etiqueta Others", "default": "Others" },
+    { "type": "url", "id": "others_link", "label": "Others — enlace" },
+    { "type": "header", "content": "Panel Products" },
+    { "type": "text", "id": "products_eyebrow", "label": "Eyebrow", "default": "View all" },
+    { "type": "url", "id": "products_eyebrow_link", "label": "Eyebrow — enlace" },
+    { "type": "header", "content": "Panel Collections" },
+    { "type": "text", "id": "collections_eyebrow", "label": "Eyebrow", "default": "View all" },
+    { "type": "url", "id": "collections_eyebrow_link", "label": "Eyebrow — enlace" },
+    { "type": "header", "content": "Panel (apariencia)" },
+    { "type": "range", "id": "panel_height", "label": "Alto del panel", "min": 30, "max": 80, "step": 2, "default": 50, "unit": "vh" },
+    { "type": "select", "id": "feature_ratio", "label": "Proporción de imagen de producto", "options": [
+      { "value": "4 / 3", "label": "4:3" },
+      { "value": "3 / 2", "label": "3:2" },
+      { "value": "1 / 1", "label": "1:1" },
+      { "value": "4 / 5", "label": "4:5" }
+    ], "default": "4 / 3" }
+  ],
+  "blocks": [
+    {
+      "type": "nav_item",
+      "name": "Item de menú",
+      "settings": [
+        { "type": "select", "id": "group", "label": "Dropdown", "options": [
+          { "value": "products", "label": "Products" },
+          { "value": "collections", "label": "Collections" }
+        ], "default": "products" },
+        { "type": "collection", "id": "collection", "label": "Colección (link + 3 productos)" },
+        { "type": "text", "id": "label", "label": "Etiqueta (opcional; default = nombre de la colección)" },
+        { "type": "url", "id": "link", "label": "Enlace alterno (si no usas colección)" }
+      ]
+    }
   ]
 }
 {% endschema %}
