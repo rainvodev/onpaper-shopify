@@ -8,7 +8,7 @@
   assign groups = 'products,collections' | split: ','
 %}
 <header class="op-header full-width{% if is_home %} is-overlay u-theme-dark{% endif %}" data-op-header data-reveal="down" data-reveal-load
-  style="--reveal-delay: 200ms; --op-panel-h: {{ section.settings.panel_height | default: 50 }}vh; --op-feat-ratio: {{ section.settings.feature_ratio | default: '4 / 3' }}" {{ section.shopify_attributes }}>
+  style="--reveal-delay: 200ms; --op-panel-h: {{ section.settings.panel_height | default: 50 }}vh; --op-feat-ratio: {{ section.settings.feature_ratio | default: '2 / 3' }}" {{ section.shopify_attributes }}>
   <div class="op-header_bar u-container">
     <div class="op-header_layout">
       <a href="{{ routes.root_url }}" class="op-header_logo" aria-label="{{ shop.name }}">
@@ -188,7 +188,7 @@
   .op-header_featuregroup { display: none; grid-template-columns: repeat(3, 1fr); gap: var(--_spacing---space--6); }
   .op-header_featuregroup.is-active { display: grid; }
   .op-header_pcard { text-decoration: none; color: currentColor; display: block; }
-  .op-header_pmedia { display: block; aspect-ratio: var(--op-feat-ratio, 4 / 3); overflow: hidden; }
+  .op-header_pmedia { display: block; aspect-ratio: var(--op-feat-ratio, 2 / 3); overflow: hidden; }
   .op-header_pimg { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms ease; }
   .op-header_pcard:hover .op-header_pimg { transform: scale(1.04); }
   .op-header_pimg--ph { display: block; background-color: color-mix(in srgb, currentColor 12%, transparent); }
@@ -232,11 +232,12 @@
     { "type": "header", "content": "Panel (apariencia)" },
     { "type": "range", "id": "panel_height", "label": "Alto del panel", "min": 30, "max": 80, "step": 2, "default": 50, "unit": "vh" },
     { "type": "select", "id": "feature_ratio", "label": "Proporción de imagen de producto", "options": [
-      { "value": "4 / 3", "label": "4:3" },
-      { "value": "3 / 2", "label": "3:2" },
+      { "value": "2 / 3", "label": "2:3 (alta)" },
+      { "value": "4 / 5", "label": "4:5" },
       { "value": "1 / 1", "label": "1:1" },
-      { "value": "4 / 5", "label": "4:5" }
-    ], "default": "4 / 3" }
+      { "value": "3 / 2", "label": "3:2" },
+      { "value": "4 / 3", "label": "4:3" }
+    ], "default": "2 / 3" }
   ],
   "blocks": [
     {
