@@ -46,7 +46,7 @@
           "settings": {
             "group": "collections",
             "collection": "best-sellers",
-            "label": "",
+            "label": "Colection Title",
             "link": ""
           }
         }
@@ -63,7 +63,7 @@
         "others_label": "Others",
         "others_link": "shopify://pages/others",
         "products_eyebrow": "View all",
-        "products_eyebrow_link": "",
+        "products_eyebrow_link": "shopify://collections/all",
         "collections_eyebrow": "View all",
         "collections_eyebrow_link": "",
         "panel_height": 50,
