@@ -14,7 +14,16 @@
     "header": {
       "type": "op-header",
       "settings": {
-        "menu": "main-menu"
+        "products_label": "Products",
+        "collections_label": "Collections",
+        "others_label": "Others",
+        "others_link": "shopify://pages/others",
+        "products_eyebrow": "View all",
+        "products_eyebrow_link": "",
+        "collections_eyebrow": "View all",
+        "collections_eyebrow_link": "",
+        "panel_height": 50,
+        "feature_ratio": "4 / 3"
       }
     }
   },
