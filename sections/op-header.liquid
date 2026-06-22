@@ -8,7 +8,7 @@
   assign groups = 'products,collections' | split: ','
 %}
 <header class="op-header full-width{% if is_home %} is-overlay u-theme-dark{% endif %}" data-op-header data-reveal="down" data-reveal-load
-  style="--reveal-delay: 200ms; --op-panel-h: {{ section.settings.panel_height | default: 50 }}vh; --op-feat-ratio: {{ section.settings.feature_ratio | default: '4 / 5' }}" {{ section.shopify_attributes }}>
+  style="--reveal-delay: 200ms; --op-feat-ratio: {{ section.settings.feature_ratio | default: '4 / 5' }}" {{ section.shopify_attributes }}>
   <div class="op-header_bar u-container">
     <div class="op-header_layout">
       <a href="{{ routes.root_url }}" class="op-header_logo" aria-label="{{ shop.name }}">
@@ -176,9 +176,9 @@
   .op-header_burger { display: none; background: none; border: 0; cursor: pointer; color: currentColor; padding: 0; }
 
   /* Paneles */
-  .op-header_panel { position: absolute; left: 0; right: 0; top: 100%; z-index: 1; background-color: var(--swatch--light-200, #f5f5ef); color: var(--swatch--brand-500, #5f604e); border-bottom: 0.0625rem solid var(--_theme---border); box-shadow: 0 1.5rem 2rem -1.5rem rgba(0,0,0,0.18); height: var(--op-panel-h, 50vh); visibility: hidden; opacity: 0; transform: translateY(-0.5rem); pointer-events: none; transition: opacity 280ms ease, transform 280ms ease, visibility 0s linear 280ms; }
+  .op-header_panel { position: absolute; left: 0; right: 0; top: 100%; z-index: 1; background-color: var(--swatch--light-200, #f5f5ef); color: var(--swatch--brand-500, #5f604e); border-bottom: 0.0625rem solid var(--_theme---border); box-shadow: 0 1.5rem 2rem -1.5rem rgba(0,0,0,0.18); max-height: 85vh; overflow-y: auto; visibility: hidden; opacity: 0; transform: translateY(-0.5rem); pointer-events: none; transition: opacity 280ms ease, transform 280ms ease, visibility 0s linear 280ms; }
   .op-header_panel.is-open { visibility: visible; opacity: 1; transform: translateY(0); pointer-events: auto; transition: opacity 280ms ease, transform 280ms ease; }
-  .op-header_panelgrid { display: grid; grid-template-columns: minmax(13rem, 1fr) 2.4fr; gap: var(--_spacing---space--8); height: 100%; padding-top: var(--_spacing---space--7); padding-bottom: var(--_spacing---space--7); align-content: start; overflow: auto; }
+  .op-header_panelgrid { display: grid; grid-template-columns: minmax(13rem, 1fr) 2.4fr; gap: var(--_spacing---space--8); padding-top: var(--_spacing---space--7); padding-bottom: var(--_spacing---space--7); align-content: start; }
   .op-header_eyebrow { opacity: 0.55; margin-bottom: var(--_spacing---space--5); }
   .op-header_eyebrow--link:hover { opacity: 0.9; }
   .op-header_menulist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--_spacing---space--3); }
@@ -230,7 +230,6 @@
     { "type": "text", "id": "collections_eyebrow", "label": "Eyebrow", "default": "View all" },
     { "type": "url", "id": "collections_eyebrow_link", "label": "Eyebrow — enlace" },
     { "type": "header", "content": "Panel (apariencia)" },
-    { "type": "range", "id": "panel_height", "label": "Alto del panel", "min": 30, "max": 80, "step": 2, "default": 50, "unit": "vh" },
     { "type": "select", "id": "feature_ratio", "label": "Proporción de imagen de producto", "options": [
       { "value": "4 / 5", "label": "4:5 (retrato suave)" },
       { "value": "5 / 6", "label": "5:6" },
