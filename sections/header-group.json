@@ -13,6 +13,20 @@
   "sections": {
     "header": {
       "type": "op-header",
+      "blocks": {
+        "nav_item_hcdkgD": {
+          "type": "nav_item",
+          "settings": {
+            "group": "products",
+            "collection": "",
+            "label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "nav_item_hcdkgD"
+      ],
       "settings": {
         "products_label": "Products",
         "collections_label": "Collections",
