@@ -12,11 +12,7 @@
   <div class="op-header_bar u-container">
     <div class="op-header_layout">
       <a href="{{ routes.root_url }}" class="op-header_logo" aria-label="{{ shop.name }}">
-        {%- if section.settings.logo != blank -%}
-          {{ section.settings.logo | image_url: width: 400 | image_tag: alt: shop.name, class: 'op-header_logo_img', widths: '160,240,400' }}
-        {%- else -%}
-          <span class="op-header_logo_text">onpaper</span>
-        {%- endif -%}
+        {% render 'op-logo' %}
       </a>
 
       <nav class="op-header_nav" aria-label="Principal">
@@ -163,8 +159,7 @@
   .op-header_bar { padding-top: var(--_spacing---space--4); padding-bottom: var(--_spacing---space--4); position: relative; z-index: 2; }
   .op-header_layout { display: flex; align-items: center; justify-content: space-between; gap: var(--_spacing---space--5); }
   .op-header_logo { text-decoration: none; color: currentColor; display: inline-flex; align-items: center; }
-  .op-header_logo_img { width: 8rem; height: auto; }
-  .op-header_logo_text { font-family: var(--_typography---font--primary-family); font-size: 1.6rem; letter-spacing: -0.01em; }
+  .op-logo { display: block; width: 7.5rem; height: auto; color: currentColor; }
   .op-header_nav { display: flex; gap: var(--_spacing---space--6); }
   .op-header_link, .op-loc_select, .op-header_cart, .op-header_accsum, .op-header_accroot, .op-header_eyebrow, .op-header_acclink {
     font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem;
@@ -223,7 +218,6 @@
 {
   "name": "Encabezado On Paper",
   "settings": [
-    { "type": "image_picker", "id": "logo", "label": "Logo (opcional; si está vacío se usa el wordmark)" },
     { "type": "header", "content": "Navegación" },
     { "type": "text", "id": "products_label", "label": "Etiqueta Products", "default": "Products" },
     { "type": "text", "id": "collections_label", "label": "Etiqueta Collections", "default": "Collections" },
