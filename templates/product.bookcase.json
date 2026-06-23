@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "main": {
+      "type": "op-product",
+      "blocks": {
+        "heading": { "type": "heading", "settings": {
+          "title": "<p>Book <em>Case</em></p>",
+          "intro": "<p>Nuestros bookcases están hechas con el mismo material, diseño y cuidado que nuestros libros. Son literalmente el libro convertido en caja: mismas texturas, mismo estilo, misma personalización, pero en versión funda rígida.</p>"
+        }},
+        "details": { "type": "accordion", "settings": {
+          "heading": "Details",
+          "content": "<p>El complemento perfecto para proteger lo que más valoras.</p><p>Están diseñadas para guardar y conservar tu libro de forma segura, protegiéndolo del polvo, el uso y el paso del tiempo, mientras mantienen su estética impecable. Son ideales para regalar un libro de forma especial o para guardar tus recuerdos como una pieza de colección.</p>"
+        }},
+        "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>15 días hábiles.</p>" }},
+        "material": { "type": "pills", "settings": { "label": "Material", "options": "Tela, Vinipiel", "default": "Vinipiel", "collapsible": true }},
+        "size": { "type": "size", "settings": { "label": "Tamaño", "set": "firmas-bookcase", "default": "11x14", "note": "Medidas en Pulgadas", "collapsible": true }},
+        "color": { "type": "swatch", "settings": { "label": "Color", "palette": "fabric-standard", "default": "Verde militar", "collapsible": true }},
+        "hotstamping": { "type": "swatch", "settings": { "label": "Hotstamping", "palette": "hotstamping", "default": "Oro Rosa", "collapsible": true }},
+        "titulo": { "type": "text", "settings": { "label": "Título en portada y lomo (opcional)", "placeholder": "Escribe el título…" }}
+      },
+      "block_order": ["heading", "details", "shipping", "material", "size", "color", "hotstamping", "titulo"],
+      "settings": {
+        "personalize_heading": "Personaliza tu Book Case",
+        "qty_style": "dropdown",
+        "qty_label": "Cantidad",
+        "show_buy_now": true,
+        "show_related": true,
+        "related_heading": "You may also like…"
+      }
+    }
+  },
+  "order": ["main"]
+}

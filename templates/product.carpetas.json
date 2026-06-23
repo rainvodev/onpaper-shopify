@@ -1,0 +1,36 @@
+{
+  "sections": {
+    "main": {
+      "type": "op-product",
+      "blocks": {
+        "heading": { "type": "heading", "settings": {
+          "title": "<p>Carpetas</p>",
+          "intro": "<p>Nuestras carpetas personalizadas están diseñadas para que tus entregables, documentos o proyectos tengan un formato impecable, elegante y completamente a tu estilo.</p>"
+        }},
+        "details": { "type": "accordion", "settings": {
+          "heading": "Details",
+          "content": "<p>Porque lo que llevas dentro importa, pero cómo lo entregas también deja huella.</p><p>Cada carpeta se hace a mano, con materiales de alta calidad y detalles personalizados como nombres, logotipos, iniciales o frases clave. Son ideales para certificados, propuestas, portafolios, fotografías o cualquier entrega en la que quieras destacar.</p><p>Disponibles tanto para proyectos individuales, como para pedidos por volumen (eventos, empresas o presentaciones profesionales). Adaptamos cada diseño a lo que necesitas.</p>"
+        }},
+        "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>20 días hábiles.</p>" }},
+        "material": { "type": "pills", "settings": { "label": "Material", "options": "Tela, Tela Plastificada, Papel Texturizado", "default": "Papel Texturizado", "collapsible": true }},
+        "size": { "type": "size", "settings": { "label": "Tamaño", "set": "carpetas", "default": "11x8.5", "note": "Medidas en Pulgadas", "collapsible": true }},
+        "color": { "type": "swatch", "settings": { "label": "Color", "palette": "fabric-carpetas", "default": "Blanco crema", "collapsible": true }},
+        "hotstamping": { "type": "swatch", "settings": { "label": "Hotstamping", "palette": "hotstamping", "default": "Oro Rosa", "collapsible": true }},
+        "herraje": { "type": "dropdown", "settings": { "label": "Medidas de herraje", "options": "Sin Herraje, 1 Pulgada, 1.5 Pulgadas, 2 Pulgadas" }},
+        "placa": { "type": "radio", "settings": { "label": "¿Cuentas con placa de logotipo?", "options": "Sí, No", "default": "Sí" }},
+        "logo": { "type": "url", "settings": { "label": "Agrega tu logotipo (opcional)", "placeholder": "Escribe el nombre o adjunta el link con el logotipo en formato PDF." }}
+      },
+      "block_order": ["heading", "details", "shipping", "material", "size", "color", "hotstamping", "herraje", "placa", "logo"],
+      "settings": {
+        "personalize_heading": "Personaliza tu Carpeta",
+        "qty_style": "dropdown",
+        "qty_label": "Cantidad de carpetas",
+        "qty_note": "A partir de 21 carpetas o más, escríbenos para recibir cotización personalizada.",
+        "show_buy_now": true,
+        "show_related": true,
+        "related_heading": "You may also like…"
+      }
+    }
+  },
+  "order": ["main"]
+}

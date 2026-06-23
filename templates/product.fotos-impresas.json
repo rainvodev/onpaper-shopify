@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "main": {
+      "type": "op-product",
+      "blocks": {
+        "heading": { "type": "heading", "settings": {
+          "title": "<p>Fotos <em>Impresas</em></p>",
+          "intro": "<p>Transformamos tus recuerdos digitales en impresiones de alta calidad, listas para regalar o enmarcar. Porque hay algo especial en ver una imagen fuera de la pantalla y revivir ese momento una y otra vez.</p>"
+        }},
+        "details": { "type": "accordion", "settings": {
+          "heading": "Details",
+          "content": "<p>Imprimimos tus fotografías en papel fotográfico profesional, cuidando cada detalle:</p><p>El color, el contraste, la nitidez y el tamaño. Puedes elegir entre distintos formatos, y si lo deseas, acompañarlas con una Memory Box personalizada. Ya sea para crear un rincón de recuerdos, decorar un espacio o simplemente revivir lo vivido, imprimir tus fotos es volver a conectar con lo que importa.</p>"
+        }},
+        "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>5 días hábiles.</p>" }},
+        "size": { "type": "size", "settings": { "label": "Tamaño", "set": "fotos", "default": "8x10", "note": "", "collapsible": true }},
+        "link": { "type": "url", "settings": { "label": "Link de fotos (opcional)", "placeholder": "Ingresa el URL", "note": "*En caso de agregar fotos, solo se aceptan links en Google Drive o WeTransfer." }}
+      },
+      "block_order": ["heading", "details", "shipping", "size", "link"],
+      "settings": {
+        "personalize_heading": "",
+        "qty_style": "stepper",
+        "qty_label": "Cantidad (mínimo 25 fotos)",
+        "qty_min": 25,
+        "show_buy_now": true,
+        "show_related": true,
+        "related_heading": "You may also like…"
+      }
+    }
+  },
+  "order": ["main"]
+}

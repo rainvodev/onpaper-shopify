@@ -1,0 +1,38 @@
+{
+  "sections": {
+    "main": {
+      "type": "op-product",
+      "blocks": {
+        "heading": { "type": "heading", "settings": {
+          "title": "<p>Photobook <em>Layflat</em></p>",
+          "intro": "<p>Cuando buscas una experiencia visual sin interrupciones, el libro Layflat es la opción ideal. Este formato se imprime en papel fotográfico, lo que ofrece una calidad de imagen superior, con colores vivos y detalles nítidos.</p>"
+        }},
+        "details": { "type": "accordion", "settings": {
+          "heading": "Details",
+          "content": "<p>A diferencia del libro tradicional, el Layflat no está cosido, lo que permite que se abra completamente en plano, ideal para fotos a doble página o composiciones amplias.</p><p>Es un producto con acabado más premium, pensado para ocasiones muy especiales o cualquier proyecto que merezca el máximo cuidado y presentación.</p><p>Su diseño limpio, apertura perfecta y calidad de impresión lo convierten en una pieza de colección.</p>"
+        }},
+        "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>20 días hábiles.</p>" }},
+        "material": { "type": "pills", "settings": { "label": "Material", "options": "Tela, Vinipiel, Impresión", "default": "Vinipiel", "collapsible": true }},
+        "size": { "type": "size", "settings": { "label": "Tamaño", "set": "photobook", "default": "11x14", "note": "Medidas en Pulgadas", "collapsible": true }},
+        "color": { "type": "swatch", "settings": { "label": "Color", "palette": "fabric-standard", "default": "Verde militar", "collapsible": true }},
+        "hotstamping": { "type": "swatch", "settings": { "label": "Hotstamping", "palette": "hotstamping", "default": "Plateado", "collapsible": true }},
+        "ventana": { "type": "radio", "settings": { "label": "Ventana de foto en portada", "options": "Sí, No", "default": "No" }},
+        "titulo_p": { "type": "text", "settings": { "label": "Título en portada", "placeholder": "Escribe el título…" }},
+        "titulo_l": { "type": "text", "settings": { "label": "Título en lomo (opcional)", "placeholder": "Escribe el título…" }},
+        "fotos": { "type": "dropdown", "settings": { "label": "Número de fotos y páginas", "options": "0-50 fotos (20-30 páginas), 0-100 fotos (30-40 páginas), 0-150 fotos (60-70 páginas), 0-200 fotos (80-90 páginas), 0-250 fotos (100 páginas)" }},
+        "link": { "type": "url", "settings": { "label": "Link de fotos (opcional)", "placeholder": "Ingresa el URL", "note": "*En caso de agregar fotos, solo se aceptan links en Google Drive o WeTransfer." }}
+      },
+      "block_order": ["heading", "details", "shipping", "material", "size", "color", "hotstamping", "ventana", "titulo_p", "titulo_l", "fotos", "link"],
+      "settings": {
+        "personalize_heading": "Personaliza tu Photobook",
+        "qty_style": "dropdown",
+        "qty_label": "Cantidad",
+        "qty_note": "A partir de 6 libros o más, se requiere cotización personalizada.",
+        "show_buy_now": true,
+        "show_related": true,
+        "related_heading": "You may also like…"
+      }
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,34 @@
+{
+  "sections": {
+    "main": {
+      "type": "op-product",
+      "blocks": {
+        "heading": { "type": "heading", "settings": {
+          "title": "<p>Porta planos</p>",
+          "intro": "<p>Nuestros portaplanos personalizados están pensados para transportar y presentar planos, láminas o documentos de gran formato con estilo y profesionalismo.</p>"
+        }},
+        "details": { "type": "accordion", "settings": {
+          "heading": "Details",
+          "content": "<p>Protección, presentación y diseño en una sola pieza.</p><p>Están hechos a mano con materiales resistentes, su medida es de 60 x 90 cm y puedes elegir desde el material, hasta el estampado con logotipo, nombre, o frase. Son ideales para entregas de proyectos arquitectónicos o propuestas creativas.</p>"
+        }},
+        "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>15 días hábiles.</p>" }},
+        "material": { "type": "pills", "settings": { "label": "Material", "options": "Tela, Tela Plastificada, Papel Texturizado", "default": "Papel Texturizado", "collapsible": true }},
+        "color": { "type": "swatch", "settings": { "label": "Color", "palette": "fabric-carpetas", "default": "Blanco crema", "collapsible": true }},
+        "hotstamping": { "type": "swatch", "settings": { "label": "Hotstamping", "palette": "hotstamping", "default": "Oro Rosa", "collapsible": true }},
+        "placa": { "type": "radio", "settings": { "label": "¿Cuentas con placa de logotipo?", "options": "Sí, No", "default": "No" }},
+        "logo": { "type": "url", "settings": { "label": "Agrega tu logotipo (opcional)", "placeholder": "Adjunta el link con el logotipo en formato PDF." }}
+      },
+      "block_order": ["heading", "details", "shipping", "material", "color", "hotstamping", "placa", "logo"],
+      "settings": {
+        "personalize_heading": "Personaliza tu Portaplano",
+        "qty_style": "dropdown",
+        "qty_label": "Cantidad de portaplanos",
+        "qty_note": "A partir de 21 porta planos o más, escríbenos para recibir cotización personalizada.",
+        "show_buy_now": true,
+        "show_related": true,
+        "related_heading": "You may also like…"
+      }
+    }
+  },
+  "order": ["main"]
+}

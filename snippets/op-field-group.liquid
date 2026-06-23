@@ -1,0 +1,13 @@
+{% comment %} On Paper — wrapper colapsable para grupos de personalización (Material/Tamaño/Color/Hotstamping).
+  Params: block, label, body (HTML capturado), hint (opcional). {% endcomment %}
+{%- if block.settings.collapsible -%}
+  <details class="op-product_grp" open {{ block.shopify_attributes }}>
+    <summary class="op-product_grp-sum">{{ label }}{% if hint != blank %} <span class="op-product_grp-hint">({{ hint }})</span>{% endif %}</summary>
+    <div class="op-product_grp-body">{{ body }}</div>
+  </details>
+{%- else -%}
+  <div class="op-product_grp" {{ block.shopify_attributes }}>
+    <span class="op-product_grp-sum" style="cursor: default;">{{ label }}{% if hint != blank %} <span class="op-product_grp-hint">({{ hint }})</span>{% endif %}</span>
+    <div class="op-product_grp-body">{{ body }}</div>
+  </div>
+{%- endif -%}

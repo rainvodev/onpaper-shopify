@@ -1,0 +1,34 @@
+{
+  "sections": {
+    "main": {
+      "type": "op-product",
+      "blocks": {
+        "heading": { "type": "heading", "settings": {
+          "title": "<p>Memory <em>Box</em></p>",
+          "intro": "<p>Nuestras Memory Box son cajitas diseñadas para guardar esos momentos especiales de forma física y personalizada. Cada caja es hecha a mano y puede llevar nombres, fechas o frases significativas que la vuelven única.</p>"
+        }},
+        "details": { "type": "accordion", "settings": {
+          "heading": "Details",
+          "content": "<p>Las memory box no solo guardan fotos. Guardan historias.</p><p>Están pensadas para almacenar fotos impresas (puedes elegir el tamaño y cantidad), y son perfectas para regalar, coleccionar momentos importantes o simplemente tener tus recuerdos a la mano.</p>"
+        }},
+        "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>10-15 días hábiles.</p>" }},
+        "material": { "type": "pills", "settings": { "label": "Material", "options": "Tela, Vinipiel", "default": "Vinipiel", "collapsible": true }},
+        "size": { "type": "size", "settings": { "label": "Tamaño", "set": "memory", "default": "5x4", "note": "Medidas en Pulgadas", "collapsible": true }},
+        "color": { "type": "swatch", "settings": { "label": "Color", "palette": "fabric-standard", "default": "Verde militar", "collapsible": true }},
+        "hotstamping": { "type": "swatch", "settings": { "label": "Hotstamping", "palette": "hotstamping", "default": "Oro Rosa", "collapsible": true }},
+        "titulo": { "type": "text", "settings": { "label": "Título en portada", "placeholder": "Escribe el título…" }},
+        "fotos": { "type": "stepper", "settings": { "label": "Fotos impresas del tamaño de la caja (opcional)", "min": 0, "default": 1 }}
+      },
+      "block_order": ["heading", "details", "shipping", "material", "size", "color", "hotstamping", "titulo", "fotos"],
+      "settings": {
+        "personalize_heading": "Personaliza tu Memory Box",
+        "qty_style": "dropdown",
+        "qty_label": "Cantidad",
+        "show_buy_now": true,
+        "show_related": true,
+        "related_heading": "You may also like…"
+      }
+    }
+  },
+  "order": ["main"]
+}

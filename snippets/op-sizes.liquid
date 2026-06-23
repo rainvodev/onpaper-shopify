@@ -1,0 +1,40 @@
+{% comment %} On Paper — selector visual de tamaños (rectángulos a escala). Params: set, property (= label),
+  default (ej. "11x14"). Render: cada opción es un rectángulo escalado a su proporción + etiqueta en pulgadas. {% endcomment %}
+{%- liquid
+  case set
+    when 'photobook'
+      assign data = "14x11,11x14,10x10,8.5x11,11x8.5,8x8"
+    when 'firmas-bookcase'
+      assign data = "14x11,11x14,8.5x11,11x8.5,8x8,10x10"
+    when 'memory'
+      assign data = "7x5,5x7,5x4,4x5"
+    when 'carpetas'
+      assign data = "17x11,11x8.5,11x17,8.5x11"
+    when 'cajas'
+      assign data = "11x17,8.5x11,17x11,11x8.5"
+    when 'fotos'
+      assign data = "5x7,8x10,10x14,11x14,12x16,20x20,30x30,30x45"
+    else
+      assign data = ""
+  endcase
+  assign items = data | split: ','
+-%}
+<div class="op-product_sizes" data-op-picker data-prop="{{ property | escape }}">
+  <input type="hidden" name="properties[{{ property }}]" value="{{ default | default: items.first }}">
+  {%- for it in items -%}
+    {%- assign p = it | split: 'x' -%}
+    {%- assign w = p[0] | times: 1.0 -%}
+    {%- assign h = p[1] | times: 1.0 -%}
+    {%- if w >= h -%}
+      {%- assign bw = 4.4 -%}
+      {%- assign bh = 4.4 | times: h | divided_by: w -%}
+    {%- else -%}
+      {%- assign bh = 4.4 -%}
+      {%- assign bw = 4.4 | times: w | divided_by: h -%}
+    {%- endif -%}
+    <button type="button" class="op-product_size{% if it == default %} is-active{% endif %}" data-val="{{ it | escape }}">
+      <span class="op-product_size-box" style="--w: {{ bw }}rem; --h: {{ bh }}rem;"></span>
+      <span class="op-product_size-label">{{ it }}&Prime;</span>
+    </button>
+  {%- endfor -%}
+</div>

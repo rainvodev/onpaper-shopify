@@ -1,0 +1,27 @@
+{% comment %} On Paper — grid de swatches (Color / Hotstamping). Params: palette, property (= label), default (nombre).
+  Placeholder = color sólido (hex). Cuando subas la textura a Files como `swatch-<slug>.jpg`, aparece sola
+  encima del color. NOTA: los nombres son inferidos del XD — ajústalos aquí (un solo archivo) cuando tengas
+  los oficiales; el `value` que viaja al carrito es el nombre. {% endcomment %}
+{%- liquid
+  case palette
+    when 'hotstamping'
+      assign data = "Café|#6b4f3a|hs-cafe;Negro|#2e2e2e|hs-negro;Plateado|#c9c9c9|hs-plateado;Blanco|#e8e8e8|hs-blanco;Cobre|#b5723a|hs-cobre;Dorado|#c9a227|hs-dorado;Oro Rosa|#b76e79|hs-oro-rosa"
+    when 'fabric-photobook'
+      assign data = "Negro|#14140f|pb-negro;Camel|#c8a578|pb-camel;Café claro|#9c6b4a|pb-cafe-claro;Gris oscuro|#3a3f42|pb-gris-oscuro;Azul marino|#2c3a5a|pb-azul-marino;Terracota|#a8542f|pb-terracota;Mostaza|#b9912f|pb-mostaza;Vino|#6e2230|pb-vino;Chocolate|#4b3a30|pb-chocolate;Beige|#d8cbb3|pb-beige;Naranja|#c1622a|pb-naranja;Azul petróleo|#2f5d6b|pb-azul-petroleo;Gris verdoso|#9aa39a|pb-gris-verdoso;Blanco|#f2f0ea|pb-blanco;Arena|#cbb896|pb-arena;Verde olivo|#6b6f3a|pb-verde-olivo;Gris claro|#b9bcbe|pb-gris-claro;Negro mate|#1b1b18|pb-negro-mate;Crema|#e9e6db|pb-crema;Vino oscuro|#5a2330|pb-vino-oscuro;Gris|#8f9499|pb-gris;Azul grisáceo|#6f8395|pb-azul-grisaceo;Marino|#243049|pb-marino;Hueso|#ece7da|pb-hueso;Piedra|#a7a7a0|pb-piedra;Verde militar|#5b6149|pb-verde-militar;Camel oscuro|#a07b50|pb-camel-oscuro;Óxido|#8a3b27|pb-oxido;Topo|#8c8278|pb-topo;Verde bosque|#2f4434|pb-verde-bosque"
+    when 'fabric-carpetas'
+      assign data = "Carbón|#2f3438|cp-carbon;Blanco crema|#f2f0ea|cp-blanco-crema;Azul|#2f5d8a|cp-azul;Beige|#d8cbb3|cp-beige;Camel|#b07a45|cp-camel;Café|#5a4334|cp-cafe;Gris oscuro|#3a3f42|cp-gris-oscuro;Gris claro|#aeb4b6|cp-gris-claro;Verde|#4f7a43|cp-verde;Negro|#14140f|cp-negro;Gris perla|#d3d3cc|cp-gris-perla;Vino|#6e2230|cp-vino;Marino|#243049|cp-marino;Verde bosque|#28503a|cp-verde-bosque"
+    else
+      assign data = "Camel|#c8a578|fs-camel;Gris medio|#8f9499|fs-gris-medio;Blanco|#f2f0ea|fs-blanco;Cobre|#9c6b4a|fs-cobre;Gris claro|#b9bcbe|fs-gris-claro;Carbón|#2f3438|fs-carbon;Crema|#e9e6db|fs-crema;Terracota|#a8542f|fs-terracota;Marino|#2c3a5a|fs-marino;Verde militar|#5b6149|fs-verde-militar;Café|#6f5440|fs-cafe;Chocolate|#4b3a30|fs-chocolate;Vino|#6e2230|fs-vino;Azul|#2f4d8a|fs-azul;Negro|#14140f|fs-negro"
+  endcase
+  assign rows = data | split: ';'
+-%}
+<div class="op-product_swatches" data-op-picker data-prop="{{ property | escape }}">
+  <input type="hidden" name="properties[{{ property }}]" value="{{ default }}">
+  {%- for r in rows -%}
+    {%- assign parts = r | split: '|' -%}
+    {%- assign nm = parts[0] -%}
+    {%- assign hx = parts[1] -%}
+    {%- assign fn = 'swatch-' | append: parts[2] | append: '.jpg' -%}
+    <button type="button" class="op-product_swatch{% if nm == default %} is-active{% endif %}" data-val="{{ nm | escape }}" title="{{ nm | escape }}" aria-label="{{ nm | escape }}" style="background-color: {{ hx }}; background-image: url({{ fn | file_url }});"></button>
+  {%- endfor -%}
+</div>

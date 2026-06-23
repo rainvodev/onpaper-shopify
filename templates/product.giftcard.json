@@ -1,0 +1,46 @@
+{
+  "sections": {
+    "main": {
+      "type": "op-product",
+      "blocks": {
+        "heading": { "type": "heading", "settings": {
+          "title": "<p>Giftcard</p>",
+          "intro": "<p>Nuestros certificados de regalo son la opción perfecta de obsequiar algo verdaderamente especial, permitiendo que la persona que los reciba decida qué, cuándo y cómo quiere transformar sus recuerdos.</p>"
+        }},
+        "details": { "type": "accordion", "settings": {
+          "heading": "Details",
+          "content": "<p>Porque a veces, el mejor regalo es dejar que el otro elija.</p><p>Los certificados están disponibles en formato físico o digital, y pueden personalizarse con el nombre del destinatario, un mensaje especial y el monto o producto elegido.</p><p>Son ideales para cumpleaños, bodas, agradecimientos, o celebraciones especiales. Tienen una vigencia de 6 meses a partir de la fecha de compra.</p>"
+        }},
+        "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>Entrega física: 5 días hábiles.</p>" }},
+        "gift": { "type": "gift_type", "settings": {
+          "label": "Elige el regalo perfecto",
+          "option_a": "Producto On Paper",
+          "option_b": "Crédito / Saldo",
+          "products": "Photobook Tradicional, Photobook Layflat, Memory Box",
+          "products_placeholder": "Selecciona el producto de tu preferencia…",
+          "amount_placeholder": "Agrega el monto que deseas regalar…"
+        }},
+        "para": { "type": "text", "settings": { "label": "Nombre de quien recibe el regalo", "placeholder": "Para:" }},
+        "de": { "type": "text", "settings": { "label": "Nombre de quien regala", "placeholder": "De:" }},
+        "entrega": { "type": "radio", "settings": {
+          "label": "Forma de entrega",
+          "options": "Digital, Entrega física",
+          "default": "Entrega física",
+          "note": "*Si tu selección fue Digital se enviará a tu correo de compra el PDF para descargar tu certificado de regalo. *El certificado de regalo tiene vigencia de 6 meses a partir de su compra."
+        }},
+        "nombre": { "type": "text", "settings": { "label": "Nombre", "placeholder": "Nombre:" }},
+        "tel": { "type": "text", "settings": { "label": "Teléfono", "placeholder": "Teléfono:" }},
+        "correo": { "type": "text", "settings": { "label": "Correo electrónico", "placeholder": "Correo electrónico:" }},
+        "dir": { "type": "text", "settings": { "label": "Dirección de envío", "placeholder": "Dirección:" }}
+      },
+      "block_order": ["heading", "details", "shipping", "gift", "para", "de", "entrega", "nombre", "tel", "correo", "dir"],
+      "settings": {
+        "personalize_heading": "Personaliza tu Giftcard",
+        "show_qty": false,
+        "show_buy_now": true,
+        "show_related": false
+      }
+    }
+  },
+  "order": ["main"]
+}

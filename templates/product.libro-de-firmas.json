@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "main": {
+      "type": "op-product",
+      "blocks": {
+        "heading": { "type": "heading", "settings": {
+          "title": "<p>Libro de <em>Firmas</em></p>",
+          "intro": "<p>Los momentos más especiales merecen palabras que los acompañen. Nuestro libro de firmas está diseñado para convertirse en un recuerdo tangible lleno de mensajes, deseos y cariño.</p>"
+        }},
+        "details": { "type": "accordion", "settings": {
+          "heading": "Details",
+          "content": "<p>Los momentos más especiales merecen palabras que los acompañen.</p><p>Es un detalle ideal para boda civil o eventos donde las personas más importantes de tu vida quieran dejarte algo más que su presencia: sus palabras. El diseño es limpio, elegante y completamente personalizado para ti. Un objeto que guarda no solo firmas, sino emociones.</p>"
+        }},
+        "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>10-15 días hábiles.</p>" }},
+        "material": { "type": "pills", "settings": { "label": "Material", "options": "Tela, Vinipiel, Impresión", "default": "Vinipiel", "collapsible": true }},
+        "size": { "type": "size", "settings": { "label": "Tamaño", "set": "firmas-bookcase", "default": "11x14", "note": "Medidas en Pulgadas", "collapsible": true }},
+        "color": { "type": "swatch", "settings": { "label": "Color", "palette": "fabric-standard", "default": "Verde militar", "collapsible": true }},
+        "hotstamping": { "type": "swatch", "settings": { "label": "Hotstamping", "palette": "hotstamping", "default": "Dorado", "collapsible": true }},
+        "titulo_p": { "type": "text", "settings": { "label": "Título en portada", "placeholder": "Escribe el título…" }},
+        "titulo_l": { "type": "text", "settings": { "label": "Título en lomo (opcional)", "placeholder": "Escribe el título…" }},
+        "hojas": { "type": "dropdown", "settings": { "label": "Tipo de hojas", "options": "Hojas en Blanco, Nombres Impresos, Nombres Rotulados" }},
+        "cant_hojas": { "type": "stepper", "settings": { "label": "Cantidad de hojas", "min": 1, "default": 1 }},
+        "nombres": { "type": "textarea", "settings": { "label": "Agregar más nombres (opcional)", "placeholder": "Escribe los nombres a agregar…" }}
+      },
+      "block_order": ["heading", "details", "shipping", "material", "size", "color", "hotstamping", "titulo_p", "titulo_l", "hojas", "cant_hojas", "nombres"],
+      "settings": {
+        "personalize_heading": "Personaliza tu Libro de Firmas",
+        "qty_style": "dropdown",
+        "qty_label": "Cantidad",
+        "show_buy_now": true,
+        "show_related": true,
+        "related_heading": "You may also like…"
+      }
+    }
+  },
+  "order": ["main"]
+}
