@@ -14,12 +14,12 @@
     "header": {
       "type": "op-header",
       "settings": {
-        "products_collection": "",
-        "bestsellers_collection": "best-sellers",
         "products_label": "Products",
         "collections_label": "Collections",
         "others_label": "Others",
         "others_link": "shopify://pages/others",
+        "products_collection": "best-sellers",
+        "bestsellers_collection": "photobook-tradicional",
         "products_eyebrow": "View all",
         "products_eyebrow_link": "shopify://collections/all",
         "collections_eyebrow": "View all",
