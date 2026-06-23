@@ -27,9 +27,9 @@
           "type": "nav_item",
           "settings": {
             "group": "products",
-            "collection": "",
-            "label": "Test 2",
-            "link": ""
+            "collection": "photobook-tradicional",
+            "label": "Photobook Layflat",
+            "link": "shopify://products/photobook-layflat"
           }
         },
         "nav_item_WRfrQy": {
