@@ -204,7 +204,8 @@
 
     {%- comment -%} Relacionados {%- endcomment -%}
     {%- if section.settings.show_related -%}
-      {%- assign related = product.collections.first.products | default: collections.all.products -%}
+      {%- assign related = product.collections.first.products -%}
+      {%- if related == blank or related.size < 2 -%}{%- assign related = collections.all.products -%}{%- endif -%}
       {%- if related and related.size > 1 -%}
         <div class="op-product_related">
           <h2 class="op-product_related-h">{{ section.settings.related_heading | default: 'You may also like…' }}</h2>
