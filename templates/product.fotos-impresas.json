@@ -1,7 +1,7 @@
 {
   "sections": {
     "main": {
-      "type": "op-product",
+      "type": "product",
       "blocks": {
         "heading": { "type": "heading", "settings": {
           "title": "<p>Fotos <em>Impresas</em></p>",

@@ -1,7 +1,7 @@
 {
   "sections": {
     "main": {
-      "type": "op-product",
+      "type": "product",
       "blocks": {
         "heading": { "type": "heading", "settings": {
           "title": "<p>Libro de <em>Firmas</em></p>",
