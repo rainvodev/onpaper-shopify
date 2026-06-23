@@ -1,0 +1,11 @@
+{% comment %} On Paper — mini card de producto para el mega-menú (imagen con ratio del panel + nombre). {% endcomment %}
+<a class="op-header_pcard" href="{{ product.url }}">
+  <span class="op-header_pmedia">
+    {%- if product.featured_image -%}
+      {{ product.featured_image | image_url: width: 600 | image_tag: alt: product.title, class: 'op-header_pimg', widths: '200,300,450,600', sizes: '20vw', loading: 'lazy' }}
+    {%- else -%}
+      <span class="op-header_pimg op-header_pimg--ph"></span>
+    {%- endif -%}
+  </span>
+  <span class="op-header_pname">{{ product.title }}</span>
+</a>

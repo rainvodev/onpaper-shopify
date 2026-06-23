@@ -58,93 +58,100 @@
     </div>
   </div>
 
-  {%- comment -%} Paneles desktop {%- endcomment -%}
-  {%- for g in groups -%}
-    <div class="op-header_panel" id="op-panel-{{ g }}" data-op-panel="{{ g }}">
-      <div class="op-header_panelgrid u-container">
-        <div class="op-header_menucol">
-          {%- liquid
-            if g == 'products'
-              assign eyebrow = section.settings.products_eyebrow
-              assign eyebrow_link = section.settings.products_eyebrow_link
-            else
-              assign eyebrow = section.settings.collections_eyebrow
-              assign eyebrow_link = section.settings.collections_eyebrow_link
-            endif
-          -%}
-          {%- if eyebrow != blank -%}
-            {%- if eyebrow_link != blank -%}
-              <a class="op-header_eyebrow op-header_eyebrow--link" href="{{ eyebrow_link }}">{{ eyebrow }}</a>
-            {%- else -%}
-              <p class="op-header_eyebrow">{{ eyebrow }}</p>
-            {%- endif -%}
-          {%- endif -%}
-          <ul class="op-header_menulist">
-            {%- assign idx = 0 -%}
-            {%- for block in section.blocks -%}
-              {%- if block.settings.group == g -%}
-                {%- assign item_url = block.settings.collection.url | default: block.settings.link | default: '#' -%}
-                {%- assign item_label = block.settings.label | default: block.settings.collection.title -%}
-                <li>
-                  <a class="op-header_menulink{% if idx == 0 %} is-active{% endif %}" data-op-item="{{ g }}-{{ idx }}" href="{{ item_url }}" {{ block.shopify_attributes }}>{{ item_label }}</a>
-                </li>
-                {%- assign idx = idx | plus: 1 -%}
-              {%- endif -%}
-            {%- endfor -%}
-            {%- if idx == 0 and request.design_mode -%}
-              <li class="op-header_empty">Agrega items de menú (bloques) para "{{ g }}".</li>
-            {%- endif -%}
-          </ul>
-        </div>
+  {%- comment -%} Paneles desktop (dinámicos) {%- endcomment -%}
+  {%- liquid
+    assign products_col = section.settings.products_collection
+    if products_col != blank
+      assign product_list = products_col.products
+    else
+      assign product_list = collections.all.products
+    endif
+    assign best_col = section.settings.bestsellers_collection
+  -%}
 
-        <div class="op-header_feature">
-          {%- assign idx = 0 -%}
-          {%- for block in section.blocks -%}
-            {%- if block.settings.group == g -%}
-              <div class="op-header_featuregroup{% if idx == 0 %} is-active{% endif %}" data-op-feature="{{ g }}-{{ idx }}">
-                {%- assign col = block.settings.collection -%}
-                {%- if col != blank and col.products.size > 0 -%}
-                  {%- for product in col.products limit: 3 -%}
-                    <a class="op-header_pcard" href="{{ product.url }}">
-                      <span class="op-header_pmedia">
-                        {%- if product.featured_image -%}
-                          {{ product.featured_image | image_url: width: 600 | image_tag: alt: product.title, class: 'op-header_pimg', widths: '200,300,450,600', sizes: '20vw', loading: 'lazy' }}
-                        {%- else -%}
-                          <span class="op-header_pimg op-header_pimg--ph"></span>
-                        {%- endif -%}
-                      </span>
-                      <span class="op-header_pname">{{ product.title }}</span>
-                    </a>
-                  {%- endfor -%}
-                {%- elsif request.design_mode -%}
-                  <p class="op-header_empty">Elige una colección con productos publicados en este item.</p>
-                {%- endif -%}
-              </div>
-              {%- assign idx = idx | plus: 1 -%}
-            {%- endif -%}
+  {%- comment -%} PRODUCTS: izquierda = productos; derecha = Best sellers (máx 3) {%- endcomment -%}
+  <div class="op-header_panel" id="op-panel-products" data-op-panel="products">
+    <div class="op-header_panelgrid u-container">
+      <div class="op-header_menucol">
+        {%- if section.settings.products_eyebrow != blank -%}
+          {%- if section.settings.products_eyebrow_link != blank -%}
+            <a class="op-header_eyebrow op-header_eyebrow--link" href="{{ section.settings.products_eyebrow_link }}">{{ section.settings.products_eyebrow }}</a>
+          {%- else -%}
+            <p class="op-header_eyebrow">{{ section.settings.products_eyebrow }}</p>
+          {%- endif -%}
+        {%- endif -%}
+        <ul class="op-header_menulist">
+          {%- for product in product_list limit: 30 -%}
+            <li><a class="op-header_menulink" href="{{ product.url }}">{{ product.title }}</a></li>
+          {%- else -%}
+            {%- if request.design_mode -%}<li class="op-header_empty">Elige la colección que alimenta este dropdown (Panel Products) o publica productos.</li>{%- endif -%}
           {%- endfor -%}
+        </ul>
+      </div>
+      <div class="op-header_feature">
+        <div class="op-header_featuregroup is-active">
+          {%- if best_col != blank and best_col.products.size > 0 -%}
+            {%- for product in best_col.products limit: 3 -%}
+              {% render 'op-product-card-mini', product: product %}
+            {%- endfor -%}
+          {%- elsif request.design_mode -%}
+            <p class="op-header_empty">Elige la colección "Best sellers" (Panel Products) para mostrar 3 productos.</p>
+          {%- endif -%}
         </div>
       </div>
     </div>
-  {%- endfor -%}
+  </div>
+
+  {%- comment -%} COLLECTIONS: izquierda = todas las colecciones; derecha = sus 3 primeros productos (swap) {%- endcomment -%}
+  <div class="op-header_panel" id="op-panel-collections" data-op-panel="collections">
+    <div class="op-header_panelgrid u-container">
+      <div class="op-header_menucol">
+        {%- if section.settings.collections_eyebrow != blank -%}
+          {%- if section.settings.collections_eyebrow_link != blank -%}
+            <a class="op-header_eyebrow op-header_eyebrow--link" href="{{ section.settings.collections_eyebrow_link }}">{{ section.settings.collections_eyebrow }}</a>
+          {%- else -%}
+            <p class="op-header_eyebrow">{{ section.settings.collections_eyebrow }}</p>
+          {%- endif -%}
+        {%- endif -%}
+        <ul class="op-header_menulist">
+          {%- for collection in collections -%}
+            <li><a class="op-header_menulink{% if forloop.first %} is-active{% endif %}" data-op-item="collections-{{ forloop.index0 }}" href="{{ collection.url }}">{{ collection.title }}</a></li>
+          {%- else -%}
+            {%- if request.design_mode -%}<li class="op-header_empty">No hay colecciones en la tienda.</li>{%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+      <div class="op-header_feature">
+        {%- for collection in collections -%}
+          <div class="op-header_featuregroup{% if forloop.first %} is-active{% endif %}" data-op-feature="collections-{{ forloop.index0 }}">
+            {%- for product in collection.products limit: 3 -%}
+              {% render 'op-product-card-mini', product: product %}
+            {%- endfor -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
 
   {%- comment -%} Drawer móvil {%- endcomment -%}
   <div class="op-header_drawer" data-op-drawer>
     <div class="op-header_drawerinner u-container">
-      {%- for g in groups -%}
-        <details class="op-header_acc">
-          <summary class="op-header_accsum">{%- if g == 'products' -%}{{ section.settings.products_label | default: 'Products' }}{%- else -%}{{ section.settings.collections_label | default: 'Collections' }}{%- endif -%}</summary>
-          <ul class="op-header_acclist">
-            {%- for block in section.blocks -%}
-              {%- if block.settings.group == g -%}
-                {%- assign item_url = block.settings.collection.url | default: block.settings.link | default: '#' -%}
-                {%- assign item_label = block.settings.label | default: block.settings.collection.title -%}
-                <li><a class="op-header_acclink" href="{{ item_url }}">{{ item_label }}</a></li>
-              {%- endif -%}
-            {%- endfor -%}
-          </ul>
-        </details>
-      {%- endfor -%}
+      <details class="op-header_acc">
+        <summary class="op-header_accsum">{{ section.settings.products_label | default: 'Products' }}</summary>
+        <ul class="op-header_acclist">
+          {%- for product in product_list limit: 30 -%}
+            <li><a class="op-header_acclink" href="{{ product.url }}">{{ product.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </details>
+      <details class="op-header_acc">
+        <summary class="op-header_accsum">{{ section.settings.collections_label | default: 'Collections' }}</summary>
+        <ul class="op-header_acclist">
+          {%- for collection in collections -%}
+            <li><a class="op-header_acclink" href="{{ collection.url }}">{{ collection.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </details>
       {%- if section.settings.others_link != blank -%}
         <a class="op-header_accroot" href="{{ section.settings.others_link }}">{{ section.settings.others_label | default: 'Others' }}</a>
       {%- endif -%}
@@ -225,6 +232,8 @@
     { "type": "text", "id": "others_label", "label": "Etiqueta Others", "default": "Others" },
     { "type": "url", "id": "others_link", "label": "Others — enlace" },
     { "type": "header", "content": "Panel Products" },
+    { "type": "collection", "id": "products_collection", "label": "Colección que lista los productos (vacío = todos)" },
+    { "type": "collection", "id": "bestsellers_collection", "label": "Best sellers (3 productos a la derecha)" },
     { "type": "text", "id": "products_eyebrow", "label": "Eyebrow", "default": "View all" },
     { "type": "url", "id": "products_eyebrow_link", "label": "Eyebrow — enlace" },
     { "type": "header", "content": "Panel Collections" },
@@ -238,21 +247,6 @@
       { "value": "2 / 3", "label": "2:3 (alta)" },
       { "value": "3 / 2", "label": "3:2" }
     ], "default": "4 / 5" }
-  ],
-  "blocks": [
-    {
-      "type": "nav_item",
-      "name": "Item de menú",
-      "settings": [
-        { "type": "select", "id": "group", "label": "Dropdown", "options": [
-          { "value": "products", "label": "Products" },
-          { "value": "collections", "label": "Collections" }
-        ], "default": "products" },
-        { "type": "collection", "id": "collection", "label": "Colección (link + 3 productos)" },
-        { "type": "text", "id": "label", "label": "Etiqueta (opcional; default = nombre de la colección)" },
-        { "type": "url", "id": "link", "label": "Enlace alterno (si no usas colección)" }
-      ]
-    }
   ]
 }
 {% endschema %}
