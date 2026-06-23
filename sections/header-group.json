@@ -36,9 +36,36 @@
           "type": "nav_item",
           "settings": {
             "group": "products",
-            "collection": "",
-            "label": "Test 3",
-            "link": ""
+            "collection": "photobook-tradicional",
+            "label": "Libro de Firmas",
+            "link": "shopify://products/libro-de-firmas"
+          }
+        },
+        "nav_item_ba4tnE": {
+          "type": "nav_item",
+          "settings": {
+            "group": "products",
+            "collection": "photobook-tradicional",
+            "label": "Bookcase",
+            "link": "shopify://products/bookcase"
+          }
+        },
+        "nav_item_L4XzVn": {
+          "type": "nav_item",
+          "settings": {
+            "group": "products",
+            "collection": "photobook-tradicional",
+            "label": "Memory Box",
+            "link": "shopify://products/memory-box"
+          }
+        },
+        "nav_item_KdgCCk": {
+          "type": "nav_item",
+          "settings": {
+            "group": "products",
+            "collection": "best-sellers",
+            "label": "Fotos Impresas",
+            "link": "shopify://products/fotos-impresas"
           }
         },
         "nav_item_zqHLxq": {
@@ -55,6 +82,9 @@
         "nav_item_MNJwq7",
         "nav_item_r6n6Rm",
         "nav_item_WRfrQy",
+        "nav_item_ba4tnE",
+        "nav_item_L4XzVn",
+        "nav_item_KdgCCk",
         "nav_item_zqHLxq"
       ],
       "settings": {
