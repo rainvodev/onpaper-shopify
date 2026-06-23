@@ -176,7 +176,7 @@
   .op-header_burger { display: none; background: none; border: 0; cursor: pointer; color: currentColor; padding: 0; }
 
   /* Paneles */
-  .op-header_panel { position: absolute; left: 0; right: 0; top: 100%; z-index: 1; background-color: var(--swatch--light-200, #f5f5ef); color: var(--swatch--brand-500, #5f604e); border-bottom: 0.0625rem solid var(--_theme---border); box-shadow: 0 1.5rem 2rem -1.5rem rgba(0,0,0,0.18); max-height: 85vh; overflow-y: auto; visibility: hidden; opacity: 0; transform: translateY(-0.5rem); pointer-events: none; transition: opacity 280ms ease, transform 280ms ease, visibility 0s linear 280ms; }
+  .op-header_panel { position: absolute; left: 0; right: 0; top: 100%; z-index: 1; background-color: var(--swatch--light-200, #f5f5ef); color: var(--swatch--brand-500, #5f604e); border-bottom: 0.0625rem solid var(--_theme---border); box-shadow: 0 1.5rem 2rem -1.5rem rgba(0,0,0,0.18); min-height: 50svh; max-height: 85vh; overflow-y: auto; visibility: hidden; opacity: 0; transform: translateY(-0.5rem); pointer-events: none; transition: opacity 280ms ease, transform 280ms ease, visibility 0s linear 280ms; }
   .op-header_panel.is-open { visibility: visible; opacity: 1; transform: translateY(0); pointer-events: auto; transition: opacity 280ms ease, transform 280ms ease; }
   .op-header_panelgrid { display: grid; grid-template-columns: minmax(13rem, 1fr) 2.4fr; gap: var(--_spacing---space--8); padding-top: var(--_spacing---space--7); padding-bottom: var(--_spacing---space--7); align-content: start; }
   .op-header_menucol { text-align: left; }

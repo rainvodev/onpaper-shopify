@@ -46,6 +46,11 @@
     root.addEventListener('mouseleave', scheduleClose);
     root.addEventListener('mouseenter', cancelClose);
 
+    // Hover sobre zonas del bar que NO son trigger (Others, logo, acciones) cierra el panel
+    root.querySelectorAll('.op-header_logo, .op-header_actions, .op-header_nav a').forEach(function (el) {
+      el.addEventListener('mouseenter', function () { cancelClose(); closeRoot(root); });
+    });
+
     root.querySelectorAll('[data-op-item]').forEach(function (link) {
       var key = link.getAttribute('data-op-item');
       function activate() {
