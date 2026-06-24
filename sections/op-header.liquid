@@ -46,9 +46,9 @@
           {%- endform -%}
         {%- endif -%}
 
-        <a href="{{ routes.cart_url }}" class="op-header_cart" aria-label="Carrito">
+        <a href="{{ routes.cart_url }}" class="op-header_cart" aria-label="Carrito" data-op-cart-open>
           <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-          <span>Cart ({{ cart.item_count }})</span>
+          <span>Cart (<span data-op-cart-badge>{{ cart.item_count }}</span>)</span>
         </a>
 
         <button type="button" class="op-header_burger" data-op-burger aria-label="Menú" aria-expanded="false">
