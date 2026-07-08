@@ -1,6 +1,6 @@
 {% comment %} On Paper — Página de producto (Lumos). Galería + info + personalización por bloques (line-item
   properties, sin variantes) + relacionados. Calcado del XD; un template por producto define los bloques. {% endcomment %}
-<section class="op-product u-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" data-op-handle="{{ product.handle }}" data-op-money="{{ shop.money_format | strip_html | escape }}" {{ section.shopify_attributes }}>
+<section class="op-product u-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" data-op-handle="{{ product.handle }}" data-op-money="{{ shop.money_format | strip_html | escape }}"{% if product.variants.size > 1 %} data-op-variant-mode="1"{% endif %} {{ section.shopify_attributes }}>
   <div class="op-product_contain u-container">
     {%- if section.settings.back_label != blank -%}
       <a class="op-product_back" href="{{ section.settings.back_link | default: routes.all_products_collection_url }}">{{ section.settings.back_label }}</a>
@@ -68,6 +68,10 @@
 
         {%- form 'product', product, id: 'opProductForm', class: 'op-product_form' -%}
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          {%- if product.variants.size > 1 -%}
+            <script type="application/json" data-op-variants>{{ product.variants | json }}</script>
+            <script type="application/json" data-op-options>{{ product.options | json }}</script>
+          {%- endif -%}
 
           {%- if section.settings.personalize_heading != blank -%}
             <h2 class="op-product_personalize">{{ section.settings.personalize_heading }}</h2>

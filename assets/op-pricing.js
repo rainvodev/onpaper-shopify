@@ -62,6 +62,7 @@
 
   function initPricing(root) {
     if (!root || root.__opPricingInit) return;
+    if (root.hasAttribute('data-op-variant-mode')) return; // variantes nativas → el precio lo maneja op-variants.js
     var handle = root.getAttribute('data-op-handle');
     var cfg = window.OP_PRICING && handle && window.OP_PRICING[handle];
     if (!cfg) return; // sin config → conserva el precio de Shopify
