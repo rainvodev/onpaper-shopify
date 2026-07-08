@@ -1,6 +1,6 @@
 {% comment %} On Paper — Página de producto (Lumos). Galería + info + personalización por bloques (line-item
   properties, sin variantes) + relacionados. Calcado del XD; un template por producto define los bloques. {% endcomment %}
-<section class="op-product u-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" {{ section.shopify_attributes }}>
+<section class="op-product u-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" data-op-handle="{{ product.handle }}" data-op-money="{{ shop.money_format | strip_html | escape }}" {{ section.shopify_attributes }}>
   <div class="op-product_contain u-container">
     {%- if section.settings.back_label != blank -%}
       <a class="op-product_back" href="{{ section.settings.back_link | default: routes.all_products_collection_url }}">{{ section.settings.back_label }}</a>
@@ -49,11 +49,11 @@
           {%- if product.description != blank -%}<div class="op-product_intro rte">{{ product.description }}</div>{%- endif -%}
         {%- endif -%}
 
-        <div class="op-product_price">
+        <div class="op-product_price" data-op-price>
           {%- if product.compare_at_price > product.price -%}
-            <span class="op-product_price-now">{{ product.price | money }}</span>
+            <span class="op-product_price-now" data-op-price-amount>{{ product.price | money }}</span>
             <s class="op-product_price-was">{{ product.compare_at_price | money }}</s>
-          {%- else -%}{{ product.price | money }}{%- endif -%}
+          {%- else -%}<span data-op-price-amount>{{ product.price | money }}</span>{%- endif -%}
         </div>
 
         {%- comment -%} Acordeones DETAILS / SHIPPING {%- endcomment -%}

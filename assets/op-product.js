@@ -25,7 +25,7 @@
         opt.addEventListener('click', function () {
           opts.forEach(function (o) { o.classList.remove('is-active'); });
           opt.classList.add('is-active');
-          if (input) input.value = opt.getAttribute('data-val');
+          if (input) { input.value = opt.getAttribute('data-val'); input.dispatchEvent(new Event('change', { bubbles: true })); }
           if (picker.hasAttribute('data-op-gift')) toggleGift(picker, opt.getAttribute('data-gift'));
         });
       });
@@ -51,6 +51,7 @@
           val += parseInt(btn.getAttribute('data-step'), 10);
           if (val < min) val = min;
           input.value = val;
+          input.dispatchEvent(new Event('change', { bubbles: true }));
         });
       });
     });
