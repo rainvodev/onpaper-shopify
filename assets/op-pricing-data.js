@@ -1,68 +1,60 @@
 /* On Paper — Configuración de precios por producto (line-item properties → recargos).
-   ⚠️ DUMMY DE DEMO: todo en 10 pesos para ver la tienda funcionando. Base = 10; cada opción
-   que cambia el precio suma +10; la opción por defecto/base suma 0 (para que se note el cambio).
-   Reemplazar por los montos reales de Anaissa antes de producción. Keyed por handle. En PESOS (MXN).
+   ⚠️ DUMMY ESCALONADO (escala pesos MXN): valores coherentes para un taller artesanal, para que
+   Anaissa vea el catálogo en acción. Reemplazar por los montos reales antes de producción.
+   Los productos con variantes nativas (photobooks, bookcase, fotos, porta-planos) cobran por su
+   variante de Shopify (op-variants.js); su config aquí queda como respaldo/consistencia.
+   Keyed por handle. Montos en PESOS.
 
-   Tipos de regla:
-     { map: { <valor>: recargo } }  → suma el recargo del valor seleccionado
-     { perUnit: <monto> }           → suma monto × (número escrito en ese campo)
-     { nonEmpty: <monto> }          → suma monto si el campo de texto tiene contenido
-   Modos de producto:
-     (default) 'sum'  → base + Σ recargos
-     'unit_qty'       → (precio unitario según unitProp) × cantidad
-     'amount'         → precio = monto escrito por el cliente (giftcard) */
+   Reglas: { map:{valor:recargo} } · { perUnit:monto } · { nonEmpty:monto }
+   Modos:  'sum' (base+Σ) · 'unit_qty' (unitario×cantidad) · 'amount' (monto del cliente) */
 window.OP_PRICING = {
 
   'photobook-tradicional': {
-    base: 10,
+    base: 1990,
     rules: {
-      'Tamaño': { map: { '14x11': 0, '11x14': 0, '10x10': 0, '8.5x11': 10, '11x8.5': 10, '8x8': 10 } },
-      // 'Ventana de foto en portada' → opción sin costo (incluida en el precio · confirmado Anaissa 8-jul-2026)
-      'Diseño interior': { map: { 'Minimalista': 10, 'Tradicional': 0 } },
-      'Número de fotos': { map: { '0-150 fotos': 0, '151-250 fotos': 10, '251-350 fotos': 10 } }
+      'Tamaño': { map: { '14x11':500, '11x14':500, '10x10':300, '8.5x11':200, '11x8.5':200, '8x8':0 } },
+      // 'Ventana de foto en portada' → opción sin costo (confirmado Anaissa 8-jul-2026)
+      'Diseño interior': { map: { 'Minimalista':550, 'Tradicional':0 } },
+      'Número de fotos': { map: { '0-150 fotos':0, '151-250 fotos':400, '251-350 fotos':800 } }
     }
   },
 
   'photobook-layflat': {
-    base: 10,
+    base: 2490,
     rules: {
-      'Tamaño': { map: { '14x11': 0, '11x14': 0, '10x10': 10, '8.5x11': 10, '11x8.5': 10, '8x8': 10 } },
-      // 'Ventana de foto en portada' → opción sin costo (incluida en el precio · confirmado Anaissa 8-jul-2026)
-      'Título en lomo (opcional)': { nonEmpty: 10 },
+      'Tamaño': { map: { '14x11':600, '11x14':600, '10x10':400, '8.5x11':300, '11x8.5':300, '8x8':0 } },
+      // 'Ventana de foto en portada' → opción sin costo (confirmado Anaissa 8-jul-2026)
       'Número de fotos y páginas': { map: {
-        '0-50 fotos (20-30 páginas)': 0,
-        '0-100 fotos (30-40 páginas)': 10,
-        '0-150 fotos (60-70 páginas)': 10,
-        '0-200 fotos (80-90 páginas)': 10,
-        '0-250 fotos (100 páginas)': 10
+        '0-50 fotos (20-30 páginas)':0, '0-100 fotos (30-40 páginas)':400,
+        '0-150 fotos (60-70 páginas)':800, '0-200 fotos (80-90 páginas)':1200, '0-250 fotos (100 páginas)':1600
       } }
     }
   },
 
   'libro-de-firmas': {
-    base: 10,
+    base: 1490,
     rules: {
-      'Tamaño': { map: { '8x8': 0, '10x10': 10, '8.5x11': 10, '11x8.5': 10, '11x14': 10, '14x11': 10 } },
-      'Tipo de hojas': { map: { 'Hojas en Blanco': 0, 'Nombres Impresos': 10, 'Nombres Rotulados': 10 } },
-      'Cantidad de hojas': { perUnit: 10 },
-      'Agregar más nombres (opcional)': { nonEmpty: 10 }
+      'Tamaño': { map: { '8x8':0, '10x10':250, '8.5x11':150, '11x8.5':150, '11x14':400, '14x11':400 } },
+      'Tipo de hojas': { map: { 'Hojas en Blanco':0, 'Nombres Impresos':250, 'Nombres Rotulados':500 } },
+      'Cantidad de hojas': { perUnit: 40 },
+      'Agregar más nombres (opcional)': { nonEmpty: 150 }
     }
   },
 
   'bookcase': {
-    base: 10,
+    base: 990,
     rules: {
-      'Material': { map: { 'Tela': 0, 'Vinipiel': 10 } },
-      'Tamaño': { map: { '8x8': 0, '10x10': 10, '8.5x11': 10, '11x8.5': 10, '11x14': 10, '14x11': 10 } }
+      'Material': { map: { 'Tela':0, 'Vinipiel':300 } },
+      'Tamaño': { map: { '8x8':0, '10x10':250, '8.5x11':150, '11x8.5':150, '11x14':400, '14x11':400 } }
     }
   },
 
   'memory-box': {
-    base: 10,
+    base: 690,
     rules: {
-      'Material': { map: { 'Tela': 0, 'Vinipiel': 10 } },
-      'Tamaño': { map: { '4x5': 0, '5x4': 0, '5x7': 10, '7x5': 10 } },
-      'Fotos impresas del tamaño de la caja (opcional)': { perUnit: 10 }
+      'Material': { map: { 'Tela':0, 'Vinipiel':200 } },
+      'Tamaño': { map: { '4x5':0, '5x4':0, '5x7':150, '7x5':150 } },
+      'Fotos impresas del tamaño de la caja (opcional)': { perUnit: 18 }
     }
   },
 
@@ -71,39 +63,36 @@ window.OP_PRICING = {
     unitProp: 'Tamaño',
     qtyName: 'quantity',
     rules: {
-      'Tamaño': { map: {
-        '5x7': 10, '8x10': 10, '10x14': 10, '11x14': 10,
-        '12x16': 10, '20x20': 10, '30x30': 10, '30x45': 10
-      } }
+      'Tamaño': { map: { '5x7':15, '8x10':25, '10x14':40, '11x14':55, '12x16':80, '20x20':180, '30x30':350, '30x45':480 } }
     }
   },
 
   'cajas-personalizadas': {
-    base: 10,
+    base: 650,
     rules: {
-      'Material': { map: { 'Papel Texturizado': 0, 'Tela Plastificada': 10, 'Tela': 10 } },
-      'Tamaño': { map: { '11x8.5': 0, '8.5x11': 0, '17x11': 10, '11x17': 10 } },
-      'Medidas de herraje': { map: { 'Sin Herraje': 0, '1 Pulgada': 10, '1.5 Pulgadas': 10, '2 Pulgadas': 10 } },
-      'Espacio para USB': { map: { 'Sí': 10, 'No': 0 } },
-      '¿Cuentas con placa de logotipo?': { map: { 'Sí': 10, 'No': 0 } }
+      'Material': { map: { 'Papel Texturizado':0, 'Tela Plastificada':150, 'Tela':300 } },
+      'Tamaño': { map: { '11x8.5':0, '8.5x11':100, '17x11':300, '11x17':300 } },
+      'Medidas de herraje': { map: { 'Sin Herraje':0, '1 Pulgada':120, '1.5 Pulgadas':160, '2 Pulgadas':200 } },
+      'Espacio para USB': { map: { 'Sí':150, 'No':0 } },
+      '¿Cuentas con placa de logotipo?': { map: { 'Sí':250, 'No':0 } }
     }
   },
 
   'porta-planos': {
-    base: 10,
+    base: 750,
     rules: {
-      'Material': { map: { 'Papel Texturizado': 0, 'Tela Plastificada': 10, 'Tela': 10 } },
-      '¿Cuentas con placa de logotipo?': { map: { 'Sí': 10, 'No': 0 } }
+      'Material': { map: { 'Papel Texturizado':0, 'Tela Plastificada':150, 'Tela':300 } },
+      '¿Cuentas con placa de logotipo?': { map: { 'Sí':250, 'No':0 } }
     }
   },
 
   'carpetas': {
-    base: 10,
+    base: 550,
     rules: {
-      'Material': { map: { 'Papel Texturizado': 0, 'Tela Plastificada': 10, 'Tela': 10 } },
-      'Tamaño': { map: { '11x8.5': 0, '8.5x11': 0, '17x11': 10, '11x17': 10 } },
-      'Medidas de herraje': { map: { 'Sin Herraje': 0, '1 Pulgada': 10, '1.5 Pulgadas': 10, '2 Pulgadas': 10 } },
-      '¿Cuentas con placa de logotipo?': { map: { 'Sí': 10, 'No': 0 } }
+      'Material': { map: { 'Papel Texturizado':0, 'Tela Plastificada':150, 'Tela':300 } },
+      'Tamaño': { map: { '11x8.5':0, '8.5x11':0, '17x11':200, '11x17':200 } },
+      'Medidas de herraje': { map: { 'Sin Herraje':0, '1 Pulgada':120, '1.5 Pulgadas':160, '2 Pulgadas':200 } },
+      '¿Cuentas con placa de logotipo?': { map: { 'Sí':250, 'No':0 } }
     }
   },
 
