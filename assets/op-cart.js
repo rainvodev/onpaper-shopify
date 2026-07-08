@@ -1,4 +1,5 @@
-/* On Paper — Cart drawer. AJAX add/change/remove + re-render vía Section Rendering API. */
+/* On Paper — Cart drawer. AJAX add/change/remove. Re-render usando el parámetro `sections` de la
+   Ajax API (respuesta de /cart/add.js y /cart/change.js), que es fiable para secciones del layout. */
 (function () {
   'use strict';
   var SECTION = 'op-cart-drawer';
@@ -23,37 +24,34 @@
     document.querySelectorAll('[data-op-cart-badge]').forEach(function (b) { b.textContent = count; });
   }
 
-  function refresh(cb) {
-    // cache: 'no-store' + timestamp para evitar que el navegador sirva el drawer con el carrito anterior
-    fetch(window.location.pathname + '?sections=' + SECTION + '&_=' + Date.now(), {
-      headers: { 'Accept': 'application/json' }, cache: 'no-store'
-    })
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        var html = data[SECTION];
-        if (html == null) { if (cb) cb(); return; }
-        var tmp = document.createElement('div');
-        tmp.innerHTML = html;
-        var fresh = tmp.querySelector('[data-op-cart]');
-        var cur = root();
-        if (fresh && cur) {
-          var wasOpen = cur.classList.contains('is-open');
-          cur.innerHTML = fresh.innerHTML;
-          if (wasOpen) { cur.classList.add('is-open'); cur.setAttribute('aria-hidden', 'false'); }
-          var count = fresh.getAttribute('data-op-cart-count-value');
-          if (count !== null) { cur.setAttribute('data-op-cart-count-value', count); updateBadge(count); }
-        }
-        if (cb) cb();
-      })
-      .catch(function () { if (cb) cb(); });
+  // Reemplaza el contenido del drawer con el HTML fresco de la sección (preserva estado abierto)
+  function renderDrawer(html) {
+    if (html == null) return;
+    var tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    var fresh = tmp.querySelector('[data-op-cart]');
+    var cur = root();
+    if (!fresh || !cur) return;
+    var wasOpen = cur.classList.contains('is-open');
+    cur.innerHTML = fresh.innerHTML;
+    if (wasOpen) { cur.classList.add('is-open'); cur.setAttribute('aria-hidden', 'false'); }
+    var count = fresh.getAttribute('data-op-cart-count-value');
+    if (count !== null) { cur.setAttribute('data-op-cart-count-value', count); updateBadge(count); }
+  }
+
+  function sectionFrom(data) {
+    return data && data.sections ? data.sections[SECTION] : null;
   }
 
   function changeLine(line, qty) {
     fetch('/cart/change.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ line: line, quantity: qty })
-    }).then(function (r) { return r.json(); }).then(function () { refresh(); });
+      body: JSON.stringify({ line: line, quantity: qty, sections: [SECTION], sections_url: window.location.pathname })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) { renderDrawer(sectionFrom(data)); })
+      .catch(function () {});
   }
 
   // Agregar al carrito (intercepta el form de producto)
@@ -63,9 +61,12 @@
     e.preventDefault();
     var btn = form.querySelector('[name="add"]');
     if (btn) btn.setAttribute('disabled', '');
-    fetch('/cart/add.js', { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+    var fd = new FormData(form);
+    fd.append('sections', SECTION);
+    fd.append('sections_url', window.location.pathname);
+    fetch('/cart/add.js', { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
       .then(function (r) { return r.json(); })
-      .then(function () { open(); refresh(); }) // abre de inmediato y refresca el contenido
+      .then(function (data) { renderDrawer(sectionFrom(data)); open(); })
       .catch(function () { form.submit(); })
       .finally(function () { if (btn) btn.removeAttribute('disabled'); });
   });

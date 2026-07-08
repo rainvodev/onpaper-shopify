@@ -16,7 +16,7 @@
         <button type="button" class="op-cart_continue" data-op-cart-close>{{ section.settings.continue_label | default: 'Seguir comprando' }}</button>
       </div>
     {%- else -%}
-      <div class="op-cart_items">
+      <div class="op-cart_items" data-lenis-prevent>
         {%- for item in cart.items -%}
           <div class="op-cart_item" data-line="{{ forloop.index }}">
             <a href="{{ item.url }}" class="op-cart_item-media">
