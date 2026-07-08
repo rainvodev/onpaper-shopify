@@ -55,6 +55,20 @@
         });
       });
     });
+
+    // Barra flotante: mostrar cuando el precio principal sale de la vista
+    var priceMain = root.querySelector('.op-product_price');
+    var sticky = root.querySelector('[data-op-sticky]');
+    if (priceMain && sticky && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var show = !e.isIntersecting;
+          sticky.classList.toggle('is-visible', show);
+          sticky.setAttribute('aria-hidden', show ? 'false' : 'true');
+        });
+      }, { threshold: 0 });
+      io.observe(priceMain);
+    }
   }
 
   function initAll() { document.querySelectorAll('.op-product').forEach(initProduct); }

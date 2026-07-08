@@ -226,6 +226,17 @@
       {%- endif -%}
     {%- endif -%}
   </div>
+
+  {%- comment -%} Barra flotante: aparece al perder de vista el precio {%- endcomment -%}
+  <div class="op-product_sticky" data-op-sticky aria-hidden="true">
+    <div class="op-product_sticky-in">
+      <div class="op-product_sticky-info">
+        <span class="op-product_sticky-title">{{ product.title }}</span>
+        <span class="op-product_sticky-price" data-op-price-amount>{{ product.price | money }}</span>
+      </div>
+      <button type="submit" name="add" form="opProductForm" class="op-product_sticky-add">{{ section.settings.add_label | default: 'Agregar al carrito' }}</button>
+    </div>
+  </div>
 </section>
 
 {% stylesheet %}
@@ -322,6 +333,16 @@
     .op-product_media { position: static; }
     .op-product_related-grid { grid-template-columns: 1fr; }
   }
+
+  /* Barra flotante de precio */
+  .op-product_sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; background: var(--_theme---background); border-top: 0.0625rem solid var(--_theme---border); transform: translateY(100%); transition: transform 300ms ease; box-shadow: 0 -0.5rem 1.5rem -0.8rem rgba(0,0,0,0.2); }
+  .op-product_sticky.is-visible { transform: translateY(0); }
+  .op-product_sticky-in { display: flex; align-items: center; justify-content: space-between; gap: var(--_spacing---space--5); padding: 0.7rem var(--_spacing---space--5); max-width: 68rem; margin: 0 auto; }
+  .op-product_sticky-info { display: flex; flex-direction: column; line-height: 1.2; }
+  .op-product_sticky-title { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.66rem; opacity: 0.7; }
+  .op-product_sticky-price { font-size: 1.15rem; }
+  .op-product_sticky-add { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.76rem; color: var(--_theme---background); background: var(--_theme---text); border: 0; border-radius: 2rem; padding: 0.85rem 1.6rem; cursor: pointer; white-space: nowrap; }
+  @media (prefers-reduced-motion: reduce) { .op-product_sticky { transition: none; } }
 {% endstylesheet %}
 
 {% schema %}

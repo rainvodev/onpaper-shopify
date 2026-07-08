@@ -29,7 +29,7 @@
     var form = root.querySelector('#opProductForm') || root.querySelector('form');
     if (!form) return;
     var idInput = form.querySelector('[name="id"]');
-    var priceEl = root.querySelector('[data-op-price-amount]');
+    var priceEls = root.querySelectorAll('[data-op-price-amount]');
     var addBtn = form.querySelector('[name="add"]');
     var money = moneyFmt(root);
     root.__opVariantInit = true;
@@ -56,7 +56,7 @@
         return;
       }
       if (idInput) idInput.value = v.id;
-      if (priceEl && v.price != null) priceEl.textContent = money(v.price);
+      if (v.price != null) { var m = money(v.price); priceEls.forEach(function (el) { el.textContent = m; }); }
       if (addBtn) { if (v.available === false) addBtn.setAttribute('disabled', ''); else addBtn.removeAttribute('disabled'); }
     }
 

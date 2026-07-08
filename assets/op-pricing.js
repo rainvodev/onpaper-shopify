@@ -67,12 +67,15 @@
     var cfg = window.OP_PRICING && handle && window.OP_PRICING[handle];
     if (!cfg) return; // sin config → conserva el precio de Shopify
     var form = root.querySelector('#opProductForm') || root.querySelector('form');
-    var target = root.querySelector('[data-op-price-amount]');
-    if (!form || !target) return;
+    var targets = root.querySelectorAll('[data-op-price-amount]');
+    if (!form || !targets.length) return;
     root.__opPricingInit = true;
 
     var money = moneyFormatter(root);
-    var recalc = function () { target.textContent = compute(root, cfg, form, money); };
+    var recalc = function () {
+      var val = compute(root, cfg, form, money);
+      targets.forEach(function (t) { t.textContent = val; });
+    };
 
     form.addEventListener('change', recalc);
     form.addEventListener('input', recalc);
