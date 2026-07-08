@@ -17,7 +17,7 @@ window.OP_PRICING = {
     base: 1990, // dummy
     rules: {
       'Tamaño': { map: { '14x11': 0, '11x14': 0, '10x10': 0, '8.5x11': 400, '11x8.5': 400, '8x8': 400 } }, // dummy (8.5x11 asumido)
-      'Ventana de foto en portada': { map: { 'Sí': 200, 'No': 0 } }, // confirmado
+      // 'Ventana de foto en portada' → sigue como opción pero YA NO cobra (incluida en el precio · confirmado Anaissa 8-jul-2026)
       'Diseño interior': { map: { 'Minimalista': 550, 'Tradicional': 0 } }, // confirmado
       'Número de fotos': { map: { '0-150 fotos': 0, '151-250 fotos': 400, '251-350 fotos': 800 } } // dummy
     }
@@ -27,7 +27,7 @@ window.OP_PRICING = {
     base: 2490, // real (CSV)
     rules: {
       'Tamaño': { map: { '14x11': 0, '11x14': 0, '10x10': 300, '8.5x11': 300, '11x8.5': 300, '8x8': 500 } }, // dummy
-      'Ventana de foto en portada': { map: { 'Sí': 200, 'No': 0 } }, // confirmado
+      // 'Ventana de foto en portada' → sigue como opción pero YA NO cobra (incluida en el precio · confirmado Anaissa 8-jul-2026)
       'Título en lomo (opcional)': { nonEmpty: 200 }, // confirmado (+$200 si lleva título en lomo)
       'Número de fotos y páginas': { map: {
         '0-50 fotos (20-30 páginas)': 0,

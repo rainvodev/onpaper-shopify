@@ -37,7 +37,7 @@
 | Tamaño | **SÍ** | 14x11 = base · 11x14 y 10x10 = **+$0 (dummy)** · 11x8.5 y 8x8 = **+$400 (dummy)** |
 | Color | NO | — |
 | Hotstamping | NO | — |
-| Ventana de foto en portada | **SÍ** | **+$200 (confirmado)** |
+| Ventana de foto en portada | NO | Sigue como opción, pero **incluida en el precio — ya no cobra** (confirmado Anaissa · 8-jul-2026) |
 | Diseño interior | **SÍ** | Minimalista **+$550 (confirmado)** · Tradicional = base |
 | Título en portada/lomo | NO | — |
 | Número de fotos | **SÍ** | Escalonado *(dummy)*: 0-150 = **+$0** · 250 = **+$400** · 350 = **+$800** · 450 = **+$1,200** · 550 = **+$1,600**. *450 y 550 solo aplican en 11x14 horizontal (confirmado).* |
@@ -57,7 +57,7 @@
 | Tamaño | **SÍ** | 11x14 = base · 10x10 y 11x8.5 = **+$300 (dummy)** · 8x8 = **+$500 (dummy)** |
 | Color | NO | — |
 | Hotstamping | NO | — |
-| Ventana de foto en portada | **SÍ** | **+$200 (confirmado)** |
+| Ventana de foto en portada | NO | Sigue como opción, pero **incluida en el precio — ya no cobra** (confirmado Anaissa · 8-jul-2026) |
 | Título en portada | NO | — |
 | Título en lomo | **SÍ** | **+$200 (confirmado)** |
 | Número de fotos y páginas | **SÍ** | *(dummy)* +$300 por cada escalón: 0-50 = +$0 · 0-100 = +$300 · 0-150 = +$600 · 0-200 = +$900 · 0-250 = +$1,200 |
@@ -212,6 +212,11 @@
 4. **Escalonado del Layflat (02):** montos reales por tramo de fotos/páginas.
 5. **Confirmar** si "Datos de contacto y envío" del Giftcard afectan el precio.
 6. **Fotos Impresas (06):** confirmar si el precio es por foto o por paquete.
+
+## Decisiones cerradas
+
+- **Plan:** Shopify **Basic** (definido). No hay Shopify Functions de precio → el cobro va por variantes nativas / app / cotización.
+- **Ventana en photobooks (8-jul-2026):** se queda como opción seleccionable pero **ya no cambia el precio** (Anaissa). Con esto los photobooks bajan a **3 opciones con precio** (tamaño · número de fotos · diseño interior) → **caben en variantes nativas, sin app.**
 
 ## Notas de implementación
 
