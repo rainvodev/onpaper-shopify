@@ -6,11 +6,14 @@
 >
 > **Modelo técnico:** los productos **no usan variantes nativas de Shopify**. La personalización son *line-item properties*. Por lo tanto, el precio debe calcularse como **precio base + recargos** según los campos marcados abajo (vía app de cotización, add-ons o Shopify Functions).
 
+> ## ⚠️ AVISO — MONTOS DUMMY
+> Todos los valores marcados **`(dummy)`** son **placeholders inventados** para poder implementar y probar la lógica de precios **antes** de que Anaissa entregue los números reales. **NO usar en producción.** Los marcados **`(confirmado)`** sí vienen de Anaissa. Ver sección [Pendientes](#-pendientes-para-cerrar-precios-reemplazar-dummies) para saber qué falta reemplazar.
+
 ## Convenciones
 
 - **SÍ / NO** = si la opción cambia el precio.
-- `+$X` = recargo confirmado por Anaissa.
-- **`TBD`** = Anaissa confirmó que **sí cambia**, pero **falta el monto**.
+- `+$X (confirmado)` = recargo real dado por Anaissa.
+- `+$X (dummy)` = placeholder para pruebas — reemplazar.
 - Color y Hotstamping: **nunca** cambian precio (personalización estética gratis) en todos los productos.
 
 ---
@@ -26,68 +29,68 @@
 
 ## 01 · Photobook Tradicional  (`photobook-tradicional`)
 
-- **Precio base:** `TBD` (sin precio en CSV)
+- **Precio base:** **$1,990.00 (dummy)**
 
 | Opción | ¿Cambia? | Regla de precio |
 |--------|:---:|-----------------|
 | Material | NO | — |
-| Tamaño | **SÍ** | 11x14 y 10x10 = mismo precio · 11x8.5 y 8x8 = otro precio · (14x11 `TBD`) |
+| Tamaño | **SÍ** | 14x11 = base · 11x14 y 10x10 = **+$0 (dummy)** · 11x8.5 y 8x8 = **+$400 (dummy)** |
 | Color | NO | — |
 | Hotstamping | NO | — |
-| Ventana de foto en portada | **SÍ** | **+$200** |
-| Diseño interior | **SÍ** | Minimalista **+$550** (Tradicional = base) |
+| Ventana de foto en portada | **SÍ** | **+$200 (confirmado)** |
+| Diseño interior | **SÍ** | Minimalista **+$550 (confirmado)** · Tradicional = base |
 | Título en portada/lomo | NO | — |
-| Número de fotos | **SÍ** | Escalonado: 0-150 / 250 / 350 / 450 / 550 — precio distinto por tramo. *450 y 550 solo aplican en 11x14 horizontal.* Montos por tramo `TBD` |
+| Número de fotos | **SÍ** | Escalonado *(dummy)*: 0-150 = **+$0** · 250 = **+$400** · 350 = **+$800** · 450 = **+$1,200** · 550 = **+$1,600**. *450 y 550 solo aplican en 11x14 horizontal (confirmado).* |
 | Link de fotos | NO | — |
 
-> ⚠️ Ojo: los tramos de "Número de fotos" que Anaissa listó (hasta 550) **no coinciden** con el dropdown actual del template (0-150 / 151-250 / 251-350). Hay que **actualizar el template** con los tramos reales.
+> ⚠️ El dropdown actual del template solo tiene 3 tramos (`0-150 / 151-250 / 251-350`); Anaissa definió hasta 550. **Actualizar el template** al cerrar montos reales.
 
 ---
 
 ## 02 · Photobook Layflat  (`photobook-layflat`)
 
-- **Precio base:** $2,490.00 (CSV)
+- **Precio base:** $2,490.00 (CSV, real)
 
 | Opción | ¿Cambia? | Regla de precio |
 |--------|:---:|-----------------|
 | Material | NO | — |
-| Tamaño | **SÍ** | 11x14 = un precio · 10x10 y 11x8.5 = otro · 8x8 = otro. Montos `TBD` |
+| Tamaño | **SÍ** | 11x14 = base · 10x10 y 11x8.5 = **+$300 (dummy)** · 8x8 = **+$500 (dummy)** |
 | Color | NO | — |
 | Hotstamping | NO | — |
-| Ventana de foto en portada | **SÍ** | **+$200** |
+| Ventana de foto en portada | **SÍ** | **+$200 (confirmado)** |
 | Título en portada | NO | — |
-| Título en lomo | **SÍ** | **+$200** |
-| Número de fotos y páginas | **SÍ** | Cada escalón de cantidad aumenta el precio. Montos por tramo `TBD` |
+| Título en lomo | **SÍ** | **+$200 (confirmado)** |
+| Número de fotos y páginas | **SÍ** | *(dummy)* +$300 por cada escalón: 0-50 = +$0 · 0-100 = +$300 · 0-150 = +$600 · 0-200 = +$900 · 0-250 = +$1,200 |
 | Link de fotos | NO | — |
 
 ---
 
 ## 03 · Libro de Firmas  (`libro-de-firmas`)
 
-- **Precio base:** `TBD`
+- **Precio base:** **$1,490.00 (dummy)**
 
 | Opción | ¿Cambia? | Regla de precio |
 |--------|:---:|-----------------|
 | Material | NO | — |
-| Tamaño | **SÍ** | `TBD` |
+| Tamaño | **SÍ** | *(dummy)* +$300 por cada escalón de tamaño |
 | Color | NO | — |
 | Hotstamping | NO | — |
 | Título portada | NO | — |
 | Título lomo | NO | — |
-| Tipo de hojas | **SÍ** | `TBD` |
-| Cantidad de hojas | **SÍ** | `TBD` (por hoja) |
-| Agregar más nombres | **SÍ** | `TBD` |
+| Tipo de hojas | **SÍ** | *(dummy)* Blanco +$0 · Nombres Impresos +$250 · Nombres Rotulados +$500 |
+| Cantidad de hojas | **SÍ** | **+$50 (dummy)** por hoja adicional |
+| Agregar más nombres | **SÍ** | **+$150 (dummy)** |
 
 ---
 
 ## 04 · Bookcase  (`bookcase`)
 
-- **Precio base:** $3,400.00 (CSV)
+- **Precio base:** $3,400.00 (CSV, real)
 
 | Opción | ¿Cambia? | Regla de precio |
 |--------|:---:|-----------------|
-| Material | **SÍ** | `TBD` |
-| Tamaño | **SÍ** | `TBD` |
+| Material | **SÍ** | *(dummy)* Tela +$0 · Vinipiel +$300 |
+| Tamaño | **SÍ** | *(dummy)* +$300 por cada escalón de tamaño |
 | Color | NO | — |
 | Hotstamping | NO | — |
 | Título portada/lomo | NO | — |
@@ -96,75 +99,75 @@
 
 ## 05 · Memory Box  (`memory-box`)
 
-- **Precio base:** `TBD`
+- **Precio base:** **$890.00 (dummy)**
 
 | Opción | ¿Cambia? | Regla de precio |
 |--------|:---:|-----------------|
-| Material | **SÍ** | `TBD` |
-| Tamaño | **SÍ** | `TBD` |
+| Material | **SÍ** | *(dummy)* Tela +$0 · Vinipiel +$200 |
+| Tamaño | **SÍ** | *(dummy)* +$150 por cada escalón de tamaño |
 | Color | NO | — |
 | Hotstamping | NO | — |
 | Título en portada | NO | — |
-| Fotos impresas (tamaño caja) | **SÍ** | `TBD` (por foto) |
+| Fotos impresas (tamaño caja) | **SÍ** | **+$15 (dummy)** por foto |
 
 ---
 
 ## 06 · Fotos Impresas  (`fotos-impresas`)
 
-- **Precio base:** $3,400.00 (CSV) — *revisar: probablemente es precio por paquete/tamaño*
+- **Precio base:** $3,400.00 (CSV — revisar si es por paquete)
 
 | Opción | ¿Cambia? | Regla de precio |
 |--------|:---:|-----------------|
-| Tamaño | **SÍ** | `TBD` (precio por tamaño) |
+| Tamaño | **SÍ** | *(dummy)* precio por tamaño: 5x7 = $12 · 8x10 = $20 · 10x14 = $35 · 11x14 = $45 · 12x16 = $60 · 20x20 = $120 · 30x30 = $250 · 30x45 = $380 (precio unitario por foto) |
 | Link de fotos | NO | — |
 
-> Nota: cantidad mínima 25 fotos (stepper). Confirmar si el precio es por foto o por paquete.
+> Nota: mínimo 25 fotos (stepper). Precio total = precio unitario × cantidad *(dummy — confirmar si es por foto o paquete)*.
 
 ---
 
 ## 07 · Cajas Personalizadas  (`cajas-personalizadas`)
 
-- **Precio base:** `TBD`
+- **Precio base:** **$650.00 (dummy)**
 
 | Opción | ¿Cambia? | Regla de precio |
 |--------|:---:|-----------------|
-| Material | **SÍ** | `TBD` |
-| Tamaño | **SÍ** | `TBD` |
+| Material | **SÍ** | *(dummy)* Papel Texturizado +$0 · Tela Plastificada +$150 · Tela +$300 |
+| Tamaño | **SÍ** | *(dummy)* +$200 por cada escalón de tamaño |
 | Color | NO | — |
 | Hotstamping | NO | — |
-| Medidas de herraje | **SÍ** | `TBD` (por medida) |
-| Espacio para USB | **SÍ** | `TBD` |
-| ¿Placa de logotipo? | **SÍ** | `TBD` |
+| Medidas de herraje | **SÍ** | *(dummy)* Sin Herraje +$0 · 1" +$120 · 1.5" +$160 · 2" +$200 |
+| Espacio para USB | **SÍ** | **+$150 (dummy)** |
+| ¿Placa de logotipo? | **SÍ** | **+$250 (dummy)** |
 | Agrega tu logotipo | NO | — |
 
 ---
 
 ## 08 · Porta Planos  (`porta-planos`)
 
-- **Precio base:** `TBD`
+- **Precio base:** **$750.00 (dummy)**
 
 | Opción | ¿Cambia? | Regla de precio |
 |--------|:---:|-----------------|
-| Material | **SÍ** | `TBD` |
+| Material | **SÍ** | *(dummy)* Papel Texturizado +$0 · Tela Plastificada +$150 · Tela +$300 |
 | Color | NO | — |
 | Hotstamping | NO | — |
-| ¿Placa de logotipo? | **SÍ** | `TBD` |
+| ¿Placa de logotipo? | **SÍ** | **+$250 (dummy)** |
 | Agrega tu logotipo | NO | — |
 
 ---
 
 ## 09 · Carpetas  (`carpetas`)
 
-- **Precio base:** `TBD`
+- **Precio base:** **$550.00 (dummy)**
 
 | Opción | ¿Cambia? | Regla de precio |
 |--------|:---:|-----------------|
-| Material | **SÍ** | `TBD` |
-| Tamaño | **SÍ** | `TBD` |
+| Material | **SÍ** | *(dummy)* Papel Texturizado +$0 · Tela Plastificada +$150 · Tela +$300 |
+| Tamaño | **SÍ** | *(dummy)* +$200 por cada escalón de tamaño |
 | Color | NO | — |
 | Hotstamping | NO | — |
-| Medidas de herraje | **SÍ** | `TBD` |
-| ¿Placa de logotipo? | **SÍ** | `TBD` |
+| Medidas de herraje | **SÍ** | *(dummy)* Sin Herraje +$0 · 1" +$120 · 1.5" +$160 · 2" +$200 |
+| ¿Placa de logotipo? | **SÍ** | **+$250 (dummy)** |
 | Agrega tu logotipo | NO | — |
 
 ---
@@ -184,17 +187,34 @@
 
 ---
 
-## 🔴 Pendientes para cerrar precios (falta de Anaissa)
+## Resumen de precios base (dummy vs. real)
 
-1. **Montos exactos (`+$X` / precio por tramo/opción) de los productos 03–10.** Solo llegaron completos para el 01 y parte del 02.
-2. **Precios base** de los 7 productos sin precio en CSV: Photobook Tradicional, Libro de Firmas, Memory Box, Cajas Personalizadas, Porta Planos, Carpetas (y regla de Giftcard).
-3. **Tramos del "Número de fotos"** — actualizar los tramos reales (01 llega hasta 550; el template actual solo tiene 3 tramos) y sus montos.
-4. **Escalonado del Layflat (02):** montos por cada tramo de fotos/páginas.
+| # | Producto | Precio base | Origen |
+|---|----------|-------------|--------|
+| 1 | Photobook Tradicional | $1,990.00 | **dummy** |
+| 2 | Photobook Layflat | $2,490.00 | real (CSV) |
+| 3 | Libro de Firmas | $1,490.00 | **dummy** |
+| 4 | Bookcase | $3,400.00 | real (CSV) |
+| 5 | Memory Box | $890.00 | **dummy** |
+| 6 | Fotos Impresas | $3,400.00 | real (CSV, revisar) |
+| 7 | Cajas Personalizadas | $650.00 | **dummy** |
+| 8 | Porta Planos | $750.00 | **dummy** |
+| 9 | Carpetas | $550.00 | **dummy** |
+| 10 | Giftcard | dinámico | n/a |
+
+---
+
+## 🔴 Pendientes para cerrar precios (reemplazar dummies)
+
+1. **Precios base reales** de: Photobook Tradicional, Libro de Firmas, Memory Box, Cajas, Porta Planos, Carpetas.
+2. **Montos exactos** de todos los campos marcados `(dummy)` en 01–09.
+3. **Tramos reales del "Número de fotos"** del Photobook Tradicional (llega hasta 550) + actualizar el template.
+4. **Escalonado del Layflat (02):** montos reales por tramo de fotos/páginas.
 5. **Confirmar** si "Datos de contacto y envío" del Giftcard afectan el precio.
 6. **Fotos Impresas (06):** confirmar si el precio es por foto o por paquete.
 
-## Notas de implementación (cuando lleguen los montos)
+## Notas de implementación
 
 - Traducir cada regla `SÍ` a un **recargo** sobre el precio base del producto.
-- Reglas condicionadas por tamaño (p. ej. tramos 450/550 solo en 11x14) requieren lógica dependiente entre campos → considerar app de cotización o Shopify Functions, no solo properties estáticas.
-- Actualizar los templates `product.*.json` donde las opciones no coincidan con lo definido por Anaissa (caso "Número de fotos" del 01).
+- Reglas condicionadas por tamaño (p. ej. tramos 450/550 solo en 11x14) requieren lógica dependiente entre campos → app de cotización o Shopify Functions, no solo properties estáticas.
+- Al llegar los montos reales, basta reemplazar los valores `(dummy)` por los definitivos y quitar el aviso de arriba.
