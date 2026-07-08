@@ -1,11 +1,11 @@
 Handle,Title,Body (HTML),Vendor,Type,Tags,Published,Variant Price,Variant Inventory Policy,Variant Fulfillment Service,Status
-photobook-tradicional,Photobook Tradicional,"<p>Photobook tradicional para guardar tus recuerdos más bonitos. Personalízalo a tu gusto.</p>",On Paper,Photobooks,"photobook,recuerdos",FALSE,,deny,manual,draft
-photobook-layflat,Photobook Layflat,"<p>Photobook layflat de páginas continuas para una experiencia visual sin cortes.</p>",On Paper,Photobooks,"photobook,layflat,recuerdos",FALSE,2490.00,deny,manual,draft
-libro-de-firmas,Libro de Firmas,"<p>Libro de firmas para tu evento; un recuerdo de las personas que te acompañaron.</p>",On Paper,Libros,"libro-de-firmas,bodas,eventos",FALSE,,deny,manual,draft
-bookcase,Bookcase,"<p>Estuche/caja para proteger y presentar tu photobook.</p>",On Paper,Cajas,"bookcase,estuche",FALSE,3400.00,deny,manual,draft
-memory-box,Memory Box,"<p>Caja de recuerdos para guardar tus momentos especiales.</p>",On Paper,Cajas,"memory-box,recuerdos",FALSE,,deny,manual,draft
-fotos-impresas,Fotos Impresas,"<p>Impresión de fotografías con acabado premium.</p>",On Paper,Impresiones,"fotos,impresiones",FALSE,3400.00,deny,manual,draft
-cajas-personalizadas,Cajas Personalizadas,"<p>Cajas personalizadas para regalar o guardar tus recuerdos.</p>",On Paper,Cajas,"cajas,personalizado",FALSE,,deny,manual,draft
-porta-planos,Porta Planos,"<p>Porta planos / tubo para transportar y guardar impresiones y posters.</p>",On Paper,Accesorios,"porta-planos,accesorios",FALSE,,deny,manual,draft
-carpetas,Carpetas,"<p>Carpetas para organizar y presentar documentos y recuerdos.</p>",On Paper,Accesorios,"carpetas,papeleria",FALSE,,deny,manual,draft
-certificado-de-regalo,Certificado de Regalo,"<p>Tarjeta de regalo On Paper. El regalo perfecto para quien aprecia los recuerdos.</p>",On Paper,Gift Card,"gift-card,regalo",FALSE,,deny,manual,draft
+photobook-tradicional,Photobook Tradicional,"<p>Photobook tradicional para guardar tus recuerdos más bonitos. Personalízalo a tu gusto.</p>",On Paper,Photobooks,"photobook,recuerdos",TRUE,10.00,deny,manual,active
+photobook-layflat,Photobook Layflat,"<p>Photobook layflat de páginas continuas para una experiencia visual sin cortes.</p>",On Paper,Photobooks,"photobook,layflat,recuerdos",TRUE,10.00,deny,manual,active
+libro-de-firmas,Libro de Firmas,"<p>Libro de firmas para tu evento; un recuerdo de las personas que te acompañaron.</p>",On Paper,Libros,"libro-de-firmas,bodas,eventos",TRUE,10.00,deny,manual,active
+bookcase,Bookcase,"<p>Estuche/caja para proteger y presentar tu photobook.</p>",On Paper,Cajas,"bookcase,estuche",TRUE,10.00,deny,manual,active
+memory-box,Memory Box,"<p>Caja de recuerdos para guardar tus momentos especiales.</p>",On Paper,Cajas,"memory-box,recuerdos",TRUE,10.00,deny,manual,active
+fotos-impresas,Fotos Impresas,"<p>Impresión de fotografías con acabado premium.</p>",On Paper,Impresiones,"fotos,impresiones",TRUE,10.00,deny,manual,active
+cajas-personalizadas,Cajas Personalizadas,"<p>Cajas personalizadas para regalar o guardar tus recuerdos.</p>",On Paper,Cajas,"cajas,personalizado",TRUE,10.00,deny,manual,active
+porta-planos,Porta Planos,"<p>Porta planos / tubo para transportar y guardar impresiones y posters.</p>",On Paper,Accesorios,"porta-planos,accesorios",TRUE,10.00,deny,manual,active
+carpetas,Carpetas,"<p>Carpetas para organizar y presentar documentos y recuerdos.</p>",On Paper,Accesorios,"carpetas,papeleria",TRUE,10.00,deny,manual,active
+certificado-de-regalo,Certificado de Regalo,"<p>Tarjeta de regalo On Paper. El regalo perfecto para quien aprecia los recuerdos.</p>",On Paper,Gift Card,"gift-card,regalo",TRUE,10.00,deny,manual,active
