@@ -24,7 +24,10 @@
   }
 
   function refresh(cb) {
-    fetch(window.location.pathname + '?sections=' + SECTION, { headers: { 'Accept': 'application/json' } })
+    // cache: 'no-store' + timestamp para evitar que el navegador sirva el drawer con el carrito anterior
+    fetch(window.location.pathname + '?sections=' + SECTION + '&_=' + Date.now(), {
+      headers: { 'Accept': 'application/json' }, cache: 'no-store'
+    })
       .then(function (r) { return r.json(); })
       .then(function (data) {
         var html = data[SECTION];
@@ -62,7 +65,7 @@
     if (btn) btn.setAttribute('disabled', '');
     fetch('/cart/add.js', { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
       .then(function (r) { return r.json(); })
-      .then(function () { refresh(function () { open(); }); })
+      .then(function () { open(); refresh(); }) // abre de inmediato y refresca el contenido
       .catch(function () { form.submit(); })
       .finally(function () { if (btn) btn.removeAttribute('disabled'); });
   });
