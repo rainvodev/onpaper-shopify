@@ -73,6 +73,7 @@
       function openDrawer() {
         drawer.classList.add('is-open');
         root.classList.add('is-drawer-open');
+        root.classList.remove('is-hidden');
         burger.setAttribute('aria-expanded', 'true');
         document.documentElement.classList.add('op-no-scroll');
         if (window.lenis) window.lenis.stop();
@@ -122,6 +123,36 @@
         if (!root.contains(e.target)) closeRoot(root);
       });
     });
+  }
+
+  // Sticky con hide-on-scroll-down / show-on-scroll-up + offset del contenido (una sola vez)
+  if (!window.__opHeaderScroll) {
+    window.__opHeaderScroll = true;
+    var lastY = window.scrollY || 0, ticking = false, HIDE_AFTER = 90;
+
+    function apply() {
+      ticking = false;
+      var y = window.scrollY || window.pageYOffset || 0;
+      document.querySelectorAll('[data-op-header]').forEach(function (h) {
+        h.classList.toggle('is-scrolled', y > 16);
+        if (h.classList.contains('is-drawer-open')) { h.classList.remove('is-hidden'); }
+        else if (y > HIDE_AFTER && y > lastY + 4) { h.classList.add('is-hidden'); }
+        else if (y < lastY - 4 || y <= HIDE_AFTER) { h.classList.remove('is-hidden'); }
+      });
+      lastY = y;
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(apply); } }, { passive: true });
+
+    function offset() {
+      document.querySelectorAll('[data-op-header]').forEach(function (h) {
+        document.body.style.paddingTop = h.classList.contains('is-overlay') ? '' : h.offsetHeight + 'px';
+      });
+    }
+    window.addEventListener('load', offset);
+    window.addEventListener('resize', offset);
+    document.addEventListener('shopify:section:load', offset);
+    if (document.readyState !== 'loading') offset();
+    else document.addEventListener('DOMContentLoaded', offset);
   }
 
   if (document.readyState !== 'loading') initAll();
