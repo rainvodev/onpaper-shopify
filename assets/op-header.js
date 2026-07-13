@@ -67,12 +67,44 @@
     var burger = root.querySelector('[data-op-burger]');
     var drawer = root.querySelector('[data-op-drawer]');
     if (burger && drawer) {
+      var g = window.gsap;
+      var items = drawer.querySelectorAll('.op-header_acc, .op-header_accroot, .op-header_drawerloc');
+
+      function openDrawer() {
+        drawer.classList.add('is-open');
+        root.classList.add('is-drawer-open');
+        burger.setAttribute('aria-expanded', 'true');
+        document.documentElement.classList.add('op-no-scroll');
+        if (window.lenis) window.lenis.stop();
+        if (g) {
+          g.killTweensOf([drawer, items]);
+          // mask-down: se revela de arriba hacia abajo
+          g.fromTo(drawer, { clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)', duration: 0.55, ease: 'power3.inOut' });
+          g.fromTo(items, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, stagger: 0.05, ease: 'power2.out', delay: 0.1 });
+        }
+      }
+      function closeDrawer() {
+        burger.setAttribute('aria-expanded', 'false');
+        document.documentElement.classList.remove('op-no-scroll');
+        if (window.lenis) window.lenis.start();
+        if (g) {
+          g.killTweensOf([drawer, items]);
+          g.to(drawer, {
+            clipPath: 'inset(0 0 100% 0)', duration: 0.4, ease: 'power3.in',
+            onComplete: function () {
+              drawer.classList.remove('is-open');
+              root.classList.remove('is-drawer-open');
+              g.set(drawer, { clearProps: 'clipPath' });
+            }
+          });
+        } else {
+          drawer.classList.remove('is-open');
+          root.classList.remove('is-drawer-open');
+        }
+      }
+
       burger.addEventListener('click', function () {
-        var isOpen = drawer.classList.toggle('is-open');
-        root.classList.toggle('is-drawer-open', isOpen);
-        burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        document.documentElement.classList.toggle('op-no-scroll', isOpen);
-        if (window.lenis) { isOpen ? window.lenis.stop() : window.lenis.start(); }
+        if (drawer.classList.contains('is-open')) closeDrawer(); else openDrawer();
       });
     }
   }

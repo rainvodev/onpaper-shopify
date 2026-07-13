@@ -13,4 +13,6 @@
   [data-reveal="down"] { transform: translateY(-12px); }
   [data-reveal="zoom"] { transform: scale(1.04); }
   [data-reveal].is-in { opacity: 1; transform: none; }
+  /* Con GSAP activo, el motor controla la animación (op-gsap.js): sin transición CSS que interfiera. */
+  .op-gsap [data-reveal] { transition: none; }
 }
