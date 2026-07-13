@@ -52,7 +52,11 @@
         </a>
 
         <button type="button" class="op-header_burger" data-op-burger aria-label="Menú" aria-expanded="false">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          <span class="op-header_burger-box" aria-hidden="true">
+            <span class="op-header_burger-bar"></span>
+            <span class="op-header_burger-bar"></span>
+            <span class="op-header_burger-bar"></span>
+          </span>
         </button>
       </div>
     </div>
@@ -219,6 +223,15 @@
   .op-loc_select option { color: #111; }
   .op-header_cart { display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
   .op-header_burger { display: none; background: none; border: 0; cursor: pointer; color: currentColor; padding: 0; }
+  .op-header_burger-box { position: relative; display: block; width: 1.4rem; height: 0.85rem; }
+  .op-header_burger-bar { position: absolute; left: 0; width: 100%; height: 0.09375rem; background-color: currentColor; border-radius: 2px; transition: transform 300ms cubic-bezier(0.4,0,0.2,1), opacity 200ms ease; }
+  .op-header_burger-bar:nth-child(1) { top: 0; }
+  .op-header_burger-bar:nth-child(2) { top: 50%; margin-top: -0.047rem; }
+  .op-header_burger-bar:nth-child(3) { bottom: 0; }
+  .op-header_burger[aria-expanded="true"] .op-header_burger-bar:nth-child(1) { transform: translateY(0.38rem) rotate(45deg); }
+  .op-header_burger[aria-expanded="true"] .op-header_burger-bar:nth-child(2) { opacity: 0; }
+  .op-header_burger[aria-expanded="true"] .op-header_burger-bar:nth-child(3) { transform: translateY(-0.38rem) rotate(-45deg); }
+  @media (prefers-reduced-motion: reduce) { .op-header_burger-bar { transition: none; } }
 
   /* Paneles */
   .op-header_panel { position: absolute; left: 0; right: 0; top: 100%; z-index: 1; background-color: var(--swatch--light-200, #f5f5ef); color: var(--swatch--brand-500, #5f604e); border-bottom: 0.0625rem solid var(--_theme---border); box-shadow: 0 1.5rem 2rem -1.5rem rgba(0,0,0,0.18); min-height: 50svh; max-height: 85vh; overflow-y: auto; visibility: hidden; opacity: 0; transform: translateY(-0.5rem); pointer-events: none; transition: opacity 280ms ease, transform 280ms ease, visibility 0s linear 280ms; }
