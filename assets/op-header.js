@@ -69,6 +69,7 @@
     if (burger && drawer) {
       burger.addEventListener('click', function () {
         var isOpen = drawer.classList.toggle('is-open');
+        root.classList.toggle('is-drawer-open', isOpen);
         burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         document.documentElement.classList.toggle('op-no-scroll', isOpen);
         if (window.lenis) { isOpen ? window.lenis.stop() : window.lenis.start(); }

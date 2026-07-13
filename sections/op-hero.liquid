@@ -11,7 +11,7 @@
     <div class="op-hero_overlay" style="opacity: {{ section.settings.overlay | divided_by: 100.0 }}"></div>
   </div>
 
-  <div class="op-hero_more" data-reveal="fade" data-reveal-load style="--reveal-delay: 750ms"><span class="op-hero_more_text">More of us</span></div>
+  <a class="op-hero_more" href="{{ section.settings.more_link | default: routes.all_products_collection_url }}" data-reveal="fade" data-reveal-load style="--reveal-delay: 750ms"><span class="op-hero_more_text">{{ section.settings.more_label | default: 'More of us' }}</span></a>
 
   <div class="op-hero_contain">
     <div class="op-hero_content u-margin-trim" style="--op-hero-cw: {{ section.settings.content_width }}ch">
@@ -43,8 +43,8 @@
   .op-hero_overlay { background-color: #1d1c17; pointer-events: none; }
   .op-hero_contain { position: relative; z-index: 2; width: 100%; max-width: var(--page-width, 90rem); margin-inline: auto; padding-inline: var(--page-margin, 1.5rem); }
   .op-hero_content { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: var(--op-hero-cw, 40ch); margin-inline: auto; }
-  .op-hero_title { font-family: var(--_typography---font--primary-family); font-size: clamp(1.5rem, 1rem + 2.2vw, 2.25rem); line-height: 1.2; }
-  .op-hero_title p { margin: 0; }
+  .op-hero_title { font-family: var(--_typography---font--primary-family); font-size: clamp(1.5rem, 1rem + 2.2vw, 2.25rem); line-height: 1.2; text-align: center; }
+  .op-hero_title p { margin: 0; text-align: center; }
   .op-hero_title em, .op-hero_title i { font-style: italic; }
   .op-hero_text { margin-top: var(--_spacing---space--3); }
   .op-hero_btn {
@@ -57,7 +57,9 @@
     transition: background-color 300ms;
   }
   .op-hero_btn:hover, .op-hero_btn:focus-visible { background-color: rgba(255, 255, 255, 0.26); }
-  .op-hero_more { position: absolute; left: var(--page-margin, 2rem); bottom: 0; z-index: 2; height: 12rem; display: flex; align-items: flex-start; gap: 0.7rem; }
+  .op-hero_more { position: absolute; left: var(--page-margin, 2rem); bottom: 0; z-index: 2; height: 12rem; display: flex; align-items: flex-start; gap: 0.7rem; color: currentColor; text-decoration: none; }
+  .op-hero_more:hover .op-hero_more_text, .op-hero_more:focus-visible .op-hero_more_text { opacity: 0.65; }
+  .op-hero_more_text { transition: opacity 250ms; }
   .op-hero_more::before { content: ""; width: 0.0625rem; align-self: stretch; background-color: rgba(255, 255, 255, 0.55); }
   .op-hero_more_text { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.7rem; }
   .op-hero_dots { position: absolute; bottom: var(--_spacing---space--6); left: 50%; transform: translateX(-50%); z-index: 2; display: flex; gap: 0.75rem; }
@@ -112,7 +114,9 @@
     { "type": "richtext", "id": "heading", "label": "Título (multilínea; itálica donde quieras)", "default": "<p>Crafted with passion,</p><p><em>designed for a lifetime.</em></p>" },
     { "type": "text", "id": "subheading", "label": "Subtítulo (opcional; el hero del diseño no lleva)" },
     { "type": "text", "id": "cta_label", "label": "Texto del botón", "default": "Shop now" },
-    { "type": "url", "id": "cta_link", "label": "Link del botón" }
+    { "type": "url", "id": "cta_link", "label": "Link del botón" },
+    { "type": "text", "id": "more_label", "label": "Etiqueta 'More of us'", "default": "More of us" },
+    { "type": "url", "id": "more_link", "label": "Link de 'More of us' (elige una sección/página con sentido)" }
   ],
   "blocks": [
     { "type": "slide", "name": "Slide", "settings": [ { "type": "image_picker", "id": "image", "label": "Imagen" } ] }
