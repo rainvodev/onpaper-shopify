@@ -164,6 +164,35 @@
           <svg class="op-header_chev op-header_chev--go" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       {%- endif -%}
+
+      {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
+        <div class="op-header_drawerloc">
+          {%- if localization.available_countries.size > 1 -%}
+            {%- form 'localization', class: 'op-loc op-loc--drawer' -%}
+              <label class="op-header_locrow">
+                <span>{{ 'localization.country_label' | t | default: 'País / moneda' }}</span>
+                <select name="country_code" class="op-loc_select" aria-label="País / moneda" onchange="this.form.submit()">
+                  {%- for country in localization.available_countries -%}
+                    <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>{{ country.name }} · {{ country.currency.iso_code }}</option>
+                  {%- endfor -%}
+                </select>
+              </label>
+            {%- endform -%}
+          {%- endif -%}
+          {%- if localization.available_languages.size > 1 -%}
+            {%- form 'localization', class: 'op-loc op-loc--drawer' -%}
+              <label class="op-header_locrow">
+                <span>{{ 'localization.language_label' | t | default: 'Idioma' }}</span>
+                <select name="language_code" class="op-loc_select" aria-label="Idioma" onchange="this.form.submit()">
+                  {%- for language in localization.available_languages -%}
+                    <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>{{ language.endonym_name | capitalize }}</option>
+                  {%- endfor -%}
+                </select>
+              </label>
+            {%- endform -%}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
     </div>
   </div>
 </header>
@@ -231,11 +260,17 @@
   .op-header_acclist { list-style: none; margin: 0; padding: 0 0 var(--_spacing---space--4); display: flex; flex-direction: column; gap: var(--_spacing---space--3); }
   .op-header_acclink { font-family: var(--_typography---font--primary-family); text-transform: none; letter-spacing: 0; font-size: 1rem; opacity: 0.8; }
   .op-header_accroot { padding: var(--_spacing---space--4) 0; border-bottom: 0.0625rem solid var(--_theme---border); display: flex; align-items: center; justify-content: space-between; gap: var(--_spacing---space--4); }
+  .op-header_drawerloc { padding-top: var(--_spacing---space--5); display: flex; flex-direction: column; gap: var(--_spacing---space--5); }
+  .op-header_locrow { display: flex; flex-direction: column; gap: 0.45rem; }
+  .op-header_locrow > span { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.68rem; opacity: 0.6; }
+  .op-loc--drawer { display: block; }
+  .op-loc--drawer .op-loc_select { width: 100%; border: 0.0625rem solid var(--_theme---border); border-radius: 2rem; padding: 0.75rem 1.1rem; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.78rem; color: currentColor; background-color: transparent; }
 
   @media (max-width: 990px) {
     .op-header_nav { display: none; }
     .op-header_panel { display: none; }
     .op-header_burger { display: inline-flex; }
+    .op-header_actions .op-loc { display: none; }
   }
   .op-no-scroll { overflow: hidden; }
 {% endstylesheet %}
