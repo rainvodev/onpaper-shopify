@@ -30,6 +30,11 @@
         t.setAttribute('aria-expanded', on ? 'true' : 'false');
       });
       root.__opCurrent = name;
+      // Stagger elegante del contenido (rise), sin tocar opacidad para respetar estados hover
+      if (window.gsap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var items = panel.querySelectorAll('.op-header_eyebrow, .op-header_menulink, .op-header_pcard');
+        window.gsap.fromTo(items, { y: 16 }, { y: 0, duration: 0.7, stagger: 0.028, ease: 'power3.out', delay: 0.08, overwrite: 'auto', clearProps: 'transform' });
+      }
     }
     function scheduleClose() { clearTimeout(closeTimer); closeTimer = setTimeout(function () { closeRoot(root); }, 180); }
     function cancelClose() { clearTimeout(closeTimer); }
