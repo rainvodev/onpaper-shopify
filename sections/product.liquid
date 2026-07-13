@@ -343,6 +343,11 @@
   .op-product_sticky-price { font-size: 1.15rem; }
   .op-product_sticky-add { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.76rem; color: var(--_theme---background); background: var(--_theme---text); border: 0; border-radius: 2rem; padding: 0.85rem 1.6rem; cursor: pointer; white-space: nowrap; }
   @media (prefers-reduced-motion: reduce) { .op-product_sticky { transition: none; } }
+  @media (max-width: 430px) {
+    .op-product_sticky-title { display: none; }
+    .op-product_sticky-in { padding: 0.6rem var(--_spacing---space--4); }
+    .op-product_sticky-add { flex: 1; text-align: center; }
+  }
 {% endstylesheet %}
 
 {% schema %}

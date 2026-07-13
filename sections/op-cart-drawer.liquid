@@ -1,6 +1,14 @@
 {% comment %} On Paper — Cart drawer (Lumos). Carrito deslizable AJAX. Re-render vía Section Rendering API
   (?sections=op-cart-drawer). La lógica vive en assets/op-cart.js. {% endcomment %}
-<div class="op-cart" data-op-cart data-op-cart-count-value="{{ cart.item_count }}" aria-hidden="true">
+<div class="op-cart" data-op-cart data-op-cart-count-value="{{ cart.item_count }}" aria-hidden="true"
+  data-op-money="{{ shop.money_format | strip_html | escape }}"
+  data-l-title="{{ section.settings.title | default: 'Carrito' | escape }}"
+  data-l-subtotal="{{ section.settings.subtotal_label | default: 'Subtotal' | escape }}"
+  data-l-checkout="{{ section.settings.checkout_label | default: 'Finalizar compra' | escape }}"
+  data-l-view="{{ section.settings.view_label | default: 'Ver carrito' | escape }}"
+  data-l-remove="{{ section.settings.remove_label | default: 'Quitar' | escape }}"
+  data-l-empty="{{ section.settings.empty_text | default: 'Tu carrito está vacío.' | escape }}"
+  data-l-continue="{{ section.settings.continue_label | default: 'Seguir comprando' | escape }}">
   <div class="op-cart_overlay" data-op-cart-close></div>
   <aside class="op-cart_panel" role="dialog" aria-modal="true" aria-label="{{ section.settings.title | default: 'Carrito' }}">
     <header class="op-cart_head">
@@ -26,14 +34,17 @@
             </a>
             <div class="op-cart_item-info">
               <a href="{{ item.url }}" class="op-cart_item-title">{{ item.product.title }}</a>
+              {%- unless item.product.has_only_default_variant -%}
+                {%- if item.variant.title != blank -%}<div class="op-cart_item-variant">{{ item.variant.title }}</div>{%- endif -%}
+              {%- endunless -%}
               {%- assign has_props = false -%}
-              {%- for p in item.properties -%}{%- if p.last != blank -%}{%- assign first_char = p.first | slice: 0 -%}{%- unless first_char == '_' -%}{%- assign has_props = true -%}{%- endunless -%}{%- endif -%}{%- endfor -%}
+              {%- for p in item.properties -%}{%- if p.last != blank -%}{%- assign first_char = p.first | slice: 0 -%}{%- unless first_char == '_' or item.product.options contains p.first -%}{%- assign has_props = true -%}{%- endunless -%}{%- endif -%}{%- endfor -%}
               {%- if has_props -%}
                 <ul class="op-cart_item-props">
                   {%- for p in item.properties -%}
                     {%- if p.last != blank -%}
                       {%- assign first_char = p.first | slice: 0 -%}
-                      {%- unless first_char == '_' -%}<li><span>{{ p.first }}:</span> {{ p.last }}</li>{%- endunless -%}
+                      {%- unless first_char == '_' or item.product.options contains p.first -%}<li><span>{{ p.first }}:</span> {{ p.last }}</li>{%- endunless -%}
                     {%- endif -%}
                   {%- endfor -%}
                 </ul>
@@ -88,6 +99,7 @@
   .op-cart_item-img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .op-cart_item-img--ph { display: block; background-color: color-mix(in srgb, var(--_theme---text) 10%, transparent); }
   .op-cart_item-title { font-family: var(--_typography---font--primary-family); font-size: 1rem; color: currentColor; text-decoration: none; }
+  .op-cart_item-variant { font-size: 0.78rem; opacity: 0.72; margin-top: 0.15rem; }
   .op-cart_item-props { list-style: none; margin: 0.35rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.1rem; }
   .op-cart_item-props li { font-size: 0.74rem; opacity: 0.65; }
   .op-cart_item-props span { opacity: 0.8; }

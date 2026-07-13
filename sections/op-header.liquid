@@ -137,7 +137,10 @@
   <div class="op-header_drawer" data-op-drawer>
     <div class="op-header_drawerinner u-container">
       <details class="op-header_acc">
-        <summary class="op-header_accsum">{{ section.settings.products_label | default: 'Products' }}</summary>
+        <summary class="op-header_accsum">
+          <span>{{ section.settings.products_label | default: 'Products' }}</span>
+          <svg class="op-header_chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
         <ul class="op-header_acclist">
           {%- for product in product_list limit: 30 -%}
             <li><a class="op-header_acclink" href="{{ product.url }}">{{ product.title }}</a></li>
@@ -145,7 +148,10 @@
         </ul>
       </details>
       <details class="op-header_acc">
-        <summary class="op-header_accsum">{{ section.settings.collections_label | default: 'Collections' }}</summary>
+        <summary class="op-header_accsum">
+          <span>{{ section.settings.collections_label | default: 'Collections' }}</span>
+          <svg class="op-header_chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
         <ul class="op-header_acclist">
           {%- for collection in collections -%}
             <li><a class="op-header_acclink" href="{{ collection.url }}">{{ collection.title }}</a></li>
@@ -153,7 +159,10 @@
         </ul>
       </details>
       {%- if section.settings.others_link != blank -%}
-        <a class="op-header_accroot" href="{{ section.settings.others_link }}">{{ section.settings.others_label | default: 'Others' }}</a>
+        <a class="op-header_accroot" href="{{ section.settings.others_link }}">
+          <span>{{ section.settings.others_label | default: 'Others' }}</span>
+          <svg class="op-header_chev op-header_chev--go" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       {%- endif -%}
     </div>
   </div>
@@ -206,13 +215,17 @@
   /* Drawer móvil */
   .op-header_drawer { position: absolute; left: 0; right: 0; top: 100%; background-color: var(--swatch--light-200, #f5f5ef); color: var(--swatch--brand-500, #5f604e); border-bottom: 0.0625rem solid var(--_theme---border); display: none; }
   .op-header_drawer.is-open { display: block; }
-  .op-header_drawerinner { padding-top: var(--_spacing---space--6); padding-bottom: var(--_spacing---space--6); display: flex; flex-direction: column; gap: var(--_spacing---space--4); }
+  .op-header_drawerinner { padding-top: var(--_spacing---space--4); padding-bottom: var(--_spacing---space--5); display: flex; flex-direction: column; gap: 0; }
   .op-header_acc { border-bottom: 0.0625rem solid var(--_theme---border); }
-  .op-header_accsum { cursor: pointer; list-style: none; padding: var(--_spacing---space--4) 0; }
+  .op-header_acc:first-child { border-top: 0.0625rem solid var(--_theme---border); }
+  .op-header_accsum { cursor: pointer; list-style: none; padding: var(--_spacing---space--4) 0; display: flex; align-items: center; justify-content: space-between; gap: var(--_spacing---space--4); }
   .op-header_accsum::-webkit-details-marker { display: none; }
+  .op-header_chev { flex: none; opacity: 0.6; transition: transform 220ms ease; }
+  .op-header_acc[open] > .op-header_accsum .op-header_chev { transform: rotate(180deg); }
+  .op-header_chev--go { transform: none; }
   .op-header_acclist { list-style: none; margin: 0; padding: 0 0 var(--_spacing---space--4); display: flex; flex-direction: column; gap: var(--_spacing---space--3); }
   .op-header_acclink { font-family: var(--_typography---font--primary-family); text-transform: none; letter-spacing: 0; font-size: 1rem; opacity: 0.8; }
-  .op-header_accroot { padding: var(--_spacing---space--4) 0; }
+  .op-header_accroot { padding: var(--_spacing---space--4) 0; border-bottom: 0.0625rem solid var(--_theme---border); display: flex; align-items: center; justify-content: space-between; gap: var(--_spacing---space--4); }
 
   @media (max-width: 990px) {
     .op-header_nav { display: none; }
