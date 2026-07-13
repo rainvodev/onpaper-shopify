@@ -10,7 +10,7 @@
       {%- comment -%} Galería {%- endcomment -%}
       <div class="op-product_media">
         {%- if product.featured_media -%}
-          <div class="op-product_main">
+          <div class="op-product_main" data-mask="up">
             {{ product.featured_media | image_url: width: 1400 | image_tag: alt: product.title, class: 'op-product_mainimg', id: 'opMainImg', widths: '500,800,1100,1400', sizes: '(min-width: 750px) 50vw, 100vw' }}
           </div>
           {%- if product.media.size > 1 -%}
