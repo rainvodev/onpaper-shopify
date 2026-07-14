@@ -5,9 +5,9 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/cart
 {% endcomment %}
 
-<h1>{{ 'cart.title' | t }}</h1>
+<h1 data-reveal>{{ 'cart.title' | t }}</h1>
 
-<form action="{{ routes.cart_url }}" method="post">
+<form action="{{ routes.cart_url }}" method="post" data-reveal style="--reveal-delay: 100ms">
   <table>
     {% for item in cart.items %}
       <tr>

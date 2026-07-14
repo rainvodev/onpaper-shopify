@@ -78,14 +78,15 @@
 </div>
 
 {% stylesheet %}
-  .op-cart { position: fixed; inset: 0; z-index: 100; visibility: hidden; pointer-events: none; }
-  .op-cart.is-open { visibility: visible; pointer-events: auto; }
+  /* visibility se retrasa al cerrar (0s tras 480ms) para que el panel alcance a animar su salida
+     — sin esto, el contenedor se ocultaría al instante y el cierre no reproduciría la apertura en reversa. */
+  .op-cart { position: fixed; inset: 0; z-index: 100; visibility: hidden; pointer-events: none; transition: visibility 0s linear 480ms; }
+  .op-cart.is-open { visibility: visible; pointer-events: auto; transition: visibility 0s; }
   .op-cart_overlay { position: absolute; inset: 0; background-color: rgba(30,30,26,0.35); opacity: 0; transition: opacity 320ms ease; }
   .op-cart.is-open .op-cart_overlay { opacity: 1; }
   .op-cart_panel { position: absolute; top: 0; right: 0; height: 100%; width: clamp(20rem, 90vw, 27rem); background-color: var(--swatch--light-200, #f5f5ef); color: var(--_theme---text); display: flex; flex-direction: column; clip-path: inset(0 0 0 100%); transition: clip-path 480ms cubic-bezier(0.16, 1, 0.3, 1); box-shadow: -1rem 0 2.5rem -1rem rgba(0,0,0,0.25); }
   .op-cart.is-open .op-cart_panel { clip-path: inset(0 0 0 0%); }
-  @media (prefers-reduced-motion: reduce) { .op-cart_panel { transition: none; } }
-  @media (prefers-reduced-motion: reduce) { .op-cart_panel, .op-cart_overlay { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .op-cart, .op-cart_panel, .op-cart_overlay { transition: none; } }
 
   .op-cart_head { display: flex; align-items: center; justify-content: space-between; padding: var(--_spacing---space--5) var(--_spacing---space--6); border-bottom: 0.0625rem solid var(--_theme---border); }
   .op-cart_title { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.82rem; }

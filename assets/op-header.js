@@ -3,7 +3,31 @@
 (function () {
   'use strict';
 
+  // Debug: actívalo con ?opdebug=1 en la URL, localStorage.opDebug='1', o window.OP_DEBUG=true.
+  // Loguea el ciclo de apertura/cierre del menú + drawer y marca visualmente los elementos animados.
+  var DEBUG = (function () {
+    try {
+      return /(?:^|[?&])opdebug=1\b/.test(location.search) ||
+        (window.localStorage && localStorage.getItem('opDebug') === '1') ||
+        window.OP_DEBUG === true;
+    } catch (e) { return false; }
+  })();
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var t0 = (window.performance && performance.now) ? performance.now() : Date.now();
+  function now() { return Math.round(((window.performance && performance.now) ? performance.now() : Date.now()) - t0); }
+  function dbg() {
+    if (!DEBUG || !window.console) return;
+    var a = ['%c[op-header +' + now() + 'ms]', 'color:#b0b094;font-weight:600'];
+    console.log.apply(console, a.concat([].slice.call(arguments)));
+  }
+  function mark(items, color) {
+    if (!DEBUG || !items) return;
+    [].forEach.call(items, function (el) { el.style.outline = '1px dashed ' + (color || '#e26'); el.style.outlineOffset = '2px'; });
+  }
+  if (DEBUG && window.console) console.log('%c[op-header] DEBUG ON — reduce=' + reduce, 'color:#e26;font-weight:700');
+
   function closeRoot(root) {
+    dbg('closeRoot', root.__opCurrent);
     root.querySelectorAll('[data-op-panel].is-open').forEach(function (p) { p.classList.remove('is-open'); });
     root.querySelectorAll('[data-op-trigger]').forEach(function (t) { t.classList.remove('is-active'); t.setAttribute('aria-expanded', 'false'); });
     root.classList.remove('is-menu-open');
@@ -22,6 +46,9 @@
     function open(name) {
       var panel = panels[name];
       if (!panel) return;
+      // ¿Ya estaba abierto ESTE panel? Entonces es un re-hover (mouse que vuelve al trigger):
+      // NO relanzar el stagger o los elementos "brincan" a su posición inicial y re-animan.
+      var alreadyOpen = root.classList.contains('is-menu-open') && root.__opCurrent === name;
       Object.keys(panels).forEach(function (k) { panels[k].classList.toggle('is-open', k === name); });
       root.classList.add('is-menu-open');
       triggers.forEach(function (t) {
@@ -30,10 +57,20 @@
         t.setAttribute('aria-expanded', on ? 'true' : 'false');
       });
       root.__opCurrent = name;
-      // Stagger elegante del contenido (rise), sin tocar opacidad para respetar estados hover
-      if (window.gsap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+
+      if (alreadyOpen) { dbg('open(' + name + ') re-hover → skip stagger'); return; }
+
+      // Stagger elegante del contenido (rise), sin tocar opacidad para respetar estados hover.
+      if (window.gsap && !reduce) {
         var items = panel.querySelectorAll('.op-header_eyebrow, .op-header_menulink, .op-header_pcard');
-        window.gsap.fromTo(items, { y: 16 }, { y: 0, duration: 0.7, stagger: 0.028, ease: 'power3.out', delay: 0.08, overwrite: 'auto', clearProps: 'transform' });
+        window.gsap.killTweensOf(items); // evita solapar tweens al cambiar de panel
+        dbg('open(' + name + ') stagger', items.length, 'items');
+        mark(items, '#2a7');
+        window.gsap.fromTo(items, { y: 12 }, {
+          y: 0, duration: 0.6, stagger: 0.028, ease: 'power3.out', delay: 0.04,
+          overwrite: 'auto', force3D: true, clearProps: 'transform',
+          onComplete: function () { dbg('open(' + name + ') stagger done'); }
+        });
       }
     }
     function scheduleClose() { clearTimeout(closeTimer); closeTimer = setTimeout(function () { closeRoot(root); }, 180); }
@@ -84,12 +121,15 @@
         if (window.lenis) window.lenis.stop();
         if (g) {
           g.killTweensOf([drawer, items]);
+          dbg('openDrawer', items.length, 'items');
+          mark(items, '#27a');
           // mask-down: se revela de arriba hacia abajo
           g.fromTo(drawer, { clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)', duration: 0.55, ease: 'power3.inOut' });
-          g.fromTo(items, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, stagger: 0.05, ease: 'power2.out', delay: 0.1 });
+          g.fromTo(items, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, stagger: 0.05, ease: 'power2.out', delay: 0.1, force3D: true });
         }
       }
       function closeDrawer() {
+        dbg('closeDrawer');
         burger.setAttribute('aria-expanded', 'false');
         document.documentElement.classList.remove('op-no-scroll');
         if (window.lenis) window.lenis.start();

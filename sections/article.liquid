@@ -7,15 +7,15 @@
 {% endcomment %}
 
 {% if article.image %}
-  {{ article.image | image_url: width: 1000 | image_tag }}
+  <div data-mask="up">{{ article.image | image_url: width: 1000 | image_tag }}</div>
 {% endif %}
 
-<h1>{{ article.title }}</h1>
+<h1 data-reveal>{{ article.title }}</h1>
 
 {% assign date = article.published_at | time_tag: format: 'date' %}
-<p>{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
+<p data-reveal style="--reveal-delay: 80ms">{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
 
-{{ article.content }}
+<div data-reveal style="--reveal-delay: 160ms">{{ article.content }}</div>
 
 {% if blog.comments_enabled? %}
   <h2>{{ 'blog.article_comments' | t }}</h2>

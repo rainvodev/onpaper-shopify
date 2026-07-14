@@ -41,15 +41,15 @@
         {%- for block in section.blocks -%}{%- if block.type == 'heading' -%}{%- assign has_heading = true -%}{%- endif -%}{%- endfor -%}
         {%- if has_heading -%}
           {%- for block in section.blocks -%}{%- if block.type == 'heading' -%}
-            <h1 class="op-product_title" {{ block.shopify_attributes }}>{{ block.settings.title }}</h1>
-            {%- if block.settings.intro != blank -%}<div class="op-product_intro rte">{{ block.settings.intro }}</div>{%- endif -%}
+            <h1 class="op-product_title" data-reveal-load {{ block.shopify_attributes }}>{{ block.settings.title }}</h1>
+            {%- if block.settings.intro != blank -%}<div class="op-product_intro rte" data-reveal-load style="--reveal-delay: 100ms">{{ block.settings.intro }}</div>{%- endif -%}
           {%- endif -%}{%- endfor -%}
         {%- else -%}
-          <h1 class="op-product_title">{{ product.title }}</h1>
-          {%- if product.description != blank -%}<div class="op-product_intro rte">{{ product.description }}</div>{%- endif -%}
+          <h1 class="op-product_title" data-reveal-load>{{ product.title }}</h1>
+          {%- if product.description != blank -%}<div class="op-product_intro rte" data-reveal-load style="--reveal-delay: 100ms">{{ product.description }}</div>{%- endif -%}
         {%- endif -%}
 
-        <div class="op-product_price" data-op-price>
+        <div class="op-product_price" data-op-price data-reveal-load style="--reveal-delay: 180ms">
           {%- if product.compare_at_price > product.price -%}
             <span class="op-product_price-now" data-op-price-amount>{{ product.price | money }}</span>
             <s class="op-product_price-was">{{ product.compare_at_price | money }}</s>
@@ -74,7 +74,7 @@
           {%- endif -%}
 
           {%- if section.settings.personalize_heading != blank -%}
-            <h2 class="op-product_personalize">{{ section.settings.personalize_heading }}</h2>
+            <h2 class="op-product_personalize" data-reveal>{{ section.settings.personalize_heading }}</h2>
           {%- endif -%}
 
           {%- for block in section.blocks -%}
@@ -211,7 +211,7 @@
       {%- assign related = product.collections.first.products -%}
       {%- if related == blank or related.size < 2 -%}{%- assign related = collections.all.products -%}{%- endif -%}
       {%- if related and related.size > 1 -%}
-        <div class="op-product_related">
+        <div class="op-product_related" data-reveal>
           <h2 class="op-product_related-h">{{ section.settings.related_heading | default: 'You may also like…' }}</h2>
           <div class="op-product_related-grid">
             {%- assign shown = 0 -%}
