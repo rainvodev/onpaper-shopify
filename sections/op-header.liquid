@@ -7,8 +7,8 @@
   endif
   assign groups = 'products,collections' | split: ','
 %}
-<header class="op-header full-width{% if is_home %} is-overlay u-theme-dark{% endif %}" data-op-header data-reveal="down" data-reveal-load
-  style="--reveal-delay: 200ms; --op-feat-ratio: {{ section.settings.feature_ratio | default: '4 / 5' }}" {{ section.shopify_attributes }}>
+<header class="op-header full-width{% if is_home %} is-overlay u-theme-dark{% endif %}" data-op-header
+  style="--op-feat-ratio: {{ section.settings.feature_ratio | default: '4 / 5' }}" {{ section.shopify_attributes }}>
   <div class="op-header_bg" aria-hidden="true"></div>
   <div class="op-header_bar u-container">
     <div class="op-header_layout">

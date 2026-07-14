@@ -139,10 +139,12 @@
       ticking = false;
       var y = window.scrollY || window.pageYOffset || 0;
       document.querySelectorAll('[data-op-header]').forEach(function (h) {
-        h.classList.toggle('is-scrolled', y > 16);
+        // Histéresis para el fondo (evita flicker cerca del umbral)
+        if (y > 48) h.classList.add('is-scrolled');
+        else if (y < 8) h.classList.remove('is-scrolled');
         if (h.classList.contains('is-drawer-open')) { h.classList.remove('is-hidden'); }
-        else if (y > HIDE_AFTER && y > lastY + 4) { h.classList.add('is-hidden'); }
-        else if (y < lastY - 4 || y <= HIDE_AFTER) { h.classList.remove('is-hidden'); }
+        else if (y > HIDE_AFTER && y > lastY + 6) { h.classList.add('is-hidden'); }
+        else if (y < lastY - 6 || y <= HIDE_AFTER) { h.classList.remove('is-hidden'); }
       });
       lastY = y;
     }

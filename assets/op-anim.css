@@ -2,20 +2,14 @@
    Uso: data-reveal (fade-up por defecto) | data-reveal="fade|down|zoom"; data-reveal-load = al cargar;
    stagger con style="--reveal-delay:200ms". JS (op-reveal.js) agrega .is-in. */
 @media (prefers-reduced-motion: no-preference) {
-  [data-reveal] {
+  /* Fade in simple (el motor GSAP lo controla; CSS solo define el estado inicial oculto sin FOUC). */
+  [data-reveal], [data-split] {
     opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.85s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.85s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transition: opacity 0.85s ease;
     transition-delay: var(--reveal-delay, 0ms);
-    will-change: opacity, transform;
   }
-  [data-reveal="fade"] { transform: none; }
-  [data-reveal="down"] { transform: translateY(-12px); }
-  [data-reveal="zoom"] { transform: scale(1.04); }
-  [data-reveal].is-in { opacity: 1; transform: none; }
-  /* Con GSAP activo, el motor controla la animación (op-gsap.js): sin transición CSS que interfiera. */
-  .op-gsap [data-reveal] { transition: none; }
-  /* Estados iniciales ocultos (evitan flash antes de GSAP; se liberan al revelar). */
+  [data-reveal].is-in, [data-split].is-in { opacity: 1; }
+  .op-gsap [data-reveal], .op-gsap [data-split] { transition: none; }
+  /* Máscara: estado inicial oculto (se libera al revelar). */
   .op-gsap [data-mask]:not(.is-in) { clip-path: inset(0 0 100% 0); }
-  .op-gsap [data-split]:not(.is-in) { opacity: 0; }
 }
