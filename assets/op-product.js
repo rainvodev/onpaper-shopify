@@ -70,19 +70,34 @@
       });
     }
 
-    // Steppers
+    // Steppers (respetan min/max; muestran aviso al alcanzar el tope)
     root.querySelectorAll('[data-op-stepper]').forEach(function (stepper) {
       var input = stepper.querySelector('input');
       if (!input) return;
+      var msg = stepper.closest('.op-product_field') ?
+        stepper.closest('.op-product_field').querySelector('[data-op-qty-msg]') : null;
+      function clamp(val) {
+        var min = parseInt(input.min, 10) || 1;
+        var max = parseInt(input.max, 10);
+        var capped = false;
+        if (val < min) val = min;
+        if (!isNaN(max) && val > max) { val = max; capped = true; }
+        if (msg) msg.hidden = !capped;
+        return val;
+      }
       stepper.querySelectorAll('button[data-step]').forEach(function (btn) {
         btn.addEventListener('click', function () {
           var min = parseInt(input.min, 10) || 1;
           var val = parseInt(input.value, 10) || min;
           val += parseInt(btn.getAttribute('data-step'), 10);
-          if (val < min) val = min;
-          input.value = val;
+          input.value = clamp(val);
           input.dispatchEvent(new Event('change', { bubbles: true }));
         });
+      });
+      // Al teclear un valor manualmente también se respeta el tope.
+      input.addEventListener('change', function () {
+        var v = clamp(parseInt(input.value, 10) || (parseInt(input.min, 10) || 1));
+        if (String(v) !== input.value) input.value = v;
       });
     });
 

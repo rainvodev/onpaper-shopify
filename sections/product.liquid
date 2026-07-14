@@ -181,22 +181,25 @@
             {%- endcase -%}
           {%- endfor -%}
 
-          {%- comment -%} Cantidad (line qty) {%- endcomment -%}
+          {%- comment -%} Cantidad (line qty). Límite opcional por producto vía metafield custom.max_qty {%- endcomment -%}
           {%- if section.settings.show_qty -%}
-          <div class="op-product_field op-product_qty">
+          {%- assign max_qty = product.metafields.custom.max_qty.value -%}
+          {%- if max_qty and max_qty > 0 -%}{%- assign qty_ceiling = max_qty -%}{%- else -%}{%- assign qty_ceiling = 10 -%}{%- endif -%}
+          <div class="op-product_field op-product_qty"{% if max_qty and max_qty > 0 %} data-op-max="{{ max_qty }}"{% endif %}>
             <span class="op-product_field-label">{{ section.settings.qty_label | default: 'Cantidad' }}</span>
             {%- if section.settings.qty_style == 'stepper' -%}
               <div class="op-product_stepper" data-op-stepper>
                 <button type="button" data-step="-1" aria-label="Restar">&#8211;</button>
-                <input type="number" name="quantity" value="{{ section.settings.qty_min | default: 1 }}" min="{{ section.settings.qty_min | default: 1 }}" inputmode="numeric">
+                <input type="number" name="quantity" value="{{ section.settings.qty_min | default: 1 }}" min="{{ section.settings.qty_min | default: 1 }}"{% if max_qty and max_qty > 0 %} max="{{ max_qty }}"{% endif %} inputmode="numeric">
                 <button type="button" data-step="1" aria-label="Sumar">+</button>
               </div>
             {%- else -%}
               <select class="op-product_select" name="quantity">
-                {%- for i in (1..10) -%}<option value="{{ i }}">{{ i }}</option>{%- endfor -%}
+                {%- for i in (1..qty_ceiling) -%}<option value="{{ i }}">{{ i }}</option>{%- endfor -%}
               </select>
             {%- endif -%}
             {%- if section.settings.qty_note != blank -%}<p class="op-product_note">{{ section.settings.qty_note }}</p>{%- endif -%}
+            {%- if max_qty and max_qty > 0 -%}<p class="op-product_note op-product_qty-msg" data-op-qty-msg hidden>Máximo {{ max_qty }} por pedido.</p>{%- endif -%}
           </div>
           {%- endif -%}
 
