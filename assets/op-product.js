@@ -3,9 +3,39 @@
 (function () {
   'use strict';
 
+  function moneyFmt(root) {
+    var fmt = (root.getAttribute('data-op-money') || '${{amount}}').replace(/<[^>]+>/g, '');
+    return function (cents) {
+      var s = (Number(cents) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return fmt.replace(/\{\{\s*amount[^}]*\}\}/g, s);
+    };
+  }
+
   function initProduct(root) {
     if (!root || root.__opProductInit) return;
     root.__opProductInit = true;
+
+    // Total en tiempo real: precio unitario (variante) × cantidad.
+    var money = moneyFmt(root);
+    var priceEls = root.querySelectorAll('[data-op-price-amount]');
+    var qtyInput = root.querySelector('[name="quantity"]');
+    function unitPrice() { return parseInt(root.getAttribute('data-op-unit-price'), 10) || 0; }
+    function currentQty() {
+      var min = qtyInput ? (parseInt(qtyInput.min, 10) || 1) : 1;
+      var q = qtyInput ? parseInt(qtyInput.value, 10) : 1;
+      return (isNaN(q) || q < min) ? min : q;
+    }
+    function renderTotal() {
+      if (!priceEls.length) return;
+      var m = money(unitPrice() * currentQty());
+      priceEls.forEach(function (el) { el.textContent = m; });
+    }
+    // Recalcular al cambiar cantidad y cuando la variante actualice el precio unitario.
+    if (qtyInput) {
+      qtyInput.addEventListener('change', renderTotal);
+      qtyInput.addEventListener('input', renderTotal);
+    }
+    root.addEventListener('op:unitprice', renderTotal);
 
     // Galería
     var main = root.querySelector('#opMainImg');
@@ -69,6 +99,8 @@
       }, { threshold: 0 });
       io.observe(priceMain);
     }
+
+    renderTotal();
   }
 
   function initAll() { document.querySelectorAll('.op-product').forEach(initProduct); }

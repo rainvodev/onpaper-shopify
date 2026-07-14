@@ -1,6 +1,6 @@
 {% comment %} On Paper — Página de producto (Lumos). Galería + info + personalización por bloques (line-item
   properties, sin variantes) + relacionados. Calcado del XD; un template por producto define los bloques. {% endcomment %}
-<section class="op-product u-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" data-op-handle="{{ product.handle }}" data-op-money="{{ shop.money_format | strip_html | escape }}"{% if product.variants.size > 1 %} data-op-variant-mode="1"{% endif %} {{ section.shopify_attributes }}>
+<section class="op-product u-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" data-op-handle="{{ product.handle }}" data-op-money="{{ shop.money_format | strip_html | escape }}" data-op-unit-price="{{ product.selected_or_first_available_variant.price | default: product.price }}"{% if product.variants.size > 1 %} data-op-variant-mode="1"{% endif %} {{ section.shopify_attributes }}>
   <div class="op-product_contain u-container">
     {%- if section.settings.back_label != blank -%}
       <a class="op-product_back" href="{{ section.settings.back_link | default: routes.all_products_collection_url }}">{{ section.settings.back_label }}</a>

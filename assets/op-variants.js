@@ -56,7 +56,11 @@
         return;
       }
       if (idInput) idInput.value = v.id;
-      if (v.price != null) { var m = money(v.price); priceEls.forEach(function (el) { el.textContent = m; }); }
+      // Actualiza el precio unitario y delega el render del total (unidad × cantidad) a op-product.js.
+      if (v.price != null) {
+        root.setAttribute('data-op-unit-price', v.price);
+        root.dispatchEvent(new CustomEvent('op:unitprice'));
+      }
       if (addBtn) { if (v.available === false) addBtn.setAttribute('disabled', ''); else addBtn.removeAttribute('disabled'); }
     }
 
