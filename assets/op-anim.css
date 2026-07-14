@@ -1,8 +1,9 @@
-/* On Paper — reveal animations. Estado oculto solo si el usuario no pidió reduce (sin FOUC ni bloqueo).
-   Uso: data-reveal (fade-up por defecto) | data-reveal="fade|down|zoom"; data-reveal-load = al cargar;
-   stagger con style="--reveal-delay:200ms". JS (op-reveal.js) agrega .is-in. */
+/* On Paper — reveal + transiciones. Estado oculto solo si el usuario no pidió reduce (sin FOUC ni bloqueo).
+   Uso: data-reveal (fade-up por defecto) | data-reveal="fade|up|down|left|right|zoom"; data-reveal-load = al cargar;
+   data-split = título palabra por palabra; data-mask = máscara; stagger con style="--reveal-delay:200ms".
+   El motor GSAP (op-gsap.js) agrega .is-in. */
 @media (prefers-reduced-motion: no-preference) {
-  /* Fade in simple (el motor GSAP lo controla; CSS solo define el estado inicial oculto sin FOUC). */
+  /* Estado inicial oculto (el motor GSAP controla el movimiento; el CSS evita el FOUC). */
   [data-reveal], [data-split] {
     opacity: 0;
     transition: opacity 0.85s ease;
@@ -10,6 +11,32 @@
   }
   [data-reveal].is-in, [data-split].is-in { opacity: 1; }
   .op-gsap [data-reveal], .op-gsap [data-split] { transition: none; }
+
+  /* Palabras del SplitText: inline-block para permitir el desplazamiento vertical. */
+  .op-splitword { display: inline-block; will-change: transform; }
+
   /* Máscara: estado inicial oculto (se libera al revelar). */
   .op-gsap [data-mask]:not(.is-in) { clip-path: inset(0 0 100% 0); }
+
+  /* Entrada de página: fundido suave del contenido (solo opacidad → no afecta posicionamiento fijo). */
+  .op-main { animation: op-page-in 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+  @keyframes op-page-in { from { opacity: 0; } to { opacity: 1; } }
+}
+
+/* Cortina de transición entre páginas (op-transition.js controla la opacidad).
+   Definida siempre; inerte hasta activarse. Nunca atrapa clics salvo durante la salida. */
+.op-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: var(--swatch--light-200, #f5f5ef);
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity;
+}
+.op-transition.is-active { pointer-events: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  .op-main { animation: none; }
+  .op-transition { display: none; }
 }

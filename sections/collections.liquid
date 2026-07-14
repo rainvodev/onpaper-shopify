@@ -5,14 +5,15 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/collection
 {% endcomment %}
 
-<h1>{{ 'collections.title' | t }}</h1>
+<h1 data-reveal>{{ 'collections.title' | t }}</h1>
 
 <div
   class="collections {{ section.settings.grid_item_width }}"
   style="--grid-gap: {{ section.settings.grid_gap }}px"
+  data-reveal-group
 >
   {% for collection in collections %}
-    <a class="collection-card" href="{{ collection.url }}">
+    <a class="collection-card" href="{{ collection.url }}" data-reveal>
       {% if collection.featured_image %}
         {% render 'image',
           class: 'collection-card__image',

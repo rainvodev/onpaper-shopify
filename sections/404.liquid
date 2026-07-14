@@ -5,13 +5,13 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/404
 {% endcomment %}
 
-<h1>{{ '404.title' | t }}</h1>
+<h1 data-reveal-load>{{ '404.title' | t }}</h1>
 
-<p>
+<p data-reveal-load style="--reveal-delay: 100ms">
   {{ '404.not_found' | t }}
 </p>
 
-<a href="{{ routes.all_products_collection_url }}">
+<a href="{{ routes.all_products_collection_url }}" data-reveal-load style="--reveal-delay: 200ms">
   {{ '404.back_to_shopping' | t }}
 </a>
 
