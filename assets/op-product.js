@@ -41,7 +41,12 @@
     var main = root.querySelector('#opMainImg');
     root.querySelectorAll('[data-op-thumb]').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        if (main && btn.dataset.full) { main.src = btn.dataset.full; main.removeAttribute('srcset'); }
+        if (main && btn.dataset.full) {
+          main.src = btn.dataset.full;
+          // Conserva srcset responsivo si el thumb lo trae (evita cargar 1400px en móvil)
+          if (btn.dataset.srcset) main.setAttribute('srcset', btn.dataset.srcset);
+          else main.removeAttribute('srcset');
+        }
         root.querySelectorAll('[data-op-thumb]').forEach(function (b) { b.classList.remove('is-active'); });
         btn.classList.add('is-active');
       });

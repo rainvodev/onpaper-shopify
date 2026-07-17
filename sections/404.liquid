@@ -1,19 +1,22 @@
-{% comment %}
-  This section is used in the 404 template to render page shown when customers
-  enter an invalid store URL.
+{% comment %} On Paper — 404 (Lumos). Mensaje editorial centrado + CTA de regreso. {% endcomment %}
+<section class="op-404 u-section">
+  <div class="op-404_contain u-container">
+    <p class="op-404_eyebrow" data-reveal-load>{{ '404.title' | t }}</p>
+    <h1 class="op-404_title" data-reveal-load style="--reveal-delay: 100ms">{{ '404.not_found' | t }}</h1>
+    <a class="op-404_cta" href="{{ routes.all_products_collection_url }}" data-reveal-load style="--reveal-delay: 220ms">
+      {{ '404.back_to_shopping' | t }}
+    </a>
+  </div>
+</section>
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/404
-{% endcomment %}
-
-<h1 data-reveal-load>{{ '404.title' | t }}</h1>
-
-<p data-reveal-load style="--reveal-delay: 100ms">
-  {{ '404.not_found' | t }}
-</p>
-
-<a href="{{ routes.all_products_collection_url }}" data-reveal-load style="--reveal-delay: 200ms">
-  {{ '404.back_to_shopping' | t }}
-</a>
+{% stylesheet %}
+  .op-404 { min-height: 55svh; display: flex; align-items: center; }
+  .op-404_contain { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--_spacing---space--5); }
+  .op-404_eyebrow { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; opacity: 0.7; margin: 0; }
+  .op-404_title { font-family: var(--_typography---font--primary-family); font-style: italic; font-weight: 400; font-size: clamp(1.6rem, 1rem + 2.2vw, 2.4rem); line-height: 1.2; color: var(--swatch--brand-300, #b0b094); margin: 0; max-width: 26ch; }
+  .op-404_cta { margin-top: var(--_spacing---space--3); font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.78rem; color: var(--_theme---text); text-decoration: none; border: 0.0625rem solid var(--_theme---text); border-radius: 2rem; padding: 0.85rem 1.8rem; transition: background-color 250ms, color 250ms; }
+  .op-404_cta:hover { background-color: var(--_theme---text); color: var(--_theme---background); }
+{% endstylesheet %}
 
 {% schema %}
 {

@@ -1,0 +1,50 @@
+{% comment %} On Paper — Direcciones del cliente (lista + nueva). {% endcomment %}
+{% render 'op-account-styles' %}
+<section class="u-section"><div class="u-container"><div class="op-acct op-acct--wide">
+  <h1 class="op-acct_title">Direcciones</h1>
+  {% if customer.addresses.size > 0 %}
+    <div class="op-acct_cards">
+      {% for address in customer.addresses %}
+        <div class="op-acct_card">
+          {% if address == customer.default_address %}<strong style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;opacity:0.6">Predeterminada</strong>{% endif %}
+          <span>{{ address.first_name }} {{ address.last_name }}</span>
+          <span>{{ address.address1 }}{% if address.address2 != blank %}, {{ address.address2 }}{% endif %}</span>
+          <span>{{ address.city }}, {{ address.province }} {{ address.zip }}</span>
+          <span>{{ address.country }}</span>
+          {% if address.phone != blank %}<span>{{ address.phone }}</span>{% endif %}
+          <div style="display:flex; gap:1rem; margin-top:0.4rem">
+            {% form 'customer_address', address %}
+              <button type="submit" class="op-acct_link">Eliminar</button>
+              <input type="hidden" name="_method" value="delete">
+            {% endform %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="op-acct_empty">Aún no tienes direcciones guardadas.</p>
+  {% endif %}
+
+  <h2 class="op-acct_sub">Agregar dirección</h2>
+  {% form 'customer_address', customer.new_address, class: 'op-acct_form' %}
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap: var(--_spacing---space--4)">
+      <label class="op-acct_field"><span>Nombre</span><input type="text" name="address[first_name]" autocomplete="given-name"></label>
+      <label class="op-acct_field"><span>Apellido</span><input type="text" name="address[last_name]" autocomplete="family-name"></label>
+    </div>
+    <label class="op-acct_field"><span>Dirección</span><input type="text" name="address[address1]" autocomplete="address-line1"></label>
+    <label class="op-acct_field"><span>Colonia / interior (opcional)</span><input type="text" name="address[address2]" autocomplete="address-line2"></label>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap: var(--_spacing---space--4)">
+      <label class="op-acct_field"><span>Ciudad</span><input type="text" name="address[city]" autocomplete="address-level2"></label>
+      <label class="op-acct_field"><span>Estado</span><input type="text" name="address[province]" autocomplete="address-level1"></label>
+      <label class="op-acct_field"><span>C.P.</span><input type="text" name="address[zip]" autocomplete="postal-code"></label>
+    </div>
+    <label class="op-acct_field"><span>País</span>
+      <select name="address[country]" data-default="{{ customer.new_address.country }}">{{ all_country_option_tags }}</select>
+    </label>
+    <label class="op-acct_field"><span>Teléfono (opcional)</span><input type="tel" name="address[phone]" autocomplete="tel"></label>
+    <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.85rem"><input type="checkbox" name="address[default]" style="width:auto"> Usar como predeterminada</label>
+    <button type="submit" class="op-acct_submit">Guardar dirección</button>
+  {% endform %}
+  <div class="op-acct_links"><a class="op-acct_link" href="{{ routes.account_url }}">Volver a mi cuenta</a></div>
+</div></div></section>
+{% schema %}{ "name": "Direcciones", "settings": [] }{% endschema %}

@@ -1,0 +1,13 @@
+{% comment %} On Paper — Activar cuenta. {% endcomment %}
+{% render 'op-account-styles' %}
+<section class="u-section"><div class="u-container"><div class="op-acct">
+  <h1 class="op-acct_title">Activa tu cuenta</h1>
+  {% form 'activate_customer_password', class: 'op-acct_form' %}
+    {% if form.errors %}<div class="op-acct_errors">{{ form.errors | default_errors }}</div>{% endif %}
+    <label class="op-acct_field"><span>Contraseña</span><input type="password" name="customer[password]" autocomplete="new-password" required></label>
+    <label class="op-acct_field"><span>Confirmar contraseña</span><input type="password" name="customer[password_confirmation]" autocomplete="new-password" required></label>
+    <button type="submit" class="op-acct_submit">Activar cuenta</button>
+    <button type="submit" name="decline" class="op-acct_submit op-acct_alt">Rechazar invitación</button>
+  {% endform %}
+</div></div></section>
+{% schema %}{ "name": "Activar cuenta", "settings": [] }{% endschema %}

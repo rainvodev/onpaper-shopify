@@ -2,6 +2,11 @@
   (?sections=op-cart-drawer). La lógica vive en assets/op-cart.js. {% endcomment %}
 <div class="op-cart" data-op-cart data-op-cart-count-value="{{ cart.item_count }}" aria-hidden="true"
   data-op-money="{{ shop.money_format | strip_html | escape }}"
+  data-op-url-cart="{{ routes.cart_url }}"
+  data-op-url-cart-js="{{ routes.cart_url }}.js"
+  data-op-url-change="{{ routes.cart_change_url }}.js"
+  data-op-url-add="{{ routes.cart_add_url }}.js"
+  data-l-error="{{ section.settings.error_text | default: 'No se pudo actualizar el carrito. Inténtalo de nuevo.' | escape }}"
   data-l-title="{{ section.settings.title | default: 'Carrito' | escape }}"
   data-l-subtotal="{{ section.settings.subtotal_label | default: 'Subtotal' | escape }}"
   data-l-checkout="{{ section.settings.checkout_label | default: 'Finalizar compra' | escape }}"
@@ -106,7 +111,9 @@
   .op-cart_item-props li { font-size: 0.74rem; opacity: 0.65; }
   .op-cart_item-props span { opacity: 0.8; }
   .op-cart_item-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: var(--_spacing---space--4); }
-  .op-cart_qty { display: inline-flex; align-items: center; border: 0.0625rem solid var(--_theme---border); border-radius: 2rem; }
+  .op-cart_qty { display: inline-flex; align-items: center; border: 0.0625rem solid var(--_theme---border); border-radius: 2rem; transition: opacity 200ms; }
+  .op-cart_qty.is-busy { opacity: 0.45; pointer-events: none; }
+  .op-cart_error { font-size: 0.8rem; color: #a4472f; margin: 0; }
   .op-cart_qty button { background: none; border: 0; cursor: pointer; color: currentColor; padding: 0.35rem 0.7rem; font-size: 0.95rem; }
   .op-cart_qty-val { min-width: 1.5rem; text-align: center; font-size: 0.9rem; }
   .op-cart_item-price { font-size: 0.9rem; }
@@ -132,6 +139,7 @@
     { "type": "text", "id": "view_label", "label": "Ver carrito", "default": "Ver carrito" },
     { "type": "text", "id": "remove_label", "label": "Quitar", "default": "Quitar" },
     { "type": "text", "id": "empty_text", "label": "Texto vacío", "default": "Tu carrito está vacío." },
+    { "type": "text", "id": "error_text", "label": "Mensaje de error", "default": "No se pudo actualizar el carrito. Inténtalo de nuevo." },
     { "type": "text", "id": "continue_label", "label": "Seguir comprando", "default": "Seguir comprando" }
   ]
 }

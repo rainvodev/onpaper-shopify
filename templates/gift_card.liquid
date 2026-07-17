@@ -9,16 +9,28 @@
     {% # Load and preload the critical CSS %}
     {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
 
+    {% # Marca On Paper (tipografías + tokens, igual que theme.liquid) %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    {{ 'lumos.css' | asset_url | stylesheet_tag }}
+    {{ 'brand.css' | asset_url | stylesheet_tag }}
+
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
 
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 96 }}">
+    {%- endif -%}
+
     {% style %}
-      main {
-        text-align: center;
-      }
-      main img {
-        display: unset;
-      }
+      body { background-color: var(--swatch--light-200, #f5f5ef); color: var(--swatch--brand-500, #5f604e); }
+      main { text-align: center; min-height: 100svh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+      main img { display: unset; max-width: 100%; }
+      main .shopify-section { display: flex; flex-direction: column; gap: 0.9rem; max-width: 26rem; }
+      main h1 { font-family: var(--_typography---font--primary-family, serif); font-style: italic; font-weight: 400; font-size: clamp(2rem, 6vw, 2.8rem); color: var(--swatch--brand-300, #b0b094); margin: 0; }
+      main h2 { font-family: var(--font-label, inherit); text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.8rem; font-weight: 400; margin: 0; opacity: 0.8; }
+      main p { margin: 0; }
     {% endstyle %}
 
     {{ content_for_header }}

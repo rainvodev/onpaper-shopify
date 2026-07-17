@@ -1,0 +1,33 @@
+{% comment %} On Paper — Mi cuenta: pedidos y datos. {% endcomment %}
+{% render 'op-account-styles' %}
+<section class="u-section"><div class="u-container"><div class="op-acct op-acct--wide">
+  <h1 class="op-acct_title">Mi cuenta</h1>
+  <div class="op-acct_links" style="margin-top:0">
+    <span class="op-acct_link" style="opacity:1">{{ customer.email }}</span>
+    <a class="op-acct_link" href="{{ routes.account_addresses_url }}">Direcciones ({{ customer.addresses_count }})</a>
+    <a class="op-acct_link" href="{{ routes.account_logout_url }}">Cerrar sesión</a>
+  </div>
+  <h2 class="op-acct_sub">Pedidos</h2>
+  {% paginate customer.orders by 20 %}
+    {% if customer.orders.size > 0 %}
+      <table class="op-acct_table">
+        <thead><tr><th>Pedido</th><th>Fecha</th><th>Estado del pago</th><th>Envío</th><th>Total</th></tr></thead>
+        <tbody>
+          {% for order in customer.orders %}
+            <tr>
+              <td><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
+              <td>{{ order.created_at | date: '%d/%m/%Y' }}</td>
+              <td>{{ order.financial_status_label }}</td>
+              <td>{{ order.fulfillment_status_label }}</td>
+              <td>{{ order.total_price | money }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {%- if paginate.pages > 1 -%}{{ paginate | default_pagination }}{%- endif -%}
+    {% else %}
+      <p class="op-acct_empty">Aún no tienes pedidos.</p>
+    {% endif %}
+  {% endpaginate %}
+</div></div></section>
+{% schema %}{ "name": "Mi cuenta", "settings": [] }{% endschema %}
