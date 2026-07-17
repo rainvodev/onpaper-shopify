@@ -1,0 +1,33 @@
+{% comment %} On Paper — Detalle de pedido. {% endcomment %}
+{% render 'op-account-styles' %}
+<section class="u-section"><div class="u-container"><div class="op-acct op-acct--wide">
+  <h1 class="op-acct_title">Pedido {{ order.name }}</h1>
+  <p class="op-acct_ok">{{ order.created_at | date: '%d/%m/%Y' }} · {{ order.financial_status_label }} · {{ order.fulfillment_status_label }}</p>
+  <table class="op-acct_table" style="margin-top: var(--_spacing---space--5)">
+    <thead><tr><th>Producto</th><th>Cantidad</th><th>Precio</th></tr></thead>
+    <tbody>
+      {% for line_item in order.line_items %}
+        <tr>
+          <td>{{ line_item.title }}
+            {%- if line_item.properties.size > 0 -%}
+              <br><small style="opacity:0.65">
+              {%- for p in line_item.properties -%}
+                {%- assign fc = p.first | slice: 0 -%}
+                {%- if p.last != blank and fc != '_' %}{{ p.first }}: {{ p.last }}{% unless forloop.last %} · {% endunless %}{% endif -%}
+              {%- endfor -%}</small>
+            {%- endif -%}
+          </td>
+          <td>{{ line_item.quantity }}</td>
+          <td>{{ line_item.final_line_price | money }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div style="margin-top: var(--_spacing---space--5); display:flex; flex-direction:column; gap:0.3rem; align-items:flex-end; font-size:0.92rem">
+    <span>Subtotal: {{ order.line_items_subtotal_price | money }}</span>
+    {% for shipping_method in order.shipping_methods %}<span>Envío ({{ shipping_method.title }}): {{ shipping_method.price | money }}</span>{% endfor %}
+    <strong>Total: {{ order.total_price | money }}</strong>
+  </div>
+  <div class="op-acct_links"><a class="op-acct_link" href="{{ routes.account_url }}">Volver a mi cuenta</a></div>
+</div></div></section>
+{% schema %}{ "name": "Pedido", "settings": [] }{% endschema %}

@@ -1,0 +1,28 @@
+{% comment %} On Paper — estilos compartidos de las páginas de cuenta (login, registro, pedidos, direcciones). {% endcomment %}
+<style>
+  .op-acct { max-width: 30rem; margin-inline: auto; width: 100%; }
+  .op-acct--wide { max-width: 46rem; }
+  .op-acct_title { font-family: var(--_typography---font--primary-family); font-style: italic; font-weight: 400; font-size: clamp(1.6rem, 1rem + 2vw, 2.2rem); line-height: 1.2; color: var(--swatch--brand-300, #b0b094); text-align: center; margin: 0 0 var(--_spacing---space--6); }
+  .op-acct_form { display: flex; flex-direction: column; gap: var(--_spacing---space--4); }
+  .op-acct_field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .op-acct_field > span { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.68rem; opacity: 0.7; }
+  .op-acct_field input, .op-acct_field select { font-family: inherit; font-size: 0.95rem; color: var(--_theme---text); background-color: transparent; border: 0.0625rem solid var(--_theme---border); border-radius: 2rem; padding: 0.8rem 1.1rem; width: 100%; }
+  .op-acct_submit { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.78rem; color: #fff; background-color: var(--swatch--brand-300, #b0b094); border: 0; border-radius: 2rem; padding: 0.9rem 1.8rem; cursor: pointer; transition: background-color 250ms; }
+  .op-acct_submit:hover { background-color: var(--swatch--brand-500, #5f604e); }
+  .op-acct_alt { background: none; border: 0.0625rem solid var(--_theme---border); color: var(--_theme---text); }
+  .op-acct_alt:hover { background-color: color-mix(in srgb, var(--_theme---text) 8%, transparent); color: var(--_theme---text); }
+  .op-acct_links { display: flex; justify-content: center; gap: var(--_spacing---space--5); margin-top: var(--_spacing---space--5); flex-wrap: wrap; }
+  .op-acct_link { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.72rem; color: currentColor; text-decoration: none; opacity: 0.7; background: none; border: 0; cursor: pointer; padding: 0; }
+  .op-acct_link:hover { opacity: 1; }
+  .op-acct_errors { font-size: 0.85rem; color: #a4472f; }
+  .op-acct_errors ul { margin: 0; padding-left: 1.2em; }
+  .op-acct_ok { font-size: 0.9rem; text-align: center; opacity: 0.85; }
+  .op-acct_table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .op-acct_table th { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.66rem; opacity: 0.6; text-align: left; padding: 0.6rem 0.5rem; border-bottom: 0.0625rem solid var(--_theme---border); font-weight: 400; }
+  .op-acct_table td { padding: 0.7rem 0.5rem; border-bottom: 0.0625rem solid var(--_theme---border); }
+  .op-acct_table a { color: currentColor; }
+  .op-acct_card { border: 0.0625rem solid var(--_theme---border); border-radius: 1rem; padding: var(--_spacing---space--5); display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.92rem; }
+  .op-acct_cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: var(--_spacing---space--5); }
+  .op-acct_sub { font-family: var(--_typography---font--primary-family); font-weight: 400; font-size: 1.25rem; margin: var(--_spacing---space--7) 0 var(--_spacing---space--4); }
+  .op-acct_empty { opacity: 0.7; text-align: center; }
+</style>

@@ -57,7 +57,10 @@
       else if (rule.perUnit != null) total += num(rule.perUnit) * num(el.value);
       else if (rule.nonEmpty != null && el.value && el.value.trim()) total += num(rule.nonEmpty);
     });
-    return money(total);
+    // El total mostrado debe reflejar la cantidad (igual que lo hará la línea del carrito)
+    var sumQtyEl = form.querySelector('[name="quantity"]');
+    var sumQty = Math.max(1, parseInt(sumQtyEl && sumQtyEl.value, 10) || 1);
+    return money(total * sumQty);
   }
 
   function initPricing(root) {

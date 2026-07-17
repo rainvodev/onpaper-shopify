@@ -1,37 +1,253 @@
-{% comment %}
-  This section is used in the cart template to render /cart page with an
-  overview of the items in customer's cart.
+{% comment %} On Paper — Página de carrito (Lumos). Lista de items + resumen sticky con checkout.
+  Cantidades vía AJAX (/cart/change.js) sin recargar; nota de pedido; estado vacío con CTA.
+  El mismo diseño del cart drawer, con más aire. {% endcomment %}
+<section class="op-cartpage u-section" data-op-cartpage data-op-money="{{ shop.money_format | strip_html | escape }}" data-op-change-url="{{ routes.cart_change_url }}.js"
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" {{ section.shopify_attributes }}>
+  <div class="op-cartpage_contain u-container">
+    <header class="op-cartpage_head" data-reveal>
+      <h1 class="op-cartpage_title">{{ section.settings.title | default: 'Carrito' }} <span class="op-cartpage_count" data-cartpage-count>({{ cart.item_count }})</span></h1>
+    </header>
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/cart
-{% endcomment %}
+    <div class="op-cartpage_empty{% if cart.item_count > 0 %} is-hidden{% endif %}" data-cartpage-empty data-reveal style="--reveal-delay: 100ms">
+      <p class="op-cartpage_empty-text">{{ section.settings.empty_text | default: 'Tu carrito está vacío.' }}</p>
+      <a class="op-cartpage_empty-cta" href="{{ section.settings.empty_link | default: routes.all_products_collection_url }}">{{ section.settings.empty_label | default: 'Descubre nuestros productos' }}</a>
+    </div>
 
-<h1 data-reveal>{{ 'cart.title' | t }}</h1>
+    {%- if cart.item_count > 0 -%}
+      <div class="op-cartpage_layout" data-cartpage-layout data-reveal-group style="--reveal-step: 80">
+        <div class="op-cartpage_items">
+          {%- for item in cart.items -%}
+            <div class="op-cartpage_item" data-cartpage-item data-line="{{ forloop.index }}" data-reveal>
+              <a href="{{ item.url }}" class="op-cartpage_media">
+                {%- if item.image -%}
+                  {{ item.image | image_url: width: 480 | image_tag: alt: item.product.title, widths: '240,480', loading: 'lazy', class: 'op-cartpage_img' }}
+                {%- else -%}<span class="op-cartpage_img op-cartpage_img--ph"></span>{%- endif -%}
+              </a>
+              <div class="op-cartpage_info">
+                <div class="op-cartpage_toprow">
+                  <a href="{{ item.url }}" class="op-cartpage_iname">{{ item.product.title }}</a>
+                  <span class="op-cartpage_iprice" data-cartpage-lineprice>{{ item.final_line_price | money }}</span>
+                </div>
+                {%- unless item.product.has_only_default_variant -%}
+                  {%- if item.variant.title != blank -%}<div class="op-cartpage_ivariant">{{ item.variant.title }}</div>{%- endif -%}
+                {%- endunless -%}
+                {%- assign has_props = false -%}
+                {%- for p in item.properties -%}{%- if p.last != blank -%}{%- assign first_char = p.first | slice: 0 -%}{%- unless first_char == '_' or item.product.options contains p.first -%}{%- assign has_props = true -%}{%- endunless -%}{%- endif -%}{%- endfor -%}
+                {%- if has_props -%}
+                  <ul class="op-cartpage_props">
+                    {%- for p in item.properties -%}
+                      {%- if p.last != blank -%}
+                        {%- assign first_char = p.first | slice: 0 -%}
+                        {%- unless first_char == '_' or item.product.options contains p.first -%}<li><span>{{ p.first }}:</span> {{ p.last }}</li>{%- endunless -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+                <div class="op-cartpage_bottomrow">
+                  <div class="op-cartpage_qty" data-cartpage-qty>
+                    <button type="button" data-cartpage-minus aria-label="Restar">&#8211;</button>
+                    <span class="op-cartpage_qty-val" data-cartpage-qtyval>{{ item.quantity }}</span>
+                    <button type="button" data-cartpage-plus aria-label="Sumar">+</button>
+                  </div>
+                  <button type="button" class="op-cartpage_remove" data-cartpage-remove>{{ section.settings.remove_label | default: 'Quitar' }}</button>
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
 
-<form action="{{ routes.cart_url }}" method="post" data-reveal style="--reveal-delay: 100ms">
-  <table>
-    {% for item in cart.items %}
-      <tr>
-        <td>
-          {% render 'image', image: item.image, url: item.url %}
-        </td>
-        <td>
-          <p>{{ item.product.title }}</p>
-          {{ 'cart.remove' | t | link_to: item.url_to_remove }}
-        </td>
-        <td>
-          <input type="text" name="updates[]" value="{{ item.quantity }}">
-          <input type="submit" value="{{ 'cart.update' | t }}">
-        </td>
-      </tr>
-    {% endfor %}
-  </table>
+        <aside class="op-cartpage_summary" data-reveal>
+          <div class="op-cartpage_summary-in">
+            <h2 class="op-cartpage_sumtitle">{{ section.settings.summary_title | default: 'Resumen' }}</h2>
+            <form action="{{ routes.cart_url }}" method="post" class="op-cartpage_form">
+              {%- if section.settings.show_note -%}
+                <label class="op-cartpage_notelabel">
+                  <span>{{ section.settings.note_label | default: 'Notas del pedido (opcional)' }}</span>
+                  <textarea name="note" rows="3" placeholder="{{ section.settings.note_placeholder | default: '¿Algo que debamos saber sobre tu pedido?' }}">{{ cart.note }}</textarea>
+                </label>
+              {%- endif -%}
+              <div class="op-cartpage_subtotal">
+                <span>{{ section.settings.subtotal_label | default: 'Subtotal' }}</span>
+                <span data-cartpage-subtotal>{{ cart.total_price | money }}</span>
+              </div>
+              {%- if section.settings.shipping_note != blank -%}
+                <p class="op-cartpage_shipnote">{{ section.settings.shipping_note }}</p>
+              {%- endif -%}
+              <button type="submit" name="checkout" class="op-cartpage_checkout">{{ section.settings.checkout_label | default: 'Finalizar compra' }}</button>
+            </form>
+            <a class="op-cartpage_continue" href="{{ section.settings.continue_link | default: routes.all_products_collection_url }}">{{ section.settings.continue_label | default: 'Seguir comprando' }}</a>
+          </div>
+        </aside>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
 
-  <input type="submit" name="checkout" value="{{ 'cart.checkout' | t }}">
-</form>
+{% stylesheet %}
+  .op-cartpage_head { margin-bottom: var(--_spacing---space--7); }
+  .op-cartpage_title { font-family: var(--_typography---font--primary-family); font-style: italic; font-weight: 400; font-size: clamp(1.7rem, 1.1rem + 2.2vw, 2.6rem); line-height: 1.18; color: var(--swatch--brand-300, #b0b094); margin: 0; }
+  .op-cartpage_count { font-size: 0.55em; font-style: normal; opacity: 0.7; vertical-align: 0.35em; letter-spacing: 0.02em; }
+
+  .op-cartpage_layout { display: grid; grid-template-columns: 1.8fr 1fr; gap: var(--_spacing---space--8); align-items: start; }
+  .op-cartpage_items { display: flex; flex-direction: column; }
+  .op-cartpage_item { display: grid; grid-template-columns: 7rem 1fr; gap: var(--_spacing---space--5); padding: var(--_spacing---space--5) 0; border-bottom: 0.0625rem solid var(--_theme---border); }
+  .op-cartpage_item:first-child { border-top: 0.0625rem solid var(--_theme---border); }
+  .op-cartpage_media { display: block; aspect-ratio: 4 / 5; overflow: hidden; }
+  .op-cartpage_img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .op-cartpage_img--ph { display: block; background-color: color-mix(in srgb, var(--_theme---text) 10%, transparent); }
+  .op-cartpage_info { min-width: 0; display: flex; flex-direction: column; }
+  .op-cartpage_toprow { display: flex; justify-content: space-between; gap: var(--_spacing---space--5); align-items: baseline; }
+  .op-cartpage_iname { font-family: var(--_typography---font--primary-family); font-size: 1.15rem; color: currentColor; text-decoration: none; }
+  .op-cartpage_iname:hover { opacity: 0.75; }
+  .op-cartpage_iprice { font-size: 0.95rem; white-space: nowrap; }
+  .op-cartpage_ivariant { font-size: 0.8rem; opacity: 0.72; margin-top: 0.2rem; }
+  .op-cartpage_props { list-style: none; margin: 0.5rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.12rem; }
+  .op-cartpage_props li { font-size: 0.76rem; opacity: 0.65; }
+  .op-cartpage_props span { opacity: 0.85; }
+  .op-cartpage_bottomrow { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: var(--_spacing---space--4); }
+  .op-cartpage_qty { display: inline-flex; align-items: center; border: 0.0625rem solid var(--_theme---border); border-radius: 2rem; transition: opacity 200ms; }
+  .op-cartpage_qty.is-busy { opacity: 0.45; pointer-events: none; }
+  .op-cartpage_qty button { background: none; border: 0; cursor: pointer; color: currentColor; padding: 0.4rem 0.8rem; font-size: 1rem; }
+  .op-cartpage_qty-val { min-width: 1.6rem; text-align: center; font-size: 0.92rem; }
+  .op-cartpage_remove { background: none; border: 0; cursor: pointer; color: currentColor; padding: 0; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.68rem; opacity: 0.6; transition: opacity 200ms; }
+  .op-cartpage_remove:hover { opacity: 1; }
+
+  .op-cartpage_summary { position: sticky; top: 6rem; }
+  .op-cartpage_summary-in { background-color: var(--swatch--light-200, #f5f5ef); padding: var(--_spacing---space--6); display: flex; flex-direction: column; gap: var(--_spacing---space--5); }
+  .op-cartpage_sumtitle { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.8rem; font-weight: 400; margin: 0; }
+  .op-cartpage_form { display: flex; flex-direction: column; gap: var(--_spacing---space--5); }
+  .op-cartpage_notelabel { display: flex; flex-direction: column; gap: 0.45rem; }
+  .op-cartpage_notelabel > span { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.68rem; opacity: 0.7; }
+  .op-cartpage_notelabel textarea { font-family: inherit; font-size: 0.92rem; color: var(--_theme---text); background-color: transparent; border: 0.0625rem solid var(--_theme---border); border-radius: 1rem; padding: 0.8rem 1rem; resize: vertical; width: 100%; }
+  .op-cartpage_subtotal { display: flex; align-items: center; justify-content: space-between; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.82rem; padding-top: var(--_spacing---space--4); border-top: 0.0625rem solid var(--_theme---border); }
+  .op-cartpage_shipnote { font-size: 0.78rem; font-style: italic; opacity: 0.6; margin: 0; }
+  .op-cartpage_checkout { width: 100%; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.8rem; color: #fff; background-color: var(--swatch--brand-300, #b0b094); border: 0; border-radius: 2rem; padding: 1rem 2rem; cursor: pointer; transition: background-color 250ms; }
+  .op-cartpage_checkout:hover { background-color: var(--swatch--brand-500, #5f604e); }
+  .op-cartpage_continue { text-align: center; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.74rem; color: currentColor; text-decoration: none; opacity: 0.7; transition: opacity 200ms; }
+  .op-cartpage_continue:hover { opacity: 1; }
+
+  .op-cartpage_empty { display: flex; flex-direction: column; align-items: center; gap: var(--_spacing---space--5); text-align: center; padding: var(--_spacing---space--8) 0; }
+  .op-cartpage_empty.is-hidden { display: none; }
+  .op-cartpage_empty-text { opacity: 0.75; margin: 0; }
+  .op-cartpage_empty-cta { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.78rem; color: var(--_theme---text); text-decoration: none; border: 0.0625rem solid var(--_theme---text); border-radius: 2rem; padding: 0.85rem 1.8rem; transition: background-color 250ms, color 250ms; }
+  .op-cartpage_empty-cta:hover { background-color: var(--_theme---text); color: var(--_theme---background); }
+
+  @media (max-width: 900px) {
+    .op-cartpage_layout { grid-template-columns: 1fr; gap: var(--_spacing---space--6); }
+    .op-cartpage_summary { position: static; }
+    .op-cartpage_item { grid-template-columns: 5.5rem 1fr; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  /* Carrito (página): cantidades y quitar vía /cart/change.js sin recargar.
+     Peticiones serializadas (sin carreras); fallback a recarga si algo falla. */
+  function opCartPageInit(scope) {
+    (scope || document).querySelectorAll('[data-op-cartpage]').forEach(function (root) {
+      if (root.dataset.opCartpageInit) return;
+      root.dataset.opCartpageInit = '1';
+
+      var changeUrl = root.getAttribute('data-op-change-url') || '/cart/change.js';
+      var fmt = (root.getAttribute('data-op-money') || ('$' + '{' + '{amount}' + '}')).replace(/<[^>]+>/g, '');
+      function money(cents) {
+        var s = (Number(cents) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        return fmt.replace(/\{\{\s*amount[^}]*\}\}/g, s);
+      }
+
+      var chain = Promise.resolve(); // serializa cambios para evitar respuestas fuera de orden
+
+      function apply(cart) {
+        // Totales y badges (los del header comparten selector con el drawer)
+        var st = root.querySelector('[data-cartpage-subtotal]');
+        if (st) st.textContent = money(cart.total_price);
+        var ct = root.querySelector('[data-cartpage-count]');
+        if (ct) ct.textContent = '(' + cart.item_count + ')';
+        document.querySelectorAll('[data-op-cart-badge]').forEach(function (b) { b.textContent = cart.item_count; });
+
+        // Reconcilia líneas: cantidades/precios por índice; si el carrito quedó vacío, muestra el estado vacío.
+        var rows = root.querySelectorAll('[data-cartpage-item]');
+        rows.forEach(function (row, i) {
+          var it = cart.items[i];
+          if (!it) { row.remove(); return; }
+          row.setAttribute('data-line', i + 1);
+          var qv = row.querySelector('[data-cartpage-qtyval]');
+          if (qv) qv.textContent = it.quantity;
+          var lp = row.querySelector('[data-cartpage-lineprice]');
+          if (lp) lp.textContent = money(it.final_line_price);
+        });
+        if (cart.item_count === 0) {
+          var layout = root.querySelector('[data-cartpage-layout]');
+          if (layout) layout.remove();
+          var empty = root.querySelector('[data-cartpage-empty]');
+          if (empty) empty.classList.remove('is-hidden');
+        }
+      }
+
+      function change(row, qty) {
+        var line = parseInt(row.getAttribute('data-line'), 10);
+        if (!line) return;
+        var qtyBox = row.querySelector('[data-cartpage-qty]');
+        if (qtyBox) qtyBox.classList.add('is-busy');
+        chain = chain.then(function () {
+          return fetch(changeUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ line: line, quantity: qty })
+          })
+            .then(function (r) { if (!r.ok) throw new Error('cart change ' + r.status); return r.json(); })
+            .then(function (cart) {
+              if (qty === 0 && window.gsap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                return new Promise(function (res) {
+                  window.gsap.to(row, { opacity: 0, height: 0, marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0, duration: 0.35, ease: 'power2.in', onComplete: function () { row.remove(); apply(cart); res(); } });
+                });
+              }
+              apply(cart);
+            })
+            .catch(function () { window.location.reload(); })
+            .finally(function () { if (qtyBox) qtyBox.classList.remove('is-busy'); });
+        });
+      }
+
+      root.addEventListener('click', function (e) {
+        var row = e.target.closest ? e.target.closest('[data-cartpage-item]') : null;
+        if (!row) return;
+        var qv = row.querySelector('[data-cartpage-qtyval]');
+        var q = qv ? parseInt(qv.textContent, 10) || 1 : 1;
+        if (e.target.closest('[data-cartpage-plus]')) { change(row, q + 1); }
+        else if (e.target.closest('[data-cartpage-minus]')) { change(row, Math.max(0, q - 1)); }
+        else if (e.target.closest('[data-cartpage-remove]')) { change(row, 0); }
+      });
+    });
+  }
+  opCartPageInit();
+  document.addEventListener('shopify:section:load', function (e) { opCartPageInit(e.target); });
+{% endjavascript %}
 
 {% schema %}
 {
   "name": "t:general.cart",
-  "settings": []
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 200, "step": 4, "default": 96, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 200, "step": 4, "default": 96, "unit": "px" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Carrito" },
+    { "type": "text", "id": "summary_title", "label": "Título del resumen", "default": "Resumen" },
+    { "type": "text", "id": "subtotal_label", "label": "Subtotal", "default": "Subtotal" },
+    { "type": "text", "id": "checkout_label", "label": "Botón checkout", "default": "Finalizar compra" },
+    { "type": "text", "id": "remove_label", "label": "Quitar", "default": "Quitar" },
+    { "type": "text", "id": "shipping_note", "label": "Nota de envío", "default": "Envío e impuestos se calculan en el checkout. Producción artesanal: 20 días hábiles." },
+    { "type": "header", "content": "Nota del pedido" },
+    { "type": "checkbox", "id": "show_note", "label": "Mostrar notas del pedido", "default": true },
+    { "type": "text", "id": "note_label", "label": "Etiqueta", "default": "Notas del pedido (opcional)" },
+    { "type": "text", "id": "note_placeholder", "label": "Placeholder", "default": "¿Algo que debamos saber sobre tu pedido?" },
+    { "type": "header", "content": "Seguir comprando" },
+    { "type": "text", "id": "continue_label", "label": "Texto", "default": "Seguir comprando" },
+    { "type": "url", "id": "continue_link", "label": "Enlace (vacío = todos los productos)" },
+    { "type": "header", "content": "Carrito vacío" },
+    { "type": "text", "id": "empty_text", "label": "Mensaje", "default": "Tu carrito está vacío." },
+    { "type": "text", "id": "empty_label", "label": "Botón", "default": "Descubre nuestros productos" },
+    { "type": "url", "id": "empty_link", "label": "Enlace del botón (vacío = todos los productos)" }
+  ]
 }
 {% endschema %}

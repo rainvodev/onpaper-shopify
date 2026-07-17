@@ -1,64 +1,85 @@
-{% comment %}
-  This section is used in the article template to render the article page, which
-  displays the full content of the blog post and can optionally include a
-  comments section for customers (not shown in this example).
+{% comment %} On Paper — Artículo (Lumos). Cabecera editorial + prosa con el estilo de op-page + comentarios. {% endcomment %}
+<section class="op-article u-section">
+  <div class="op-article_contain u-container">
+    <div class="op-article_inner">
+      <header class="op-article_head">
+        <p class="op-article_meta" data-reveal>{% assign date = article.published_at | time_tag: format: 'date' %}{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
+        <h1 class="op-article_title" data-reveal style="--reveal-delay: 100ms">{{ article.title }}</h1>
+      </header>
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/article
-{% endcomment %}
-
-{% if article.image %}
-  <div data-mask="up">{{ article.image | image_url: width: 1000 | image_tag }}</div>
-{% endif %}
-
-<h1 data-reveal>{{ article.title }}</h1>
-
-{% assign date = article.published_at | time_tag: format: 'date' %}
-<p data-reveal style="--reveal-delay: 80ms">{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
-
-<div data-reveal style="--reveal-delay: 160ms">{{ article.content }}</div>
-
-{% if blog.comments_enabled? %}
-  <h2>{{ 'blog.article_comments' | t }}</h2>
-
-  <div id="comments">
-    {% paginate article.comments by 10 %}
-      {% for comment in article.comments %}
-        <div>
-          <p>{{ comment.author }}</p>
-          <p>
-            {{- comment.created_at | time_tag: format: 'date' -}}
-          </p>
-          <p>{{ comment.content }}</p>
+      {% if article.image %}
+        <div class="op-article_media" data-mask="up">
+          {{ article.image | image_url: width: 1600 | image_tag: alt: article.title, class: 'op-article_img', widths: '600,1000,1300,1600', sizes: '(min-width: 990px) 60rem, 100vw' }}
         </div>
-      {% endfor %}
+      {% endif %}
 
-      {{ paginate | default_pagination: anchor: 'comments' }}
-    {% endpaginate %}
+      <div class="op-article_body rte" data-reveal>{{ article.content }}</div>
+
+      {% if blog.comments_enabled? %}
+        <div class="op-article_comments" id="comments">
+          <h2 class="op-article_subtitle">{{ 'blog.article_comments' | t }}</h2>
+          {% paginate article.comments by 10 %}
+            {% for comment in article.comments %}
+              <div class="op-article_comment">
+                <p class="op-article_comment-meta">{{ comment.author }} · {{ comment.created_at | time_tag: format: 'date' }}</p>
+                <p class="op-article_comment-body">{{ comment.content }}</p>
+              </div>
+            {% endfor %}
+            {%- if paginate.pages > 1 -%}{{ paginate | default_pagination: anchor: 'comments' }}{%- endif -%}
+          {% endpaginate %}
+
+          {% form 'new_comment', article, class: 'op-article_form' %}
+            <h2 class="op-article_subtitle">{{ 'blog.comment_form_title' | t }}</h2>
+            {{ form.errors | default_errors }}
+            <div class="op-article_form-row">
+              <label class="op-article_field">
+                <span>{{ 'blog.comment_form_name' | t }}</span>
+                <input type="text" name="comment[author]" value="{{ form.author }}" required>
+              </label>
+              <label class="op-article_field">
+                <span>{{ 'blog.comment_form_email' | t }}</span>
+                <input type="email" name="comment[email]" value="{{ form.email }}" required>
+              </label>
+            </div>
+            <label class="op-article_field">
+              <span>{{ 'blog.comment_form_body' | t }}</span>
+              <textarea name="comment[body]" rows="4" required>{{ form.body }}</textarea>
+            </label>
+            <button type="submit" class="op-article_submit">{{ 'blog.comment_form_submit' | t }}</button>
+          {% endform %}
+        </div>
+      {% endif %}
+    </div>
   </div>
+</section>
 
-  {% form 'new_comment', article %}
-    <h2>{{ 'blog.comment_form_title' | t }}</h2>
-
-    {{ form.errors | default_errors }}
-
-    <div>
-      <label for="author">{{ 'blog.comment_form_name' | t }}</label>
-      <input type="text" name="comment[author]" id="author" value="{{ form.author }}" required>
-    </div>
-
-    <div>
-      <label for="email">{{ 'blog.comment_form_email' | t }}</label>
-      <input type="email" name="comment[email]" id="email" value="{{ form.email }}" required>
-    </div>
-
-    <div>
-      <label for="body">{{ 'blog.comment_form_body' | t }}</label>
-      <textarea name="comment[body]" id="body" required>{{ form.body }}</textarea>
-    </div>
-
-    <input type="submit" value="{{ 'blog.comment_form_submit' | t }}">
-  {% endform %}
-{% endif %}
+{% stylesheet %}
+  .op-article_inner { max-width: 70ch; margin-inline: auto; width: 100%; }
+  .op-article_head { text-align: center; margin-bottom: var(--_spacing---space--6); }
+  .op-article_meta { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.68rem; opacity: 0.6; margin: 0 0 var(--_spacing---space--4); }
+  .op-article_title { font-family: var(--_typography---font--primary-family); font-style: italic; font-weight: 400; font-size: clamp(1.7rem, 1.1rem + 2.2vw, 2.6rem); line-height: 1.18; color: var(--swatch--brand-300, #b0b094); margin: 0; }
+  .op-article_media { overflow: hidden; margin-bottom: var(--_spacing---space--6); }
+  .op-article_img { width: 100%; height: auto; display: block; }
+  .op-article_body { font-size: 0.97rem; line-height: 1.7; }
+  .op-article_body p { margin: 0 0 1em; }
+  .op-article_body h2, .op-article_body h3 { font-family: var(--_typography---font--primary-family); font-weight: 400; margin: 2em 0 0.7em; }
+  .op-article_body img { max-width: 100%; height: auto; }
+  .op-article_body a { color: currentColor; text-underline-offset: 0.2em; }
+  .op-article_comments { margin-top: var(--_spacing---space--8); padding-top: var(--_spacing---space--7); border-top: 0.0625rem solid var(--_theme---border); }
+  .op-article_subtitle { font-family: var(--_typography---font--primary-family); font-weight: 400; font-size: 1.35rem; margin: 0 0 var(--_spacing---space--5); }
+  .op-article_comment { padding: var(--_spacing---space--4) 0; border-bottom: 0.0625rem solid var(--_theme---border); }
+  .op-article_comment-meta { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.66rem; opacity: 0.6; margin: 0 0 0.3rem; }
+  .op-article_comment-body { margin: 0; font-size: 0.92rem; }
+  .op-article_form { margin-top: var(--_spacing---space--7); display: flex; flex-direction: column; gap: var(--_spacing---space--4); }
+  .op-article_form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--_spacing---space--4); }
+  .op-article_field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .op-article_field > span { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.68rem; opacity: 0.7; }
+  .op-article_field input, .op-article_field textarea { font-family: inherit; font-size: 0.95rem; color: var(--_theme---text); background-color: transparent; border: 0.0625rem solid var(--_theme---border); border-radius: 2rem; padding: 0.8rem 1.1rem; }
+  .op-article_field textarea { border-radius: 1rem; resize: vertical; }
+  .op-article_submit { align-self: flex-start; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.78rem; color: #fff; background-color: var(--swatch--brand-300, #b0b094); border: 0; border-radius: 2rem; padding: 0.85rem 1.8rem; cursor: pointer; transition: background-color 250ms; }
+  .op-article_submit:hover { background-color: var(--swatch--brand-500, #5f604e); }
+  @media (max-width: 600px) { .op-article_form-row { grid-template-columns: 1fr; } }
+{% endstylesheet %}
 
 {% schema %}
 {

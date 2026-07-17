@@ -40,6 +40,10 @@
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
 
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 96 }}">
+    {%- endif -%}
+
     {{ content_for_header }}
   </head>
 

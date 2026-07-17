@@ -1,56 +1,56 @@
 {
   "404": {
     "title": "404",
-    "not_found": "Page not found.",
-    "back_to_shopping": "Back to shopping"
+    "not_found": "No encontramos esta página.",
+    "back_to_shopping": "Volver a la tienda"
   },
   "blog": {
-    "article_comments": "Comments",
-    "article_metadata_html": "{{ date }} by {{ author }}",
-    "comment_form_body": "Comment",
-    "comment_form_email": "Email",
-    "comment_form_name": "Name",
-    "comment_form_submit": "Post",
-    "comment_form_title": "Add a comment"
+    "article_comments": "Comentarios",
+    "article_metadata_html": "{{ date }} por {{ author }}",
+    "comment_form_body": "Comentario",
+    "comment_form_email": "Correo electrónico",
+    "comment_form_name": "Nombre",
+    "comment_form_submit": "Publicar",
+    "comment_form_title": "Deja un comentario"
   },
   "cart": {
-    "checkout": "Checkout",
-    "title": "Cart",
-    "update": "Update",
-    "remove": "Remove"
+    "checkout": "Finalizar compra",
+    "title": "Carrito",
+    "update": "Actualizar",
+    "remove": "Quitar"
   },
   "customers": {
     "login": {
-      "email": "Email",
-      "password": "Password",
-      "submit": "Sign in",
-      "title": "Login"
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "submit": "Iniciar sesión",
+      "title": "Iniciar sesión"
     }
   },
   "collections": {
-    "title": "Collections"
+    "title": "Colecciones"
   },
   "gift_card": {
-    "add_to_apple_wallet": "Add to Apple Wallet",
-    "card": "Gift card",
-    "expired": "This gift card has expired",
-    "expires_on": "Expires on {{ expires_on }}",
-    "use_at_checkout": "Use this gift card at checkout"
+    "add_to_apple_wallet": "Agregar a Apple Wallet",
+    "card": "Tarjeta de regalo",
+    "expired": "Esta tarjeta de regalo ha expirado",
+    "expires_on": "Expira el {{ expires_on }}",
+    "use_at_checkout": "Usa esta tarjeta de regalo al finalizar tu compra"
   },
   "localization": {
-    "country_label": "Country / currency",
-    "language_label": "Language"
+    "country_label": "País / moneda",
+    "language_label": "Idioma"
   },
   "password": {
-    "title": "This shop is private",
-    "password": "Password",
-    "enter": "Enter"
+    "title": "Muy pronto",
+    "password": "Contraseña",
+    "enter": "Entrar"
   },
   "search": {
-    "title": "Search",
-    "placeholder": "Search articles, pages, or products",
-    "submit": "Search",
-    "no_results_html": "No results found for {{ terms }}",
-    "results_for_html": "{{ count }} results found for {{ terms }}"
+    "title": "Buscar",
+    "placeholder": "Busca productos, páginas o artículos",
+    "submit": "Buscar",
+    "no_results_html": "No encontramos resultados para {{ terms }}",
+    "results_for_html": "{{ count }} resultados para {{ terms }}"
   }
 }
