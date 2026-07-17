@@ -54,7 +54,8 @@
 
 {% javascript %}
   /* Acordeón animado (GSAP si está; nativo si no). Guard por sección + re-init en el editor. */
-  document.querySelectorAll('[data-op-faq]').forEach(function (list) {
+  function opFaqInit(root) {
+    (root || document).querySelectorAll('[data-op-faq]').forEach(function (list) {
     if (list.dataset.opFaqInit) return;
     list.dataset.opFaqInit = '1';
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -89,7 +90,10 @@
         }
       });
     });
-  });
+    });
+  }
+  opFaqInit();
+  document.addEventListener('shopify:section:load', function (e) { opFaqInit(e.target); });
 {% endjavascript %}
 
 {% schema %}
