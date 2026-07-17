@@ -1,0 +1,59 @@
+{
+  "sections": {
+    "main": {
+      "type": "op-faq",
+      "blocks": {
+        "faq-tiempo": {
+          "type": "item",
+          "settings": {
+            "question": "¿Cuánto tarda mi pedido?",
+            "answer": "<p>Cada pieza se produce artesanalmente al recibir tu pedido. El tiempo estándar de producción y envío es de 20 días hábiles.</p>"
+          }
+        },
+        "faq-personalizar": {
+          "type": "item",
+          "settings": {
+            "question": "¿Cómo personalizo mi producto?",
+            "answer": "<p>En la página de cada producto eliges material, tamaño, color y hotstamping, y agregas los textos o fotos que quieras. Si tienes una idea especial, escríbenos y la hacemos realidad.</p>"
+          }
+        },
+        "faq-fotos": {
+          "type": "item",
+          "settings": {
+            "question": "¿Cómo les hago llegar mis fotos?",
+            "answer": "<p>Al personalizar tu producto puedes agregar un link de Google Drive o WeTransfer con tus fotos. También podemos ayudarte por WhatsApp.</p>"
+          }
+        },
+        "faq-volumen": {
+          "type": "item",
+          "settings": {
+            "question": "¿Hacen pedidos por volumen?",
+            "answer": "<p>Sí. A partir de 6 piezas o más te preparamos una cotización personalizada. Escríbenos por WhatsApp o correo.</p>"
+          }
+        },
+        "faq-cambios": {
+          "type": "item",
+          "settings": {
+            "question": "¿Puedo cambiar o cancelar mi pedido?",
+            "answer": "<p>Como cada pieza es personalizada, solo podemos hacer cambios antes de que tu pedido entre a producción. Contáctanos lo antes posible y con gusto te ayudamos.</p>"
+          }
+        }
+      },
+      "block_order": ["faq-tiempo", "faq-personalizar", "faq-fotos", "faq-volumen", "faq-cambios"],
+      "settings": {
+        "eyebrow": "FAQ",
+        "heading": "<p><em>Preguntas frecuentes</em></p>"
+      }
+    },
+    "cta": {
+      "type": "op-cta",
+      "settings": {
+        "eyebrow": "¿Más dudas?",
+        "heading": "<p><em>¿No encontraste tu respuesta?</em></p>",
+        "body": "<p>Escríbenos y con gusto te ayudamos. En On Paper cada cliente tiene un lugar especial.</p>",
+        "cta_label": "Contáctanos"
+      }
+    }
+  },
+  "order": ["main", "cta"]
+}

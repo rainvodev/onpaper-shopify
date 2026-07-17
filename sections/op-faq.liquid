@@ -1,0 +1,134 @@
+{% comment %} On Paper — FAQ (Lumos). Eyebrow + título itálico + acordeón de preguntas (bloques).
+  Apertura/cierre animado con GSAP (fallback nativo sin JS/GSAP). Estilo calcado de op-about/product_acc. {% endcomment %}
+<section class="op-faq u-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" {{ section.shopify_attributes }}>
+  <div class="op-faq_contain u-container">
+    <header class="op-faq_head u-margin-trim" style="--op-faq-hw: {{ section.settings.heading_width }}ch">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="op-faq_eyebrow" data-reveal style="--reveal-delay: 0ms">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <div class="op-faq_heading" role="heading" aria-level="1" data-reveal style="--reveal-delay: 120ms">{{ section.settings.heading }}</div>
+      {%- endif -%}
+      {%- if section.settings.intro != blank -%}
+        <div class="op-faq_intro" data-reveal style="--reveal-delay: 240ms">{{ section.settings.intro }}</div>
+      {%- endif -%}
+    </header>
+
+    <div class="op-faq_list" data-op-faq data-reveal-group style="--op-faq-lw: {{ section.settings.list_width }}ch; --reveal-step: 70">
+      {%- for block in section.blocks -%}
+        <details class="op-faq_item" data-reveal {{ block.shopify_attributes }}>
+          <summary class="op-faq_q">
+            <span class="op-faq_q-text">{{ block.settings.question }}</span>
+            <svg class="op-faq_chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="op-faq_a"><div class="op-faq_a-inner rte">{{ block.settings.answer }}</div></div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .op-faq_head { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: var(--_spacing---space--7); }
+  .op-faq_eyebrow { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; opacity: 0.7; margin-bottom: var(--_spacing---space--5); }
+  .op-faq_heading { max-width: var(--op-faq-hw, 30ch); margin-inline: auto; font-family: var(--_typography---font--primary-family); font-style: italic; font-size: clamp(1.6rem, 1rem + 2.2vw, 2.4rem); line-height: 1.2; color: var(--swatch--brand-300, #b0b094); }
+  .op-faq_heading p { margin: 0; }
+  .op-faq_intro { max-width: 56ch; margin-inline: auto; margin-top: var(--_spacing---space--5); opacity: 0.85; }
+  .op-faq_intro p { margin: 0; }
+
+  .op-faq_list { max-width: var(--op-faq-lw, 78ch); width: 100%; margin-inline: auto; }
+  .op-faq_item { border-bottom: 0.0625rem solid var(--_theme---border); }
+  .op-faq_item:first-of-type { border-top: 0.0625rem solid var(--_theme---border); }
+  .op-faq_q { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: var(--_spacing---space--5); padding: var(--_spacing---space--5) 0; }
+  .op-faq_q::-webkit-details-marker { display: none; }
+  .op-faq_q-text { font-family: var(--_typography---font--primary-family); font-size: clamp(1.02rem, 0.9rem + 0.5vw, 1.2rem); line-height: 1.3; }
+  .op-faq_chev { flex: none; opacity: 0.55; transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1); }
+  .op-faq_item[open] > .op-faq_q .op-faq_chev { transform: rotate(180deg); }
+  .op-faq_q:hover .op-faq_chev { opacity: 0.9; }
+  .op-faq_a { overflow: hidden; }
+  .op-faq_a-inner { padding-bottom: var(--_spacing---space--5); max-width: 62ch; font-size: 0.95rem; opacity: 0.85; }
+  .op-faq_a-inner p { margin: 0 0 0.7em; }
+  .op-faq_a-inner p:last-child { margin-bottom: 0; }
+  @media (prefers-reduced-motion: reduce) { .op-faq_chev { transition: none; } }
+{% endstylesheet %}
+
+{% javascript %}
+  /* Acordeón animado (GSAP si está; nativo si no). Guard por sección + re-init en el editor. */
+  function opFaqInit(root) {
+    (root || document).querySelectorAll('[data-op-faq]').forEach(function (list) {
+    if (list.dataset.opFaqInit) return;
+    list.dataset.opFaqInit = '1';
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    list.querySelectorAll('.op-faq_item').forEach(function (item) {
+      var sum = item.querySelector('.op-faq_q');
+      var body = item.querySelector('.op-faq_a');
+      if (!sum || !body) return;
+
+      var closing = false; // item.open sigue true durante la animación de cierre; distingue ese estado
+      sum.addEventListener('click', function (e) {
+        var g = window.gsap;
+        if (!g || reduce) return; // comportamiento nativo de <details>
+        e.preventDefault();
+        g.killTweensOf(body);
+        function settle() { g.set(body, { clearProps: 'height' }); }
+        if (!item.open) {
+          // Cerrado → abrir desde 0
+          item.open = true; closing = false;
+          g.fromTo(body, { height: 0 }, { height: body.scrollHeight, duration: 0.5, ease: 'power3.out', onComplete: settle });
+        } else if (closing) {
+          // Clic a mitad del cierre → reabrir desde la altura actual (sin brinco)
+          closing = false;
+          g.to(body, { height: body.scrollHeight, duration: 0.4, ease: 'power3.out', onComplete: settle });
+        } else {
+          // Abierto → cerrar desde la altura actual (offsetHeight, no scrollHeight: sin brinco si estaba a medio abrir)
+          closing = true;
+          g.fromTo(body, { height: body.offsetHeight }, {
+            height: 0, duration: 0.4, ease: 'power3.inOut',
+            onComplete: function () { item.open = false; closing = false; settle(); }
+          });
+        }
+      });
+    });
+    });
+  }
+  opFaqInit();
+  document.addEventListener('shopify:section:load', function (e) { opFaqInit(e.target); });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "On Paper FAQ",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 200, "step": 4, "default": 96, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 200, "step": 4, "default": 96, "unit": "px" },
+    { "type": "range", "id": "heading_width", "label": "Ancho del título (caracteres)", "min": 16, "max": 60, "step": 1, "default": 30, "unit": "ch" },
+    { "type": "range", "id": "list_width", "label": "Ancho de la lista (caracteres)", "min": 50, "max": 100, "step": 2, "default": 78, "unit": "ch" },
+    { "type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "FAQ" },
+    { "type": "richtext", "id": "heading", "label": "Título (itálica)", "default": "<p><em>Preguntas frecuentes</em></p>" },
+    { "type": "richtext", "id": "intro", "label": "Intro (opcional)" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Pregunta",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Pregunta", "default": "¿Cuánto tarda mi pedido?" },
+        { "type": "richtext", "id": "answer", "label": "Respuesta", "default": "<p>Cada pieza se produce artesanalmente al recibir tu pedido. El tiempo estándar de producción y envío es de 20 días hábiles.</p>" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "On Paper FAQ",
+    "blocks": [
+      { "type": "item", "settings": { "question": "¿Cuánto tarda mi pedido?", "answer": "<p>Cada pieza se produce artesanalmente al recibir tu pedido. El tiempo estándar de producción y envío es de 20 días hábiles.</p>" } },
+      { "type": "item", "settings": { "question": "¿Cómo personalizo mi producto?", "answer": "<p>En la página de cada producto eliges material, tamaño, color y hotstamping, y agregas los textos o fotos que quieras. Si tienes una idea especial, escríbenos y la hacemos realidad.</p>" } },
+      { "type": "item", "settings": { "question": "¿Cómo les hago llegar mis fotos?", "answer": "<p>Al personalizar tu producto puedes agregar un link de Google Drive o WeTransfer con tus fotos. También podemos ayudarte por WhatsApp.</p>" } },
+      { "type": "item", "settings": { "question": "¿Hacen pedidos por volumen?", "answer": "<p>Sí. A partir de 6 piezas o más te preparamos una cotización personalizada. Escríbenos por WhatsApp o correo.</p>" } },
+      { "type": "item", "settings": { "question": "¿Puedo cambiar o cancelar mi pedido?", "answer": "<p>Como cada pieza es personalizada, solo podemos hacer cambios antes de que tu pedido entre a producción. Contáctanos lo antes posible y con gusto te ayudamos.</p>" } }
+    ]
+  }]
+}
+{% endschema %}
