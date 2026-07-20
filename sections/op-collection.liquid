@@ -70,8 +70,9 @@
   .op-collection_pagelink { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.74rem; color: currentColor; text-decoration: none; opacity: 0.8; transition: opacity 250ms; }
   .op-collection_pagelink:hover { opacity: 1; }
   .op-collection_pageinfo { font-size: 0.8rem; opacity: 0.6; }
-  @media (max-width: 990px) { .op-collection_grid { --op-collection-cols: 2; } }
-  @media (max-width: 600px) { .op-collection_grid { --op-collection-cols: 1; } }
+  /* Fijamos grid-template-columns directo (no la variable) para ganarle al valor inline en móvil */
+  @media (max-width: 990px) { .op-collection_grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .op-collection_grid { grid-template-columns: 1fr; } }
 {% endstylesheet %}
 
 {% schema %}
