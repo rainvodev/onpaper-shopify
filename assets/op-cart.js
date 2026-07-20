@@ -5,18 +5,28 @@
   'use strict';
 
   function root() { return document.querySelector('[data-op-cart]'); }
+  function route(key, fallback) {
+    var r = root();
+    return (r && r.getAttribute('data-op-url-' + key)) || fallback;
+  }
 
+  var lastTrigger = null; // devuelve el foco al cerrar (a11y)
   function open() {
     var r = root(); if (!r) return;
+    lastTrigger = document.activeElement;
     r.classList.add('is-open'); r.setAttribute('aria-hidden', 'false');
     document.documentElement.classList.add('op-no-scroll');
     if (window.lenis) window.lenis.stop();
+    var closeBtn = r.querySelector('.op-cart_close');
+    if (closeBtn) closeBtn.focus({ preventScroll: true });
   }
   function close() {
     var r = root(); if (!r) return;
     r.classList.remove('is-open'); r.setAttribute('aria-hidden', 'true');
     document.documentElement.classList.remove('op-no-scroll');
     if (window.lenis) window.lenis.start();
+    if (lastTrigger && lastTrigger.focus) { try { lastTrigger.focus({ preventScroll: true }); } catch (e) {} }
+    lastTrigger = null;
   }
   function updateBadge(count) {
     document.querySelectorAll('[data-op-cart-badge]').forEach(function (b) { b.textContent = count; });
@@ -84,57 +94,113 @@
           + '</div></div>';
       });
       html += '</div>';
+      var cartUrl = route('cart', '/cart');
       html += '<footer class="op-cart_foot"><div class="op-cart_subtotal"><span>' + esc(label(cur, 'subtotal', 'Subtotal'))
         + '</span><span>' + money(cart.total_price) + '</span></div>'
-        + '<form action="/cart" method="post"><button type="submit" name="checkout" class="op-cart_checkout">' + esc(label(cur, 'checkout', 'Finalizar compra')) + '</button></form>'
-        + '<a href="/cart" class="op-cart_view">' + esc(label(cur, 'view', 'Ver carrito')) + '</a></footer>';
+        + '<p class="op-cart_error" data-op-cart-error hidden></p>'
+        + '<form action="' + esc(cartUrl) + '" method="post"><button type="submit" name="checkout" class="op-cart_checkout">' + esc(label(cur, 'checkout', 'Finalizar compra')) + '</button></form>'
+        + '<a href="' + esc(cartUrl) + '" class="op-cart_view">' + esc(label(cur, 'view', 'Ver carrito')) + '</a></footer>';
     }
     html += '</aside>';
 
     var wasOpen = cur.classList.contains('is-open');
+    var hadFocus = cur.contains(document.activeElement); // innerHTML destruye el nodo con foco
     cur.innerHTML = html;
     if (wasOpen) cur.classList.add('is-open');
+    if (wasOpen && hadFocus) {
+      var closeBtn = cur.querySelector('.op-cart_close');
+      if (closeBtn) closeBtn.focus({ preventScroll: true });
+    }
+  }
+
+  function showError(msg) {
+    var r = root(); if (!r) return;
+    var el = r.querySelector('[data-op-cart-error]');
+    if (el) { el.textContent = msg; el.hidden = false; }
   }
 
   function fetchCart() {
-    return fetch('/cart.js', { headers: { 'Accept': 'application/json' }, cache: 'no-store' }).then(function (r) { return r.json(); });
+    return fetch(route('cart-js', '/cart.js'), { headers: { 'Accept': 'application/json' }, cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw new Error('cart ' + r.status); return r.json(); });
   }
 
-  function changeLine(line, qty) {
-    fetch('/cart/change.js', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ line: line, quantity: qty })
-    }).then(function (r) { return r.json(); }).then(renderCart).catch(function () {});
+  // Mutaciones serializadas: sin carreras entre +/-, sin líneas obsoletas, sin respuestas fuera de orden.
+  var queue = Promise.resolve();
+  function changeLine(line, qty, itemEl) {
+    var qtyBox = itemEl && itemEl.querySelector('.op-cart_qty');
+    if (qtyBox) qtyBox.classList.add('is-busy');
+    queue = queue.then(function () {
+      return fetch(route('change', '/cart/change.js'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ line: line, quantity: qty })
+      })
+        .then(function (r) { if (!r.ok) throw new Error('change ' + r.status); return r.json(); })
+        .then(renderCart)
+        .catch(function () {
+          // Nunca dejes el carrito en un estado falso: re-sincroniza desde el servidor y avisa.
+          return fetchCart().then(renderCart).catch(function () {}).then(function () {
+            showError((root() && root().getAttribute('data-l-error')) || 'No se pudo actualizar el carrito. Inténtalo de nuevo.');
+          });
+        });
+    });
+    return queue;
+  }
+
+  function allAddButtons(form) {
+    var btns = [].slice.call(form.querySelectorAll('[name="add"]'));
+    if (form.id) btns = btns.concat([].slice.call(document.querySelectorAll('[name="add"][form="' + form.id + '"]')));
+    return btns;
   }
 
   document.addEventListener('submit', function (e) {
     var form = e.target;
     if (!form.matches || !form.matches('form[action*="/cart/add"]')) return;
     e.preventDefault();
-    var btn = form.querySelector('[name="add"]');
-    if (btn) btn.setAttribute('disabled', '');
-    fetch('/cart/add.js', { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
-      .then(function (r) { if (!r.ok) throw new Error('add'); return r.json(); })
+    var btns = allAddButtons(form);
+    var prevText = btns.map(function (b) { return b.textContent; });
+    btns.forEach(function (b) { b.setAttribute('disabled', ''); if (b.tagName === 'BUTTON') b.textContent = (form.getAttribute('data-l-adding') || 'Agregando…'); });
+    var errEl = form.querySelector('[data-op-add-error]');
+    if (errEl) errEl.hidden = true;
+    fetch(route('add', '/cart/add.js'), { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+      .then(function (r) {
+        if (!r.ok) {
+          return r.json().catch(function () { return {}; }).then(function (j) {
+            throw new Error(j.description || j.message || 'No se pudo agregar al carrito. Inténtalo de nuevo.');
+          });
+        }
+        return r.json();
+      })
       .then(fetchCart)
       .then(function (cart) { renderCart(cart); open(); })
-      .catch(function () { form.submit(); })
-      .finally(function () { if (btn) btn.removeAttribute('disabled'); });
+      .catch(function (err) {
+        // Sin form.submit(): navegar perdería toda la personalización escrita. Error inline en su lugar.
+        if (errEl) { errEl.textContent = err.message; errEl.hidden = false; }
+        else if (window.alert) alert(err.message);
+      })
+      .finally(function () {
+        btns.forEach(function (b, i) { b.removeAttribute('disabled'); if (b.tagName === 'BUTTON') b.textContent = prevText[i]; });
+      });
   });
 
   document.addEventListener('click', function (e) {
     if (e.target.closest('[data-op-cart-open]')) { e.preventDefault(); open(); return; }
     if (e.target.closest('[data-op-cart-close]')) { e.preventDefault(); close(); return; }
     var item = e.target.closest('[data-line]');
-    if (item) {
+    if (item && root() && root().contains(item)) {
       var line = parseInt(item.getAttribute('data-line'), 10);
       var valEl = item.querySelector('[data-op-cart-qtyval]');
       var q = valEl ? (parseInt(valEl.textContent, 10) || 0) : 0;
-      if (e.target.closest('[data-op-cart-remove]')) { e.preventDefault(); changeLine(line, 0); return; }
-      if (e.target.closest('[data-op-cart-plus]')) { e.preventDefault(); changeLine(line, q + 1); return; }
-      if (e.target.closest('[data-op-cart-minus]')) { e.preventDefault(); changeLine(line, Math.max(0, q - 1)); return; }
+      if (e.target.closest('[data-op-cart-remove]')) { e.preventDefault(); changeLine(line, 0, item); return; }
+      if (e.target.closest('[data-op-cart-plus]')) { e.preventDefault(); changeLine(line, q + 1, item); return; }
+      if (e.target.closest('[data-op-cart-minus]')) { e.preventDefault(); changeLine(line, Math.max(0, q - 1), item); return; }
     }
   });
 
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      var r = root();
+      if (r && r.classList.contains('is-open')) close();
+    }
+  });
 })();

@@ -1,31 +1,56 @@
-{% comment %}
-  This section is used in the blog template to render the blog page listing all
-  articles within a blog.
+{% comment %} On Paper — Blog (Lumos). Título serif + lista editorial de artículos. {% endcomment %}
+<section class="op-blog u-section">
+  <div class="op-blog_contain u-container">
+    <h1 class="op-blog_title" data-reveal>{{ blog.title }}</h1>
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/blog
-{% endcomment %}
+    {% paginate blog.articles by 8 %}
+      <div class="op-blog_list" data-reveal-group>
+        {% for article in blog.articles %}
+          <article class="op-blog_card" data-reveal>
+            {% if article.image %}
+              <a href="{{ article.url }}" class="op-blog_media" aria-label="{{ article.title | escape }}">
+                {{ article.image | image_url: width: 1200 | image_tag: alt: article.title, class: 'op-blog_img', widths: '400,700,1000,1200', sizes: '(min-width: 750px) 45vw, 90vw', loading: 'lazy' }}
+              </a>
+            {% endif %}
+            <div class="op-blog_body">
+              <p class="op-blog_meta">{% assign date = article.published_at | time_tag: format: 'date' %}{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
+              <h2 class="op-blog_name"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+              {% if article.excerpt != blank %}
+                <p class="op-blog_excerpt">{{ article.excerpt | strip_html | truncatewords: 30 }}</p>
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
 
-<h1>{{ blog.title }}</h1>
+      {%- if paginate.pages > 1 -%}
+        <nav class="op-blog_pager" aria-label="Paginación">
+          {%- if paginate.previous -%}<a class="op-blog_pagelink" href="{{ paginate.previous.url }}" rel="prev">Anterior</a>{%- endif -%}
+          <span class="op-blog_pageinfo">{{ paginate.current_page }} / {{ paginate.pages }}</span>
+          {%- if paginate.next -%}<a class="op-blog_pagelink" href="{{ paginate.next.url }}" rel="next">Siguiente</a>{%- endif -%}
+        </nav>
+      {%- endif -%}
+    {% endpaginate %}
+  </div>
+</section>
 
-{% paginate blog.articles by 5 %}
-  {% for article in blog.articles %}
-    <div>
-      {% if article.image %}
-        {{ article.image | image_url: width: 1000 | image_tag }}
-      {% endif %}
-      <h2>
-        {{ article.title | link_to: article.url }}
-      </h2>
-      {% assign date = article.published_at | time_tag: format: 'date' %}
-      <p>{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
-      <p>{{ article.excerpt }}</p>
-    </div>
-  {% endfor %}
-
-  {%- if paginate.pages > 1 -%}
-    {{- paginate | default_pagination -}}
-  {%- endif -%}
-{% endpaginate %}
+{% stylesheet %}
+  .op-blog_title { font-family: var(--_typography---font--primary-family); font-style: italic; font-weight: 400; font-size: clamp(1.7rem, 1.1rem + 2.2vw, 2.6rem); line-height: 1.18; color: var(--swatch--brand-300, #b0b094); text-align: center; margin: 0 0 var(--_spacing---space--7); }
+  .op-blog_list { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--_spacing---space--7); }
+  .op-blog_media { display: block; aspect-ratio: 3 / 2; overflow: hidden; }
+  .op-blog_img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms ease; }
+  .op-blog_media:hover .op-blog_img { transform: scale(1.03); }
+  .op-blog_meta { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.68rem; opacity: 0.6; margin: var(--_spacing---space--4) 0 0.35rem; }
+  .op-blog_name { font-family: var(--_typography---font--primary-family); font-weight: 400; font-size: 1.35rem; line-height: 1.25; margin: 0; }
+  .op-blog_name a { color: currentColor; text-decoration: none; }
+  .op-blog_name a:hover { opacity: 0.75; }
+  .op-blog_excerpt { font-size: 0.92rem; opacity: 0.8; margin: 0.5rem 0 0; }
+  .op-blog_pager { display: flex; align-items: center; justify-content: center; gap: var(--_spacing---space--6); margin-top: var(--_spacing---space--8); }
+  .op-blog_pagelink { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.74rem; color: currentColor; text-decoration: none; opacity: 0.8; }
+  .op-blog_pagelink:hover { opacity: 1; }
+  .op-blog_pageinfo { font-size: 0.8rem; opacity: 0.6; }
+  @media (max-width: 700px) { .op-blog_list { grid-template-columns: 1fr; } }
+{% endstylesheet %}
 
 {% schema %}
 {

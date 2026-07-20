@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "page",
+      "settings": {
+        "align": "left",
+        "content_width": 72,
+        "eyebrow": "Legal"
+      }
+    }
+  },
+  "order": ["main"]
+}

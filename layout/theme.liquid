@@ -30,9 +30,19 @@
     {{ 'lenis.css' | asset_url | stylesheet_tag }}
     {% # Reveal animations %}
     {{ 'op-anim.css' | asset_url | stylesheet_tag }}
+    {% # Sin JavaScript no hay motor de animación: todo el contenido visible por defecto. %}
+    <noscript><style>
+      [data-reveal], [data-split] { opacity: 1 !important; }
+      [data-mask] { clip-path: none !important; }
+      .op-main { animation: none !important; }
+    </style></noscript>
 
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 96 }}">
+    {%- endif -%}
 
     {{ content_for_header }}
   </head>
@@ -40,7 +50,9 @@
   <body>
     {% sections 'header-group' %}
 
-    {{ content_for_layout }}
+    <main id="op-main" class="op-main">
+      {{ content_for_layout }}
+    </main>
 
     {% sections 'footer-group' %}
 
@@ -50,6 +62,7 @@
     <script src="{{ 'lenis.min.js' | asset_url }}" defer></script>
     <script src="{{ 'gsap.min.js' | asset_url }}" defer></script>
     <script src="{{ 'ScrollTrigger.min.js' | asset_url }}" defer></script>
+    <script src="{{ 'SplitText.min.js' | asset_url }}" defer></script>
     <script src="{{ 'op-cursor-follow.js' | asset_url }}" defer></script>
     <script src="{{ 'op-gsap.js' | asset_url }}" defer></script>
     <script src="{{ 'op-header.js' | asset_url }}" defer></script>
@@ -58,6 +71,7 @@
     <script src="{{ 'op-pricing.js' | asset_url }}" defer></script>
     <script src="{{ 'op-variants.js' | asset_url }}" defer></script>
     <script src="{{ 'op-cart.js' | asset_url }}" defer></script>
+    <script src="{{ 'op-transition.js' | asset_url }}" defer></script>
     <script>
       (function () {
         if (window.Shopify && window.Shopify.designMode) return;

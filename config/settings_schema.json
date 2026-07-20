@@ -79,5 +79,20 @@
         "default": 4
       }
     ]
+  },
+  {
+    "name": "Marca On Paper",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon (cuadrado, mínimo 96×96 px)"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo (se usa en la página de gift card)"
+      }
+    ]
   }
 ]

@@ -1,17 +1,58 @@
-{% comment %}
-  This section is used in the page template to render store pages like About us
-  or Contact us.
+{% comment %} On Paper — Página genérica (Lumos). Título serif + prosa editorial. Sirve para
+  Términos y Condiciones, Privacidad, Envíos y cualquier página de texto del admin. {% endcomment %}
+<section class="op-page u-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" {{ section.shopify_attributes }}>
+  <div class="op-page_contain u-container">
+    <div class="op-page_inner op-page_inner--{{ section.settings.align }}" style="--op-page-cw: {{ section.settings.content_width }}ch">
+      <header class="op-page_head">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="op-page_eyebrow" data-reveal style="--reveal-delay: 0ms">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h1 class="op-page_title" data-reveal style="--reveal-delay: 100ms">{{ page.title }}</h1>
+      </header>
+      <div class="op-page_body rte" data-reveal style="--reveal-delay: 220ms">{{ page.content }}</div>
+    </div>
+  </div>
+</section>
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/page
-{% endcomment %}
-
-<h1>{{ page.title }}</h1>
-
-{{ page.content }}
+{% stylesheet %}
+  .op-page_inner { max-width: var(--op-page-cw, 70ch); margin-inline: auto; width: 100%; }
+  .op-page_head { margin-bottom: var(--_spacing---space--7); }
+  .op-page_eyebrow { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; opacity: 0.7; margin-bottom: var(--_spacing---space--5); }
+  .op-page_title { font-family: var(--_typography---font--primary-family); font-style: italic; font-weight: 400; font-size: clamp(1.7rem, 1.1rem + 2.2vw, 2.6rem); line-height: 1.18; color: var(--swatch--brand-300, #b0b094); margin: 0; }
+  .op-page_inner--center .op-page_head { text-align: center; }
+  .op-page_body { font-size: 0.97rem; line-height: 1.7; }
+  .op-page_body p { margin: 0 0 1em; }
+  .op-page_body h2, .op-page_body h3, .op-page_body h4 { font-family: var(--_typography---font--primary-family); font-weight: 400; line-height: 1.25; margin: 2em 0 0.7em; }
+  .op-page_body h2 { font-size: 1.4rem; }
+  .op-page_body h3 { font-size: 1.18rem; }
+  .op-page_body h4 { font-size: 1.05rem; }
+  .op-page_body ul, .op-page_body ol { margin: 0 0 1em; padding-left: 1.4em; }
+  .op-page_body li { margin-bottom: 0.35em; }
+  .op-page_body li::marker { color: var(--swatch--brand-300, #b0b094); }
+  .op-page_body a { color: currentColor; text-underline-offset: 0.2em; }
+  .op-page_body a:hover { opacity: 0.75; }
+  .op-page_body strong { font-weight: 600; }
+  .op-page_body em { font-style: italic; }
+  .op-page_body img { max-width: 100%; height: auto; }
+  .op-page_body blockquote { margin: 1.5em 0; padding-left: 1.2em; border-left: 0.125rem solid var(--swatch--brand-300, #b0b094); font-style: italic; opacity: 0.85; }
+  .op-page_body table { width: 100%; border-collapse: collapse; margin: 0 0 1em; font-size: 0.9rem; }
+  .op-page_body th, .op-page_body td { border: 0.0625rem solid var(--_theme---border); padding: 0.5em 0.8em; text-align: left; }
+{% endstylesheet %}
 
 {% schema %}
 {
   "name": "t:general.page",
-  "settings": []
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 200, "step": 4, "default": 96, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 200, "step": 4, "default": 96, "unit": "px" },
+    { "type": "range", "id": "content_width", "label": "Ancho del contenido (caracteres)", "min": 40, "max": 90, "step": 2, "default": 70, "unit": "ch" },
+    { "type": "select", "id": "align", "label": "Alineación del título", "options": [
+      { "value": "center", "label": "Centrado" },
+      { "value": "left", "label": "Izquierda" }
+    ], "default": "center" },
+    { "type": "text", "id": "eyebrow", "label": "Etiqueta (opcional)" }
+  ]
 }
 {% endschema %}

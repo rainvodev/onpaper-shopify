@@ -1,0 +1,30 @@
+{% comment %} On Paper — Login + recuperar contraseña. {% endcomment %}
+{% render 'op-account-styles' %}
+<section class="u-section"><div class="u-container"><div class="op-acct">
+  <div id="op-login" {% if request.params.type == 'recover' %}hidden{% endif %}>
+    <h1 class="op-acct_title">{{ 'customers.login.title' | t }}</h1>
+    {% form 'customer_login', class: 'op-acct_form' %}
+      {% if form.errors %}<div class="op-acct_errors">{{ form.errors | default_errors }}</div>{% endif %}
+      <label class="op-acct_field"><span>{{ 'customers.login.email' | t }}</span><input type="email" name="customer[email]" autocomplete="email" required></label>
+      <label class="op-acct_field"><span>{{ 'customers.login.password' | t }}</span><input type="password" name="customer[password]" autocomplete="current-password" required></label>
+      <button type="submit" class="op-acct_submit">{{ 'customers.login.submit' | t }}</button>
+    {% endform %}
+    <div class="op-acct_links">
+      <a class="op-acct_link" href="#recover" onclick="document.getElementById('op-login').hidden=true;document.getElementById('op-recover').hidden=false;return false;">¿Olvidaste tu contraseña?</a>
+      <a class="op-acct_link" href="{{ routes.account_register_url }}">Crear cuenta</a>
+    </div>
+  </div>
+  <div id="op-recover" {% unless request.params.type == 'recover' %}hidden{% endunless %}>
+    <h1 class="op-acct_title">Recuperar contraseña</h1>
+    {% form 'recover_customer_password', class: 'op-acct_form' %}
+      {% if form.posted_successfully? %}<p class="op-acct_ok">Te enviamos un correo para restablecer tu contraseña.</p>{% endif %}
+      {% if form.errors %}<div class="op-acct_errors">{{ form.errors | default_errors }}</div>{% endif %}
+      <label class="op-acct_field"><span>{{ 'customers.login.email' | t }}</span><input type="email" name="email" autocomplete="email" required></label>
+      <button type="submit" class="op-acct_submit">Enviar enlace</button>
+    {% endform %}
+    <div class="op-acct_links">
+      <a class="op-acct_link" href="{{ routes.account_login_url }}" onclick="document.getElementById('op-recover').hidden=true;document.getElementById('op-login').hidden=false;return false;">Volver a iniciar sesión</a>
+    </div>
+  </div>
+</div></div></section>
+{% schema %}{ "name": "Login", "settings": [] }{% endschema %}

@@ -41,7 +41,12 @@
     var main = root.querySelector('#opMainImg');
     root.querySelectorAll('[data-op-thumb]').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        if (main && btn.dataset.full) { main.src = btn.dataset.full; main.removeAttribute('srcset'); }
+        if (main && btn.dataset.full) {
+          main.src = btn.dataset.full;
+          // Conserva srcset responsivo si el thumb lo trae (evita cargar 1400px en móvil)
+          if (btn.dataset.srcset) main.setAttribute('srcset', btn.dataset.srcset);
+          else main.removeAttribute('srcset');
+        }
         root.querySelectorAll('[data-op-thumb]').forEach(function (b) { b.classList.remove('is-active'); });
         btn.classList.add('is-active');
       });
@@ -70,19 +75,34 @@
       });
     }
 
-    // Steppers
+    // Steppers (respetan min/max; muestran aviso al alcanzar el tope)
     root.querySelectorAll('[data-op-stepper]').forEach(function (stepper) {
       var input = stepper.querySelector('input');
       if (!input) return;
+      var msg = stepper.closest('.op-product_field') ?
+        stepper.closest('.op-product_field').querySelector('[data-op-qty-msg]') : null;
+      function clamp(val) {
+        var min = parseInt(input.min, 10) || 1;
+        var max = parseInt(input.max, 10);
+        var capped = false;
+        if (val < min) val = min;
+        if (!isNaN(max) && val > max) { val = max; capped = true; }
+        if (msg) msg.hidden = !capped;
+        return val;
+      }
       stepper.querySelectorAll('button[data-step]').forEach(function (btn) {
         btn.addEventListener('click', function () {
           var min = parseInt(input.min, 10) || 1;
           var val = parseInt(input.value, 10) || min;
           val += parseInt(btn.getAttribute('data-step'), 10);
-          if (val < min) val = min;
-          input.value = val;
+          input.value = clamp(val);
           input.dispatchEvent(new Event('change', { bubbles: true }));
         });
+      });
+      // Al teclear un valor manualmente también se respeta el tope.
+      input.addEventListener('change', function () {
+        var v = clamp(parseInt(input.value, 10) || (parseInt(input.min, 10) || 1));
+        if (String(v) !== input.value) input.value = v;
       });
     });
 
