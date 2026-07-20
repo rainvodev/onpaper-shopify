@@ -66,8 +66,8 @@
   .op-best_price em { font-style: italic; }
   .op-best_cta { display: inline-block; margin-top: var(--_spacing---space--5); font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.74rem; color: var(--_theme---text); text-decoration: none; background-color: color-mix(in srgb, var(--_theme---text) 8%, transparent); border-radius: 2rem; padding: 0.7rem 1.6rem; transition: background-color 300ms; }
   .op-best_cta:hover { background-color: color-mix(in srgb, var(--_theme---text) 16%, transparent); }
-  @media (max-width: 990px) { .op-best_grid { --op-best-cols: 2; } }
-  @media (max-width: 600px) { .op-best_grid { --op-best-cols: 1; } }
+  @media (max-width: 990px) { .op-best_grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .op-best_grid { grid-template-columns: 1fr; } }
 {% endstylesheet %}
 
 {% schema %}
