@@ -67,7 +67,14 @@
   .op-best_cta { display: inline-block; margin-top: var(--_spacing---space--5); font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.74rem; color: var(--_theme---text); text-decoration: none; background-color: color-mix(in srgb, var(--_theme---text) 8%, transparent); border-radius: 2rem; padding: 0.7rem 1.6rem; transition: background-color 300ms; }
   .op-best_cta:hover { background-color: color-mix(in srgb, var(--_theme---text) 16%, transparent); }
   @media (max-width: 990px) { .op-best_grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 600px) { .op-best_grid { grid-template-columns: 1fr; } }
+  /* Móvil: 2 columnas compactas (no se apila a 1). Apretamos gap y tipografía para que no se amontone. */
+  @media (max-width: 600px) {
+    .op-best_grid { grid-template-columns: repeat(2, 1fr); gap: var(--_spacing---space--4); }
+    .op-best_head { margin-bottom: var(--_spacing---space--6); }
+    .op-best_title { font-size: 1rem; margin-top: var(--_spacing---space--4); }
+    .op-best_price { font-size: 0.82rem; }
+    .op-best_cta { padding: 0.55rem 1.1rem; font-size: 0.68rem; margin-top: var(--_spacing---space--4); }
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -81,7 +88,7 @@
     { "type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "Best sellers" },
     { "type": "richtext", "id": "heading", "label": "Título", "default": "<p>Enduring, personal, <em>unforgettable.</em></p>" },
     { "type": "collection", "id": "collection", "label": "Colección" },
-    { "type": "range", "id": "products_count", "label": "Número de productos", "min": 2, "max": 8, "step": 1, "default": 3 },
+    { "type": "range", "id": "products_count", "label": "Número de productos", "min": 2, "max": 8, "step": 1, "default": 4 },
     { "type": "text", "id": "cta_label", "label": "Texto del botón", "default": "Shop now" }
   ],
   "presets": [{ "name": "On Paper Best sellers" }]
