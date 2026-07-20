@@ -1,7 +1,7 @@
 {% comment %} On Paper — Galería (Lumos). Mosaico de 3 columnas alineadas arriba (masonry por altura de imagen) + disco "Send message" que sigue el cursor. {% endcomment %}
 {%- assign grid_tag = 'div' -%}
 {%- if section.settings.disc_link != blank -%}{%- assign grid_tag = 'a' -%}{%- endif -%}
-<section class="op-gallery u-section full-width" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; background-color: var(--swatch--sand-300, #e5e1d9); --op-gallery-gap: {{ section.settings.gap }}px" {{ section.shopify_attributes }}>
+<section class="op-gallery u-section full-width" style="padding-top: clamp({{ section.settings.padding_top | times: 0.42 | round }}px, {{ section.settings.padding_top | divided_by: 12.0 }}vw, {{ section.settings.padding_top }}px); padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.42 | round }}px, {{ section.settings.padding_bottom | divided_by: 12.0 }}vw, {{ section.settings.padding_bottom }}px); background-color: var(--swatch--sand-300, #e5e1d9); --op-gallery-gap: {{ section.settings.gap }}px" {{ section.shopify_attributes }}>
   <div class="op-gallery_contain u-container">
     {%- if section.settings.heading != blank -%}
       <div class="op-gallery_heading" role="heading" aria-level="2">{{ section.settings.heading }}</div>

@@ -1,5 +1,5 @@
 {% comment %} On Paper — CTA centrado (Lumos). Título + párrafo + botón, centrado. {% endcomment %}
-<section class="op-cta u-section full-width {{ section.settings.theme }}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; background-color: {% if section.settings.bg_color != blank %}{{ section.settings.bg_color }}{% else %}var(--swatch--sand-300, #e5e1d9){% endif %}" {{ section.shopify_attributes }}>
+<section class="op-cta u-section full-width {{ section.settings.theme }}" style="padding-top: clamp({{ section.settings.padding_top | times: 0.42 | round }}px, {{ section.settings.padding_top | divided_by: 12.0 }}vw, {{ section.settings.padding_top }}px); padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.42 | round }}px, {{ section.settings.padding_bottom | divided_by: 12.0 }}vw, {{ section.settings.padding_bottom }}px); background-color: {% if section.settings.bg_color != blank %}{{ section.settings.bg_color }}{% else %}var(--swatch--sand-300, #e5e1d9){% endif %}" {{ section.shopify_attributes }}>
   <div class="op-cta_contain u-container">
     <div class="op-cta_content" style="--op-cta-hw: {{ section.settings.heading_width }}ch; --op-cta-bw: {{ section.settings.body_width }}ch">
       {%- if section.settings.eyebrow != blank -%}

@@ -1,5 +1,5 @@
 {% comment %} On Paper — About (Lumos). Eyebrow + título itálico + párrafo de intro, centrado. La tira de imágenes y el texto inferior son secciones propias (op-bookcase, op-text). {% endcomment %}
-<section class="op-about u-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" {{ section.shopify_attributes }}>
+<section class="op-about u-section" style="padding-top: clamp({{ section.settings.padding_top | times: 0.42 | round }}px, {{ section.settings.padding_top | divided_by: 12.0 }}vw, {{ section.settings.padding_top }}px); padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.42 | round }}px, {{ section.settings.padding_bottom | divided_by: 12.0 }}vw, {{ section.settings.padding_bottom }}px)" {{ section.shopify_attributes }}>
   <div class="op-about_contain u-container">
     <div class="op-about_content u-margin-trim" style="--op-about-hw: {{ section.settings.heading_width }}ch; --op-about-bw: {{ section.settings.body_width }}ch">
       {%- if section.settings.eyebrow != blank -%}

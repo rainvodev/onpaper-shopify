@@ -1,5 +1,5 @@
 {% comment %} On Paper — Bookcase (Lumos). Tira full-bleed de imágenes con disco que sigue el cursor. Componente propio, reordenable. {% endcomment %}
-<section class="op-bookcase u-section full-width" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" {{ section.shopify_attributes }}>
+<section class="op-bookcase u-section full-width" style="padding-top: clamp({{ section.settings.padding_top | times: 0.42 | round }}px, {{ section.settings.padding_top | divided_by: 12.0 }}vw, {{ section.settings.padding_top }}px); padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.42 | round }}px, {{ section.settings.padding_bottom | divided_by: 12.0 }}vw, {{ section.settings.padding_bottom }}px)" {{ section.shopify_attributes }}>
   {%- assign strip_tag = 'div' -%}
   {%- if section.settings.strip_link != blank -%}{%- assign strip_tag = 'a' -%}{%- endif -%}
   <{{ strip_tag }} class="op-bookcase_strip" data-cursor-follow style="--op-bookcase-cols: {{ section.blocks.size | at_least: 1 }}; --op-bookcase-ratio: {{ section.settings.ratio }}" {% if section.settings.strip_link != blank %}href="{{ section.settings.strip_link }}" aria-label="{{ section.settings.strip_label }}"{% endif %}>
@@ -35,8 +35,8 @@
   }
   .op-bookcase_disc.is-active { opacity: 1; }
   @media (hover: none) { .op-bookcase_strip { cursor: pointer; } }
+  /* Strip decorativo: se mantiene compacto en móvil (2 col), no se apila a 1 (sería demasiado alto). */
   @media (max-width: 900px) { .op-bookcase_strip { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 600px) { .op-bookcase_strip { grid-template-columns: 1fr; } }
 {% endstylesheet %}
 
 {% schema %}

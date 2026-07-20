@@ -1,5 +1,5 @@
 {% comment %} On Paper — Texto (Lumos). Párrafo centrado reutilizable, ancho ajustable. {% endcomment %}
-<section class="op-text u-section {{ section.settings.theme }}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" {{ section.shopify_attributes }}>
+<section class="op-text u-section {{ section.settings.theme }}" style="padding-top: clamp({{ section.settings.padding_top | times: 0.42 | round }}px, {{ section.settings.padding_top | divided_by: 12.0 }}vw, {{ section.settings.padding_top }}px); padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.42 | round }}px, {{ section.settings.padding_bottom | divided_by: 12.0 }}vw, {{ section.settings.padding_bottom }}px)" {{ section.shopify_attributes }}>
   <div class="op-text_contain u-container">
     <div class="op-text_content" style="--op-text-cw: {{ section.settings.content_width }}ch; text-align: {{ section.settings.align }}">
       {%- if section.settings.body != blank -%}
