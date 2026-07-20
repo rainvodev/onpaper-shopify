@@ -59,8 +59,12 @@
   }
   .op-gallery_disc.is-active { opacity: 1; }
   @media (hover: none) { .op-gallery_grid[data-cursor-follow] { cursor: pointer; } }
+  /* Móvil: mosaico real a 2 columnas (multi-column) en vez de apilar todo a lo largo.
+     display:contents desarma los 3 wrappers para que las imágenes fluyan solas y se balanceen. */
   @media (max-width: 700px) {
-    .op-gallery_grid { grid-template-columns: 1fr; }
+    .op-gallery_grid { display: block; columns: 2; column-gap: var(--op-gallery-gap, 12px); }
+    .op-gallery_col { display: contents; }
+    .op-gallery_item { break-inside: avoid; margin-bottom: var(--op-gallery-gap, 12px); }
   }
 {% endstylesheet %}
 
