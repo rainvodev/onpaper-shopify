@@ -1,10 +1,8 @@
-/* On Paper — Motor de precios en vivo. Lee window.OP_PRICING[handle] (assets/op-pricing-data.js)
-   y recalcula el precio mostrado en la página de producto según las opciones (line-item properties)
-   elegidas. Escucha cambios en el formulario (pickers, selects, steppers, textos).
-
-   ⚠️ Solo actualiza el precio MOSTRADO. Cobrar ese precio ajustado requiere un mecanismo de backend
-   (Shopify Functions / draft orders / add-ons), ya que el carrito nativo cobra por variante, no por
-   line-item property. Ver docs/precios-spec.md.
+/* On Paper — Motor de precios en vivo por line-item properties (FALLBACK).
+   Todos los productos cobran hoy por variantes nativas (op-variants.js maneja el precio y
+   este motor se desactiva vía data-op-variant-mode). OP_PRICING está vacío a propósito:
+   solo poblarlo si algún producto futuro necesita precio calculado sin variantes, sabiendo
+   que un precio por properties es SOLO visual — el carrito nativo cobra por variante.
 
    Re-init en shopify:section:load. */
 (function () {

@@ -12,14 +12,8 @@
           "content": "<p>Porque a veces, el mejor regalo es dejar que el otro elija.</p><p>Los certificados están disponibles en formato físico o digital, y pueden personalizarse con el nombre del destinatario, un mensaje especial y el monto o producto elegido.</p><p>Son ideales para cumpleaños, bodas, agradecimientos, o celebraciones especiales. Tienen una vigencia de 6 meses a partir de la fecha de compra.</p>"
         }},
         "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>Entrega física: 5 días hábiles.</p>" }},
-        "gift": { "type": "gift_type", "settings": {
-          "label": "Elige el regalo perfecto",
-          "option_a": "Producto On Paper",
-          "option_b": "Crédito / Saldo",
-          "products": "Photobook Tradicional, Photobook Layflat, Memory Box",
-          "products_placeholder": "Selecciona el producto de tu preferencia…",
-          "amount_placeholder": "Agrega el monto que deseas regalar…"
-        }},
+        "valor": { "type": "pills", "settings": { "label": "Valor", "options": "$500, $1000, $1500, $2000, $3000", "default": "$1000", "collapsible": true }},
+        "valor_nota": { "type": "note", "settings": { "text": "¿Quieres regalar un producto específico? Elige el valor equivalente y menciónalo en el mensaje; nosotros nos encargamos del resto." }},
         "para": { "type": "text", "settings": { "label": "Nombre de quien recibe el regalo", "placeholder": "Para:" }},
         "de": { "type": "text", "settings": { "label": "Nombre de quien regala", "placeholder": "De:" }},
         "entrega": { "type": "radio", "settings": {
@@ -33,7 +27,7 @@
         "correo": { "type": "text", "settings": { "label": "Correo electrónico", "placeholder": "Correo electrónico:" }},
         "dir": { "type": "text", "settings": { "label": "Dirección de envío", "placeholder": "Dirección:" }}
       },
-      "block_order": ["heading", "details", "shipping", "gift", "para", "de", "entrega", "nombre", "tel", "correo", "dir"],
+      "block_order": ["heading", "details", "shipping", "valor", "valor_nota", "para", "de", "entrega", "nombre", "tel", "correo", "dir"],
       "settings": {
         "personalize_heading": "Personaliza tu Giftcard",
         "show_qty": false,

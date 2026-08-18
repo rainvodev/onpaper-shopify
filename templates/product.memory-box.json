@@ -13,11 +13,11 @@
         }},
         "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>10-15 días hábiles.</p>" }},
         "material": { "type": "pills", "settings": { "label": "Material", "options": "Tela, Vinipiel", "default": "Vinipiel", "collapsible": true }},
-        "size": { "type": "size", "settings": { "label": "Tamaño", "set": "memory", "default": "5x4", "note": "Medidas en Pulgadas", "collapsible": true }},
+        "size": { "type": "size", "settings": { "label": "Tamaño", "set": "memory", "default": "4x5", "note": "Medidas en Pulgadas · 4x5 Polaroid · 5x7 Standard", "collapsible": true }},
         "color": { "type": "swatch", "settings": { "label": "Color", "palette": "fabric-standard", "default": "Verde militar", "collapsible": true }},
         "hotstamping": { "type": "swatch", "settings": { "label": "Hotstamping", "palette": "hotstamping", "default": "Oro Rosa", "collapsible": true }},
         "titulo": { "type": "text", "settings": { "label": "Título en portada", "placeholder": "Escribe el título…" }},
-        "fotos": { "type": "stepper", "settings": { "label": "Fotos impresas del tamaño de la caja (opcional)", "min": 0, "default": 1 }}
+        "fotos": { "type": "dropdown", "settings": { "label": "Fotos impresas del tamaño de la caja (opcional)", "options": "Sin fotos, 10 fotos, 20 fotos, 30 fotos" }}
       },
       "block_order": ["heading", "details", "shipping", "material", "size", "color", "hotstamping", "titulo", "fotos"],
       "settings": {

@@ -19,7 +19,7 @@
         "titulo_p": { "type": "text", "settings": { "label": "Título en portada", "placeholder": "Escribe el título…" }},
         "titulo_l": { "type": "text", "settings": { "label": "Título en lomo (opcional)", "placeholder": "Escribe el título…" }},
         "hojas": { "type": "dropdown", "settings": { "label": "Tipo de hojas", "options": "Hojas en Blanco, Nombres Impresos, Nombres Rotulados" }},
-        "cant_hojas": { "type": "stepper", "settings": { "label": "Cantidad de hojas", "min": 1, "default": 1 }},
+        "cant_hojas": { "type": "dropdown", "settings": { "label": "Cantidad de hojas", "options": "Hasta 20 hojas, Hasta 30 hojas, Hasta 40 hojas, Hasta 50 hojas" }},
         "nombres": { "type": "textarea", "settings": { "label": "Agregar más nombres (opcional)", "placeholder": "Escribe los nombres a agregar…" }}
       },
       "block_order": ["heading", "details", "shipping", "material", "size", "color", "hotstamping", "titulo_p", "titulo_l", "hojas", "cant_hojas", "nombres"],

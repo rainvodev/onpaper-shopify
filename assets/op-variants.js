@@ -31,8 +31,15 @@
     var idInput = form.querySelector('[name="id"]');
     var priceEls = root.querySelectorAll('[data-op-price-amount]');
     var addBtn = form.querySelector('[name="add"]');
+    var errEl = form.querySelector('[data-op-add-error]');
     var money = moneyFmt(root);
     root.__opVariantInit = true;
+
+    function setError(msg) {
+      if (!errEl) return;
+      if (msg) { errEl.textContent = msg; errEl.hidden = false; }
+      else { errEl.hidden = true; }
+    }
 
     function selectedValue(optName) {
       var el = form.querySelector('[name="properties[' + optName + ']"]');
@@ -53,6 +60,7 @@
       var v = matchVariant();
       if (!v) {
         if (addBtn) { addBtn.setAttribute('disabled', ''); }
+        setError('Esta combinación no está disponible por el momento.');
         return;
       }
       if (idInput) idInput.value = v.id;
@@ -61,7 +69,15 @@
         root.setAttribute('data-op-unit-price', v.price);
         root.dispatchEvent(new CustomEvent('op:unitprice'));
       }
-      if (addBtn) { if (v.available === false) addBtn.setAttribute('disabled', ''); else addBtn.removeAttribute('disabled'); }
+      if (addBtn) {
+        if (v.available === false) {
+          addBtn.setAttribute('disabled', '');
+          setError('Esta opción está agotada por el momento.');
+        } else {
+          addBtn.removeAttribute('disabled');
+          setError(null);
+        }
+      }
     }
 
     form.addEventListener('change', update);

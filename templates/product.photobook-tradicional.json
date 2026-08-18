@@ -20,9 +20,10 @@
         "interior": { "type": "radio", "settings": { "label": "Diseño interior", "options": "Minimalista, Tradicional", "default": "Minimalista" }},
         "titulo": { "type": "text", "settings": { "label": "Título en portada y lomo (opcional)", "placeholder": "Escribe el título" }},
         "fotos": { "type": "dropdown", "settings": { "label": "Número de fotos", "options": "0-150 fotos, 151-250 fotos, 251-350 fotos" }},
+        "fotos_nota": { "type": "note", "settings": { "text": "¿Más de 350 fotografías? Escríbenos y te hacemos una cotización personalizada." }},
         "link": { "type": "url", "settings": { "label": "Link de fotos (opcional)", "placeholder": "Ingresa el URL", "note": "*En caso de agregar fotos, solo se aceptan links en Google Drive o WeTransfer." }}
       },
-      "block_order": ["heading", "details", "shipping", "material", "size", "color", "hotstamping", "ventana", "interior", "titulo", "fotos", "link"],
+      "block_order": ["heading", "details", "shipping", "material", "size", "color", "hotstamping", "ventana", "interior", "titulo", "fotos", "fotos_nota", "link"],
       "settings": {
         "personalize_heading": "Personaliza tu Photobook",
         "qty_style": "dropdown",
