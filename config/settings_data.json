@@ -8,5 +8,11 @@
  * ------------------------------------------------------------
  */
 {
-  "current": {}
+  "current": {
+    "max_page_width": "90rem",
+    "min_page_margin": 20,
+    "background_color": "#f5f5ef",
+    "foreground_color": "#5f604e",
+    "input_corner_radius": 4
+  }
 }
