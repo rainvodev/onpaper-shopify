@@ -11,3 +11,11 @@
 #
 # Ignore templates and sections with a regular expression:
 #   /(templates|sections)/.*\.json/
+
+# On Paper: material interno del repo que no pertenece al theme publicado
+docs/
+_import/
+README.md
+CONTRIBUTING.md
+LICENSE.md
+.github/
