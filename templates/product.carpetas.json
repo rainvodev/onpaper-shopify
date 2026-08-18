@@ -52,12 +52,33 @@
             "collapsible": true
           }
         },
-        "color": {
+        "color_tela": {
           "type": "swatch",
           "settings": {
             "label": "Color",
-            "palette": "fabric-carpetas",
-            "default": "Blanco crema",
+            "palette": "telas",
+            "default": "Blanco Crema",
+            "show_for": "Tela",
+            "collapsible": true
+          }
+        },
+        "color_plastificada": {
+          "type": "swatch",
+          "settings": {
+            "label": "Color",
+            "palette": "telas-plastificadas",
+            "default": "Blanco",
+            "show_for": "Tela Plastificada",
+            "collapsible": true
+          }
+        },
+        "color_papel": {
+          "type": "swatch",
+          "settings": {
+            "label": "Color",
+            "palette": "papel-texturizado",
+            "default": "Blanco",
+            "show_for": "Papel Texturizado",
             "collapsible": true
           }
         },
@@ -66,7 +87,7 @@
           "settings": {
             "label": "Hotstamping",
             "palette": "hotstamping",
-            "default": "Oro Rosa",
+            "default": "Dorado",
             "collapsible": true
           }
         },
@@ -101,7 +122,9 @@
         "shipping",
         "material",
         "size",
-        "color",
+        "color_tela",
+        "color_plastificada",
+        "color_papel",
         "hotstamping",
         "herraje",
         "placa",

@@ -106,6 +106,84 @@
       });
     });
 
+    // Paletas dependientes del material: muestra solo el grupo cuyo data-op-dep-values
+    // incluye el valor actual del campo controlador, y DESHABILITA los inputs de los
+    // grupos ocultos para que un único properties[Color] viaje al carrito.
+    var form = root.querySelector('#opProductForm') || root.querySelector('form');
+    var deps = root.querySelectorAll('[data-op-dep]');
+    function applyDeps() {
+      deps.forEach(function (dep) {
+        var prop = dep.getAttribute('data-op-dep-prop');
+        var ctrl = form ? form.querySelector('[name="properties[' + prop + ']"]') : null;
+        var values = (dep.getAttribute('data-op-dep-values') || '').split(',').map(function (s) { return s.trim(); });
+        var show = !!ctrl && values.indexOf(ctrl.value) !== -1;
+        dep.hidden = !show;
+        dep.querySelectorAll('input, select, textarea').forEach(function (i) { i.disabled = !show; });
+      });
+    }
+    if (deps.length && form) {
+      applyDeps();
+      form.addEventListener('change', applyDeps);
+    }
+
+    // Imagen por color: primero busca media del producto con alt == color; si no hay,
+    // intenta assets/<handle>-<slug>.jpg (convención del repo). Fallback: no cambia nada.
+    var imgBase = root.getAttribute('data-op-img-base') || '';
+    var imgPrefix = root.getAttribute('data-op-img-prefix') || '';
+    var mediaEl = root.querySelector('[data-op-color-media]');
+    var mediaList = [];
+    if (mediaEl) { try { mediaList = JSON.parse(mediaEl.textContent) || []; } catch (e) { mediaList = []; } }
+    function slug(s) {
+      return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    }
+    function mainImgEl() { return root.querySelector('#opMainImg'); }
+    function swapMain(src, srcset) {
+      var img = mainImgEl();
+      if (!img) {
+        // Producto sin media: sustituye el placeholder por una imagen real.
+        var ph = root.querySelector('[data-op-main-ph]');
+        if (!ph) return;
+        img = document.createElement('img');
+        img.id = 'opMainImg';
+        img.className = 'op-product_mainimg';
+        img.alt = '';
+        ph.replaceWith(img);
+      }
+      img.src = src;
+      if (srcset) img.setAttribute('srcset', srcset);
+      else img.removeAttribute('srcset');
+    }
+    function colorImage(value) {
+      if (!value) return;
+      var target = slug(value);
+      var m = mediaList.filter(function (it) { return it.alt && slug(it.alt) === target; })[0];
+      if (m) { swapMain(m.src, m.srcset || ''); return; }
+      if (!imgBase || !imgPrefix) return;
+      var url = imgBase + imgPrefix + target + '.jpg';
+      var probe = new Image();
+      probe.onload = function () { swapMain(url, ''); };
+      probe.src = url; // si no existe el asset, onerror silencioso: se conserva la imagen actual
+    }
+    function activeColorValue() {
+      var el = null;
+      root.querySelectorAll('[name="properties[Color]"]').forEach(function (i) { if (!i.disabled) el = i; });
+      return el ? el.value : null;
+    }
+    if (form && (mediaList.length || (imgBase && imgPrefix))) {
+      form.addEventListener('change', function (e) {
+        var name = e.target && e.target.name;
+        if (name === 'properties[Color]') colorImage(e.target.value);
+        else if (deps.length && name && name.indexOf('properties[') === 0) {
+          // p. ej. cambio de Material → la paleta activa cambió; refleja su color vigente
+          var v = activeColorValue();
+          if (v) colorImage(v);
+        }
+      });
+      var initial = activeColorValue();
+      if (initial) colorImage(initial);
+    }
+
     // Barra flotante: mostrar cuando el precio principal sale de la vista
     var priceMain = root.querySelector('.op-product_price');
     var sticky = root.querySelector('[data-op-sticky]');

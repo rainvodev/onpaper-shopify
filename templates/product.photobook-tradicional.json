@@ -14,8 +14,9 @@
         "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>20 días hábiles.</p>" }},
         "material": { "type": "pills", "settings": { "label": "Material", "options": "Tela, Vinipiel, Impresión", "default": "Tela", "collapsible": true }},
         "size": { "type": "size", "settings": { "label": "Tamaño", "set": "photobook", "default": "14x11", "note": "Medidas en Pulgadas", "collapsible": true }},
-        "color": { "type": "swatch", "settings": { "label": "Color", "palette": "fabric-photobook", "default": "Gris claro", "collapsible": true }},
-        "hotstamping": { "type": "swatch", "settings": { "label": "Hotstamping", "palette": "hotstamping", "default": "Oro Rosa", "collapsible": true }},
+        "color_tela": { "type": "swatch", "settings": { "label": "Color", "palette": "telas", "default": "Verde Oliva", "show_for": "Tela", "collapsible": true }},
+        "color_vinipiel": { "type": "swatch", "settings": { "label": "Color", "palette": "vinipieles", "default": "Verde Militar", "show_for": "Vinipiel", "collapsible": true }},
+        "hotstamping": { "type": "swatch", "settings": { "label": "Hotstamping", "palette": "hotstamping", "default": "Dorado", "show_for": "Tela, Vinipiel", "collapsible": true }},
         "ventana": { "type": "radio", "settings": { "label": "Ventana de foto en portada", "options": "Sí, No", "default": "No" }},
         "interior": { "type": "radio", "settings": { "label": "Diseño interior", "options": "Minimalista, Tradicional", "default": "Minimalista" }},
         "titulo": { "type": "text", "settings": { "label": "Título en portada y lomo (opcional)", "placeholder": "Escribe el título" }},
@@ -23,7 +24,7 @@
         "fotos_nota": { "type": "note", "settings": { "text": "¿Más de 350 fotografías? Escríbenos y te hacemos una cotización personalizada." }},
         "link": { "type": "url", "settings": { "label": "Link de fotos (opcional)", "placeholder": "Ingresa el URL", "note": "*En caso de agregar fotos, solo se aceptan links en Google Drive o WeTransfer." }}
       },
-      "block_order": ["heading", "details", "shipping", "material", "size", "color", "hotstamping", "ventana", "interior", "titulo", "fotos", "fotos_nota", "link"],
+      "block_order": ["heading", "details", "shipping", "material", "size", "color_tela", "color_vinipiel", "hotstamping", "ventana", "interior", "titulo", "fotos", "fotos_nota", "link"],
       "settings": {
         "personalize_heading": "Personaliza tu Photobook",
         "qty_style": "dropdown",

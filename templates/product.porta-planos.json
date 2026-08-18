@@ -13,12 +13,14 @@
         }},
         "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>15 días hábiles.</p>" }},
         "material": { "type": "pills", "settings": { "label": "Material", "options": "Tela, Tela Plastificada, Papel Texturizado", "default": "Papel Texturizado", "collapsible": true }},
-        "color": { "type": "swatch", "settings": { "label": "Color", "palette": "fabric-carpetas", "default": "Blanco crema", "collapsible": true }},
-        "hotstamping": { "type": "swatch", "settings": { "label": "Hotstamping", "palette": "hotstamping", "default": "Oro Rosa", "collapsible": true }},
+        "color_tela": { "type": "swatch", "settings": { "label": "Color", "palette": "telas", "default": "Blanco Crema", "show_for": "Tela", "collapsible": true }},
+        "color_plastificada": { "type": "swatch", "settings": { "label": "Color", "palette": "telas-plastificadas", "default": "Blanco", "show_for": "Tela Plastificada", "collapsible": true }},
+        "color_papel": { "type": "swatch", "settings": { "label": "Color", "palette": "papel-texturizado", "default": "Blanco", "show_for": "Papel Texturizado", "collapsible": true }},
+        "hotstamping": { "type": "swatch", "settings": { "label": "Hotstamping", "palette": "hotstamping", "default": "Dorado", "collapsible": true }},
         "placa": { "type": "radio", "settings": { "label": "¿Cuentas con placa de logotipo?", "options": "Sí, No", "default": "No" }},
         "logo": { "type": "url", "settings": { "label": "Agrega tu logotipo (opcional)", "placeholder": "Adjunta el link con el logotipo en formato PDF." }}
       },
-      "block_order": ["heading", "details", "shipping", "material", "color", "hotstamping", "placa", "logo"],
+      "block_order": ["heading", "details", "shipping", "material", "color_tela", "color_plastificada", "color_papel", "hotstamping", "placa", "logo"],
       "settings": {
         "personalize_heading": "Personaliza tu Portaplano",
         "qty_style": "dropdown",

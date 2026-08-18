@@ -1,6 +1,6 @@
 {% comment %} On Paper — Página de producto (Lumos). Galería + info + personalización por bloques (line-item
   properties, sin variantes) + relacionados. Calcado del XD; un template por producto define los bloques. {% endcomment %}
-<section class="op-product u-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" data-op-handle="{{ product.handle }}" data-op-money="{{ shop.money_format | strip_html | escape }}" data-op-unit-price="{{ product.selected_or_first_available_variant.price | default: product.price }}"{% if product.variants.size > 1 %} data-op-variant-mode="1"{% endif %} {{ section.shopify_attributes }}>
+<section class="op-product u-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" data-op-handle="{{ product.handle }}" data-op-money="{{ shop.money_format | strip_html | escape }}" data-op-unit-price="{{ product.selected_or_first_available_variant.price | default: product.price }}"{% if product.variants.size > 1 %} data-op-variant-mode="1"{% endif %} data-op-img-base="{{ 'op-product.js' | asset_url | split: 'op-product.js' | first }}" data-op-img-prefix="{{ product.handle }}-" {{ section.shopify_attributes }}>
   <div class="op-product_contain u-container">
     {%- if section.settings.back_label != blank -%}
       <a class="op-product_back" href="{{ section.settings.back_link | default: routes.all_products_collection_url }}">{{ section.settings.back_label }}</a>
@@ -26,12 +26,21 @@
             </div>
           {%- endif -%}
         {%- else -%}
-          <div class="op-product_main"><div class="op-product_mainimg op-product_mainimg--ph"></div></div>
+          <div class="op-product_main"><div class="op-product_mainimg op-product_mainimg--ph" data-op-main-ph></div></div>
           <div class="op-product_thumbs">
             <span class="op-product_thumb op-product_thumb--ph"></span>
             <span class="op-product_thumb op-product_thumb--ph"></span>
             <span class="op-product_thumb op-product_thumb--ph"></span>
           </div>
+        {%- endif -%}
+        {%- comment -%} Media del producto (alt = nombre del color) para el swap de imagen por color {%- endcomment -%}
+        {%- if product.media.size > 0 -%}
+          <script type="application/json" data-op-color-media>[
+            {%- for media in product.media -%}
+              {%- capture m_srcset -%}{{ media | image_url: width: 500 }} 500w, {{ media | image_url: width: 800 }} 800w, {{ media | image_url: width: 1100 }} 1100w, {{ media | image_url: width: 1400 }} 1400w{%- endcapture -%}
+              {"alt": {{ media.alt | json }}, "src": {{ media | image_url: width: 1400 | json }}, "srcset": {{ m_srcset | json }}}{% unless forloop.last %},{% endunless %}
+            {%- endfor -%}
+          ]</script>
         {%- endif -%}
       </div>
 
@@ -97,7 +106,16 @@
 
               {%- when 'swatch' -%}
                 {%- capture body -%}{% render 'op-swatches', palette: block.settings.palette, property: label, default: block.settings.default %}{%- endcapture -%}
-                {% render 'op-field-group', block: block, label: label, body: body, hint: block.settings.default %}
+                {%- if block.settings.show_for != blank -%}
+                  {%- comment -%} Paleta dependiente: visible solo cuando el campo controlador (Material)
+                    tiene uno de los valores listados; op-product.js oculta y DESHABILITA los inputs
+                    de los grupos inactivos para que solo un properties[Color] viaje al carrito. {%- endcomment -%}
+                  <div data-op-dep data-op-dep-prop="{{ block.settings.depends_on | default: 'Material' | escape }}" data-op-dep-values="{{ block.settings.show_for | escape }}" hidden>
+                    {% render 'op-field-group', block: block, label: label, body: body, hint: block.settings.default %}
+                  </div>
+                {%- else -%}
+                  {% render 'op-field-group', block: block, label: label, body: body, hint: block.settings.default %}
+                {%- endif -%}
 
               {%- when 'size' -%}
                 {%- capture body -%}{% render 'op-sizes', set: block.settings.set, property: label, default: block.settings.default %}{%- endcapture -%}
@@ -400,13 +418,16 @@
     ]},
     { "type": "swatch", "name": "Color / Hotstamping", "settings": [
       { "type": "text", "id": "label", "label": "Etiqueta", "default": "Color" },
-      { "type": "select", "id": "palette", "label": "Paleta", "options": [
-        { "value": "fabric-standard", "label": "Telas (15)" },
-        { "value": "fabric-photobook", "label": "Telas Photobook (30)" },
-        { "value": "fabric-carpetas", "label": "Telas Carpetas (14)" },
-        { "value": "hotstamping", "label": "Hotstamping (7)" }
-      ], "default": "fabric-standard" },
+      { "type": "select", "id": "palette", "label": "Paleta (catálogo oficial)", "options": [
+        { "value": "telas", "label": "Telas (19)" },
+        { "value": "vinipieles", "label": "Vinipieles (17)" },
+        { "value": "telas-plastificadas", "label": "Telas Plastificadas (6)" },
+        { "value": "papel-texturizado", "label": "Papel Texturizado (14)" },
+        { "value": "hotstamping", "label": "Hotstamping (8)" }
+      ], "default": "telas" },
       { "type": "text", "id": "default", "label": "Default (nombre)" },
+      { "type": "text", "id": "depends_on", "label": "Depende del campo (etiqueta)", "default": "Material", "info": "Campo cuyo valor decide si esta paleta se muestra." },
+      { "type": "text", "id": "show_for", "label": "Mostrar solo para (valores, coma)", "info": "Ej. 'Tela'. Vacío = siempre visible." },
       { "type": "checkbox", "id": "collapsible", "label": "Colapsable", "default": true }
     ]},
     { "type": "size", "name": "Tamaño", "settings": [
@@ -414,10 +435,10 @@
       { "type": "select", "id": "set", "label": "Set", "options": [
         { "value": "photobook", "label": "Photobook (6)" },
         { "value": "firmas-bookcase", "label": "Firmas/Bookcase (6)" },
-        { "value": "memory", "label": "Memory (4)" },
+        { "value": "memory", "label": "Memory (2)" },
         { "value": "carpetas", "label": "Carpetas (4)" },
         { "value": "cajas", "label": "Cajas (4)" },
-        { "value": "fotos", "label": "Fotos (8)" }
+        { "value": "fotos", "label": "Fotos (9)" }
       ], "default": "photobook" },
       { "type": "text", "id": "default", "label": "Default (ej. 11x14)" },
       { "type": "text", "id": "note", "label": "Nota", "default": "Medidas en Pulgadas" },

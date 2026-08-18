@@ -14,12 +14,13 @@
         "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>10-15 días hábiles.</p>" }},
         "material": { "type": "pills", "settings": { "label": "Material", "options": "Tela, Vinipiel", "default": "Vinipiel", "collapsible": true }},
         "size": { "type": "size", "settings": { "label": "Tamaño", "set": "memory", "default": "4x5", "note": "Medidas en Pulgadas · 4x5 Polaroid · 5x7 Standard", "collapsible": true }},
-        "color": { "type": "swatch", "settings": { "label": "Color", "palette": "fabric-standard", "default": "Verde militar", "collapsible": true }},
-        "hotstamping": { "type": "swatch", "settings": { "label": "Hotstamping", "palette": "hotstamping", "default": "Oro Rosa", "collapsible": true }},
+        "color_tela": { "type": "swatch", "settings": { "label": "Color", "palette": "telas", "default": "Verde Oliva", "show_for": "Tela", "collapsible": true }},
+        "color_vinipiel": { "type": "swatch", "settings": { "label": "Color", "palette": "vinipieles", "default": "Verde Militar", "show_for": "Vinipiel", "collapsible": true }},
+        "hotstamping": { "type": "swatch", "settings": { "label": "Hotstamping", "palette": "hotstamping", "default": "Dorado", "collapsible": true }},
         "titulo": { "type": "text", "settings": { "label": "Título en portada", "placeholder": "Escribe el título…" }},
         "fotos": { "type": "dropdown", "settings": { "label": "Fotos impresas del tamaño de la caja (opcional)", "options": "Sin fotos, 10 fotos, 20 fotos, 30 fotos" }}
       },
-      "block_order": ["heading", "details", "shipping", "material", "size", "color", "hotstamping", "titulo", "fotos"],
+      "block_order": ["heading", "details", "shipping", "material", "size", "color_tela", "color_vinipiel", "hotstamping", "titulo", "fotos"],
       "settings": {
         "personalize_heading": "Personaliza tu Memory Box",
         "qty_style": "dropdown",
