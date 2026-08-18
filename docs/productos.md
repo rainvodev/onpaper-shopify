@@ -1,4 +1,6 @@
-# Catálogo de Productos — On Paper
+# Catálogo de Productos — On Paper (HISTÓRICO)
+
+> **⚠️ DOCUMENTO SUPERADO (ago-2026).** Los productos ahora SÍ usan **variantes nativas** para todo lo que afecta precio (ver `_import/products-variants.csv`); las properties quedan solo para personalización sin costo. Los precios reales vienen del catálogo oficial (CATALOGO.pdf / CATALOGO_CAJAS.pdf). Se conserva como referencia del catálogo y sus campos. Ver `docs/migracion.md`.
 
 > Documento generado a partir del theme (`_import/products.csv` + templates `product.*.json` + `sections/product.liquid`).
 >

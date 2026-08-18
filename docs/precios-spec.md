@@ -1,4 +1,6 @@
-# On Paper — Spec de precios (fuente única)
+# On Paper — Spec de precios (HISTÓRICO)
+
+> **⚠️ DOCUMENTO SUPERADO (ago-2026).** La tienda ahora cobra por **variantes nativas de Shopify**; la fuente única de precios es `_import/products-variants.csv` (generado por `_import/gen_variants_csv.py`, con los precios reales del catálogo oficial para photobooks/bookcase/memory box/fotos impresas). Este documento se conserva como referencia de las reglas de negocio y de los pendientes con Anaissa. Ver `docs/migracion.md` §7-8.
 
 > **Propósito:** definir, campo por campo, qué opciones de cada producto **alteran el precio final** en la tienda Shopify, para implementar la lógica de cotización.
 >

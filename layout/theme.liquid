@@ -47,7 +47,8 @@
     {{ content_for_header }}
   </head>
 
-  <body>
+  <body class="{% unless template.name == 'index' %}has-fixed-header{% endunless %}">
+    <a class="skip-link" href="#op-main">Ir al contenido</a>
     {% sections 'header-group' %}
 
     <main id="op-main" class="op-main">
