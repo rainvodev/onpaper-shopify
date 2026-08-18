@@ -8,10 +8,10 @@
           "intro": "<p>Nuestros portaplanos personalizados están pensados para transportar y presentar planos, láminas o documentos de gran formato con estilo y profesionalismo.</p>"
         }},
         "details": { "type": "accordion", "settings": {
-          "heading": "Details",
+          "heading": "Detalles",
           "content": "<p>Protección, presentación y diseño en una sola pieza.</p><p>Están hechos a mano con materiales resistentes, su medida es de 60 x 90 cm y puedes elegir desde el material, hasta el estampado con logotipo, nombre, o frase. Son ideales para entregas de proyectos arquitectónicos o propuestas creativas.</p>"
         }},
-        "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>15 días hábiles.</p>" }},
+        "shipping": { "type": "accordion", "settings": { "heading": "Tiempo de envío", "content": "<p>15 días hábiles.</p>" }},
         "material": { "type": "pills", "settings": { "label": "Material", "options": "Tela, Tela Plastificada, Papel Texturizado", "default": "Papel Texturizado", "collapsible": true }},
         "color_tela": { "type": "swatch", "settings": { "label": "Color", "palette": "telas", "default": "Blanco Crema", "show_for": "Tela", "collapsible": true }},
         "color_plastificada": { "type": "swatch", "settings": { "label": "Color", "palette": "telas-plastificadas", "default": "Blanco", "show_for": "Tela Plastificada", "collapsible": true }},
@@ -28,7 +28,7 @@
         "qty_note": "A partir de 21 porta planos o más, escríbenos para recibir cotización personalizada.",
         "show_buy_now": true,
         "show_related": true,
-        "related_heading": "You may also like…"
+        "related_heading": "También te puede gustar…"
       }
     }
   },

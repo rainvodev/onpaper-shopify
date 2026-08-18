@@ -52,5 +52,9 @@
     "submit": "Buscar",
     "no_results_html": "No encontramos resultados para {{ terms }}",
     "results_for_html": "{{ count }} resultados para {{ terms }}"
+  },
+  "seo": {
+    "tagged": "etiquetado \"{{ tags }}\"",
+    "page": "Página {{ page }}"
   }
 }

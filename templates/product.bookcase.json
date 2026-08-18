@@ -8,10 +8,10 @@
           "intro": "<p>Nuestros bookcases están hechas con el mismo material, diseño y cuidado que nuestros libros. Son literalmente el libro convertido en caja: mismas texturas, mismo estilo, misma personalización, pero en versión funda rígida.</p>"
         }},
         "details": { "type": "accordion", "settings": {
-          "heading": "Details",
+          "heading": "Detalles",
           "content": "<p>El complemento perfecto para proteger lo que más valoras.</p><p>Están diseñadas para guardar y conservar tu libro de forma segura, protegiéndolo del polvo, el uso y el paso del tiempo, mientras mantienen su estética impecable. Son ideales para regalar un libro de forma especial o para guardar tus recuerdos como una pieza de colección.</p>"
         }},
-        "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>15 días hábiles.</p>" }},
+        "shipping": { "type": "accordion", "settings": { "heading": "Tiempo de envío", "content": "<p>15 días hábiles.</p>" }},
         "material": { "type": "pills", "settings": { "label": "Material", "options": "Tela, Vinipiel", "default": "Vinipiel", "collapsible": true }},
         "size": { "type": "size", "settings": { "label": "Tamaño", "set": "firmas-bookcase", "default": "11x14", "note": "Medidas en Pulgadas", "collapsible": true }},
         "color_tela": { "type": "swatch", "settings": { "label": "Color", "palette": "telas", "default": "Verde Oliva", "show_for": "Tela", "collapsible": true }},
@@ -26,7 +26,7 @@
         "qty_label": "Cantidad",
         "show_buy_now": true,
         "show_related": true,
-        "related_heading": "You may also like…"
+        "related_heading": "También te puede gustar…"
       }
     }
   },

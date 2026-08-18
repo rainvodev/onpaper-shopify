@@ -8,10 +8,10 @@
           "intro": "<p>Cuando buscas una experiencia visual sin interrupciones, el libro Layflat es la opción ideal. Este formato se imprime en papel fotográfico, lo que ofrece una calidad de imagen superior, con colores vivos y detalles nítidos.</p>"
         }},
         "details": { "type": "accordion", "settings": {
-          "heading": "Details",
+          "heading": "Detalles",
           "content": "<p>A diferencia del libro tradicional, el Layflat no está cosido, lo que permite que se abra completamente en plano, ideal para fotos a doble página o composiciones amplias.</p><p>Es un producto con acabado más premium, pensado para ocasiones muy especiales o cualquier proyecto que merezca el máximo cuidado y presentación.</p><p>Su diseño limpio, apertura perfecta y calidad de impresión lo convierten en una pieza de colección.</p>"
         }},
-        "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>20 días hábiles.</p>" }},
+        "shipping": { "type": "accordion", "settings": { "heading": "Tiempo de envío", "content": "<p>20 días hábiles.</p>" }},
         "material": { "type": "pills", "settings": { "label": "Material", "options": "Tela, Vinipiel, Impresión", "default": "Vinipiel", "collapsible": true }},
         "size": { "type": "size", "settings": { "label": "Tamaño", "set": "photobook", "default": "11x14", "note": "Medidas en Pulgadas", "collapsible": true }},
         "color_tela": { "type": "swatch", "settings": { "label": "Color", "palette": "telas", "default": "Verde Oliva", "show_for": "Tela", "collapsible": true }},
@@ -31,7 +31,7 @@
         "qty_note": "A partir de 6 libros o más, se requiere cotización personalizada.",
         "show_buy_now": true,
         "show_related": true,
-        "related_heading": "You may also like…"
+        "related_heading": "También te puede gustar…"
       }
     }
   },

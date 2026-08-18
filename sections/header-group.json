@@ -14,15 +14,15 @@
     "header": {
       "type": "op-header",
       "settings": {
-        "products_label": "Products",
-        "collections_label": "Collections",
-        "others_label": "Others",
+        "products_label": "Productos",
+        "collections_label": "Colecciones",
+        "others_label": "Otros",
         "others_link": "shopify://pages/others",
         "products_collection": "best-sellers",
         "bestsellers_collection": "best-sellers",
-        "products_eyebrow": "View all",
+        "products_eyebrow": "Ver todo",
         "products_eyebrow_link": "shopify://collections/all",
-        "collections_eyebrow": "View all",
+        "collections_eyebrow": "Ver todo",
         "collections_eyebrow_link": "",
         "feature_ratio": "4 / 5"
       }

@@ -42,7 +42,7 @@
         "content_width": 40,
         "heading": "<p>Crafted with passion, <em>designed for a lifetime.</em></p>",
         "subheading": "",
-        "cta_label": "Shop now",
+        "cta_label": "Comprar ahora",
         "cta_link": "shopify://collections/all"
       }
     },
@@ -53,7 +53,7 @@
         "padding_bottom": 64,
         "heading_width": 25,
         "body_width": 56,
-        "eyebrow": "About us",
+        "eyebrow": "Nosotros",
         "heading": "<p><em>Because your moments are meant to be celebrated.</em></p>",
         "body": "<p>En On Paper creemos que los recuerdos más bonitos merecen guardarse con intención. Somos una marca mexicana de diseño personalizado especializada en transformar momentos especiales en objetos impresos únicos y significativos.</p>"
       }
@@ -120,7 +120,7 @@
         "overlay": 25,
         "heading_width": 30,
         "heading": "<p>Get to know our <em>Photobook Collections.</em></p>",
-        "cta_label": "Shop now",
+        "cta_label": "Comprar ahora",
         "cta_link": "shopify://collections/photobooks"
       }
     },
@@ -129,11 +129,11 @@
       "settings": {
         "padding_top": 96,
         "padding_bottom": 96,
-        "eyebrow": "Best sellers",
+        "eyebrow": "Más vendidos",
         "heading": "<p>Enduring, personal, <em>unforgettable.</em></p>",
         "collection": "best-sellers",
         "products_count": 3,
-        "cta_label": "Shop now"
+        "cta_label": "Comprar ahora"
       }
     },
     "cta": {
@@ -148,7 +148,7 @@
         "eyebrow": "",
         "heading": "<p>Proyectos Personalizados</p>",
         "body": "<p>En On Paper cada cliente tiene un lugar especial: entendemos lo importante que es confiar en quien plasma tus recuerdos. Por eso, nuestro trabajo está hecho con atención, cariño y dedicación. ¡Escríbenos para hacer realidad tu idea!</p>",
-        "cta_label": "Let's work together",
+        "cta_label": "Trabajemos juntos",
         "cta_link": "shopify://pages/contacto"
       }
     },
@@ -253,7 +253,7 @@
         "padding_bottom": 96,
         "heading": "",
         "gap": 16,
-        "disc_label": "Send message",
+        "disc_label": "Escríbenos",
         "disc_link": "shopify://pages/contacto"
       }
     }

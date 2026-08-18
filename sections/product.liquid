@@ -235,7 +235,7 @@
       {%- if related == blank or related.size < 2 -%}{%- assign related = collections.all.products -%}{%- endif -%}
       {%- if related and related.size > 1 -%}
         <div class="op-product_related" data-reveal>
-          <h2 class="op-product_related-h">{{ section.settings.related_heading | default: 'You may also like…' }}</h2>
+          <h2 class="op-product_related-h">{{ section.settings.related_heading | default: 'También te puede gustar…' }}</h2>
           <div class="op-product_related-grid">
             {%- assign shown = 0 -%}
             {%- for p in related -%}
@@ -383,7 +383,7 @@
   "settings": [
     { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 200, "step": 4, "default": 64, "unit": "px" },
     { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 200, "step": 4, "default": 96, "unit": "px" },
-    { "type": "text", "id": "back_label", "label": "Botón volver", "default": "← Products" },
+    { "type": "text", "id": "back_label", "label": "Botón volver", "default": "← Productos" },
     { "type": "url", "id": "back_link", "label": "Volver — enlace" },
     { "type": "text", "id": "personalize_heading", "label": "Encabezado de personalización", "default": "Personaliza tu producto" },
     { "type": "header", "content": "Cantidad" },
@@ -398,8 +398,8 @@
     { "type": "text", "id": "add_label", "label": "Texto botón agregar", "default": "Agregar al carrito" },
     { "type": "checkbox", "id": "show_buy_now", "label": "Mostrar Comprar ahora", "default": true },
     { "type": "header", "content": "Relacionados" },
-    { "type": "checkbox", "id": "show_related", "label": "Mostrar 'You may also like'", "default": true },
-    { "type": "text", "id": "related_heading", "label": "Título", "default": "You may also like…" }
+    { "type": "checkbox", "id": "show_related", "label": "Mostrar 'También te puede gustar'", "default": true },
+    { "type": "text", "id": "related_heading", "label": "Título", "default": "También te puede gustar…" }
   ],
   "blocks": [
     { "type": "heading", "name": "Título + intro", "settings": [
@@ -407,7 +407,7 @@
       { "type": "richtext", "id": "intro", "label": "Descripción intro" }
     ]},
     { "type": "accordion", "name": "Acordeón", "settings": [
-      { "type": "text", "id": "heading", "label": "Título", "default": "Details" },
+      { "type": "text", "id": "heading", "label": "Título", "default": "Detalles" },
       { "type": "richtext", "id": "content", "label": "Contenido", "default": "<p>Detalles.</p>" }
     ]},
     { "type": "pills", "name": "Pills (Material)", "settings": [

@@ -14,7 +14,7 @@
       "settings": {
         "padding_top": 52,
         "padding_bottom": 96,
-        "back_label": "← Products",
+        "back_label": "← Productos",
         "back_link": "",
         "personalize_heading": "Personaliza tu producto",
         "show_qty": true,
@@ -25,7 +25,7 @@
         "add_label": "Agregar al carrito",
         "show_buy_now": true,
         "show_related": true,
-        "related_heading": "You may also like…"
+        "related_heading": "También te puede gustar…"
       }
     }
   },

@@ -8,10 +8,10 @@
           "intro": "<p>Nuestras Memory Box son cajitas diseñadas para guardar esos momentos especiales de forma física y personalizada. Cada caja es hecha a mano y puede llevar nombres, fechas o frases significativas que la vuelven única.</p>"
         }},
         "details": { "type": "accordion", "settings": {
-          "heading": "Details",
+          "heading": "Detalles",
           "content": "<p>Las memory box no solo guardan fotos. Guardan historias.</p><p>Están pensadas para almacenar fotos impresas (puedes elegir el tamaño y cantidad), y son perfectas para regalar, coleccionar momentos importantes o simplemente tener tus recuerdos a la mano.</p>"
         }},
-        "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>10-15 días hábiles.</p>" }},
+        "shipping": { "type": "accordion", "settings": { "heading": "Tiempo de envío", "content": "<p>10-15 días hábiles.</p>" }},
         "material": { "type": "pills", "settings": { "label": "Material", "options": "Tela, Vinipiel", "default": "Vinipiel", "collapsible": true }},
         "size": { "type": "size", "settings": { "label": "Tamaño", "set": "memory", "default": "4x5", "note": "Medidas en Pulgadas · 4x5 Polaroid · 5x7 Standard", "collapsible": true }},
         "color_tela": { "type": "swatch", "settings": { "label": "Color", "palette": "telas", "default": "Verde Oliva", "show_for": "Tela", "collapsible": true }},
@@ -27,7 +27,7 @@
         "qty_label": "Cantidad",
         "show_buy_now": true,
         "show_related": true,
-        "related_heading": "You may also like…"
+        "related_heading": "También te puede gustar…"
       }
     }
   },

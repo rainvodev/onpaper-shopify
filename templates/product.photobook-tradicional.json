@@ -8,10 +8,10 @@
           "intro": "<p>Nuestros libros tradicionales están pensados para conservar tus momentos especiales en un formato cálido, tangible y atemporal. Cada uno se diseña de forma personalizada y se encuaderna artesanalmente.</p>"
         }},
         "details": { "type": "accordion", "settings": {
-          "heading": "Details",
+          "heading": "Detalles",
           "content": "<p>Presentación, estructura y detalle en un solo objeto.</p><p>Los libros tradicionales están cosidos, por lo que no abren completamente. Por esa misma razón, las imágenes panorámicas no suelen recomendarse, ya que el doblez central genera un pequeño relieve que interrumpe la continuidad de la foto. Asimismo, entre más hojas se agreguen, el libro tiende a abrirse con mayor rigidez, algo natural en este tipo de encuadernación.</p><p>La impresión se hace en papel couché de 200 gr, lo que brinda una excelente calidad de imagen y un acabado firme, ideal para preservar tus fotos con detalle.</p>"
         }},
-        "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>20 días hábiles.</p>" }},
+        "shipping": { "type": "accordion", "settings": { "heading": "Tiempo de envío", "content": "<p>20 días hábiles.</p>" }},
         "material": { "type": "pills", "settings": { "label": "Material", "options": "Tela, Vinipiel, Impresión", "default": "Tela", "collapsible": true }},
         "size": { "type": "size", "settings": { "label": "Tamaño", "set": "photobook", "default": "14x11", "note": "Medidas en Pulgadas", "collapsible": true }},
         "color_tela": { "type": "swatch", "settings": { "label": "Color", "palette": "telas", "default": "Verde Oliva", "show_for": "Tela", "collapsible": true }},
@@ -32,7 +32,7 @@
         "qty_note": "A partir de 6 libros o más, se requiere cotización personalizada.",
         "show_buy_now": true,
         "show_related": true,
-        "related_heading": "You may also like…"
+        "related_heading": "También te puede gustar…"
       }
     }
   },

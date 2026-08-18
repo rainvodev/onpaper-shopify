@@ -22,14 +22,14 @@
         "details": {
           "type": "accordion",
           "settings": {
-            "heading": "Details",
+            "heading": "Detalles",
             "content": "<p>Porque lo que llevas dentro importa, pero cómo lo entregas también deja huella.</p><p>Cada carpeta se hace a mano, con materiales de alta calidad y detalles personalizados como nombres, logotipos, iniciales o frases clave. Son ideales para certificados, propuestas, portafolios, fotografías o cualquier entrega en la que quieras destacar.</p><p>Disponibles tanto para proyectos individuales, como para pedidos por volumen (eventos, empresas o presentaciones profesionales). Adaptamos cada diseño a lo que necesitas.</p>"
           }
         },
         "shipping": {
           "type": "accordion",
           "settings": {
-            "heading": "Shipping time",
+            "heading": "Tiempo de envío",
             "content": "<p>20 días hábiles.</p>"
           }
         },
@@ -133,7 +133,7 @@
       "settings": {
         "padding_top": 64,
         "padding_bottom": 96,
-        "back_label": "← Products",
+        "back_label": "← Productos",
         "back_link": "",
         "personalize_heading": "Personaliza tu Carpeta",
         "show_qty": true,
@@ -144,7 +144,7 @@
         "add_label": "Agregar al carrito",
         "show_buy_now": true,
         "show_related": true,
-        "related_heading": "You may also like…"
+        "related_heading": "También te puede gustar…"
       }
     }
   },

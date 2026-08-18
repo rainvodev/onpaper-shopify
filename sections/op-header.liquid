@@ -19,11 +19,11 @@
       <nav class="op-header_nav" aria-label="Principal">
         {%- for g in groups -%}
           <button type="button" class="op-header_link op-header_trigger" data-op-trigger="{{ g }}" aria-expanded="false" aria-controls="op-panel-{{ g }}">
-            {%- if g == 'products' -%}{{ section.settings.products_label | default: 'Products' }}{%- else -%}{{ section.settings.collections_label | default: 'Collections' }}{%- endif -%}
+            {%- if g == 'products' -%}{{ section.settings.products_label | default: 'Productos' }}{%- else -%}{{ section.settings.collections_label | default: 'Colecciones' }}{%- endif -%}
           </button>
         {%- endfor -%}
         {%- if section.settings.others_link != blank -%}
-          <a href="{{ section.settings.others_link }}" class="op-header_link">{{ section.settings.others_label | default: 'Others' }}</a>
+          <a href="{{ section.settings.others_link }}" class="op-header_link">{{ section.settings.others_label | default: 'Otros' }}</a>
         {%- endif -%}
       </nav>
 
@@ -152,7 +152,7 @@
     <div class="op-header_drawerinner u-container">
       <details class="op-header_acc">
         <summary class="op-header_accsum">
-          <span>{{ section.settings.products_label | default: 'Products' }}</span>
+          <span>{{ section.settings.products_label | default: 'Productos' }}</span>
           <svg class="op-header_chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
         </summary>
         <ul class="op-header_acclist">
@@ -163,7 +163,7 @@
       </details>
       <details class="op-header_acc">
         <summary class="op-header_accsum">
-          <span>{{ section.settings.collections_label | default: 'Collections' }}</span>
+          <span>{{ section.settings.collections_label | default: 'Colecciones' }}</span>
           <svg class="op-header_chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
         </summary>
         <ul class="op-header_acclist">
@@ -174,7 +174,7 @@
       </details>
       {%- if section.settings.others_link != blank -%}
         <a class="op-header_accroot" href="{{ section.settings.others_link }}">
-          <span>{{ section.settings.others_label | default: 'Others' }}</span>
+          <span>{{ section.settings.others_label | default: 'Otros' }}</span>
           <svg class="op-header_chev op-header_chev--go" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       {%- endif -%}
@@ -331,10 +331,10 @@
     { "type": "header", "content": "Panel Products" },
     { "type": "collection", "id": "products_collection", "label": "Colección que lista los productos (vacío = todos)" },
     { "type": "collection", "id": "bestsellers_collection", "label": "Best sellers (3 productos a la derecha)" },
-    { "type": "text", "id": "products_eyebrow", "label": "Eyebrow", "default": "View all" },
+    { "type": "text", "id": "products_eyebrow", "label": "Eyebrow", "default": "Ver todo" },
     { "type": "url", "id": "products_eyebrow_link", "label": "Eyebrow — enlace" },
     { "type": "header", "content": "Panel Collections" },
-    { "type": "text", "id": "collections_eyebrow", "label": "Eyebrow", "default": "View all" },
+    { "type": "text", "id": "collections_eyebrow", "label": "Eyebrow", "default": "Ver todo" },
     { "type": "url", "id": "collections_eyebrow_link", "label": "Eyebrow — enlace" },
     { "type": "header", "content": "Panel (apariencia)" },
     { "type": "select", "id": "feature_ratio", "label": "Proporción de imagen de producto", "options": [

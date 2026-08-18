@@ -8,10 +8,10 @@
           "intro": "<p>Los momentos más especiales merecen palabras que los acompañen. Nuestro libro de firmas está diseñado para convertirse en un recuerdo tangible lleno de mensajes, deseos y cariño.</p>"
         }},
         "details": { "type": "accordion", "settings": {
-          "heading": "Details",
+          "heading": "Detalles",
           "content": "<p>Los momentos más especiales merecen palabras que los acompañen.</p><p>Es un detalle ideal para boda civil o eventos donde las personas más importantes de tu vida quieran dejarte algo más que su presencia: sus palabras. El diseño es limpio, elegante y completamente personalizado para ti. Un objeto que guarda no solo firmas, sino emociones.</p>"
         }},
-        "shipping": { "type": "accordion", "settings": { "heading": "Shipping time", "content": "<p>10-15 días hábiles.</p>" }},
+        "shipping": { "type": "accordion", "settings": { "heading": "Tiempo de envío", "content": "<p>10-15 días hábiles.</p>" }},
         "material": { "type": "pills", "settings": { "label": "Material", "options": "Tela, Vinipiel, Impresión", "default": "Vinipiel", "collapsible": true }},
         "size": { "type": "size", "settings": { "label": "Tamaño", "set": "firmas-bookcase", "default": "11x14", "note": "Medidas en Pulgadas", "collapsible": true }},
         "color_tela": { "type": "swatch", "settings": { "label": "Color", "palette": "telas", "default": "Verde Oliva", "show_for": "Tela", "collapsible": true }},
@@ -30,7 +30,7 @@
         "qty_label": "Cantidad",
         "show_buy_now": true,
         "show_related": true,
-        "related_heading": "You may also like…"
+        "related_heading": "También te puede gustar…"
       }
     }
   },
