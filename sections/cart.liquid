@@ -74,6 +74,9 @@
                 <p class="op-cartpage_shipnote">{{ section.settings.shipping_note }}</p>
               {%- endif -%}
               <button type="submit" name="checkout" class="op-cartpage_checkout">{{ section.settings.checkout_label | default: 'Finalizar compra' }}</button>
+              {%- if additional_checkout_buttons -%}
+                <div class="op-cartpage_addl">{{ content_for_additional_checkout_buttons }}</div>
+              {%- endif -%}
             </form>
             <a class="op-cartpage_continue" href="{{ section.settings.continue_link | default: routes.all_products_collection_url }}">{{ section.settings.continue_label | default: 'Seguir comprando' }}</a>
           </div>
@@ -122,6 +125,7 @@
   .op-cartpage_subtotal { display: flex; align-items: center; justify-content: space-between; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.82rem; padding-top: var(--_spacing---space--4); border-top: 0.0625rem solid var(--_theme---border); }
   .op-cartpage_shipnote { font-size: 0.78rem; font-style: italic; opacity: 0.6; margin: 0; }
   .op-cartpage_checkout { width: 100%; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.8rem; color: #fff; background-color: var(--swatch--brand-300, #b0b094); border: 0; border-radius: 2rem; padding: 1rem 2rem; cursor: pointer; transition: background-color 250ms; }
+  .op-cartpage_addl { margin-top: var(--_spacing---space--4); }
   .op-cartpage_checkout:hover { background-color: var(--swatch--brand-500, #5f604e); }
   .op-cartpage_continue { text-align: center; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.74rem; color: currentColor; text-decoration: none; opacity: 0.7; transition: opacity 200ms; }
   .op-cartpage_continue:hover { opacity: 1; }

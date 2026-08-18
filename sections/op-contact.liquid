@@ -1,0 +1,117 @@
+{% comment %} On Paper — Página de contacto (Lumos). Formulario nativo de Shopify ({% form 'contact' %}):
+  los mensajes llegan al correo del remitente configurado en Admin → Configuración → Notificaciones.
+  Estilos alineados a los campos de la página de producto. {% endcomment %}
+<section class="op-contact u-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" {{ section.shopify_attributes }}>
+  <div class="op-contact_contain u-container">
+    <header class="op-contact_head" data-reveal-load>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="op-contact_eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h1 class="op-contact_title">{{ section.settings.heading | default: page.title }}</h1>
+      {%- if section.settings.intro != blank -%}
+        <div class="op-contact_intro rte">{{ section.settings.intro }}</div>
+      {%- endif -%}
+    </header>
+
+    <div class="op-contact_grid">
+      <div class="op-contact_formcol" data-reveal-load style="--reveal-delay: 120ms">
+        {%- form 'contact', class: 'op-contact_form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="op-contact_success" tabindex="-1" autofocus>{{ section.settings.success_text | default: '¡Gracias por tu mensaje! Te contactamos muy pronto.' }}</p>
+          {%- endif -%}
+          {%- if form.errors -%}
+            <div class="op-contact_errors" role="alert">
+              <p>{{ section.settings.error_text | default: 'Revisa los campos marcados e inténtalo de nuevo.' }}</p>
+              <ul>
+                {%- for field in form.errors -%}
+                  <li>{{ form.errors.translated_fields[field] | capitalize }} — {{ form.errors.messages[field] }}</li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+
+          <label class="op-contact_field">
+            <span>Nombre</span>
+            <input type="text" name="contact[name]" autocomplete="name" value="{{ form.name }}" required>
+          </label>
+          <label class="op-contact_field">
+            <span>Correo electrónico</span>
+            <input type="email" name="contact[email]" autocomplete="email" value="{{ form.email }}" required aria-required="true">
+          </label>
+          <label class="op-contact_field">
+            <span>Teléfono (opcional)</span>
+            <input type="tel" name="contact[phone]" autocomplete="tel" value="{{ form.phone }}">
+          </label>
+          <label class="op-contact_field">
+            <span>{{ section.settings.message_label | default: 'Cuéntanos sobre tu proyecto' }}</span>
+            <textarea name="contact[body]" rows="6" required>{{ form.body }}</textarea>
+          </label>
+          <button type="submit" class="op-contact_submit">{{ section.settings.submit_label | default: 'Enviar mensaje' }}</button>
+        {%- endform -%}
+      </div>
+
+      <aside class="op-contact_aside" data-reveal-load style="--reveal-delay: 220ms">
+        {%- if section.settings.aside_heading != blank -%}<p class="op-contact_ahead">{{ section.settings.aside_heading }}</p>{%- endif -%}
+        {%- if section.settings.aside_body != blank -%}<div class="op-contact_abody rte">{{ section.settings.aside_body }}</div>{%- endif -%}
+        {%- if section.settings.whatsapp_url != blank -%}
+          <a class="op-contact_whatsapp" href="{{ section.settings.whatsapp_url }}" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.15-1.7-.84-2-.94-.27-.1-.46-.15-.65.15-.2.3-.76.94-.93 1.13-.17.2-.34.22-.63.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.34.45-.5.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.65-1.57-.9-2.15-.23-.56-.47-.48-.65-.5h-.55c-.2 0-.5.07-.77.37-.27.3-1.02 1-1.02 2.42 0 1.43 1.04 2.8 1.19 3 .15.2 2.05 3.12 4.96 4.38.7.3 1.24.48 1.66.61.7.22 1.33.19 1.83.12.56-.08 1.7-.7 1.95-1.36.24-.67.24-1.24.17-1.36-.07-.12-.27-.2-.56-.34zM12 2a10 10 0 0 0-8.6 15.07L2 22l5.05-1.32A10 10 0 1 0 12 2z"/></svg>
+            <span>{{ section.settings.whatsapp_label | default: 'Escríbenos por WhatsApp' }}</span>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.email != blank -%}
+          <a class="op-contact_email" href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+        {%- endif -%}
+      </aside>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .op-contact_head { max-width: 44rem; margin-bottom: var(--_spacing---space--7); }
+  .op-contact_eyebrow { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; opacity: 0.7; margin-bottom: var(--_spacing---space--4); }
+  .op-contact_title { font-family: var(--_typography---font--primary-family); font-style: italic; font-weight: 400; font-size: clamp(1.8rem, 1.2rem + 2.4vw, 2.8rem); line-height: 1.15; color: var(--swatch--brand-300, #b0b094); margin: 0; }
+  .op-contact_intro { margin-top: var(--_spacing---space--4); max-width: 52ch; }
+  .op-contact_grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: var(--_spacing---space--8); align-items: start; }
+  .op-contact_form { display: flex; flex-direction: column; gap: var(--_spacing---space--5); }
+  .op-contact_field { display: flex; flex-direction: column; gap: 0.5rem; }
+  .op-contact_field > span { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.72rem; }
+  .op-contact_field input, .op-contact_field textarea { font-family: inherit; font-size: 0.95rem; color: var(--_theme---text); background-color: transparent; border: 0.0625rem solid var(--_theme---border); border-radius: 2rem; padding: 0.85rem 1.2rem; width: 100%; }
+  .op-contact_field textarea { border-radius: 1rem; resize: vertical; }
+  .op-contact_submit { align-self: start; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.8rem; color: #fff; background-color: var(--swatch--brand-300, #b0b094); border: 0; border-radius: 2rem; padding: 1rem 2.4rem; cursor: pointer; transition: background-color 250ms; }
+  .op-contact_submit:hover { background-color: var(--swatch--brand-500, #5f604e); }
+  .op-contact_success { border: 0.0625rem solid var(--_theme---border); border-radius: 1rem; padding: 1rem 1.2rem; background-color: color-mix(in srgb, var(--swatch--brand-300, #b0b094) 14%, transparent); }
+  .op-contact_errors { border: 0.0625rem solid #b0544a; border-radius: 1rem; padding: 1rem 1.2rem; color: #8a3b32; }
+  .op-contact_errors ul { margin: 0.5rem 0 0; padding-left: 1.2rem; }
+  .op-contact_aside { display: flex; flex-direction: column; gap: var(--_spacing---space--4); border: 0.0625rem solid var(--_theme---border); border-radius: 1.5rem; padding: var(--_spacing---space--6); }
+  .op-contact_ahead { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.72rem; opacity: 0.7; margin: 0; }
+  .op-contact_whatsapp { display: inline-flex; align-items: center; gap: 0.5rem; color: currentColor; text-decoration: none; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem; }
+  .op-contact_email { color: currentColor; }
+  @media (max-width: 767px) { .op-contact_grid { grid-template-columns: 1fr; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "On Paper Contacto",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 240, "step": 4, "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 240, "step": 4, "default": 120 },
+    { "type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "Contacto" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Trabajemos juntos" },
+    { "type": "richtext", "id": "intro", "label": "Intro", "default": "<p>Cuéntanos qué tienes en mente: un photobook, un proyecto personalizado o un pedido por volumen. Te respondemos muy pronto.</p>" },
+    { "type": "text", "id": "message_label", "label": "Etiqueta del mensaje", "default": "Cuéntanos sobre tu proyecto" },
+    { "type": "text", "id": "submit_label", "label": "Texto del botón", "default": "Enviar mensaje" },
+    { "type": "text", "id": "success_text", "label": "Mensaje de éxito", "default": "¡Gracias por tu mensaje! Te contactamos muy pronto." },
+    { "type": "text", "id": "error_text", "label": "Mensaje de error", "default": "Revisa los campos marcados e inténtalo de nuevo." },
+    { "type": "header", "content": "Columna lateral" },
+    { "type": "text", "id": "aside_heading", "label": "Encabezado", "default": "También puedes" },
+    { "type": "richtext", "id": "aside_body", "label": "Texto", "default": "<p>Para cotizaciones por volumen (eventos, empresas) o dudas sobre tu pedido, escríbenos directo:</p>" },
+    { "type": "url", "id": "whatsapp_url", "label": "Link de WhatsApp" },
+    { "type": "text", "id": "whatsapp_label", "label": "Texto WhatsApp", "default": "Escríbenos por WhatsApp" },
+    { "type": "text", "id": "email", "label": "Email", "default": "taller@onpaper.mx" }
+  ],
+  "presets": [{ "name": "On Paper Contacto" }]
+}
+{% endschema %}

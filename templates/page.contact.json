@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "op-contact",
+      "settings": {
+        "eyebrow": "Contacto",
+        "heading": "Trabajemos juntos",
+        "intro": "<p>Cuéntanos qué tienes en mente: un photobook, un proyecto personalizado o un pedido por volumen. Te respondemos muy pronto.</p>",
+        "whatsapp_url": "https://wa.me/+528116111838",
+        "email": "taller@onpaper.mx"
+      }
+    }
+  },
+  "order": ["main"]
+}

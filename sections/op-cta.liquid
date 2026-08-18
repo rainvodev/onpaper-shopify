@@ -11,8 +11,8 @@
       {%- if section.settings.body != blank -%}
         <div class="op-cta_body" data-reveal style="--reveal-delay: 200ms">{{ section.settings.body }}</div>
       {%- endif -%}
-      {%- if section.settings.cta_label != blank -%}
-        <a class="op-cta_btn" href="{{ section.settings.cta_link | default: '#' }}" data-reveal style="--reveal-delay: 300ms">{{ section.settings.cta_label }}</a>
+      {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+        <a class="op-cta_btn" href="{{ section.settings.cta_link }}" data-reveal style="--reveal-delay: 300ms">{{ section.settings.cta_label }}</a>
       {%- endif -%}
     </div>
   </div>

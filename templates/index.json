@@ -43,7 +43,7 @@
         "heading": "<p>Crafted with passion, <em>designed for a lifetime.</em></p>",
         "subheading": "",
         "cta_label": "Shop now",
-        "cta_link": ""
+        "cta_link": "shopify://collections/all"
       }
     },
     "about": {
@@ -97,7 +97,7 @@
         "padding_bottom": 64,
         "ratio": "0.8",
         "strip_label": "Book case",
-        "strip_link": ""
+        "strip_link": "shopify://products/bookcase"
       }
     },
     "about_note": {
@@ -121,7 +121,7 @@
         "heading_width": 30,
         "heading": "<p>Get to know our <em>Photobook Collections.</em></p>",
         "cta_label": "Shop now",
-        "cta_link": ""
+        "cta_link": "shopify://collections/photobooks"
       }
     },
     "bestsellers": {
@@ -149,7 +149,7 @@
         "heading": "<p>Proyectos Personalizados</p>",
         "body": "<p>En On Paper cada cliente tiene un lugar especial: entendemos lo importante que es confiar en quien plasma tus recuerdos. Por eso, nuestro trabajo está hecho con atención, cariño y dedicación. ¡Escríbenos para hacer realidad tu idea!</p>",
         "cta_label": "Let's work together",
-        "cta_link": ""
+        "cta_link": "shopify://pages/contacto"
       }
     },
     "gallery": {
@@ -254,7 +254,7 @@
         "heading": "",
         "gap": 16,
         "disc_label": "Send message",
-        "disc_link": ""
+        "disc_link": "shopify://pages/contacto"
       }
     }
   },

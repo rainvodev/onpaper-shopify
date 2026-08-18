@@ -51,7 +51,8 @@
         "eyebrow": "¿Más dudas?",
         "heading": "<p><em>¿No encontraste tu respuesta?</em></p>",
         "body": "<p>Escríbenos y con gusto te ayudamos. En On Paper cada cliente tiene un lugar especial.</p>",
-        "cta_label": "Contáctanos"
+        "cta_label": "Contáctanos",
+        "cta_link": "shopify://pages/contacto"
       }
     }
   },

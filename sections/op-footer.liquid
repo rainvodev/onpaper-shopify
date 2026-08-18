@@ -43,6 +43,19 @@
             {%- endfor -%}
           </nav>
         {%- endif -%}
+        {%- comment -%} Políticas de la tienda (Admin → Configuración → Políticas): solo salen las que existen {%- endcomment -%}
+        {%- if section.settings.show_policies -%}
+          {%- capture policy_links -%}
+            {%- for policy in shop.policies -%}
+              {%- if policy.body != blank -%}
+                <a href="{{ policy.url }}" class="op-footer_link">{{ policy.title }}</a>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endcapture -%}
+          {%- if policy_links contains 'op-footer_link' -%}
+            <nav class="op-footer_col" aria-label="Políticas">{{ policy_links }}</nav>
+          {%- endif -%}
+        {%- endif -%}
       </div>
 
       <div class="op-footer_aside">
@@ -147,6 +160,7 @@
     { "type": "header", "content": "Enlaces" },
     { "type": "link_list", "id": "menu_1", "label": "Menú 1 (Products / Collections / Others)" },
     { "type": "link_list", "id": "menu_2", "label": "Menú 2 (FAQ / Legales)" },
+    { "type": "checkbox", "id": "show_policies", "label": "Mostrar políticas de la tienda", "default": true, "info": "Enlaza automáticamente las políticas escritas en Admin → Configuración → Políticas." },
     { "type": "header", "content": "Contacto" },
     { "type": "text", "id": "contact_heading", "label": "Encabezado", "default": "contacto" },
     { "type": "text", "id": "phone", "label": "Teléfono", "default": "(81) 1611 1838" },
