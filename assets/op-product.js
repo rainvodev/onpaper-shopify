@@ -166,31 +166,66 @@
       if (srcset) img.setAttribute('srcset', srcset);
       else img.removeAttribute('srcset');
     }
-    function probeChain(urls, i, onFail) {
-      if (i >= urls.length) { if (onFail) onFail(); return; }
-      var probe = new Image();
-      probe.onload = function () { swapMain(urls[i], ''); };
-      probe.onerror = function () { probeChain(urls, i + 1, onFail); };
-      probe.src = urls[i];
+    // El CDN de Shopify redimensiona con ?width= → pedimos solo los píxeles que se ven.
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    function targetWidth() {
+      var el = mainImgEl() || root.querySelector('.op-product_main');
+      var w = Math.ceil(((el && el.clientWidth) || 700) * dpr);
+      var buckets = [480, 720, 900, 1100, 1400];
+      for (var i = 0; i < buckets.length; i++) { if (w <= buckets[i]) return buckets[i]; }
+      return 1400;
+    }
+    function candidatesFor(value) {
+      var t = slug(value);
+      var mat = materialCode();
+      var ori = orientCode();
+      var wq = '?width=' + targetWidth();
+      var urls = [];
+      if (mat && ori) {
+        var key = imgPrefix + mat + '-' + ori + '-' + t + '.webp';
+        if (filesBase) urls.push(filesBase + key + wq);
+        if (imgBase) urls.push(imgBase + key + wq);
+      }
+      if (filesBase) urls.push(filesBase + imgPrefix + t + '.webp' + wq);
+      if (imgBase) urls.push(imgBase + imgPrefix + t + '.webp' + wq);
+      return urls;
+    }
+    // Caché de resolución por llave: revisitar un color es instantáneo y las llaves
+    // sin imagen no vuelven a sondear la cadena completa.
+    var resolvedUrl = {};
+    var failedKey = {};
+    var swapSeq = 0;
+    function resolveColor(value, cb) {
+      var mat = materialCode();
+      var ori = orientCode();
+      var key = mat + '|' + ori + '|' + slug(value);
+      if (resolvedUrl[key]) { if (cb) cb(resolvedUrl[key]); return; }
+      if (failedKey[key]) { if (cb) cb(null); return; }
+      var urls = candidatesFor(value);
+      (function step(i) {
+        if (i >= urls.length) { failedKey[key] = true; if (cb) cb(null); return; }
+        var probe = new Image();
+        probe.onload = function () { resolvedUrl[key] = urls[i]; if (cb) cb(urls[i]); };
+        probe.onerror = function () { step(i + 1); };
+        probe.src = urls[i];
+      })(0);
     }
     function colorImage(value) {
       if (!value || !imgPrefix) return;
-      var target = slug(value);
-      var mat = materialCode();
-      var ori = orientCode();
-      var keyed = [];
-      if (mat && ori) {
-        var key = imgPrefix + mat + '-' + ori + '-' + target + '.webp';
-        if (filesBase) keyed.push(filesBase + key);
-        if (imgBase) keyed.push(imgBase + key);
-      }
-      probeChain(keyed, 0, function () {
-        var m = mediaList.filter(function (it) { return it.alt && slug(it.alt) === target; })[0];
-        if (m) { swapMain(m.src, m.srcset || ''); return; }
-        var short = [];
-        if (filesBase) short.push(filesBase + imgPrefix + target + '.webp');
-        if (imgBase) { short.push(imgBase + imgPrefix + target + '.webp'); short.push(imgBase + imgPrefix + target + '.jpg'); }
-        probeChain(short, 0, null); // si nada existe, se conserva la imagen actual
+      var seq = ++swapSeq;
+      var dimmed = mainImgEl();
+      if (dimmed) dimmed.classList.add('is-swapping');
+      resolveColor(value, function (url) {
+        if (seq !== swapSeq) return; // llegó tarde: hay una selección más reciente en curso
+        if (url) {
+          swapMain(url, '');
+        } else {
+          var t = slug(value);
+          var m = mediaList.filter(function (it) { return it.alt && slug(it.alt) === t; })[0];
+          if (m) swapMain(m.src, m.srcset || '');
+        }
+        var img = mainImgEl();
+        if (img) img.classList.remove('is-swapping');
       });
     }
     function activeColorValue() {
@@ -207,6 +242,14 @@
           var v = activeColorValue();
           if (v) colorImage(v);
         }
+      });
+      // Precarga al pasar el mouse / tocar / enfocar un swatch de Color:
+      // para cuando llega el clic, la imagen ya está resuelta y en caché.
+      root.querySelectorAll('.op-product_swatches[data-prop="Color"] [data-val]').forEach(function (btn) {
+        var warm = function () { resolveColor(btn.getAttribute('data-val'), null); };
+        btn.addEventListener('mouseenter', warm);
+        btn.addEventListener('touchstart', warm, { passive: true });
+        btn.addEventListener('focus', warm);
       });
       var initial = activeColorValue();
       if (initial) colorImage(initial);
