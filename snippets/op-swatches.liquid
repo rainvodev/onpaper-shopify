@@ -1,21 +1,21 @@
 {% comment %} On Paper — grid de swatches (Color / Hotstamping). Params: palette, property (= label),
-  default (nombre). Paletas OFICIALES del catálogo ago-2026 (CATALOGO.pdf + CATALOGO_CAJAS.pdf); el
-  nombre es el valor que viaja al carrito/pedido — no renombrar sin avisar al taller.
-  El hex es un placeholder aproximado; al subir la textura real a Files como `swatch-<slug>.jpg`
-  aparece sola encima del color. El mismo slug del color se usa para la imagen de producto por color:
-  assets/<handle>-<slug>.jpg (ver op-product.js). {% endcomment %}
+  default (nombre). PALETAS REALES del taller (carpeta Drive "On Paper (WebP)", ago-2026): el nombre
+  es el valor que viaja al carrito/pedido — no renombrar sin avisar al taller. El hex es el color
+  promedio muestreado de la textura real; la textura vive en el repo: assets/swatch-<paleta>-<slug>.webp.
+  El mismo slug del color forma la llave de la imagen de producto por color:
+  <handle>-<material>-<orientación>-<slug>.webp (ver op-product.js y docs/imagenes-spec.md). {% endcomment %}
 {%- liquid
   case palette
     when 'hotstamping'
-      assign data = "Cobre|#b5723a|hs-cobre;Dorado|#c9a227|hs-dorado;Rosa Metálico|#b76e79|hs-rosa-metalico;Plateado|#c9c9c9|hs-plateado;Café Matte|#5c4433|hs-cafe-matte;Negro Matte|#2e2e2e|hs-negro-matte;Blanco Matte|#e8e8e8|hs-blanco-matte;Quemado|#d8d2c6|hs-quemado"
+      assign data = "Café matte|#615149|hotstamping-cafe-matte;Negro matte|#4a4b48|hotstamping-negro-matte;Plateado|#c8c8c9|hotstamping-plateado;Blanco matte|#dddce3|hotstamping-blanco-matte;Cobre matte|#9e6c48|hotstamping-cobre-matte;Dorado|#cbb572|hotstamping-dorado;Oro rosa|#c3a394|hotstamping-oro-rosa"
     when 'vinipieles'
-      assign data = "Blanco|#f5f3ee|vini-blanco;Blanco Hueso|#e9e4da|vini-blanco-hueso;Nude|#c9b49c|vini-nude;Café Claro|#8a6248|vini-cafe-claro;Café|#4a362a|vini-cafe;Vino|#6a1f26|vini-vino;Terracota|#96491f|vini-terracota;Verde Militar|#4c4f3a|vini-verde-militar;Azul Marino|#1f2c44|vini-azul-marino;Negro Matte|#232323|vini-negro-matte;Negro Brillante|#2e2e30|vini-negro-brillante;Taupe|#837c74|vini-taupe;Gris Oscuro|#7c8188|vini-gris-oscuro;Gris Marmoleado|#9fa3a6|vini-gris-marmoleado;Gris Claro|#dddddd|vini-gris-claro;Rosa Metálico|#b07b6e|vini-rosa-metalico;Azul Metálico|#33507a|vini-azul-metalico"
+      assign data = "Nude|#ccbeae|vinipieles-nude;Avena|#d4cbbc|vinipieles-avena;Azul marino|#6b7580|vinipieles-azul-marino;Blanco|#e9e9e9|vinipieles-blanco;Blanco hueso|#dadbdc|vinipieles-blanco-hueso;Terracota|#8e7769|vinipieles-terracota;Café obscuro|#807771|vinipieles-cafe-obscuro;Café|#9e8f83|vinipieles-cafe;Crema|#dddbd9|vinipieles-crema;Gris obscuro|#7c7c7c|vinipieles-gris-obscuro;Gris|#828282|vinipieles-gris;Negro brilloso|#a6a7a9|vinipieles-negro-brilloso;Gris marmoleado|#b5b5b5|vinipieles-gris-marmoleado;Negro|#6e6f6f|vinipieles-negro;Vino|#886762|vinipieles-vino;Taupe|#9c9997|vinipieles-taupe;Verde militar|#858478|vinipieles-verde-militar;Verde|#868878|vinipieles-verde;Rosa metálico|#9e8682|vinipieles-rosa-metalico;Azul metálico|#576d8a|vinipieles-azul-metalico"
     when 'telas-plastificadas'
-      assign data = "Blanco|#f2f1ea|plast-blanco;Gris Claro|#cbc8bf|plast-gris-claro;Gris|#6e7370|plast-gris;Rojo|#a33036|plast-rojo;Azul Oscuro|#1e2438|plast-azul-oscuro;Negro|#26231f|plast-negro"
+      assign data = "Azul obscuro|#67696f|telas-plastificadas-azul-obscuro;Blanco|#edf1ec|telas-plastificadas-blanco;Gris claro|#cdcbc5|telas-plastificadas-gris-claro;Gris|#909493|telas-plastificadas-gris;Negro|#6e6d6a|telas-plastificadas-negro;Rojo|#ad7979|telas-plastificadas-rojo"
     when 'papel-texturizado'
-      assign data = "Blanco|#fcfcfa|papel-blanco;Marfil Brilloso|#edebe0|papel-marfil-brilloso;Kaki|#d6c98f|papel-kaki;Café Claro|#a97c50|papel-cafe-claro;Café|#6c4429|papel-cafe;Vino Brilloso|#741f31|papel-vino-brilloso;Verde Oscuro Brilloso|#1f4a32|papel-verde-oscuro-brilloso;Verde|#6f9b62|papel-verde;Azul|#3e6c8e|papel-azul;Indigo Brilloso|#2a3f8f|papel-indigo-brilloso;Negro Brilloso|#191919|papel-negro-brilloso;Negro Matte|#3b3b3b|papel-negro-matte;Negro Textura Piel|#33343b|papel-negro-textura-piel;Plomo|#a5adb0|papel-plomo"
+      assign data = "Papel Negro|#5a5958|papel-texturizado-papel-negro;Papel Blanco|#f7f9fb|papel-texturizado-papel-blanco;Papel Azul|#597388|papel-texturizado-papel-azul;Papel Verde Crema|#cec6a0|papel-texturizado-papel-verde-crema;Papel Café Claro|#9d8267|papel-texturizado-papel-cafe-claro;Papel Café Obscuro|#6e584c|papel-texturizado-papel-cafe-obscuro;Papel Negro Textura Piel|#595a5c|papel-texturizado-papel-negro-textura-piel;Papel Gris|#99a3a4|papel-texturizado-papel-gris;Papel Verde Hoja|#77956a|papel-texturizado-papel-verde-hoja;Papel Negro Textura Plastificada|#3c3c3a|papel-texturizado-papel-negro-textura-plastificada;Papel Blanco Textura Plastificado|#e1e1dc|papel-texturizado-papel-blanco-textura-plastificado;Papel Vino Textura Plastificada|#6f353f|papel-texturizado-papel-vino-textura-plastificada;Papel Azul Textura Plastificada|#435281|papel-texturizado-papel-azul-textura-plastificada;Papel Verde Textura Plastificada|#3b5847|papel-texturizado-papel-verde-textura-plastificada"
     else
-      assign data = "Guinda|#6e2230|tela-guinda;Terracota|#a8542f|tela-terracota;Naranja|#c1622a|tela-naranja;Naranja Oscuro|#9c5b2e|tela-naranja-oscuro;Mostaza|#b9912f|tela-mostaza;Verde Oliva|#6b6f3a|tela-verde-oliva;Azul Marino|#2c3a5a|tela-azul-marino;Gris|#b0afa8|tela-gris;Gris Oscuro|#57534e|tela-gris-oscuro;Negro|#1b1b18|tela-negro;Café|#4b3a30|tela-cafe;Café Claro|#a07b50|tela-cafe-claro;Arena|#c9b393|tela-arena;Avena|#e0d3b8|tela-avena;Lino|#e5e0d4|tela-lino;Blanco Crema|#f1ede2|tela-blanco-crema;Blanco Metálico|#edeae4|tela-blanco-metalico;Plata Metálico|#c4c4c0|tela-plata-metalico;Gris Metálico|#4e5457|tela-gris-metalico"
+      assign data = "Negro|#444442|telas-negro;Café claro|#bb9e85|telas-cafe-claro;Mostaza obscuro|#a0704c|telas-mostaza-obscuro;Gris obscuro|#726d6b|telas-gris-obscuro;Azul marino|#495966|telas-azul-marino;Terracota|#995d45|telas-terracota;Ocre|#ac8b5a|telas-ocre;Vino|#79494c|telas-vino;Café obscuro|#5f5247|telas-cafe-obscuro;Arena|#baa694|telas-arena;Naranja|#d17150|telas-naranja;Onix|#555f61|telas-onix;Gris claro|#aeaaa5|telas-gris-claro;Blanco crema|#ebece7|telas-blanco-crema;Avena|#d2c6b3|telas-avena;Verde militar|#807f4c|telas-verde-militar;Lino almendra|#d0cbc5|telas-lino-almendra;Tela plastificada negra|#4a4845|telas-tela-plastificada-negra;Tela plastificada blanca|#eaefea|telas-tela-plastificada-blanca;Tela plastificada roja|#995657|telas-tela-plastificada-roja;Tela plastificada gris|#c3c0b9|telas-tela-plastificada-gris;Tela plastificada gris obscuro|#757977|telas-tela-plastificada-gris-obscuro;Tela plastificada azul marino|#535759|telas-tela-plastificada-azul-marino;Blanco brillo|#ece9da|telas-blanco-brillo;Gris claro brillo|#babbb7|telas-gris-claro-brillo;Gris brillo|#6d7071|telas-gris-brillo"
   endcase
   assign rows = data | split: ';'
 -%}
@@ -25,7 +25,7 @@
     {%- assign parts = r | split: '|' -%}
     {%- assign nm = parts[0] -%}
     {%- assign hx = parts[1] -%}
-    {%- assign fn = 'swatch-' | append: parts[2] | append: '.jpg' -%}
-    <button type="button" class="op-product_swatch{% if nm == default %} is-active{% endif %}" data-val="{{ nm | escape }}" title="{{ nm | escape }}" aria-label="{{ nm | escape }}" style="background-color: {{ hx }}; background-image: url({{ fn | file_url }});"></button>
+    {%- assign fn = 'swatch-' | append: parts[2] | append: '.webp' -%}
+    <button type="button" class="op-product_swatch{% if nm == default %} is-active{% endif %}" data-val="{{ nm | escape }}" title="{{ nm | escape }}" aria-label="{{ nm | escape }}" style="background-color: {{ hx }}; background-image: url({{ fn | asset_url }});"></button>
   {%- endfor -%}
 </div>

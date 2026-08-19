@@ -14,8 +14,8 @@
         "shipping": { "type": "accordion", "settings": { "heading": "Tiempo de envío", "content": "<p>15 días hábiles.</p>" }},
         "material": { "type": "pills", "settings": { "label": "Material", "options": "Tela, Vinipiel", "default": "Vinipiel", "collapsible": true }},
         "size": { "type": "size", "settings": { "label": "Tamaño", "set": "firmas-bookcase", "default": "11x14", "note": "Medidas en Pulgadas", "collapsible": true }},
-        "color_tela": { "type": "swatch", "settings": { "label": "Color", "palette": "telas", "default": "Verde Oliva", "show_for": "Tela", "collapsible": true }},
-        "color_vinipiel": { "type": "swatch", "settings": { "label": "Color", "palette": "vinipieles", "default": "Verde Militar", "show_for": "Vinipiel", "collapsible": true }},
+        "color_tela": { "type": "swatch", "settings": { "label": "Color", "palette": "telas", "default": "Verde militar", "show_for": "Tela", "collapsible": true }},
+        "color_vinipiel": { "type": "swatch", "settings": { "label": "Color", "palette": "vinipieles", "default": "Verde militar", "show_for": "Vinipiel", "collapsible": true }},
         "hotstamping": { "type": "swatch", "settings": { "label": "Hotstamping", "palette": "hotstamping", "default": "Dorado", "collapsible": true }},
         "titulo": { "type": "text", "settings": { "label": "Título en portada y lomo (opcional)", "placeholder": "Escribe el título…" }}
       },

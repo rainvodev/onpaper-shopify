@@ -126,9 +126,13 @@
       form.addEventListener('change', applyDeps);
     }
 
-    // Imagen por color: primero busca media del producto con alt == color; si no hay,
-    // intenta assets/<handle>-<slug>.jpg (convención del repo). Fallback: no cambia nada.
+    // Imagen por color (mockups reales del taller): la llave completa es
+    //   <handle>-<material>-<orientación>-<color>.webp
+    // y se sondea en este orden: Shopify Files → assets del theme → media del
+    // producto con alt == color → llave corta <handle>-<color> → conservar imagen.
+    // (Ver docs/imagenes-spec.md; el paquete de Files vive en _import/files-package.)
     var imgBase = root.getAttribute('data-op-img-base') || '';
+    var filesBase = root.getAttribute('data-op-files-base') || '';
     var imgPrefix = root.getAttribute('data-op-img-prefix') || '';
     var mediaEl = root.querySelector('[data-op-color-media]');
     var mediaList = [];
@@ -137,6 +141,14 @@
       return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '')
         .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
     }
+    var MATERIAL_CODES = { 'tela': 'tela', 'vinipiel': 'vinipiel', 'tela-plastificada': 'plastificada', 'papel-texturizado': 'papel' };
+    var ORIENT_CODES = { '11x14': 'h', '8.5x11': 'h', '14x11': 'v', '11x8.5': 'v', '10x10': 'sq', '8x8': 'sq' };
+    function propValue(name) {
+      var el = form ? form.querySelector('[name="properties[' + name + ']"]') : null;
+      return el ? el.value : '';
+    }
+    function materialCode() { return MATERIAL_CODES[slug(propValue('Material'))] || ''; }
+    function orientCode() { return ORIENT_CODES[propValue('Tamaño')] || ''; }
     function mainImgEl() { return root.querySelector('#opMainImg'); }
     function swapMain(src, srcset) {
       var img = mainImgEl();
@@ -154,28 +166,44 @@
       if (srcset) img.setAttribute('srcset', srcset);
       else img.removeAttribute('srcset');
     }
-    function colorImage(value) {
-      if (!value) return;
-      var target = slug(value);
-      var m = mediaList.filter(function (it) { return it.alt && slug(it.alt) === target; })[0];
-      if (m) { swapMain(m.src, m.srcset || ''); return; }
-      if (!imgBase || !imgPrefix) return;
-      var url = imgBase + imgPrefix + target + '.jpg';
+    function probeChain(urls, i, onFail) {
+      if (i >= urls.length) { if (onFail) onFail(); return; }
       var probe = new Image();
-      probe.onload = function () { swapMain(url, ''); };
-      probe.src = url; // si no existe el asset, onerror silencioso: se conserva la imagen actual
+      probe.onload = function () { swapMain(urls[i], ''); };
+      probe.onerror = function () { probeChain(urls, i + 1, onFail); };
+      probe.src = urls[i];
+    }
+    function colorImage(value) {
+      if (!value || !imgPrefix) return;
+      var target = slug(value);
+      var mat = materialCode();
+      var ori = orientCode();
+      var keyed = [];
+      if (mat && ori) {
+        var key = imgPrefix + mat + '-' + ori + '-' + target + '.webp';
+        if (filesBase) keyed.push(filesBase + key);
+        if (imgBase) keyed.push(imgBase + key);
+      }
+      probeChain(keyed, 0, function () {
+        var m = mediaList.filter(function (it) { return it.alt && slug(it.alt) === target; })[0];
+        if (m) { swapMain(m.src, m.srcset || ''); return; }
+        var short = [];
+        if (filesBase) short.push(filesBase + imgPrefix + target + '.webp');
+        if (imgBase) { short.push(imgBase + imgPrefix + target + '.webp'); short.push(imgBase + imgPrefix + target + '.jpg'); }
+        probeChain(short, 0, null); // si nada existe, se conserva la imagen actual
+      });
     }
     function activeColorValue() {
       var el = null;
       root.querySelectorAll('[name="properties[Color]"]').forEach(function (i) { if (!i.disabled) el = i; });
       return el ? el.value : null;
     }
-    if (form && (mediaList.length || (imgBase && imgPrefix))) {
+    if (form && (mediaList.length || ((imgBase || filesBase) && imgPrefix))) {
       form.addEventListener('change', function (e) {
         var name = e.target && e.target.name;
         if (name === 'properties[Color]') colorImage(e.target.value);
-        else if (deps.length && name && name.indexOf('properties[') === 0) {
-          // p. ej. cambio de Material → la paleta activa cambió; refleja su color vigente
+        else if (name && name.indexOf('properties[') === 0) {
+          // Material o Tamaño cambiaron → la llave del mockup cambió; refresca con el color vigente
           var v = activeColorValue();
           if (v) colorImage(v);
         }

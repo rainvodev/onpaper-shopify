@@ -57,7 +57,7 @@
           "settings": {
             "label": "Color",
             "palette": "telas",
-            "default": "Blanco Crema",
+            "default": "Blanco crema",
             "show_for": "Tela",
             "collapsible": true
           }
@@ -77,7 +77,7 @@
           "settings": {
             "label": "Color",
             "palette": "papel-texturizado",
-            "default": "Blanco",
+            "default": "Papel Blanco",
             "show_for": "Papel Texturizado",
             "collapsible": true
           }
