@@ -37,19 +37,22 @@
     }
     root.addEventListener('op:unitprice', renderTotal);
 
-    // Galería
-    var main = root.querySelector('#opMainImg');
-    root.querySelectorAll('[data-op-thumb]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        if (main && btn.dataset.full) {
-          main.src = btn.dataset.full;
-          // Conserva srcset responsivo si el thumb lo trae (evita cargar 1400px en móvil)
-          if (btn.dataset.srcset) main.setAttribute('srcset', btn.dataset.srcset);
-          else main.removeAttribute('srcset');
-        }
-        root.querySelectorAll('[data-op-thumb]').forEach(function (b) { b.classList.remove('is-active'); });
-        btn.classList.add('is-active');
-      });
+    // Galería: swap por thumbnail. Delegación + query del main AL MOMENTO del clic,
+    // para sobrevivir a que el swap por color reemplace o cree la imagen principal.
+    root.addEventListener('click', function (e) {
+      var btn = e.target && e.target.closest ? e.target.closest('[data-op-thumb]') : null;
+      if (!btn) return;
+      var img = root.querySelector('#opMainImg');
+      if (img && btn.dataset.full) {
+        swapSeq++; // cancela cualquier swap de color en vuelo para que no pise esta foto
+        img.classList.remove('is-swapping');
+        img.src = btn.dataset.full;
+        // Conserva srcset responsivo si el thumb lo trae (evita cargar 1400px en móvil)
+        if (btn.dataset.srcset) img.setAttribute('srcset', btn.dataset.srcset);
+        else img.removeAttribute('srcset');
+      }
+      root.querySelectorAll('[data-op-thumb]').forEach(function (b) { b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
     });
 
     // Pickers de selección única (pills, swatches, sizes, radios, gift)
@@ -251,8 +254,11 @@
         btn.addEventListener('touchstart', warm, { passive: true });
         btn.addEventListener('focus', warm);
       });
+      // Al cargar: si el producto tiene fotos propias, se muestran ellas (la destacada);
+      // el mockup por color entra solo cuando el cliente interactúa con la personalización.
+      // Sin fotos propias, el mockup del color default reemplaza al placeholder desde el inicio.
       var initial = activeColorValue();
-      if (initial) colorImage(initial);
+      if (initial && !mediaList.length) colorImage(initial);
     }
 
     // Barra flotante: mostrar cuando el precio principal sale de la vista
