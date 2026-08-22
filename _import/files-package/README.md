@@ -1,19 +1,24 @@
-# Paquete para Shopify Files — mockups por color
+# Paquete para Shopify Files — mockups por color (v2, originales sin comprimir)
 
-**Qué es:** los 528 mockups de producto (Photobook Tradicional, Photobook Layflat,
-Libro de Firmas y Book case) en todos sus colores de Tela (26) y Vinipiel (18),
-en las 3 orientaciones, optimizados (≤1400 px, webp, ~120 KB c/u, 61 MB total).
+**Qué es:** los 264 mockups corregidos (set ÚNICO compartido entre Photobook
+Tradicional, Layflat, Libro de Firmas y Book case): Tela (26 colores) y
+Vinipiel (18) × los 6 tamaños exactos (8x8, 10x10, 8.5x11, 11x14, 11x8.5,
+14x11). **Originales byte por byte, sin recomprimir** (~119 MB).
 
-**Cómo subirlos (una sola vez, ~2 min):**
-1. Admin → Content → **Files** → botón **Upload files**.
-2. Selecciona/arrastra **todos** los `.webp` de la carpeta `mockups/` de un jalón
-   (Shopify acepta cientos de archivos por subida y conserva los nombres).
-3. Listo: la página de producto los detecta sola — al elegir Material + Tamaño +
-   Color, la imagen principal cambia al mockup correspondiente
-   (`op-product.js` sondea `<handle>-<material>-<orientación>-<color>.webp`).
+Convención: `mockup-<material>-<tamaño>-<color>.webp`
+(ej. `mockup-tela-8-5x11-cafe-claro.webp` — el punto del tamaño se vuelve guión).
 
-**Importante:**
-- Subirlos en la tienda **definitiva** (los Files no se transfieren entre tiendas).
-- NO renombrar los archivos: el nombre es la llave del swap.
-- Vinipiel "Rosa metálico" y "Azul metálico" no tienen mockup (así vino del taller):
-  al elegirlos se conserva la última imagen — comportamiento esperado.
+**Sustitución en Admin → Content → Files (en este orden):**
+1. **Borrar los 528 viejos** (estaban mal y ya nada los usa): en el buscador de
+   Files filtra `photobook-`, luego `libro-de-firmas-`, luego `bookcase-`;
+   selecciona todo y Delete en cada pasada.
+2. **Subir los 264 nuevos** de esta carpeta de un jalón (drag & drop).
+3. Hard refresh en un PDP: al elegir material + tamaño + color debe salir el
+   mockup del tamaño exacto.
+
+Notas:
+- El theme sondea primero esta llave v2; mantiene la vieja solo como fallback
+  de transición, así que el orden borrar→subir no rompe nada en el ínterin.
+- Vinipiel "Rosa metálico" y "Azul metálico" siguen sin mockup (así vienen del
+  taller): al elegirlos se conserva la imagen anterior — esperado.
+- Subir en la tienda **definitiva** (los Files no se transfieren entre tiendas).

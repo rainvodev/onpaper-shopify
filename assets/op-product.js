@@ -182,8 +182,17 @@
       var t = slug(value);
       var mat = materialCode();
       var ori = orientCode();
+      var sz = propValue('Tamaño');
       var wq = '?width=' + targetWidth();
       var urls = [];
+      // v2 (ago-2026): set único compartido por material × tamaño EXACTO × color
+      //   mockup-<material>-<tamaño>-<color>.webp  (ej. mockup-tela-8-5x11-cafe-claro.webp)
+      if (mat && ORIENT_CODES[sz]) {
+        var shared = 'mockup-' + mat + '-' + slug(sz) + '-' + t + '.webp';
+        if (filesBase) urls.push(filesBase + shared + wq);
+        if (imgBase) urls.push(imgBase + shared + wq);
+      }
+      // legacy v1 (por producto y grupo de orientación) — fallback durante la transición
       if (mat && ori) {
         var key = imgPrefix + mat + '-' + ori + '-' + t + '.webp';
         if (filesBase) urls.push(filesBase + key + wq);
