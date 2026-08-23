@@ -232,6 +232,8 @@
       if (dimmed) dimmed.classList.add('is-swapping');
       resolveColor(value, function (url) {
         if (seq !== swapSeq) return; // llegó tarde: hay una selección más reciente en curso
+        // La principal ya no muestra una foto de la galería → ningún thumb queda activo
+        if (url) root.querySelectorAll('[data-op-thumb]').forEach(function (b) { b.classList.remove('is-active'); });
         if (url) {
           swapMain(url, '');
         } else {
