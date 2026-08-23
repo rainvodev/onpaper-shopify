@@ -110,6 +110,7 @@
       "settings": {
         "padding_top": 200,
         "padding_bottom": 200,
+        "image": "shopify://shop_images/cta.webp",
         "overlay": 25,
         "heading_width": 30,
         "heading": "<p>Get to know our <em>Photobook Collections.</em></p>",
