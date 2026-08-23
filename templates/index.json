@@ -124,6 +124,7 @@
         "padding_top": 64,
         "padding_bottom": 64,
         "ratio": "0.8",
+        "speed": 35,
         "strip_label": "Book case",
         "strip_link": "shopify://products/bookcase"
       }
@@ -186,6 +187,7 @@
         "g1": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/personalizados-01.webp",
             "column": "1",
             "ratio": "wide"
           }
@@ -193,6 +195,7 @@
         "g2": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/personalizados-04.webp",
             "column": "1",
             "ratio": "wide"
           }
@@ -200,6 +203,7 @@
         "g3": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/07.webp",
             "column": "1",
             "ratio": "pano"
           }
@@ -207,6 +211,7 @@
         "g4": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/personalizados-11.webp",
             "column": "1",
             "ratio": "wide"
           }
@@ -214,6 +219,7 @@
         "g5": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/personalizados-02.webp",
             "column": "2",
             "ratio": "square"
           }
@@ -221,6 +227,7 @@
         "g6": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/personalizados-05.webp",
             "column": "2",
             "ratio": "wide"
           }
@@ -228,6 +235,7 @@
         "g7": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/personalizados-08.webp",
             "column": "2",
             "ratio": "tall"
           }
@@ -235,6 +243,7 @@
         "g8": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/personalizados-03.webp",
             "column": "3",
             "ratio": "square"
           }
@@ -242,6 +251,7 @@
         "g9": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/personalizados-06.webp",
             "column": "3",
             "ratio": "square"
           }
@@ -249,6 +259,7 @@
         "g10": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/personalizados-10.webp",
             "column": "3",
             "ratio": "wide"
           }
