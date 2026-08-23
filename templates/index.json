@@ -63,6 +63,10 @@
     "bookcase": {
       "type": "op-bookcase",
       "blocks": {
+        "image_96yqf4": {
+          "type": "image",
+          "settings": {}
+        },
         "img-1": {
           "type": "image",
           "settings": {}
@@ -81,6 +85,7 @@
         }
       },
       "block_order": [
+        "image_96yqf4",
         "img-1",
         "img-2",
         "img-3",
