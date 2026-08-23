@@ -29,8 +29,17 @@ En el **store definitivo** (`<store-onpaper>.myshopify.com` — actualizar aquí
 - [ ] **Gift card nativa**: Products → Gift cards → crear "Certificado de Regalo" con handle `certificado-de-regalo`, opción **`Valor`** y valores EXACTOS `$500, $1000, $1500, $2000, $3000` (denominaciones por confirmar con Anaissa). Asignarle el theme template **giftcard**. Nota: las gift cards de Shopify **no expiran** — la "vigencia de 6 meses" del catálogo debe resolverse como política/manual (decidir con Anaissa).
 - [ ] Verificar que **ningún** producto quede a $10.00 (import viejo).
 - [ ] Metafield `custom.max_qty` (entero) si se quiere limitar cantidad por pedido (p. ej. 5 en libros, 20 en cajas — el PDP ya lo respeta).
-- [ ] **Media por producto**: subir fotos; para el **swap por color**, cada imagen de color con **alt = nombre exacto del color** (ej. `Verde Militar`), o entregar las imágenes al equipo dev para committearlas como `assets/<handle>-<slug>.jpg`.
-- [ ] **Files**: subir texturas de swatches como `swatch-<slug>.jpg` (slugs en `snippets/op-swatches.liquid`) y las 18 imágenes del home (`hero.png`, `hero-2/3`, `bookcase-1..4`, `banner-photobook.png`, `image_9..18`) con esos nombres exactos.
+- [ ] **Media por producto** (galería de 4 fotos por producto): subir las 4 de
+  `_import/admin-package/product-media/<handle>/` en orden 01→04 (la 01 queda
+  como destacada; el PDP muestra las 4 como thumbnails con la activa marcada).
+- [ ] **Files — mockups v2**: subir de un jalón los **264** de
+  `_import/files-package/mockups/` (originales sin comprimir, llave
+  `mockup-<material>-<tamaño>-<color>.webp`; el nombre usa la convención
+  ALTO×ANCHO del taller y el theme traduce solo — NO renombrar). Las texturas de
+  swatches YA van dentro del theme (assets/) — nada que subir para eso.
+- [ ] **Files/editor — home y menú**: imágenes de `_import/admin-package/`
+  (01. Home Page / 02. Menú / 03. View all) asignadas desde el editor del theme
+  (Personalizar → cada sección → picker de imagen). Ver README del paquete.
 
 ## 4. Colecciones, páginas y menús
 
