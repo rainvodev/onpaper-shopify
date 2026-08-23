@@ -14,12 +14,13 @@
             {{ product.featured_media | image_url: width: 1400 | image_tag: alt: product.title, class: 'op-product_mainimg', id: 'opMainImg', widths: '500,800,1100,1400', sizes: '(min-width: 750px) 50vw, 100vw' }}
           </div>
           {%- if product.media.size > 1 -%}
+            {%- comment -%} Thumbnails: fotos 2..4 (la 1 ya es la principal — sin duplicarla) {%- endcomment -%}
             <div class="op-product_thumbs">
-              {%- for media in product.media limit: 3 -%}
-                <button type="button" class="op-product_thumb{% if forloop.first %} is-active{% endif %}" data-op-thumb
+              {%- for media in product.media offset: 1 limit: 3 -%}
+                <button type="button" class="op-product_thumb" data-op-thumb
                   data-full="{{ media | image_url: width: 1400 }}"
                   data-srcset="{{ media | image_url: width: 500 }} 500w, {{ media | image_url: width: 800 }} 800w, {{ media | image_url: width: 1100 }} 1100w, {{ media | image_url: width: 1400 }} 1400w"
-                  aria-label="Ver imagen {{ forloop.index }}">
+                  aria-label="Ver imagen {{ forloop.index | plus: 1 }}">
                   {{ media | image_url: width: 480 | image_tag: alt: media.alt | default: product.title, class: 'op-product_thumbimg', widths: '240,480', loading: 'lazy' }}
                 </button>
               {%- endfor -%}
