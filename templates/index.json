@@ -67,7 +67,7 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/06.webp",
-            "label": "",
+            "label": "Certificado de Regalo",
             "link": ""
           }
         },
@@ -75,7 +75,7 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/05.webp",
-            "label": "",
+            "label": "Bookcase",
             "link": ""
           }
         },
@@ -83,7 +83,7 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/04.webp",
-            "label": "",
+            "label": "Fotos Impresas",
             "link": ""
           }
         },
@@ -91,7 +91,7 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/03.webp",
-            "label": "",
+            "label": "Bookcase",
             "link": ""
           }
         },
