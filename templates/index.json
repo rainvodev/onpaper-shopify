@@ -63,33 +63,62 @@
     "bookcase": {
       "type": "op-bookcase",
       "blocks": {
-        "image_96yqf4": {
+        "image_zTeQAR": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/06.webp",
+            "label": "",
+            "link": ""
+          }
         },
-        "img-1": {
+        "image_DUNfRD": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/05.webp",
+            "label": "",
+            "link": ""
+          }
         },
-        "img-2": {
+        "image_ErJhG8": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/04.webp",
+            "label": "",
+            "link": ""
+          }
         },
-        "img-3": {
+        "image_cABCRF": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/03.webp",
+            "label": "",
+            "link": ""
+          }
         },
-        "img-4": {
+        "image_EMXEr6": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/02.webp",
+            "label": "Photobook",
+            "link": ""
+          }
+        },
+        "image_BtWa9X": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/01.webp",
+            "label": "Photobook",
+            "link": ""
+          }
         }
       },
       "block_order": [
-        "image_96yqf4",
-        "img-1",
-        "img-2",
-        "img-3",
-        "img-4"
+        "image_zTeQAR",
+        "image_DUNfRD",
+        "image_ErJhG8",
+        "image_cABCRF",
+        "image_EMXEr6",
+        "image_BtWa9X"
       ],
       "settings": {
         "padding_top": 64,
