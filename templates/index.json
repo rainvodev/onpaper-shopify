@@ -15,19 +15,19 @@
         "slide_adVHqi": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/hero.png"
+            "image": "shopify://shop_images/home-hero-01.webp"
           }
         },
         "slide-1": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/hero-2.png"
+            "image": "shopify://shop_images/home-hero-02.webp"
           }
         },
         "slide-2": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/hero-3.png"
+            "image": "shopify://shop_images/home-hero-03.webp"
           }
         }
       },
@@ -43,7 +43,9 @@
         "heading": "<p>Crafted with passion, <em>designed for a lifetime.</em></p>",
         "subheading": "",
         "cta_label": "Comprar ahora",
-        "cta_link": "shopify://collections/all"
+        "cta_link": "shopify://collections/all",
+        "more_label": "More of us",
+        "more_link": ""
       }
     },
     "about": {
@@ -63,27 +65,19 @@
       "blocks": {
         "img-1": {
           "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/bookcase-1.png"
-          }
+          "settings": {}
         },
         "img-2": {
           "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/bookcase-2.png"
-          }
+          "settings": {}
         },
         "img-3": {
           "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/bookcase-3.png"
-          }
+          "settings": {}
         },
         "img-4": {
           "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/bookcase-4.png"
-          }
+          "settings": {}
         }
       },
       "block_order": [
@@ -116,7 +110,6 @@
       "settings": {
         "padding_top": 200,
         "padding_bottom": 200,
-        "image": "shopify://shop_images/banner-photobook.png",
         "overlay": 25,
         "heading_width": 30,
         "heading": "<p>Get to know our <em>Photobook Collections.</em></p>",
@@ -158,7 +151,6 @@
         "g1": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/image_9.png",
             "column": "1",
             "ratio": "wide"
           }
@@ -166,7 +158,6 @@
         "g2": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/image_10.png",
             "column": "1",
             "ratio": "wide"
           }
@@ -174,7 +165,6 @@
         "g3": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/image_11.png",
             "column": "1",
             "ratio": "pano"
           }
@@ -182,7 +172,6 @@
         "g4": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/image_12.png",
             "column": "1",
             "ratio": "wide"
           }
@@ -190,7 +179,6 @@
         "g5": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/image_13.png",
             "column": "2",
             "ratio": "square"
           }
@@ -198,7 +186,6 @@
         "g6": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/image_14.png",
             "column": "2",
             "ratio": "wide"
           }
@@ -206,7 +193,6 @@
         "g7": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/image_15.png",
             "column": "2",
             "ratio": "tall"
           }
@@ -214,7 +200,6 @@
         "g8": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/image_16.png",
             "column": "3",
             "ratio": "square"
           }
@@ -222,7 +207,6 @@
         "g9": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/image_17.png",
             "column": "3",
             "ratio": "square"
           }
@@ -230,7 +214,6 @@
         "g10": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/image_18.png",
             "column": "3",
             "ratio": "wide"
           }
