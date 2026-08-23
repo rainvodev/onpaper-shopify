@@ -38,6 +38,14 @@
       ty = e.clientY - r.top;
       kick();
     });
+    // Texto por elemento: si la celda bajo el cursor trae data-disc-label, el disco lo adopta;
+    // al salir a una zona sin label vuelve al texto original de la sección.
+    var defaultLabel = disc.textContent;
+    zone.addEventListener('pointerover', function (e) {
+      var el = e.target && e.target.closest ? e.target.closest('[data-disc-label]') : null;
+      var label = (el && zone.contains(el)) ? el.getAttribute('data-disc-label') : defaultLabel;
+      if (label && disc.textContent !== label) disc.textContent = label;
+    });
     zone.addEventListener('pointerleave', function () {
       active = false;
       disc.classList.remove('is-active');

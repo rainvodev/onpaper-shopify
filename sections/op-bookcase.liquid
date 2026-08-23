@@ -1,42 +1,81 @@
-{% comment %} On Paper — Bookcase (Lumos). Tira full-bleed de imágenes con disco que sigue el cursor. Componente propio, reordenable. {% endcomment %}
+{% comment %} On Paper — Bookcase (Lumos). Marquee infinito full-bleed de imágenes: se pausa on hover,
+  el disco sigue el cursor y su texto cambia según la imagen encima (data-disc-label; ver
+  op-cursor-follow.js). Cada imagen puede llevar su propio texto y link; si no, hereda los de la
+  sección. La secuencia se duplica (copias aria-hidden, sin tabstops) para el loop sin costura. {% endcomment %}
 <section class="op-bookcase u-section full-width" style="padding-top: clamp({{ section.settings.padding_top | times: 0.42 | round }}px, {{ section.settings.padding_top | divided_by: 12.0 }}vw, {{ section.settings.padding_top }}px); padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.42 | round }}px, {{ section.settings.padding_bottom | divided_by: 12.0 }}vw, {{ section.settings.padding_bottom }}px)" {{ section.shopify_attributes }}>
-  {%- assign strip_tag = 'div' -%}
-  {%- if section.settings.strip_link != blank -%}{%- assign strip_tag = 'a' -%}{%- endif -%}
-  <{{ strip_tag }} class="op-bookcase_strip" data-cursor-follow style="--op-bookcase-cols: {{ section.blocks.size | at_least: 1 }}; --op-bookcase-ratio: {{ section.settings.ratio }}" {% if section.settings.strip_link != blank %}href="{{ section.settings.strip_link }}" aria-label="{{ section.settings.strip_label }}"{% endif %}>
+
+  {%- capture cells_live -%}
     {%- for block in section.blocks -%}
-      <div class="op-bookcase_cell" data-reveal data-reveal-delay style="--reveal-delay: {{ forloop.index0 | times: 90 }}ms" {{ block.shopify_attributes }}>
+      {%- assign cell_label = block.settings.label | default: section.settings.strip_label -%}
+      {%- assign cell_link = block.settings.link | default: section.settings.strip_link -%}
+      {%- if cell_link != blank -%}
+        <a class="op-bookcase_cell" href="{{ cell_link }}" data-disc-label="{{ cell_label | escape }}" aria-label="{{ cell_label | escape }}" {{ block.shopify_attributes }}>
+      {%- else -%}
+        <div class="op-bookcase_cell" data-disc-label="{{ cell_label | escape }}" {{ block.shopify_attributes }}>
+      {%- endif -%}
         {%- if block.settings.image != blank -%}
           {{ block.settings.image | image_url: width: 900 | image_tag: alt: block.settings.image.alt, class: 'op-bookcase_img', widths: '300,500,700,900', sizes: '25vw', loading: 'lazy' }}
         {%- else -%}
           <div class="op-bookcase_img op-bookcase_img--ph"></div>
         {%- endif -%}
-      </div>
+      {%- if cell_link != blank -%}</a>{%- else -%}</div>{%- endif -%}
     {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- capture cells_copy -%}
+    {%- for block in section.blocks -%}
+      {%- assign cell_label = block.settings.label | default: section.settings.strip_label -%}
+      {%- assign cell_link = block.settings.link | default: section.settings.strip_link -%}
+      {%- if cell_link != blank -%}
+        <a class="op-bookcase_cell" href="{{ cell_link }}" data-disc-label="{{ cell_label | escape }}" tabindex="-1" aria-hidden="true">
+      {%- else -%}
+        <div class="op-bookcase_cell" data-disc-label="{{ cell_label | escape }}" aria-hidden="true">
+      {%- endif -%}
+        {%- if block.settings.image != blank -%}
+          {{ block.settings.image | image_url: width: 900 | image_tag: alt: '', class: 'op-bookcase_img', widths: '300,500,700,900', sizes: '25vw', loading: 'lazy' }}
+        {%- else -%}
+          <div class="op-bookcase_img op-bookcase_img--ph"></div>
+        {%- endif -%}
+      {%- if cell_link != blank -%}</a>{%- else -%}</div>{%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  <div class="op-bookcase_strip" data-cursor-follow data-reveal style="--op-bookcase-ratio: {{ section.settings.ratio }}; --op-marquee-dur: {{ section.settings.speed | default: 35 }}s">
+    <div class="op-bookcase_track">
+      {%- comment -%} mitad A (la secuencia ×2 para garantizar ancho > viewport) {%- endcomment -%}
+      <div class="op-bookcase_group">{{ cells_live }}{{ cells_copy }}</div>
+      {%- comment -%} mitad B: clon exacto de A para el loop -50% sin costura {%- endcomment -%}
+      <div class="op-bookcase_group" aria-hidden="true">{{ cells_copy }}{{ cells_copy }}</div>
+    </div>
     {%- if section.settings.strip_label != blank -%}
       <span class="op-bookcase_disc" data-cursor-disc aria-hidden="true">{{ section.settings.strip_label }}</span>
     {%- endif -%}
-  </{{ strip_tag }}>
+  </div>
 </section>
 
 {% stylesheet %}
-  .op-bookcase_strip { position: relative; display: grid; grid-template-columns: repeat(var(--op-bookcase-cols, 4), 1fr); cursor: none; text-decoration: none; color: inherit; }
-  .op-bookcase_cell { overflow: hidden; }
+  .op-bookcase_strip { position: relative; overflow: hidden; cursor: none; }
+  .op-bookcase_track { display: flex; width: max-content; animation: op-bookcase-marquee var(--op-marquee-dur, 35s) linear infinite; will-change: transform; }
+  .op-bookcase_strip:hover .op-bookcase_track { animation-play-state: paused; }
+  @keyframes op-bookcase-marquee { to { transform: translateX(-50%); } }
+  .op-bookcase_group { display: flex; }
+  .op-bookcase_cell { overflow: hidden; flex: none; width: clamp(240px, 25vw, 440px); display: block; }
   .op-bookcase_img { width: 100%; height: 100%; aspect-ratio: var(--op-bookcase-ratio, 0.8); object-fit: cover; display: block; transition: transform 700ms ease; }
   .op-bookcase_img--ph { background-color: color-mix(in srgb, var(--_theme---text) 10%, transparent); }
-  .op-bookcase_strip:hover .op-bookcase_img { transform: scale(1.03); }
+  .op-bookcase_cell:hover .op-bookcase_img { transform: scale(1.03); }
   .op-bookcase_disc {
     position: absolute; top: 0; left: 0; /* posición vía transform (JS, lerp) */
     display: grid; place-items: center; text-align: center;
     width: 8.5rem; height: 8.5rem; border-radius: 50%;
     background-color: rgba(245,245,239,0.65); backdrop-filter: blur(6px);
     color: #5f604e; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.74rem;
-    pointer-events: none; z-index: 3;
+    pointer-events: none; z-index: 3; padding: 0.8rem;
     opacity: 0; transition: opacity 280ms ease; will-change: transform, opacity;
   }
   .op-bookcase_disc.is-active { opacity: 1; }
-  @media (hover: none) { .op-bookcase_strip { cursor: pointer; } }
-  /* Strip decorativo: se mantiene compacto en móvil (2 col), no se apila a 1 (sería demasiado alto). */
-  @media (max-width: 900px) { .op-bookcase_strip { grid-template-columns: repeat(2, 1fr); } }
+  @media (hover: none) { .op-bookcase_strip { cursor: auto; } }
+  @media (max-width: 900px) { .op-bookcase_cell { width: clamp(160px, 44vw, 320px); } }
+  @media (prefers-reduced-motion: reduce) { .op-bookcase_track { animation: none; } }
 {% endstylesheet %}
 
 {% schema %}
@@ -55,15 +94,18 @@
       { "value": "1.25", "label": "Vertical (4:5)" },
       { "value": "1.4", "label": "Retrato" }
     ], "default": "0.8" },
-    { "type": "text", "id": "strip_label", "label": "Texto del disco (sigue el cursor)", "default": "Book case" },
-    { "type": "url", "id": "strip_link", "label": "Link de la tira" }
+    { "type": "range", "id": "speed", "label": "Velocidad del marquee (segundos por vuelta)", "min": 15, "max": 60, "step": 5, "default": 35 },
+    { "type": "text", "id": "strip_label", "label": "Texto default del disco", "default": "Book case", "info": "Cada imagen puede definir el suyo; este se usa cuando no lo tiene." },
+    { "type": "url", "id": "strip_link", "label": "Link default de las imágenes" }
   ],
   "blocks": [
     {
       "type": "image",
       "name": "Imagen",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Imagen" }
+        { "type": "image_picker", "id": "image", "label": "Imagen" },
+        { "type": "text", "id": "label", "label": "Texto del disco sobre esta imagen", "info": "Vacío = usa el default de la sección." },
+        { "type": "url", "id": "link", "label": "Link de esta imagen", "info": "Vacío = usa el default de la sección." }
       ]
     }
   ],
