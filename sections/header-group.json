@@ -19,7 +19,7 @@
         "others_label": "Otros",
         "others_link": "shopify://pages/others",
         "products_collection": "all-products",
-        "bestsellers_collection": "best-sellers",
+        "bestsellers_collection": "frontpage",
         "products_eyebrow": "Ver todo",
         "products_eyebrow_link": "shopify://collections/all",
         "collections_eyebrow": "Ver todo",
