@@ -3,7 +3,7 @@
 Theme OS 2.0 custom de **On Paper** (taller artesanal de photobooks e impresión, Monterrey MX), construido sobre el **Skeleton** de Shopify + el framework **Lumos** de RAINVO.
 
 - **Store actual (dev, temporal):** onpaper-fafjay65.myshopify.com — dev store NO transferible.
-- **Store definitivo:** `<store-onpaper>.myshopify.com` *(actualizar cuando se confirme la URL)*. Migración: ver `docs/migracion.md`.
+- **Store definitivo:** `on-paper-t6vfjrak.myshopify.com`. Migración: ver `docs/migracion.md`.
 - **Transferencia al lanzamiento:** la tienda queda a nombre de taller@onpaper.mx (Anaissa activa el plan de pago).
 
 ## Modelo de deploy

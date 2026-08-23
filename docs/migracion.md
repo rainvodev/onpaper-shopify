@@ -4,10 +4,17 @@
 > todo lo de abajo es configuración de Admin/Shopify o insumos del cliente.
 > Actualizado: ago-2026.
 
+## 0. Dónde viven las imágenes ahora
+
+Las carpetas pesadas de `_import/` (raw + paquetes, ~550 MB) se movieron a la
+rama **`archivo-imagenes`** para que la conexión GitHub→Shopify no falle por
+tamaño del repo. Para usar los paquetes en tu máquina:
+`git fetch && git switch archivo-imagenes` (y `git switch main` para volver).
+
 ## 1. Conectar el theme al store definitivo (2 min)
 
 El store actual `onpaper-fafjay65.myshopify.com` es un dev store NO transferible.
-En el **store definitivo** (`<store-onpaper>.myshopify.com` — actualizar aquí y en el README):
+En el **store definitivo** (`on-paper-t6vfjrak.myshopify.com`):
 
 1. Admin → **Online Store → Themes → Add theme → Connect from GitHub** → repo `rainvodev/onpaper-shopify`, rama `main`.
 2. Verificar el preview del theme conectado; **Publish** cuando el resto de esta checklist esté listo.
