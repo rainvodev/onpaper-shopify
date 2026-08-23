@@ -8,6 +8,11 @@ Vinipiel (18) × los 6 tamaños exactos (8x8, 10x10, 8.5x11, 11x14, 11x8.5,
 Convención: `mockup-<material>-<tamaño>-<color>.webp`
 (ej. `mockup-tela-8-5x11-cafe-claro.webp` — el punto del tamaño se vuelve guión).
 
+**Semántica del tamaño en el NOMBRE DE ARCHIVO:** sigue la convención del taller
+(ALTO×ANCHO): `-11x14-` es el mockup HORIZONTAL y `-14x11-` el VERTICAL. La
+tienda usa ANCHO×ALTO, y `op-product.js` traduce automáticamente al pedir la
+imagen (14x11 de la tienda → archivo `-11x14-`). No renombrar los archivos.
+
 **Sustitución en Admin → Content → Files (en este orden):**
 1. **Borrar los 528 viejos** (estaban mal y ya nada los usa): en el buscador de
    Files filtra `photobook-`, luego `libro-de-firmas-`, luego `bookcase-`;

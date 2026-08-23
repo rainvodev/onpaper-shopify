@@ -187,8 +187,11 @@
       var urls = [];
       // v2 (ago-2026): set único compartido por material × tamaño EXACTO × color
       //   mockup-<material>-<tamaño>-<color>.webp  (ej. mockup-tela-8-5x11-cafe-claro.webp)
+      // OJO: el taller nombra los tamaños ALTO×ANCHO y la tienda ANCHO×ALTO; los archivos
+      // siguen la convención del taller, así que se traduce el tamaño al construir la llave.
       if (mat && ORIENT_CODES[sz]) {
-        var shared = 'mockup-' + mat + '-' + slug(sz) + '-' + t + '.webp';
+        var TALLER_SIZE = { '8x8': '8x8', '10x10': '10x10', '14x11': '11x14', '11x14': '14x11', '8.5x11': '11x8.5', '11x8.5': '8.5x11' };
+        var shared = 'mockup-' + mat + '-' + slug(TALLER_SIZE[sz] || sz) + '-' + t + '.webp';
         if (filesBase) urls.push(filesBase + shared + wq);
         if (imgBase) urls.push(imgBase + shared + wq);
       }
