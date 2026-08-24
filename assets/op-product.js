@@ -45,6 +45,7 @@
       var img = root.querySelector('#opMainImg');
       if (img && btn.dataset.full) {
         swapSeq++; // cancela cualquier swap de color en vuelo para que no pise esta foto
+        showingMockup = false; // vuelve a ser una foto de la galería
         img.classList.remove('is-swapping');
         img.src = btn.dataset.full;
         // Conserva srcset responsivo si el thumb lo trae (evita cargar 1400px en móvil)
@@ -169,6 +170,24 @@
       if (srcset) img.setAttribute('srcset', srcset);
       else img.removeAttribute('srcset');
     }
+    // Imagen original del producto (la destacada, tal como la pintó Liquid) para
+    // restaurarla cuando el material activo no lleva paleta de color (Impresión):
+    // ahí ningún mockup aplica y no debe quedarse el del material anterior.
+    var showingMockup = false;
+    var origMain = null;
+    var origImg = mainImgEl();
+    if (origImg) origMain = { src: origImg.getAttribute('src'), srcset: origImg.getAttribute('srcset') || '' };
+    function restoreMain() {
+      showingMockup = false;
+      var img = mainImgEl();
+      if (!origMain || !img) return; // sin foto propia: se conserva lo que haya
+      swapSeq++; // cancela cualquier swap de color en vuelo
+      img.classList.remove('is-swapping');
+      img.src = origMain.src;
+      if (origMain.srcset) img.setAttribute('srcset', origMain.srcset);
+      else img.removeAttribute('srcset');
+      root.querySelectorAll('[data-op-thumb]').forEach(function (b, i) { b.classList.toggle('is-active', i === 0); });
+    }
     // El CDN de Shopify redimensiona con ?width= → pedimos solo los píxeles que se ven.
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     function targetWidth() {
@@ -236,10 +255,11 @@
         if (url) root.querySelectorAll('[data-op-thumb]').forEach(function (b) { b.classList.remove('is-active'); });
         if (url) {
           swapMain(url, '');
+          showingMockup = true;
         } else {
           var t = slug(value);
           var m = mediaList.filter(function (it) { return it.alt && slug(it.alt) === t; })[0];
-          if (m) swapMain(m.src, m.srcset || '');
+          if (m) { swapMain(m.src, m.srcset || ''); showingMockup = true; }
         }
         var img = mainImgEl();
         if (img) img.classList.remove('is-swapping');
@@ -255,9 +275,11 @@
         var name = e.target && e.target.name;
         if (name === 'properties[Color]') colorImage(e.target.value);
         else if (name && name.indexOf('properties[') === 0) {
-          // Material o Tamaño cambiaron → la llave del mockup cambió; refresca con el color vigente
+          // Material o Tamaño cambiaron → la llave del mockup cambió; refresca con el color vigente.
+          // Sin color vigente (material sin paleta, ej. Impresión) → de vuelta a la foto original.
           var v = activeColorValue();
           if (v) colorImage(v);
+          else if (showingMockup) restoreMain();
         }
       });
       // Precarga al pasar el mouse / tocar / enfocar un swatch de Color:
