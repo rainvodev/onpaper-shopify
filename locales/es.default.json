@@ -50,8 +50,11 @@
     "title": "Buscar",
     "placeholder": "Busca productos, páginas o artículos",
     "submit": "Buscar",
-    "no_results_html": "No encontramos resultados para {{ terms }}",
-    "results_for_html": "{{ count }} resultados para {{ terms }}"
+    "no_results_html": "No encontramos resultados para “{{ terms }}”",
+    "results_for_html": {
+      "one": "{{ count }} resultado para “{{ terms }}”",
+      "other": "{{ count }} resultados para “{{ terms }}”"
+    }
   },
   "seo": {
     "tagged": "etiquetado \"{{ tags }}\"",

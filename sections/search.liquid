@@ -1,19 +1,26 @@
-{% comment %} On Paper — Búsqueda (Lumos). Título serif + campo redondeado + grid de resultados estilo colección. {% endcomment %}
-<section class="op-search u-section">
+{% comment %} On Paper — Búsqueda (Lumos). Título serif + pill de búsqueda + meta con hairline y
+  grid de resultados estilo colección. El padding vertical vive aquí (u-section no trae). {% endcomment %}
+<section class="op-search u-section" style="padding-top: clamp({{ section.settings.padding_top | times: 0.42 | round }}px, {{ section.settings.padding_top | divided_by: 12.0 }}vw, {{ section.settings.padding_top }}px); padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.42 | round }}px, {{ section.settings.padding_bottom | divided_by: 12.0 }}vw, {{ section.settings.padding_bottom }}px)">
   <div class="op-search_contain u-container">
     <header class="op-search_head">
       <h1 class="op-search_title" data-reveal>{{ 'search.title' | t }}</h1>
       <form action="{{ routes.search_url }}" method="get" role="search" class="op-search_form" data-reveal style="--reveal-delay: 100ms">
-        <input class="op-search_input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'search.placeholder' | t }}" aria-label="{{ 'search.title' | t }}">
+        <svg class="op-search_glass" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input class="op-search_input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'search.placeholder' | t }}" aria-label="{{ 'search.title' | t }}" autocomplete="off" autocorrect="off" spellcheck="false">
         <button class="op-search_submit" type="submit">{{ 'search.submit' | t }}</button>
       </form>
     </header>
 
     {% if search.performed %}
       {% if search.results_count == 0 %}
-        <p class="op-search_none" data-reveal>{{ 'search.no_results_html' | t: terms: search.terms }}</p>
+        <div class="op-search_none" data-reveal>
+          <p>{{ 'search.no_results_html' | t: terms: search.terms }}</p>
+          <a class="op-search_allcta" href="{{ routes.all_products_collection_url }}">{{ section.settings.empty_cta_label | default: 'Ver todos los productos' }}</a>
+        </div>
       {% else %}
-        <p class="op-search_count" data-reveal>{{ 'search.results_for_html' | t: terms: search.terms, count: search.results_count }}</p>
+        <div class="op-search_meta" data-reveal>
+          <span>{{ 'search.results_for_html' | t: terms: search.terms, count: search.results_count }}</span>
+        </div>
 
         {% paginate search.results by 12 %}
           <div class="op-search_grid" data-reveal-group>
@@ -49,14 +56,25 @@
 </section>
 
 {% stylesheet %}
-  .op-search_head { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: var(--_spacing---space--7); }
-  .op-search_title { font-family: var(--_typography---font--primary-family); font-style: italic; font-weight: 400; font-size: clamp(1.7rem, 1.1rem + 2.2vw, 2.6rem); line-height: 1.18; color: var(--swatch--brand-300, #b0b094); margin: 0 0 var(--_spacing---space--5); }
-  .op-search_form { display: flex; gap: var(--_spacing---space--3); width: min(34rem, 100%); }
-  .op-search_input { flex: 1; font-family: inherit; font-size: 0.95rem; color: var(--_theme---text); background-color: transparent; border: 0.0625rem solid var(--_theme---border); border-radius: 2rem; padding: 0.85rem 1.3rem; }
-  .op-search_submit { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.76rem; color: #fff; background-color: var(--swatch--brand-300, #b0b094); border: 0; border-radius: 2rem; padding: 0.85rem 1.6rem; cursor: pointer; transition: background-color 250ms; }
+  .op-search_head { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: clamp(2.75rem, 6vw, 4.5rem); }
+  .op-search_title { font-family: var(--_typography---font--primary-family); font-style: italic; font-weight: 400; font-size: clamp(1.7rem, 1.1rem + 2.2vw, 2.6rem); line-height: 1.18; color: var(--swatch--brand-300, #b0b094); margin: 0 0 var(--_spacing---space--6); }
+  /* Pill idéntica a la del panel del header (el token --_theme---border al 16% se pierde en el crema) */
+  .op-search_form { display: flex; align-items: center; gap: var(--_spacing---space--4); width: min(38rem, 100%); border: 0.0625rem solid color-mix(in srgb, currentColor 32%, transparent); border-radius: 2rem; padding: 0.4rem 0.4rem 0.4rem 1.25rem; transition: border-color 250ms ease; }
+  .op-search_form:focus-within { border-color: color-mix(in srgb, currentColor 62%, transparent); }
+  .op-search_glass { flex: none; opacity: 0.55; }
+  .op-search_input { flex: 1; min-width: 0; background: transparent; border: 0; outline: 0; color: var(--_theme---text); font-family: var(--_typography---font--primary-family); font-size: 1.05rem; padding-block: 0.5rem; }
+  .op-search_input::placeholder { color: currentColor; opacity: 0.45; font-style: italic; }
+  .op-search_input::-webkit-search-cancel-button { -webkit-appearance: none; }
+  .op-search_submit { flex: none; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.76rem; color: #fff; background-color: var(--swatch--brand-300, #b0b094); border: 0; border-radius: 2rem; padding: 0.75rem 1.6rem; cursor: pointer; transition: background-color 250ms; }
   .op-search_submit:hover { background-color: var(--swatch--brand-500, #5f604e); }
-  .op-search_none, .op-search_count { text-align: center; opacity: 0.75; margin-bottom: var(--_spacing---space--6); }
-  .op-search_grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--_spacing---space--6); row-gap: var(--_spacing---space--7); }
+
+  .op-search_meta { display: flex; align-items: baseline; justify-content: space-between; gap: var(--_spacing---space--4); border-bottom: 0.0625rem solid color-mix(in srgb, currentColor 18%, transparent); padding-bottom: 0.8rem; margin-bottom: var(--_spacing---space--7); font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.74rem; opacity: 0.75; }
+  .op-search_none { text-align: center; padding-top: clamp(1rem, 3vw, 2rem); display: flex; flex-direction: column; align-items: center; gap: var(--_spacing---space--5); }
+  .op-search_none p { opacity: 0.75; margin: 0; }
+  .op-search_allcta { display: inline-block; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.78rem; color: var(--_theme---text); background: transparent; border: 0.0625rem solid var(--_theme---text); border-radius: 2rem; padding: 0.85rem 1.8rem; text-decoration: none; transition: background-color 250ms, color 250ms; }
+  .op-search_allcta:hover { background-color: var(--swatch--brand-500, #5f604e); border-color: var(--swatch--brand-500, #5f604e); color: #fff; }
+
+  .op-search_grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--_spacing---space--6); row-gap: var(--_spacing---space--8); }
   .op-search_media { display: block; aspect-ratio: 4 / 5; overflow: hidden; }
   .op-search_img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms ease; }
   .op-search_media:hover .op-search_img { transform: scale(1.04); }
@@ -69,12 +87,19 @@
   .op-search_pagelink:hover { opacity: 1; }
   .op-search_pageinfo { font-size: 0.8rem; opacity: 0.6; }
   @media (max-width: 990px) { .op-search_grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 600px) { .op-search_grid { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) {
+    .op-search_grid { grid-template-columns: 1fr; }
+    .op-search_submit { padding: 0.65rem 1.2rem; }
+  }
 {% endstylesheet %}
 
 {% schema %}
 {
   "name": "t:general.search",
-  "settings": []
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 200, "step": 4, "default": 96, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 200, "step": 4, "default": 128, "unit": "px" },
+    { "type": "text", "id": "empty_cta_label", "label": "CTA sin resultados", "default": "Ver todos los productos" }
+  ]
 }
 {% endschema %}
