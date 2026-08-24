@@ -68,7 +68,7 @@
           "settings": {
             "image": "shopify://shop_images/06.webp",
             "label": "Certificado de Regalo",
-            "link": ""
+            "link": "shopify://products/certificado-de-regalo"
           }
         },
         "image_DUNfRD": {
@@ -76,7 +76,7 @@
           "settings": {
             "image": "shopify://shop_images/05.webp",
             "label": "Bookcase",
-            "link": ""
+            "link": "shopify://products/bookcase"
           }
         },
         "image_ErJhG8": {
@@ -84,7 +84,7 @@
           "settings": {
             "image": "shopify://shop_images/04.webp",
             "label": "Fotos Impresas",
-            "link": ""
+            "link": "shopify://products/fotos-impresas"
           }
         },
         "image_cABCRF": {
@@ -92,7 +92,7 @@
           "settings": {
             "image": "shopify://shop_images/03.webp",
             "label": "Bookcase",
-            "link": ""
+            "link": "shopify://products/bookcase"
           }
         },
         "image_EMXEr6": {
@@ -100,7 +100,7 @@
           "settings": {
             "image": "shopify://shop_images/02.webp",
             "label": "Photobook",
-            "link": ""
+            "link": "shopify://products/photobook-layflat"
           }
         },
         "image_BtWa9X": {
@@ -108,7 +108,7 @@
           "settings": {
             "image": "shopify://shop_images/01.webp",
             "label": "Photobook",
-            "link": ""
+            "link": "shopify://products/photobook-tradicional"
           }
         }
       },
