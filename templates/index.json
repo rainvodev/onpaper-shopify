@@ -63,33 +63,68 @@
     "bookcase": {
       "type": "op-bookcase",
       "blocks": {
-        "img-1": {
+        "image_zTeQAR": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/06.webp",
+            "label": "Certificado de Regalo",
+            "link": "shopify://products/certificado-de-regalo"
+          }
         },
-        "img-2": {
+        "image_DUNfRD": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/05.webp",
+            "label": "Bookcase",
+            "link": "shopify://products/bookcase"
+          }
         },
-        "img-3": {
+        "image_ErJhG8": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/04.webp",
+            "label": "Fotos Impresas",
+            "link": "shopify://products/fotos-impresas"
+          }
         },
-        "img-4": {
+        "image_cABCRF": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/03.webp",
+            "label": "Bookcase",
+            "link": "shopify://products/bookcase"
+          }
+        },
+        "image_EMXEr6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/02.webp",
+            "label": "Photobook",
+            "link": "shopify://products/photobook-layflat"
+          }
+        },
+        "image_BtWa9X": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/01.webp",
+            "label": "Photobook",
+            "link": "shopify://products/photobook-tradicional"
+          }
         }
       },
       "block_order": [
-        "img-1",
-        "img-2",
-        "img-3",
-        "img-4"
+        "image_zTeQAR",
+        "image_DUNfRD",
+        "image_ErJhG8",
+        "image_cABCRF",
+        "image_EMXEr6",
+        "image_BtWa9X"
       ],
       "settings": {
         "padding_top": 64,
         "padding_bottom": 64,
         "ratio": "0.8",
+        "speed": 35,
         "strip_label": "Book case",
         "strip_link": "shopify://products/bookcase"
       }
@@ -152,6 +187,7 @@
         "g1": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/personalizados-01.webp",
             "column": "1",
             "ratio": "wide"
           }
@@ -159,6 +195,7 @@
         "g2": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/personalizados-04.webp",
             "column": "1",
             "ratio": "wide"
           }
@@ -166,6 +203,7 @@
         "g3": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/07.webp",
             "column": "1",
             "ratio": "pano"
           }
@@ -173,6 +211,7 @@
         "g4": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/personalizados-11.webp",
             "column": "1",
             "ratio": "wide"
           }
@@ -180,6 +219,7 @@
         "g5": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/personalizados-02.webp",
             "column": "2",
             "ratio": "square"
           }
@@ -187,6 +227,7 @@
         "g6": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/personalizados-05.webp",
             "column": "2",
             "ratio": "wide"
           }
@@ -194,6 +235,7 @@
         "g7": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/personalizados-08.webp",
             "column": "2",
             "ratio": "tall"
           }
@@ -201,6 +243,7 @@
         "g8": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/personalizados-03.webp",
             "column": "3",
             "ratio": "square"
           }
@@ -208,6 +251,7 @@
         "g9": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/personalizados-06.webp",
             "column": "3",
             "ratio": "square"
           }
@@ -215,6 +259,7 @@
         "g10": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/personalizados-10.webp",
             "column": "3",
             "ratio": "wide"
           }
