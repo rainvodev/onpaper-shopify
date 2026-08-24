@@ -13,6 +13,14 @@
   var lastTrigger = null; // devuelve el foco al cerrar (a11y)
   function open() {
     var r = root(); if (!r) return;
+    if (!r.classList.contains('is-open')) {
+      // Tras renderCart, panel y overlay son nodos recién insertados (innerHTML). Si
+      // .is-open llega en el mismo frame, el navegador nunca computa su estado cerrado
+      // (clip-path 100%) y la transición no corre: el drawer aparece de golpe. Leer
+      // offsetWidth fuerza ese primer layout cerrado antes de animar.
+      var panel = r.querySelector('.op-cart_panel');
+      if (panel) void panel.offsetWidth;
+    }
     lastTrigger = document.activeElement;
     r.classList.add('is-open'); r.setAttribute('aria-hidden', 'false');
     document.documentElement.classList.add('op-no-scroll');
