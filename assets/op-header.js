@@ -30,6 +30,12 @@
     dbg('closeRoot', root.__opCurrent);
     root.querySelectorAll('[data-op-panel].is-open').forEach(function (p) { p.classList.remove('is-open'); });
     root.querySelectorAll('[data-op-trigger]').forEach(function (t) { t.classList.remove('is-active'); t.setAttribute('aria-expanded', 'false'); });
+    var st = root.querySelector('[data-op-search-toggle]');
+    if (st) {
+      st.setAttribute('aria-expanded', 'false');
+      var si = root.querySelector('[data-op-search-input]');
+      if (si && document.activeElement === si) st.focus({ preventScroll: true }); // no dejar el foco en un input oculto
+    }
     root.classList.remove('is-menu-open');
     root.__opCurrent = null;
   }
@@ -73,12 +79,18 @@
         });
       }
     }
-    function scheduleClose() { clearTimeout(closeTimer); closeTimer = setTimeout(function () { closeRoot(root); }, 180); }
+    // El panel de búsqueda NO se cierra por hover (se está escribiendo); solo con Esc,
+    // click afuera o el propio toggle. Los paneles de menú sí siguen la lógica de hover.
+    function scheduleClose() {
+      if (root.__opCurrent === 'search') return;
+      clearTimeout(closeTimer); closeTimer = setTimeout(function () { closeRoot(root); }, 180);
+    }
     function cancelClose() { clearTimeout(closeTimer); }
 
     triggers.forEach(function (t) {
       var name = t.getAttribute('data-op-trigger');
-      t.addEventListener('mouseenter', function () { cancelClose(); open(name); });
+      // Con la búsqueda abierta, un roce del mouse no la reemplaza; el click sí (intencional).
+      t.addEventListener('mouseenter', function () { if (root.__opCurrent === 'search') return; cancelClose(); open(name); });
       t.addEventListener('click', function (e) {
         e.preventDefault();
         if (root.__opCurrent === name) { closeRoot(root); } else { open(name); }
@@ -89,8 +101,12 @@
     root.addEventListener('mouseenter', cancelClose);
 
     // Hover sobre zonas del bar que NO son trigger (Others, logo, acciones) cierra el panel
+    // — salvo el de búsqueda: el icono vive en actions y se está escribiendo en él.
     root.querySelectorAll('.op-header_logo, .op-header_actions, .op-header_nav a').forEach(function (el) {
-      el.addEventListener('mouseenter', function () { cancelClose(); closeRoot(root); });
+      el.addEventListener('mouseenter', function () {
+        if (root.__opCurrent === 'search') return;
+        cancelClose(); closeRoot(root);
+      });
     });
 
     root.querySelectorAll('[data-op-item]').forEach(function (link) {
@@ -110,7 +126,7 @@
     var drawer = root.querySelector('[data-op-drawer]');
     if (burger && drawer) {
       var g = window.gsap;
-      var items = drawer.querySelectorAll('.op-header_acc, .op-header_accroot, .op-header_drawerloc');
+      var items = drawer.querySelectorAll('.op-header_acc, .op-header_accroot, .op-header_drawersearch, .op-header_drawerloc');
 
       function openDrawer() {
         drawer.classList.add('is-open');
@@ -151,6 +167,85 @@
 
       burger.addEventListener('click', function () {
         if (drawer.classList.contains('is-open')) closeDrawer(); else openDrawer();
+      });
+    }
+
+    // Búsqueda inline (panel "search"): el icono abre el panel con la misma máscara del
+    // mega-menú; los resultados llegan de la Predictive Search API (/search/suggest.json).
+    // Enter (o sin JS, o en móvil donde el panel no existe) navega al template /search.
+    var searchToggle = root.querySelector('[data-op-search-toggle]');
+    var searchPanel = panels['search'];
+    if (searchToggle && searchPanel) {
+      var sInput = searchPanel.querySelector('[data-op-search-input]');
+      var sResults = searchPanel.querySelector('[data-op-search-results]');
+      var sMsg = searchPanel.querySelector('[data-op-search-msg]');
+      var sAll = searchPanel.querySelector('[data-op-search-all]');
+      var sBase = searchPanel.getAttribute('data-op-predictive-url') || '/search/suggest';
+      var sUrl = searchPanel.getAttribute('data-op-search-url') || '/search';
+      var sFmt = (searchPanel.getAttribute('data-op-money') || '${{amount}}').replace(/<[^>]+>/g, '');
+      var sMq = window.matchMedia('(max-width: 990px)');
+
+      function sEsc(s) {
+        return (s == null ? '' : String(s)).replace(/[&<>"]/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+        });
+      }
+      function sMoney(v) {
+        var n = parseFloat(String(v == null ? '' : v).replace(/,/g, ''));
+        if (isNaN(n)) return '';
+        var s = n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        return sFmt.replace(/\{\{\s*amount[^}]*\}\}/g, s);
+      }
+      function sClear() {
+        if (sResults) { sResults.hidden = true; sResults.innerHTML = ''; }
+        if (sMsg) sMsg.hidden = true;
+        if (sAll) sAll.hidden = true;
+      }
+
+      searchToggle.addEventListener('click', function (e) {
+        if (sMq.matches) return; // móvil: el panel no se renderiza; el link navega a /search
+        e.preventDefault();
+        if (root.__opCurrent === 'search') { closeRoot(root); return; }
+        cancelClose();
+        open('search');
+        searchToggle.setAttribute('aria-expanded', 'true');
+        if (sInput) setTimeout(function () { sInput.focus({ preventScroll: true }); }, 80);
+      });
+
+      var sTimer = null, sSeq = 0;
+      if (sInput) sInput.addEventListener('input', function () {
+        clearTimeout(sTimer);
+        var q = sInput.value.trim();
+        if (q.length < 2) { sSeq++; sClear(); return; }
+        sTimer = setTimeout(function () {
+          var seq = ++sSeq;
+          fetch(sBase + '.json?q=' + encodeURIComponent(q) + '&resources[type]=product&resources[limit]=8', { headers: { 'Accept': 'application/json' } })
+            .then(function (r) { if (!r.ok) throw new Error('suggest ' + r.status); return r.json(); })
+            .then(function (j) {
+              if (seq !== sSeq) return; // llegó tarde: ya hay una consulta más reciente
+              var items = (j && j.resources && j.resources.results && j.resources.results.products) || [];
+              var html = '';
+              items.forEach(function (p) {
+                var im = (p.featured_image && p.featured_image.url) || p.image || '';
+                if (im) im += (im.indexOf('?') > -1 ? '&' : '?') + 'width=360';
+                var pr = sMoney(p.price);
+                html += '<a class="op-header_pcard" href="' + sEsc(p.url) + '">'
+                  + '<span class="op-header_pmedia">'
+                  + (im ? '<img class="op-header_pimg" src="' + sEsc(im) + '" alt="" loading="lazy">' : '<span class="op-header_pimg op-header_pimg--ph"></span>')
+                  + '</span>'
+                  + '<span class="op-header_pname">' + sEsc(p.title) + '</span>'
+                  + (pr ? '<span class="op-header_pprice">' + sEsc(pr) + '</span>' : '')
+                  + '</a>';
+              });
+              if (sResults) { sResults.innerHTML = html; sResults.hidden = !items.length; }
+              if (sMsg) {
+                sMsg.hidden = !!items.length;
+                if (!items.length) sMsg.textContent = (searchPanel.getAttribute('data-l-none') || 'Sin resultados para') + ' “' + q + '”';
+              }
+              if (sAll) { sAll.href = sUrl + '?q=' + encodeURIComponent(q); sAll.hidden = !items.length; }
+            })
+            .catch(function () { /* red caída: Enter sigue llevando a /search */ });
+        }, 220);
       });
     }
   }
