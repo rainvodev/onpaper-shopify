@@ -316,13 +316,16 @@
   /* Búsqueda inline (panel "search") */
   .op-header_panel--search { min-height: 0; }
   .op-header_searchbox { padding-top: var(--_spacing---space--7); padding-bottom: var(--_spacing---space--7); display: flex; flex-direction: column; align-items: center; }
-  .op-header_searchform { display: flex; align-items: center; gap: var(--_spacing---space--4); width: min(42rem, 100%); border-bottom: 0.0625rem solid var(--_theme---border); padding-bottom: 0.7rem; }
+  /* Pill con borde visible (el --_theme---border al 16% se pierde sobre el crema del panel);
+     mismo lenguaje que el campo de la página /search. */
+  .op-header_searchform { display: flex; align-items: center; gap: var(--_spacing---space--4); width: min(42rem, 100%); border: 0.0625rem solid color-mix(in srgb, currentColor 32%, transparent); border-radius: 2rem; padding: 0.4rem 0.4rem 0.4rem 1.25rem; transition: border-color 250ms ease; }
+  .op-header_searchform:focus-within { border-color: color-mix(in srgb, currentColor 62%, transparent); }
   .op-header_searchglass { flex: none; opacity: 0.55; }
-  .op-header_searchinput { flex: 1; min-width: 0; background: transparent; border: 0; outline: 0; color: currentColor; font-family: var(--_typography---font--primary-family); font-size: 1.15rem; }
+  .op-header_searchinput { flex: 1; min-width: 0; background: transparent; border: 0; outline: 0; color: currentColor; font-family: var(--_typography---font--primary-family); font-size: 1.1rem; padding-block: 0.45rem; }
   .op-header_searchinput::placeholder { color: currentColor; opacity: 0.45; font-style: italic; }
   .op-header_searchinput::-webkit-search-cancel-button { -webkit-appearance: none; }
-  .op-header_searchsubmit { flex: none; background: none; border: 0; cursor: pointer; color: currentColor; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.74rem; opacity: 0.7; transition: opacity 200ms; padding: 0; }
-  .op-header_searchsubmit:hover { opacity: 1; }
+  .op-header_searchsubmit { flex: none; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.74rem; color: #fff; background-color: var(--swatch--brand-300, #b0b094); border: 0; border-radius: 2rem; padding: 0.65rem 1.5rem; cursor: pointer; transition: background-color 250ms; }
+  .op-header_searchsubmit:hover { background-color: var(--swatch--brand-500, #5f604e); }
   .op-header_searchmsg { margin: var(--_spacing---space--6) 0 0; opacity: 0.7; font-size: 0.95rem; }
   .op-header_searchresults { width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--_spacing---space--6); margin-top: var(--_spacing---space--7); }
   .op-header_pprice { display: block; margin-top: 0.2rem; font-size: 0.85rem; opacity: 0.7; }
@@ -353,7 +356,7 @@
   .op-header_locrow > span { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.68rem; opacity: 0.6; }
   .op-loc--drawer { display: block; }
   .op-loc--drawer .op-loc_select { width: 100%; border: 0.0625rem solid var(--_theme---border); border-radius: 2rem; padding: 0.75rem 1.1rem; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.78rem; color: currentColor; background-color: transparent; }
-  .op-header_drawersearch { display: flex; align-items: center; gap: var(--_spacing---space--3); border: 0.0625rem solid var(--_theme---border); border-radius: 2rem; padding: 0.6rem 1.1rem; margin: var(--_spacing---space--4) 0; }
+  .op-header_drawersearch { display: flex; align-items: center; gap: var(--_spacing---space--3); border: 0.0625rem solid color-mix(in srgb, currentColor 32%, transparent); border-radius: 2rem; padding: 0.6rem 1.1rem; margin: var(--_spacing---space--4) 0; }
   .op-header_drawersearch-input { flex: 1; min-width: 0; background: transparent; border: 0; outline: 0; color: currentColor; font-family: var(--_typography---font--primary-family); font-size: 1rem; }
   .op-header_drawersearch-input::placeholder { color: currentColor; opacity: 0.5; font-style: italic; }
   .op-header_drawersearch-btn { flex: none; background: none; border: 0; cursor: pointer; color: currentColor; display: inline-flex; padding: 0; opacity: 0.7; }
