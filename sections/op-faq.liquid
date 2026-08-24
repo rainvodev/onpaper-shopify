@@ -1,6 +1,6 @@
 {% comment %} On Paper — FAQ (Lumos). Eyebrow + título itálico + acordeón de preguntas (bloques).
   Apertura/cierre animado con GSAP (fallback nativo sin JS/GSAP). Estilo calcado de op-about/product_acc. {% endcomment %}
-<section class="op-faq u-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" {{ section.shopify_attributes }}>
+<section class="op-faq u-section" style="padding-top: clamp({{ section.settings.padding_top | times: 0.42 | round }}px, {{ section.settings.padding_top | divided_by: 12.0 }}vw, {{ section.settings.padding_top }}px); padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.42 | round }}px, {{ section.settings.padding_bottom | divided_by: 12.0 }}vw, {{ section.settings.padding_bottom }}px)" {{ section.shopify_attributes }}>
   <div class="op-faq_contain u-container">
     <header class="op-faq_head u-margin-trim" style="--op-faq-hw: {{ section.settings.heading_width }}ch">
       {%- if section.settings.eyebrow != blank -%}

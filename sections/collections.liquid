@@ -1,5 +1,5 @@
 {% comment %} On Paper — Lista de colecciones (Lumos). Título serif + grid de tarjetas estilo colección. {% endcomment %}
-<section class="op-cols u-section">
+<section class="op-cols u-section" style="padding-top: clamp({{ section.settings.padding_top | times: 0.42 | round }}px, {{ section.settings.padding_top | divided_by: 12.0 }}vw, {{ section.settings.padding_top }}px); padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.42 | round }}px, {{ section.settings.padding_bottom | divided_by: 12.0 }}vw, {{ section.settings.padding_bottom }}px)">
   <div class="op-cols_contain u-container">
     <h1 class="op-cols_title" data-reveal>{{ 'collections.title' | t }}</h1>
     <div class="op-cols_grid" data-reveal-group>
@@ -39,7 +39,10 @@
 {% schema %}
 {
   "name": "t:general.collections_grid",
-  "settings": [],
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 240, "step": 4, "default": 96, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 240, "step": 4, "default": 128, "unit": "px" }
+  ],
   "presets": [{ "name": "t:general.collections_grid" }]
 }
 {% endschema %}

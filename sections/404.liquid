@@ -1,5 +1,5 @@
 {% comment %} On Paper — 404 (Lumos). Mensaje editorial centrado + CTA de regreso. {% endcomment %}
-<section class="op-404 u-section">
+<section class="op-404 u-section" style="padding-top: clamp({{ section.settings.padding_top | times: 0.42 | round }}px, {{ section.settings.padding_top | divided_by: 12.0 }}vw, {{ section.settings.padding_top }}px); padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.42 | round }}px, {{ section.settings.padding_bottom | divided_by: 12.0 }}vw, {{ section.settings.padding_bottom }}px)">
   <div class="op-404_contain u-container">
     <p class="op-404_eyebrow" data-reveal-load>{{ '404.title' | t }}</p>
     <h1 class="op-404_title" data-reveal-load style="--reveal-delay: 100ms">{{ '404.not_found' | t }}</h1>
@@ -21,6 +21,9 @@
 {% schema %}
 {
   "name": "t:general.404",
-  "settings": []
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "Espacio arriba", "min": 0, "max": 240, "step": 4, "default": 160, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 240, "step": 4, "default": 160, "unit": "px" }
+  ]
 }
 {% endschema %}

@@ -2,7 +2,7 @@
   Cantidades vía AJAX (/cart/change.js) sin recargar; nota de pedido; estado vacío con CTA.
   El mismo diseño del cart drawer, con más aire. {% endcomment %}
 <section class="op-cartpage u-section" data-op-cartpage data-op-money="{{ shop.money_format | strip_html | escape }}" data-op-change-url="{{ routes.cart_change_url }}.js"
-  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" {{ section.shopify_attributes }}>
+  style="padding-top: clamp({{ section.settings.padding_top | times: 0.42 | round }}px, {{ section.settings.padding_top | divided_by: 12.0 }}vw, {{ section.settings.padding_top }}px); padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.42 | round }}px, {{ section.settings.padding_bottom | divided_by: 12.0 }}vw, {{ section.settings.padding_bottom }}px)" {{ section.shopify_attributes }}>
   <div class="op-cartpage_contain u-container">
     <header class="op-cartpage_head" data-reveal>
       <h1 class="op-cartpage_title">{{ section.settings.title | default: 'Carrito' }} <span class="op-cartpage_count" data-cartpage-count>({{ cart.item_count }})</span></h1>

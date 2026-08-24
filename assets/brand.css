@@ -30,3 +30,28 @@
 [class*="u-text-style-display"], [class*="u-text-style-h"]{ text-transform:none; }
 /* Eyebrows / etiquetas en Marcellus mayúsculas */
 .u-eyebrow-text, .u-text-style-tagline{ font-family:var(--font-label); text-transform:uppercase; letter-spacing:.08em; }
+
+/* ------------------------------------------------------------------
+   Políticas nativas de Shopify (/policies/*): Shopify pinta su propio
+   markup .shopify-policy__* dentro del layout, sin pasar por ninguna
+   sección del theme — se estilizan aquí como espejo de page.liquid
+   (mismo padding fluido, ancho de prosa y tipografía que las legales). */
+.shopify-policy__container{ max-width:70ch !important; width:100%; margin-inline:auto; padding:clamp(40px,8vw,96px) clamp(1.25rem,4vw,2.5rem) clamp(54px,10.67vw,128px); }
+.shopify-policy__title{ text-align:center; margin-bottom:var(--_spacing---space--7,2.5rem); }
+.shopify-policy__title h1{ font-family:var(--_typography---font--primary-family); font-style:italic; font-weight:400; font-size:clamp(1.7rem,1.1rem + 2.2vw,2.6rem); line-height:1.18; color:var(--swatch--brand-300,#b0b094); margin:0; }
+.shopify-policy__body{ font-size:.97rem; line-height:1.7; color:var(--_theme---text,#1e1e1a); }
+.shopify-policy__body p{ margin:0 0 1em; }
+.shopify-policy__body h2, .shopify-policy__body h3, .shopify-policy__body h4{ font-family:var(--_typography---font--primary-family); font-weight:400; line-height:1.25; margin:2em 0 .7em; }
+.shopify-policy__body h2{ font-size:1.4rem; }
+.shopify-policy__body h3{ font-size:1.18rem; }
+.shopify-policy__body h4{ font-size:1.05rem; }
+.shopify-policy__body ul, .shopify-policy__body ol{ margin:0 0 1em; padding-left:1.4em; }
+.shopify-policy__body li{ margin-bottom:.35em; }
+.shopify-policy__body li::marker{ color:var(--swatch--brand-300,#b0b094); }
+.shopify-policy__body a{ color:currentColor; text-underline-offset:.2em; }
+.shopify-policy__body a:hover{ opacity:.75; }
+.shopify-policy__body strong{ font-weight:600; }
+.shopify-policy__body img{ max-width:100%; height:auto; }
+.shopify-policy__body blockquote{ margin:1.5em 0; padding-left:1.2em; border-left:.125rem solid var(--swatch--brand-300,#b0b094); font-style:italic; opacity:.85; }
+.shopify-policy__body table{ width:100%; border-collapse:collapse; margin:0 0 1em; font-size:.9rem; }
+.shopify-policy__body th, .shopify-policy__body td{ border:.0625rem solid var(--_theme---border); padding:.5em .8em; text-align:left; }

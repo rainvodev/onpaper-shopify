@@ -1,7 +1,7 @@
 {% comment %} On Paper — Página de contacto (Lumos). Formulario nativo de Shopify ({% form 'contact' %}):
   los mensajes llegan al correo del remitente configurado en Admin → Configuración → Notificaciones.
   Estilos alineados a los campos de la página de producto. {% endcomment %}
-<section class="op-contact u-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px" {{ section.shopify_attributes }}>
+<section class="op-contact u-section" style="padding-top: clamp({{ section.settings.padding_top | times: 0.42 | round }}px, {{ section.settings.padding_top | divided_by: 12.0 }}vw, {{ section.settings.padding_top }}px); padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.42 | round }}px, {{ section.settings.padding_bottom | divided_by: 12.0 }}vw, {{ section.settings.padding_bottom }}px)" {{ section.shopify_attributes }}>
   <div class="op-contact_contain u-container">
     <header class="op-contact_head" data-reveal-load>
       {%- if section.settings.eyebrow != blank -%}
