@@ -99,8 +99,8 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/02.webp",
-            "label": "Photobook",
-            "link": "shopify://products/photobook-layflat"
+            "label": "Photobook Tradicional",
+            "link": "shopify://products/photobook-tradicional"
           }
         },
         "image_BtWa9X": {
