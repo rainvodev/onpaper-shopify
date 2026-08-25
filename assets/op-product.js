@@ -65,6 +65,23 @@
           opts.forEach(function (o) { o.classList.remove('is-active'); });
           opt.classList.add('is-active');
           if (input) { input.value = opt.getAttribute('data-val'); input.dispatchEvent(new Event('change', { bubbles: true })); }
+          // Swatches (Color/Hotstamping): el nombre junto al encabezado del grupo sigue a la
+          // selección — "Color (Verde militar)" cambia en vivo. Solo swatches: los demás grupos
+          // usan ese espacio para notas fijas.
+          if (picker.classList.contains('op-product_swatches')) {
+            var grp = picker.closest('.op-product_grp');
+            var sum = grp && grp.querySelector('.op-product_grp-sum');
+            if (sum) {
+              var hint = sum.querySelector('.op-product_grp-hint');
+              if (!hint) {
+                hint = document.createElement('span');
+                hint.className = 'op-product_grp-hint';
+                sum.appendChild(document.createTextNode(' '));
+                sum.appendChild(hint);
+              }
+              hint.textContent = '(' + opt.getAttribute('data-val') + ')';
+            }
+          }
           if (picker.hasAttribute('data-op-gift')) toggleGift(picker, opt.getAttribute('data-gift'));
         });
       });
