@@ -19,8 +19,9 @@
         "min_height": 640,
         "menu_1": "footer",
         "menu_2": "main-menu",
+        "show_policies": true,
         "contact_heading": "contacto",
-        "phone": "(81) 1611 1838",
+        "phone": "(81) 3563 9959",
         "email": "taller@onpaper.mx",
         "social_heading": "@linktr.ee",
         "social_url": "",
@@ -30,7 +31,7 @@
         "pinterest_label": "onpaper",
         "facebook": "",
         "facebook_label": "on paper",
-        "whatsapp_url": "https://wa.me/+528116111838",
+        "whatsapp_url": "https://wa.me/+528135639959",
         "whatsapp_label": "Whatsapp"
       }
     }
