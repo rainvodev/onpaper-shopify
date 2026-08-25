@@ -75,8 +75,8 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/05.webp",
-            "label": "Bookcase",
-            "link": "shopify://products/bookcase"
+            "label": "Memory Box",
+            "link": "shopify://products/memory-box"
           }
         },
         "image_ErJhG8": {
@@ -99,16 +99,16 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/02.webp",
-            "label": "Photobook",
-            "link": "shopify://products/photobook-layflat"
+            "label": "Photobook Tradicional",
+            "link": "shopify://products/photobook-tradicional"
           }
         },
         "image_BtWa9X": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/01.webp",
-            "label": "Photobook",
-            "link": "shopify://products/photobook-tradicional"
+            "label": "Photobook Layflat",
+            "link": "shopify://products/photobook-layflat"
           }
         }
       },

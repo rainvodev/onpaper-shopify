@@ -16,14 +16,18 @@
       "settings": {
         "products_label": "Productos",
         "collections_label": "Colecciones",
-        "others_label": "Otros",
-        "others_link": "shopify://pages/others",
+        "others_label": "Faq",
+        "others_link": "shopify://pages/faq",
         "products_collection": "all-products",
         "bestsellers_collection": "frontpage",
         "products_eyebrow": "Ver todo",
-        "products_eyebrow_link": "shopify://collections/all",
+        "products_eyebrow_link": "shopify://collections/all-products",
         "collections_eyebrow": "Ver todo",
-        "collections_eyebrow_link": "",
+        "collections_eyebrow_link": "shopify://collections/all-products",
+        "show_search": true,
+        "search_placeholder": "¿Qué estás buscando?",
+        "search_all_label": "Ver todos los resultados",
+        "search_none_label": "Sin resultados para",
         "feature_ratio": "4 / 5"
       }
     }
