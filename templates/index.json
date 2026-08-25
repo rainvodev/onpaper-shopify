@@ -107,8 +107,8 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/01.webp",
-            "label": "Photobook",
-            "link": "shopify://products/photobook-tradicional"
+            "label": "Photobook Layflat",
+            "link": "shopify://products/photobook-layflat"
           }
         }
       },
