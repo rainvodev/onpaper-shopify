@@ -11,7 +11,15 @@
   "sections": {
     "main": {
       "type": "op-collection",
-      "settings": {}
+      "settings": {
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "eyebrow": "",
+        "heading": "<p>Get to know our products</p>",
+        "columns": 3,
+        "ratio": "4 / 5",
+        "products_per_page": 12
+      }
     }
   },
   "order": [
