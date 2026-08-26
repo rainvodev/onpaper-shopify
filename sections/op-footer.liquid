@@ -70,6 +70,7 @@
             {%- if section.settings.contact_heading != blank -%}<p class="op-footer_chead">{{ section.settings.contact_heading }}</p>{%- endif -%}
             {%- if section.settings.phone != blank -%}<p class="op-footer_citem">{{ section.settings.phone }}</p>{%- endif -%}
             {%- if section.settings.email != blank -%}<a class="op-footer_citem op-footer_citem--link" href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>{%- endif -%}
+            {%- if section.settings.address != blank -%}{%- if section.settings.address_url != blank -%}<a class="op-footer_citem op-footer_citem--link" href="{{ section.settings.address_url }}" target="_blank" rel="noopener">{{ section.settings.address | newline_to_br }}</a>{%- else -%}<p class="op-footer_citem">{{ section.settings.address | newline_to_br }}</p>{%- endif -%}{%- endif -%}{%- if section.settings.hours != blank -%}<p class="op-footer_cnote">{{ section.settings.hours | newline_to_br }}</p>{%- endif -%}
           </div>
           <div class="op-footer_col op-footer_social">
             {%- if section.settings.social_heading != blank -%}
@@ -134,6 +135,7 @@
   .op-footer_chead--link { color: currentColor; text-decoration: none; transition: opacity 250ms; }
   .op-footer_chead--link:hover { opacity: 1; }
   .op-footer_citem { font-size: 0.85rem; opacity: 0.85; color: currentColor; text-decoration: none; }
+  .op-footer_cnote { font-size: 0.78rem; line-height: 1.55; opacity: 0.55; margin: 0.25rem 0 0; }
   .op-footer_soc { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: currentColor; text-decoration: none; opacity: 0.85; transition: opacity 250ms; }
   .op-footer_whatsapp { align-self: flex-start; display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.78rem; color: currentColor; text-decoration: none; background-color: rgba(255,255,255,0.12); backdrop-filter: blur(8px); border: 0.0625rem solid rgba(255,255,255,0.3); border-radius: 2rem; padding: 0.7rem 1.4rem; transition: background-color 250ms; }
   .op-footer_whatsapp:hover { background-color: rgba(255,255,255,0.2); }
@@ -167,6 +169,10 @@
     { "type": "text", "id": "contact_heading", "label": "Encabezado", "default": "contacto" },
     { "type": "text", "id": "phone", "label": "Teléfono", "default": "(81) 1611 1838" },
     { "type": "text", "id": "email", "label": "Email", "default": "taller@onpaper.mx" },
+    { "type": "header", "content": "Dirección" },
+    { "type": "textarea", "id": "address", "label": "Dirección" },
+    { "type": "url", "id": "address_url", "label": "Link de mapa (Google Maps)" },
+    { "type": "textarea", "id": "hours", "label": "Nota / horario" },
     { "type": "header", "content": "Redes" },
     { "type": "text", "id": "social_heading", "label": "Encabezado", "default": "@linktr.ee" },
     { "type": "url", "id": "social_url", "label": "Encabezado URL (linktree, opcional)" },
