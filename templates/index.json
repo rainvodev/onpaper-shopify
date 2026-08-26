@@ -90,7 +90,7 @@
         "image_cABCRF": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/03.webp",
+            "image": "shopify://shop_images/book-case-02.webp",
             "label": "Bookcase",
             "link": "shopify://products/bookcase"
           }
@@ -106,7 +106,7 @@
         "image_BtWa9X": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/01.webp",
+            "image": "shopify://shop_images/photobook-layflat-02.webp",
             "label": "Photobook Layflat",
             "link": "shopify://products/photobook-layflat"
           }
