@@ -1,15 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "op-contact",
       "settings": {
+        "padding_top": 96,
+        "padding_bottom": 120,
         "eyebrow": "Contacto",
         "heading": "Trabajemos juntos",
         "intro": "<p>Cuéntanos qué tienes en mente: un photobook, un proyecto personalizado o un pedido por volumen. Te respondemos muy pronto.</p>",
-        "whatsapp_url": "https://wa.me/+528116111838",
+        "message_label": "Cuéntanos sobre tu proyecto",
+        "submit_label": "Enviar mensaje",
+        "success_text": "¡Gracias por tu mensaje! Te responderemos muy pronto.",
+        "error_text": "Revisa los campos marcados e inténtalo de nuevo.",
+        "aside_heading": "También puedes",
+        "aside_body": "<p>Para cotizaciones por volumen (eventos, empresas) o dudas sobre tu pedido, escríbenos directo:</p>",
+        "whatsapp_url": "https://wa.me/+528135639959",
+        "whatsapp_label": "Escríbenos por WhatsApp",
         "email": "taller@onpaper.mx"
       }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
