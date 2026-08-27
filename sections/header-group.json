@@ -22,6 +22,9 @@
         "bestsellers_collection": "frontpage",
         "products_eyebrow": "Ver todo",
         "products_eyebrow_link": "shopify://collections/all-products",
+        "panel_collections": [
+          "frontpage"
+        ],
         "collections_eyebrow": "Ver todo",
         "collections_eyebrow_link": "shopify://collections/all-products",
         "show_search": true,
