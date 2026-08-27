@@ -1,5 +1,5 @@
 {% comment %} On Paper — About (Lumos). Eyebrow + título itálico + párrafo de intro, centrado. La tira de imágenes y el texto inferior son secciones propias (op-bookcase, op-text). {% endcomment %}
-<section class="op-about u-section" style="padding-top: clamp({{ section.settings.padding_top | times: 0.42 | round }}px, {{ section.settings.padding_top | divided_by: 12.0 }}vw, {{ section.settings.padding_top }}px); padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.42 | round }}px, {{ section.settings.padding_bottom | divided_by: 12.0 }}vw, {{ section.settings.padding_bottom }}px)" {{ section.shopify_attributes }}>
+<section id="nosotros" class="op-about u-section" style="padding-top: clamp({{ section.settings.padding_top | times: 0.42 | round }}px, {{ section.settings.padding_top | divided_by: 12.0 }}vw, {{ section.settings.padding_top }}px); padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.42 | round }}px, {{ section.settings.padding_bottom | divided_by: 12.0 }}vw, {{ section.settings.padding_bottom }}px)" {{ section.shopify_attributes }}>
   <div class="op-about_contain u-container">
     <div class="op-about_content u-margin-trim" style="--op-about-hw: {{ section.settings.heading_width }}ch; --op-about-bw: {{ section.settings.body_width }}ch">
       {%- if section.settings.eyebrow != blank -%}
@@ -16,6 +16,7 @@
 </section>
 
 {% stylesheet %}
+.op-about { scroll-margin-top: 5rem; }
   .op-about_content { display: flex; flex-direction: column; align-items: center; text-align: center; }
   .op-about_eyebrow { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; color: var(--_theme---text); opacity: 0.7; margin-bottom: var(--_spacing---space--5); }
   .op-about_heading { max-width: var(--op-about-hw, 30ch); margin-inline: auto; font-family: var(--_typography---font--primary-family); font-style: italic; font-size: clamp(1.5rem, 1rem + 2vw, 2rem); line-height: 1.25; color: var(--swatch--brand-300, #b0b094); }
