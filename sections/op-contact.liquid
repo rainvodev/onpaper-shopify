@@ -17,7 +17,7 @@
       <div class="op-contact_formcol" data-reveal-load style="--reveal-delay: 120ms">
         {%- form 'contact', class: 'op-contact_form' -%}
           {%- if form.posted_successfully? -%}
-            <p class="op-contact_success" tabindex="-1" autofocus>{{ section.settings.success_text | default: '¡Gracias por tu mensaje! Te contactamos muy pronto.' }}</p>
+            <p class="op-contact_success" tabindex="-1" autofocus>{{ section.settings.success_text | default: 'Recibimos tu mensaje. Te contestamos por correo en horario de taller: Lun a Vie, 9:00 a 17:30.' }}</p>
           {%- endif -%}
           {%- if form.errors -%}
             <div class="op-contact_errors" role="alert">
@@ -100,10 +100,10 @@
     { "type": "range", "id": "padding_bottom", "label": "Espacio abajo", "min": 0, "max": 240, "step": 4, "default": 120 },
     { "type": "text", "id": "eyebrow", "label": "Etiqueta", "default": "Contacto" },
     { "type": "text", "id": "heading", "label": "Título", "default": "Trabajemos juntos" },
-    { "type": "richtext", "id": "intro", "label": "Intro", "default": "<p>Cuéntanos qué tienes en mente: un photobook, un proyecto personalizado o un pedido por volumen. Te respondemos muy pronto.</p>" },
+    { "type": "richtext", "id": "intro", "label": "Intro", "default": "<p>Cuéntanos qué tienes en mente: un photobook, un proyecto personalizado o un pedido por volumen.</p>" },
     { "type": "text", "id": "message_label", "label": "Etiqueta del mensaje", "default": "Cuéntanos sobre tu proyecto" },
     { "type": "text", "id": "submit_label", "label": "Texto del botón", "default": "Enviar mensaje" },
-    { "type": "text", "id": "success_text", "label": "Mensaje de éxito", "default": "¡Gracias por tu mensaje! Te contactamos muy pronto." },
+    { "type": "text", "id": "success_text", "label": "Mensaje de éxito", "default": "Recibimos tu mensaje. Te contestamos por correo en horario de taller: Lun a Vie, 9:00 a 17:30." },
     { "type": "text", "id": "error_text", "label": "Mensaje de error", "default": "Revisa los campos marcados e inténtalo de nuevo." },
     { "type": "header", "content": "Columna lateral" },
     { "type": "text", "id": "aside_heading", "label": "Encabezado", "default": "También puedes" },
