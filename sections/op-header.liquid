@@ -6,6 +6,10 @@
     assign is_home = true
   endif
   assign groups = 'products,collections' | split: ','
+  assign panel_collections = section.settings.panel_collections
+  if panel_collections == blank
+    assign panel_collections = collections
+    endif
 %}
 <header class="op-header full-width{% if is_home %} is-overlay u-theme-dark{% endif %}" data-op-header
   style="--op-feat-ratio: {{ section.settings.feature_ratio | default: '4 / 5' }}" {{ section.shopify_attributes }}>
@@ -131,7 +135,7 @@
           {%- endif -%}
         {%- endif -%}
         <ul class="op-header_menulist">
-          {%- for collection in collections -%}
+          {%- for collection in panel_collections -%}
             <li><a class="op-header_menulink{% if forloop.first %} is-active{% endif %}" data-op-item="collections-{{ forloop.index0 }}" href="{{ collection.url }}">{{ collection.title }}</a></li>
           {%- else -%}
             {%- if request.design_mode -%}<li class="op-header_empty">No hay colecciones en la tienda.</li>{%- endif -%}
@@ -139,7 +143,7 @@
         </ul>
       </div>
       <div class="op-header_feature">
-        {%- for collection in collections -%}
+        {%- for collection in panel_collections -%}
           <div class="op-header_featuregroup{% if forloop.first %} is-active{% endif %}" data-op-feature="collections-{{ forloop.index0 }}">
             {%- for product in collection.products limit: 3 -%}
               {% render 'op-product-card-mini', product: product %}
@@ -191,7 +195,7 @@
           <svg class="op-header_chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
         </summary>
         <ul class="op-header_acclist">
-          {%- for collection in collections -%}
+          {%- for collection in panel_collections -%}
             <li><a class="op-header_acclink" href="{{ collection.url }}">{{ collection.title }}</a></li>
           {%- endfor -%}
         </ul>
@@ -385,6 +389,7 @@
     { "type": "text", "id": "products_eyebrow", "label": "Eyebrow", "default": "Ver todo" },
     { "type": "url", "id": "products_eyebrow_link", "label": "Eyebrow — enlace" },
     { "type": "header", "content": "Panel Collections" },
+    { "type": "collection_list", "id": "panel_collections", "label": "Colecciones del panel", "limit": 6, "info": "Si lo dejas vacío, se muestran todas las colecciones." },
     { "type": "text", "id": "collections_eyebrow", "label": "Eyebrow", "default": "Ver todo" },
     { "type": "url", "id": "collections_eyebrow_link", "label": "Eyebrow — enlace" },
     { "type": "header", "content": "Búsqueda" },
