@@ -18,7 +18,7 @@
         "collections_label": "Colecciones",
         "others_label": "Faq",
         "others_link": "shopify://pages/faq",
-        "products_collection": "all-products",
+        "products_collection": "",
         "bestsellers_collection": "frontpage",
         "products_eyebrow": "Ver todo",
         "products_eyebrow_link": "shopify://collections/all-products",
