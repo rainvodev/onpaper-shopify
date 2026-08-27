@@ -15,7 +15,7 @@
         "padding_top": 96,
         "padding_bottom": 96,
         "eyebrow": "",
-        "heading": "<p>Get to know our products</p>",
+        "heading": "<p>{{ collection.title }}</p>",
         "columns": 3,
         "ratio": "4 / 5",
         "products_per_page": 12
