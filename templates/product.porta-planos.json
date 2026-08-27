@@ -1,10 +1,19 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "product",
       "blocks": {
         "heading": { "type": "heading", "settings": {
-          "title": "<p>Porta planos</p>",
+          "title": "<p>Portaplanos</p>",
           "intro": "<p>Nuestros portaplanos personalizados están pensados para transportar y presentar planos, láminas o documentos de gran formato con estilo y profesionalismo.</p>"
         }},
         "details": { "type": "accordion", "settings": {
@@ -25,7 +34,7 @@
         "personalize_heading": "Personaliza tu Portaplano",
         "qty_style": "dropdown",
         "qty_label": "Cantidad de portaplanos",
-        "qty_note": "A partir de 21 porta planos o más, escríbenos para recibir cotización personalizada.",
+        "qty_note": "A partir de 21 portaplanos o más, escríbenos para recibir cotización personalizada.",
         "show_buy_now": true,
         "show_related": true,
         "related_heading": "También te puede gustar…"
