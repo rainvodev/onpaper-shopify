@@ -17,6 +17,7 @@
 
 {% stylesheet %}
 .op-about { scroll-margin-top: 5rem; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
   .op-about_content { display: flex; flex-direction: column; align-items: center; text-align: center; }
   .op-about_eyebrow { font-family: var(--font-label); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; color: var(--_theme---text); opacity: 0.7; margin-bottom: var(--_spacing---space--5); }
   .op-about_heading { max-width: var(--op-about-hw, 30ch); margin-inline: auto; font-family: var(--_typography---font--primary-family); font-style: italic; font-size: clamp(1.5rem, 1rem + 2vw, 2rem); line-height: 1.25; color: var(--swatch--brand-300, #b0b094); }
