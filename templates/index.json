@@ -150,7 +150,7 @@
         "heading_width": 30,
         "heading": "<p>Get to know our <em>Photobook Collections.</em></p>",
         "cta_label": "Comprar ahora",
-        "cta_link": "shopify://collections/photobooks"
+        "cta_link": "shopify://collections/frontpage"
       }
     },
     "bestsellers": {
