@@ -135,6 +135,9 @@
         "item_HjCzDk",
         "item_BhaDJ3"
       ],
+      "custom_css": [
+        ".op-faq_a-inner {padding-top: 8px;}"
+      ],
       "settings": {
         "padding_top": 96,
         "padding_bottom": 96,
