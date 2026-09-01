@@ -29,8 +29,8 @@
         "shipping": {
           "type": "accordion",
           "settings": {
-            "heading": "Tiempo de envío",
-            "content": "<p>Entrega física: 2–4 días hábiles a todo México. Entrega digital: por correo electrónico.</p>"
+            "heading": "Entrega",
+            "content": "<p>Digital: te lo enviamos por WhatsApp y correo electrónico, a ti y a quien lo recibe, en 1–2 días hábiles.</p><p>Físico: lo recoges en nuestra oficina en San Pedro Garza García, listo en 1–2 días hábiles.</p><p>Los certificados no tienen costo de entrega y no se envían por paquetería.</p>"
           }
         },
         "valor": {
