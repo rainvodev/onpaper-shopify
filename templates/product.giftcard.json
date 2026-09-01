@@ -76,7 +76,7 @@
         "nombre": {
           "type": "text",
           "settings": {
-            "label": "Nombre",
+            "label": "Nombre de quien compra",
             "placeholder": "Nombre:",
             "required": false
           }
@@ -84,7 +84,7 @@
         "tel": {
           "type": "text",
           "settings": {
-            "label": "Teléfono",
+            "label": "Teléfono de quien compra",
             "placeholder": "Teléfono:",
             "required": false
           }
@@ -92,7 +92,7 @@
         "correo": {
           "type": "text",
           "settings": {
-            "label": "Correo electrónico",
+            "label": "Correo de quien compra",
             "placeholder": "Correo electrónico:",
             "required": false
           }
