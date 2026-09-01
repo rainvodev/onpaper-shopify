@@ -13,6 +13,23 @@
     "min_page_margin": 20,
     "background_color": "#f5f5ef",
     "foreground_color": "#5f604e",
-    "input_corner_radius": 4
+    "input_corner_radius": 4,
+    "favicon": "shopify://shop_images/on-paper-favicon.png",
+    "sections": {
+      "op-cart-drawer": {
+        "type": "op-cart-drawer",
+        "settings": {
+          "title": "Carrito",
+          "subtotal_label": "Subtotal",
+          "checkout_label": "Finalizar compra",
+          "view_label": "Ver carrito",
+          "remove_label": "Quitar",
+          "empty_text": "Tu carrito está vacío.",
+          "error_text": "No se pudo actualizar el carrito. Inténtalo de nuevo.",
+          "continue_label": "Seguir comprando"
+        }
+      }
+    },
+    "content_for_index": []
   }
 }
