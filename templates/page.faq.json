@@ -46,6 +46,76 @@
             "question": "¿Puedo cambiar o cancelar mi pedido?",
             "answer": "<p>Como cada pieza es personalizada, solo podemos hacer cambios antes de que tu pedido entre a producción. Contáctanos lo antes posible y con gusto te ayudamos.</p>"
           }
+        },
+        "item_LJjKJb": {
+          "type": "item",
+          "settings": {
+            "question": "¿Qué pasa si no tengo mis fotos listas al pagar?",
+            "answer": "<p>Tienes hasta 6 meses desde que realizas el pago para enviarnos tus fotos o especificaciones. Pasado ese plazo se aplica un cargo del 20% del valor total para reactivar el proyecto, y después de un año el cargo es del 50%. Lo mismo aplica si tardas más de 2 meses en confirmar el preview.</p>"
+          }
+        },
+        "item_VE4HFN": {
+          "type": "item",
+          "settings": {
+            "question": "¿Cómo organizo el orden de mis fotos?",
+            "answer": "<p>Acomódalas en carpetas o nómbralas de forma que se entienda la secuencia. Si no nos indicas un orden, diseñamos según el acomodo en que las recibimos. Si después del preview quieres cambiar la secuencia, se aplica un cargo del 15% sobre el costo original del libro.</p>"
+          }
+        },
+        "item_pgL4gN": {
+          "type": "item",
+          "settings": {
+            "question": "¿Puedo pedir cambios después del preview?",
+            "answer": "<p>Sí. El primer preview incluye una ronda de cambios sin costo. Si pides un segundo preview con nuevas modificaciones, se aplica un cargo extra según la cantidad y complejidad de los ajustes.</p>"
+          }
+        },
+        "item_eypUF3": {
+          "type": "item",
+          "settings": {
+            "question": "¿Van a usar mis fotos en sus redes sociales?",
+            "answer": "<p>Podemos usar fotos del producto terminado en nuestro portafolio y redes sociales, únicamente para mostrar el trabajo realizado. Si prefieres que tu material se mantenga privado, avísanos al hacer tu pedido por correo o WhatsApp y no usaremos tus imágenes bajo ninguna circunstancia.</p>"
+          }
+        },
+        "item_KcXiV4": {
+          "type": "item",
+          "settings": {
+            "question": "¿Cuál es la diferencia entre el libro tradicional y el layflat?",
+            "answer": "<p>El tradicional está cosido como un libro clásico, por lo que no abre completamente plano; se imprime en papel couché de 200 g, con un acabado firme y elegante. El layflat se imprime en papel fotográfico y lleva una encuadernación especial que permite abrirlo completamente plano a 180°, ideal para fotos a doble página. Ambos son hechos a mano; el layflat es la opción más premium.</p>"
+          }
+        },
+        "item_7KrxaK": {
+          "type": "item",
+          "settings": {
+            "question": "¿Qué formas de pago aceptan? ¿Puedo dar anticipo?",
+            "answer": "<p>Aceptamos transferencias bancarias, depósitos, MoneyPool, PayPal y efectivo en nuestra oficina. Los pedidos hechos por la página web se pagan en su totalidad al momento de la compra; la opción de anticipo del 50% está disponible únicamente para pedidos hechos directamente por WhatsApp.</p>"
+          }
+        },
+        "item_Np394c": {
+          "type": "item",
+          "settings": {
+            "question": "¿Cuánto cuesta el envío? ¿Puedo recoger en el taller?",
+            "answer": "<p>El envío nacional cuesta $300 MXN y el local en Monterrey y área metropolitana $100 MXN. La recolección en nuestro taller en San Pedro es sin costo, con cita previa, de lunes a viernes de 9:00 am a 5:30 pm.</p>"
+          }
+        },
+        "item_nf4bMP": {
+          "type": "item",
+          "settings": {
+            "question": "¿Hacen envíos internacionales?",
+            "answer": "<p>Sí. Tardan de 4 a 7 días hábiles adicionales al tiempo de producción. Ten en cuenta que no nos hacemos responsables por cargos aduanales, retenciones, demoras o inspecciones por parte de las autoridades del país de destino.</p>"
+          }
+        },
+        "item_HjCzDk": {
+          "type": "item",
+          "settings": {
+            "question": "¿Qué pasa si mi pedido llega dañado?",
+            "answer": "<p>Escríbenos dentro de los 5 días naturales posteriores a la entrega, con fotografías del producto y del empaque, y revisamos tu caso para darte una solución.</p>"
+          }
+        },
+        "item_BhaDJ3": {
+          "type": "item",
+          "settings": {
+            "question": "¿Cómo pido factura?",
+            "answer": "<p>Escríbenos a taller@onpaper.mx con tus datos fiscales antes de completar tu pedido y con gusto te la emitimos.</p>"
+          }
         }
       },
       "block_order": [
@@ -53,7 +123,17 @@
         "faq-personalizar",
         "faq-fotos",
         "faq-volumen",
-        "faq-cambios"
+        "faq-cambios",
+        "item_LJjKJb",
+        "item_VE4HFN",
+        "item_pgL4gN",
+        "item_eypUF3",
+        "item_KcXiV4",
+        "item_7KrxaK",
+        "item_Np394c",
+        "item_nf4bMP",
+        "item_HjCzDk",
+        "item_BhaDJ3"
       ],
       "settings": {
         "padding_top": 96,
