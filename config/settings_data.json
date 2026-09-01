@@ -14,7 +14,7 @@
     "background_color": "#f5f5ef",
     "foreground_color": "#5f604e",
     "input_corner_radius": 4,
-    "favicon": "shopify://shop_images/favicon-on-paper-polaroid_3f28d27e-250c-4602-bc63-2690c1aa835e.png",
+    "favicon": "shopify://shop_images/favicon-on-paper-polaroid.png",
     "sections": {
       "op-cart-drawer": {
         "type": "op-cart-drawer",
