@@ -86,7 +86,7 @@
           "type": "item",
           "settings": {
             "question": "¿Qué formas de pago aceptan? ¿Puedo dar anticipo?",
-            "answer": "<p>Aceptamos transferencias bancarias, depósitos, MoneyPool, PayPal y efectivo en nuestra oficina. Los pedidos hechos por la página web se pagan en su totalidad al momento de la compra; la opción de anticipo del 50% está disponible únicamente para pedidos hechos directamente por WhatsApp.</p>"
+            "answer": "<p>Aceptamos tarjeta de crédito y débito en la tienda en línea, transferencias bancarias, depósitos, y efectivo o tarjeta con terminal en nuestra oficina. Los pedidos hechos por la página web se pagan en su totalidad al momento de la compra; la opción de anticipo del 50% está disponible únicamente para pedidos hechos directamente por WhatsApp.</p>"
           }
         },
         "item_Np394c": {
