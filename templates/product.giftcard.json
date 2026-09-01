@@ -68,9 +68,9 @@
           "type": "radio",
           "settings": {
             "label": "Forma de entrega",
-            "options": "Digital, Entrega física",
-            "default": "Entrega física",
-            "note": "*Si tu selección fue Digital se enviará a tu correo de compra el PDF para descargar tu certificado de regalo. *El certificado de regalo tiene vigencia de 6 meses a partir de su compra."
+            "options": "Digital, Física (recoges en oficina)",
+            "default": "Física (recoges en oficina)",
+            "note": "*Digital: lo enviamos por WhatsApp y correo, a ti y a quien lo recibe. *Física: la recoges en nuestra oficina, sin costo. Ambas en 1–2 días hábiles. *Vigencia de 6 meses a partir de la compra."
           }
         },
         "nombre": {
