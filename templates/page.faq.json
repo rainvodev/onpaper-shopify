@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -7,7 +16,7 @@
           "type": "item",
           "settings": {
             "question": "¿Cuánto tarda mi pedido?",
-            "answer": "<p>Cada pieza se produce artesanalmente al recibir tu pedido. El tiempo estándar de producción y envío es de 20 días hábiles.</p>"
+            "answer": "<p>Cada pieza se produce artesanalmente al recibir tu pedido. El tiempo de producción es de 15 a 20 días hábiles, a partir de que recibimos tu pago y toda la información para el diseño. A eso se suma el envío: 2 a 4 días hábiles nacional, o 4 a 7 días hábiles internacional.</p>"
           }
         },
         "faq-personalizar": {
@@ -21,7 +30,7 @@
           "type": "item",
           "settings": {
             "question": "¿Cómo les hago llegar mis fotos?",
-            "answer": "<p>Al personalizar tu producto puedes agregar un link de Google Drive o WeTransfer con tus fotos. También podemos ayudarte por WhatsApp.</p>"
+            "answer": "<p>Al personalizar tu producto puedes agregar un link de Google Drive, Google Photos o WeTransfer con tus fotos. También podemos ayudarte por WhatsApp. Mándalas en alta resolución y por medios que no las compriman: no nos hacemos responsables de la calidad de impresión si llegan como capturas de pantalla, descargadas de WhatsApp o en archivos comprimidos.</p>"
           }
         },
         "faq-volumen": {
@@ -39,15 +48,32 @@
           }
         }
       },
-      "block_order": ["faq-tiempo", "faq-personalizar", "faq-fotos", "faq-volumen", "faq-cambios"],
+      "block_order": [
+        "faq-tiempo",
+        "faq-personalizar",
+        "faq-fotos",
+        "faq-volumen",
+        "faq-cambios"
+      ],
       "settings": {
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "heading_width": 30,
+        "list_width": 78,
         "eyebrow": "FAQ",
-        "heading": "<p><em>Preguntas frecuentes</em></p>"
+        "heading": "<p><em>Preguntas frecuentes</em></p>",
+        "intro": ""
       }
     },
     "cta": {
       "type": "op-cta",
       "settings": {
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "theme": "u-theme-light",
+        "bg_color": "",
+        "heading_width": 24,
+        "body_width": 52,
         "eyebrow": "¿Más dudas?",
         "heading": "<p><em>¿No encontraste tu respuesta?</em></p>",
         "body": "<p>Escríbenos y con gusto te ayudamos. En On Paper cada cliente tiene un lugar especial.</p>",
@@ -56,5 +82,8 @@
       }
     }
   },
-  "order": ["main", "cta"]
+  "order": [
+    "main",
+    "cta"
+  ]
 }
