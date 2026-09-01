@@ -1,41 +1,144 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "product",
       "blocks": {
-        "heading": { "type": "heading", "settings": {
-          "title": "<p>Giftcard</p>",
-          "intro": "<p>Nuestros certificados de regalo son la opción perfecta de obsequiar algo verdaderamente especial, permitiendo que la persona que los reciba decida qué, cuándo y cómo quiere transformar sus recuerdos.</p>"
-        }},
-        "details": { "type": "accordion", "settings": {
-          "heading": "Detalles",
-          "content": "<p>Porque a veces, el mejor regalo es dejar que el otro elija.</p><p>Los certificados están disponibles en formato físico o digital, y pueden personalizarse con el nombre del destinatario, un mensaje especial y el monto o producto elegido.</p><p>Son ideales para cumpleaños, bodas, agradecimientos, o celebraciones especiales. Tienen una vigencia de 6 meses a partir de la fecha de compra.</p>"
-        }},
-        "shipping": { "type": "accordion", "settings": { "heading": "Tiempo de envío", "content": "<p>Entrega física: 5 días hábiles.</p>" }},
-        "valor": { "type": "pills", "settings": { "label": "Valor", "options": "$500, $1000, $1500, $2000, $3000", "default": "$1000", "collapsible": true }},
-        "valor_nota": { "type": "note", "settings": { "text": "¿Quieres regalar un producto específico? Elige el valor equivalente y menciónalo en el mensaje; nosotros nos encargamos del resto." }},
-        "para": { "type": "text", "settings": { "label": "Nombre de quien recibe el regalo", "placeholder": "Para:" }},
-        "de": { "type": "text", "settings": { "label": "Nombre de quien regala", "placeholder": "De:" }},
-        "entrega": { "type": "radio", "settings": {
-          "label": "Forma de entrega",
-          "options": "Digital, Entrega física",
-          "default": "Entrega física",
-          "note": "*Si tu selección fue Digital se enviará a tu correo de compra el PDF para descargar tu certificado de regalo. *El certificado de regalo tiene vigencia de 6 meses a partir de su compra."
-        }},
-        "nombre": { "type": "text", "settings": { "label": "Nombre", "placeholder": "Nombre:" }},
-        "tel": { "type": "text", "settings": { "label": "Teléfono", "placeholder": "Teléfono:" }},
-        "correo": { "type": "text", "settings": { "label": "Correo electrónico", "placeholder": "Correo electrónico:" }},
-        "dir": { "type": "text", "settings": { "label": "Dirección de envío", "placeholder": "Dirección:" }}
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "title": "<p>Giftcard</p>",
+            "intro": "<p>Nuestros certificados de regalo son la opción perfecta de obsequiar algo verdaderamente especial, permitiendo que la persona que los reciba decida qué, cuándo y cómo quiere transformar sus recuerdos.</p>"
+          }
+        },
+        "details": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Detalles",
+            "content": "<p>Porque a veces, el mejor regalo es dejar que el otro elija.</p><p>Los certificados están disponibles en formato físico o digital, y pueden personalizarse con el nombre del destinatario, un mensaje especial y el monto o producto elegido.</p><p>Son ideales para cumpleaños, bodas, agradecimientos, o celebraciones especiales. Tienen una vigencia de 6 meses a partir de la fecha de compra.</p>"
+          }
+        },
+        "shipping": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Tiempo de envío",
+            "content": "<p>Entrega física: 5 días hábiles.</p>"
+          }
+        },
+        "valor": {
+          "type": "pills",
+          "settings": {
+            "label": "Producto",
+            "options": "Fotos Impresas · paquete chico, Fotos Impresas · paquete grande, Memory Box Polaroid · 4x5 pulgadas, Memory Box Standard · 5x7 pulgadas, Photobook Tradicional · hasta 150 fotos · cualquier tamaño, Photobook Tradicional · hasta 250 fotos · cualquier tamaño, Photobook Tradicional · hasta 350 fotos · cualquier tamaño, Photobook Layflat · hasta 50 fotos · cualquier tamaño, Photobook Layflat · hasta 150 fotos · cualquier tamaño, Photobook Layflat · hasta 250 fotos · cualquier tamaño",
+            "default": "Photobook Tradicional · hasta 150 fotos · cualquier tamaño",
+            "collapsible": true
+          }
+        },
+        "valor_nota": {
+          "type": "note",
+          "settings": {
+            "text": "¿Quieres regalar un producto específico? Elige el valor equivalente y menciónalo en el mensaje; nosotros nos encargamos del resto."
+          }
+        },
+        "para": {
+          "type": "text",
+          "settings": {
+            "label": "Nombre de quien recibe el regalo",
+            "placeholder": "Para:",
+            "required": false
+          }
+        },
+        "de": {
+          "type": "text",
+          "settings": {
+            "label": "Nombre de quien regala",
+            "placeholder": "De:",
+            "required": false
+          }
+        },
+        "entrega": {
+          "type": "radio",
+          "settings": {
+            "label": "Forma de entrega",
+            "options": "Digital, Entrega física",
+            "default": "Entrega física",
+            "note": "*Si tu selección fue Digital se enviará a tu correo de compra el PDF para descargar tu certificado de regalo. *El certificado de regalo tiene vigencia de 6 meses a partir de su compra."
+          }
+        },
+        "nombre": {
+          "type": "text",
+          "settings": {
+            "label": "Nombre",
+            "placeholder": "Nombre:",
+            "required": false
+          }
+        },
+        "tel": {
+          "type": "text",
+          "settings": {
+            "label": "Teléfono",
+            "placeholder": "Teléfono:",
+            "required": false
+          }
+        },
+        "correo": {
+          "type": "text",
+          "settings": {
+            "label": "Correo electrónico",
+            "placeholder": "Correo electrónico:",
+            "required": false
+          }
+        },
+        "dir": {
+          "type": "text",
+          "settings": {
+            "label": "Dirección de envío",
+            "placeholder": "Dirección:",
+            "required": false
+          }
+        }
       },
-      "block_order": ["heading", "details", "shipping", "valor", "valor_nota", "para", "de", "entrega", "nombre", "tel", "correo", "dir"],
+      "block_order": [
+        "heading",
+        "details",
+        "shipping",
+        "valor",
+        "valor_nota",
+        "para",
+        "de",
+        "entrega",
+        "nombre",
+        "tel",
+        "correo",
+        "dir"
+      ],
       "settings": {
+        "padding_top": 64,
+        "padding_bottom": 96,
+        "back_label": "← Productos",
+        "back_link": "",
         "personalize_heading": "Personaliza tu Giftcard",
         "show_qty": false,
+        "qty_label": "Cantidad",
+        "qty_style": "dropdown",
+        "qty_min": 1,
+        "qty_note": "",
+        "add_label": "Agregar al carrito",
         "show_buy_now": true,
-        "show_related": false
+        "show_related": false,
+        "related_heading": "También te puede gustar…"
       }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
-
