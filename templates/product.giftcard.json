@@ -15,8 +15,8 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "title": "<p>Giftcard</p>",
-            "intro": "<p>Nuestros certificados de regalo son la opción perfecta de obsequiar algo verdaderamente especial, permitiendo que la persona que los reciba decida qué, cuándo y cómo quiere transformar sus recuerdos.</p>"
+            "title": "<p>Certificado de <em>Regalo</em></p>",
+            "intro": "<p>Regala un photobook, una memory box o un paquete de fotos impresas. Elige el producto, nosotros te enviamos el certificado y quien lo recibe agenda su proyecto con nosotros.</p>"
           }
         },
         "details": {
@@ -45,7 +45,7 @@
         "valor_nota": {
           "type": "note",
           "settings": {
-            "text": "¿Quieres regalar un producto específico? Elige el valor equivalente y menciónalo en el mensaje; nosotros nos encargamos del resto."
+            "text": "El certificado es válido por 6 meses a partir de la compra. Si quieres algo distinto a lo que aparece aquí, escríbenos por WhatsApp y lo armamos."
           }
         },
         "para": {
