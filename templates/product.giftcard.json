@@ -100,8 +100,8 @@
         "dir": {
           "type": "text",
           "settings": {
-            "label": "Dirección de envío",
-            "placeholder": "Dirección:",
+            "label": "Contacto de quien recibe el regalo",
+            "placeholder": "WhatsApp o correo:",
             "required": false
           }
         }
