@@ -23,14 +23,14 @@
           "type": "accordion",
           "settings": {
             "heading": "Detalles",
-            "content": "<p>Porque a veces, el mejor regalo es dejar que el otro elija.</p><p>Los certificados están disponibles en formato físico o digital, y pueden personalizarse con el nombre del destinatario, un mensaje especial y el monto o producto elegido.</p><p>Son ideales para cumpleaños, bodas, agradecimientos, o celebraciones especiales. Tienen una vigencia de 6 meses a partir de la fecha de compra.</p>"
+            "content": "<p>Porque a veces, el mejor regalo es dejar que el otro elija.</p><p>Los certificados están disponibles en formato físico o digital, y pueden personalizarse con el nombre del destinatario, un mensaje especial y el  producto elegido.</p><p>Son ideales para cumpleaños, bodas, agradecimientos, o celebraciones especiales. Tienen una vigencia de 6 meses a partir de la fecha de compra.</p>"
           }
         },
         "shipping": {
           "type": "accordion",
           "settings": {
             "heading": "Tiempo de envío",
-            "content": "<p>Entrega física: 5 días hábiles.</p>"
+            "content": "<p>Entrega física: 2–4 días hábiles a todo México. Entrega digital: por correo electrónico.</p>"
           }
         },
         "valor": {
