@@ -19,7 +19,7 @@
         "min_height": 640,
         "menu_1": "footer",
         "menu_2": "main-menu",
-        "show_policies": true,
+        "show_policies": false,
         "contact_heading": "contacto",
         "phone": "(81) 3563 9959",
         "email": "taller@onpaper.mx",
