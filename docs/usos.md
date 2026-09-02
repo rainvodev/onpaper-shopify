@@ -69,6 +69,25 @@ Claude, en el repo:
 Alternativa rápida para un solo precio: editarlo en Admin → Products → variante. Después replicarlo en el
 generador para que repo y tienda no diverjan.
 
+### Prender o apagar un material
+- **Photobooks, Libro de Firmas, Bookcase, Memory Box** (el material no cambia el precio): Personalizar →
+  página del producto → bloque **Material** → edita las opciones (separadas por coma). Cada bloque de
+  Color tiene "Mostrar para" con el material que lo activa; si quitas un material, quita o ajusta su paleta.
+  Impresión no lleva paleta.
+- **Cajas, Carpetas, Porta Planos** (el material es opción de variante y define el precio): lo cambia
+  Claude en `_import/gen_variants_csv.py` (mapa `MAT3` y las opciones), regenera el CSV, y Anaissa importa
+  con overwrite tras sincronizar (receta siguiente). El label del bloque y el nombre de la opción deben
+  seguir siendo idénticos.
+
+### Sincronizar precios cuando se editaron en el Admin
+Anaissa puede cambiar precios directo en el Admin; el Admin manda. Antes de cualquier import con
+overwrite:
+1. Anaissa: Products → Export → "All products" / "CSV for Excel" → se lo pasa a Claude.
+2. Claude: compara los precios exportados contra `_import/products-variants.csv`, actualiza los mapas del
+   generador para que reproduzcan lo del Admin, regenera y verifica que el diff solo contenga esos cambios.
+3. Commit + push. Solo entonces se puede volver a importar con overwrite.
+Nunca importar sin este paso: pisaría lo que ella puso.
+
 ### Límite de cantidad por pedido
 Metafield de producto `custom.max_qty` (entero). El PDP lo respeta y muestra aviso al tope.
 
@@ -78,6 +97,27 @@ que cobre según lo elegido, el producto debe tener una opción de variante llam
 con los mismos valores del bloque y su precio; si no, cobra un precio único. Se entrega manualmente
 (WhatsApp/oficina). Las gift cards nativas de Shopify (que no expiran) quedaron descartadas por decisión
 de Anaissa.
+
+## Configuración de la tienda (Admin)
+
+### Limitar monedas y países (Markets)
+Acordado: solo **MXN, USD y EUR**. Settings → Markets: conservar México, Estados Unidos y un mercado para
+Europa (EUR); eliminar los demás países. El selector de país/moneda del header lista exactamente lo que
+exista aquí (`localization.available_countries`), así que no hay nada que tocar en el theme.
+
+### Checkout con la marca (sin cambiar de plan)
+Settings → Checkout → Customize: logo, colores (crema `#F5F5EF`, olive `#5F604E`, botón sage `#B0B094`)
+y tipografía. La estructura del checkout no se puede cambiar en el plan actual.
+
+### Quitar el botón morado "Comprar con Shop"
+Es el botón dinámico de Shopify (`{{ form | payment_button }}`) y no se recolorea. Personalizar → página
+de producto → **Botón comprar ahora** (`show_buy_now`) → desactivar. El flujo por carrito no cambia.
+
+### Compra de prueba sin cobro
+Settings → Payments → Shopify Payments → Manage → **Test mode**. Tarjeta `4242 4242 4242 4242`, fecha
+futura, cualquier CVV. Hacer 2–3 pedidos con personalización completa (color, hotstamping, textos) y el
+certificado; revisar el pedido en Admin (properties) y los correos. **Desactivar el modo de prueba** al
+terminar.
 
 ## Colores e imágenes
 

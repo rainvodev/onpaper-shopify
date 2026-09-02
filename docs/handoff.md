@@ -1,10 +1,21 @@
 # Handoff — On Paper (diagnóstico y plan de entrega)
 
-> Fecha: 2 de septiembre de 2026. Autor: RAINVO (Gabriel) con Claude.
+> Fecha: 2 de septiembre de 2026, actualizado tras la llamada RAINVO x On Paper de las 10:28
+> (notas y transcripción en Drive: "RAINVO x On Paper: 2026/09/02 10:28 CST"). Autor: RAINVO (Gabriel) con Claude.
 > Destinatarios: Anaissa (On Paper) y el Claude que la acompañe.
 > Estado del theme al cierre: **theme check 0 errores, CI verde, tienda operable.**
 
 ## 0. Resumen ejecutivo
+
+**Lo que cambió con la llamada del 2-sep.** Anaissa ya conectó `onpaper.mx` (sigue con password), cargó
+las legales (plantilla de RAINVO + su información), activó y revisó el inglés con su Claude, ajustó
+precios e imágenes, y rediseñó el certificado como producto con precio por opción. Se acordó: monedas
+solo MXN/USD/EUR; Shopify Payments (sin Mercado Pago/Stripe); checkout estándar personalizando logo y
+colores (sin upgrade de plan); ella hace la compra de prueba y lanza la tienda por su cuenta; RAINVO da
+30 días de soporte (2-sep → 2-oct) con respaldos semanales y reporte al cierre, y ofrece servicio mensual
+después. El cierre financiero se acordó en la llamada (detalle en RAINVO OS, no aquí). Documentación
+enviada el mismo día (este repo + página HTML para Anaissa).
+
 
 - El theme está completo y publicado en `on-paper-t6vfjrak.myshopify.com` vía integración GitHub
   (`main` = producción). Anaissa ya edita contenido desde el Admin y esos cambios llegan al repo como
@@ -32,7 +43,10 @@ Revisado commit por commit en el repo. Todo es coherente y bien hecho; nada romp
 | Configuración del theme | Favicon subido; textos del cart drawer guardados en español | Correcto. |
 | Home (`index.json`) | 20 imágenes asignadas desde Files; textos; bookcase con imágenes | Correcto. Headings display siguen en inglés (decisión pendiente, §1.4). |
 | Idiomas | Inglés agregado en Settings → Languages: Shopify creó `locales/en.json` (667 líneas: traducciones automáticas del theme + strings de sistema `shopify.*`) y añadió el encabezado *auto-generated* a `es.default.json` | Generó el CI rojo (faltaban `404.title` y `blog.article_metadata_html`). **Corregido hoy**; también se corrigió la traducción automática "Very soon" → "Coming soon". Revisar el resto de traducciones automáticas antes de publicar EN. |
-| Productos | Los 4 productos con precios dummy fueron puestos en **Active** (reportado en sesión) | **Riesgo P0** mientras la tienda tenga clientes reales (§1.3). |
+| Productos | Los 4 productos con precios dummy fueron puestos en **Active**; en la llamada dijo haber ajustado precios en el Admin | Sincronizar el generador desde el Admin antes de cualquier import (§1.3). |
+| Dominio | `onpaper.mx` conectado por ella; tienda con password | Correcto. |
+| Legales | Términos, envíos/devoluciones y privacidad cargados (plantilla del abogado de RAINVO + su info vía su Claude) | Recomendado revisar con abogado; plantillas originales en Drive de RAINVO. |
+| Idiomas | Inglés publicado; su Claude corrigió traducciones forzadas | Falta revisión fina; `en.json` completado hoy. |
 
 Sobre "se conectó con Claude": las ediciones de código de Anaissa entran por el Admin (editor de código /
 asistente) y se ven en el repo como `shopify[bot]`. Son competentes, pero ese canal **no corre theme
@@ -56,28 +70,33 @@ los cambios de código pasen por el flujo con checks (§3).
 
 **P0 — antes de quitar el password / recibir pedidos reales**
 
-1. **Precios dummy activos.** Libro de Firmas, Cajas Personalizadas, Carpetas y Porta Planos cobran montos
-   inventados (p. ej. Libro de Firmas base $1,490 + modificadores). Acción: Anaissa manda los montos →
-   receta "Cambiar precios" en `docs/usos.md` (generador → CSV → import con overwrite). Mientras tanto,
-   regresarlos a **Draft** o dejar el password.
-2. **Certificado de regalo.** Verificar en Admin → Products → Certificado de Regalo que exista la opción
-   `Producto` con los 10 valores exactos del bloque y su precio cada uno. Sin eso el certificado cobra un
-   único precio. (El bloque está en `templates/product.giftcard.json`.)
-3. **Inglés.** El idioma existe pero productos, secciones y páginas no están traducidos: un visitante en EN
-   vería el chrome en inglés y el contenido en español. Acción: mantener EN **sin publicar** hasta
-   traducir con Translate & Adapt, y revisar las traducciones automáticas de `locales/en.json`.
-4. **Dependencia del GitHub de RAINVO.** La conexión Shopify ↔ GitHub la hizo la cuenta de Gabriel. Si esa
-   cuenta pierde acceso a la tienda o al repo, el deploy deja de sincronizar. Acción en §2 (fase B).
+1. **Precios: el Admin puede ir por delante del repo.** Anaissa editó precios en el Admin. Antes de
+   cualquier import con overwrite hay que sincronizar `_import/gen_variants_csv.py` desde una exportación
+   de productos (receta en `docs/usos.md`); si quedan montos dummy en Firmas/Cajas/Carpetas/Porta Planos,
+   a Draft o montos reales.
+2. **Monedas (Markets).** Se activaron todos los países de Europa. Acordado: México (MXN), Estados Unidos
+   (USD) y un mercado Europa (EUR). Acción de Anaissa en Settings → Markets (o su Claude).
+3. **Compra de prueba sin cobro.** Shopify Payments en modo de prueba (tarjeta 4242…), 2–3 pedidos con
+   personalización completa y el certificado; revisar correo y pedido; apagar el modo de prueba.
+4. **Checkout con marca.** Settings → Checkout → Customize: logo, colores, tipografía (sin upgrade). El
+   botón "Comprar con Shop" (morado) no se puede recolorear: si molesta, apagar `show_buy_now` en el
+   template de producto desde Personalizar.
+5. **Legales con abogado.** Lo cargado parte de la plantilla general; recomendación explícita en la
+   llamada. Confirmar que se enlacen desde el footer (`show_policies` o menú 2).
+6. **Dependencia del GitHub de RAINVO.** La conexión Shopify ↔ GitHub la hizo la cuenta de Gabriel. Acción
+   en §2 (fase B).
 
 **P1 — lanzamiento**
 
-5. Plan de pago y **transferencia** de la tienda a `taller@onpaper.mx` (Partners); dominio `onpaper.mx`;
-   quitar password; **desconectar** la integración GitHub del dev store viejo `onpaper-fafjay65`.
+5. Plan y tarjeta (en trámite con su banco); quitar password cuando ella decida; **desconectar** la
+   integración GitHub del dev store viejo `onpaper-fafjay65`. Dominio: hecho.
 6. Legales: `show_policies` está apagado en el footer. Decidir: (a) Settings → Policies + encender el
    toggle, o (b) páginas con template `legal` enlazadas desde el menú 2 del footer. Ambas se ven igual.
-7. Envíos (nacional $300, local MTY $100, pickup gratis), pagos (Shopify Payments MXN), impuestos,
-   cuentas de cliente, correos transaccionales: `docs/migracion.md` §5.
-8. Pedido de prueba end-to-end por producto: PDP = carrito = checkout; formulario de contacto; búsqueda.
+7. Envíos (nacional $300, local MTY $100, pickup gratis), impuestos, cuentas de cliente, correos
+   transaccionales: `docs/migracion.md` §5. Pagos: Shopify Payments, decidido.
+8. Prender/apagar materiales: en photobooks/firmas/bookcase/memory es contenido (pills + `show_for`);
+   en cajas/carpetas/porta planos es opción de variante (generador + CSV). Receta en `docs/usos.md`.
+9. Pedido de prueba end-to-end por producto: PDP = carrito = checkout; formulario de contacto; búsqueda.
 
 **P2 — después de lanzar**
 
@@ -94,10 +113,9 @@ sitio más liviano), headings del home en inglés como voz de marca, disco del c
 
 ## 2. Plan de handoff
 
-**Fase A — Cierre RAINVO (esta semana).** Hecho: documentación (`CLAUDE.md` + `docs/*`), CI verde,
-runbook actualizado. Pendiente: sesión de 45 min con Anaissa: (1) Admin: productos, variantes y CSV;
-(2) editor: secciones, bloques del PDP, header/footer; (3) cómo pedirle cosas a Claude y qué no pedirle;
-(4) entrega de accesos (§4).
+**Fase A — Cierre RAINVO (2-sep).** Hecho: llamada de cierre con Anaissa, documentación (`CLAUDE.md` +
+`docs/*`), página HTML de entrega, CI verde, runbook actualizado. Pendiente de Gabriel: compartir las dos
+plantillas legales de Drive con `taller@onpaper.mx` y avisar a Marijose del cierre e inicio del soporte.
 
 **Fase B — Su Claude (1 día).** Opción recomendada: **Claude Code** (claude.ai/code o app) conectado al
 repo de GitHub. Pasos: **transferir** el repo `rainvodev/onpaper-shopify` a una organización de GitHub de
@@ -108,11 +126,13 @@ anterior; en Claude Code, abrir el repo: `CLAUDE.md` se lee solo y orienta la se
 usando Claude desde el Admin/editor de código para retoques, está bien para contenido y ajustes
 pequeños; para cambios de código, mejor por el repo con checks (§3).
 
-**Fase C — Lanzamiento (Anaissa + RAINVO).** Resolver P0 (§1.3) → checklist `docs/migracion.md`
-§2–§6 → transferencia, dominio, quitar password → desconectar dev store.
+**Fase C — Lanzamiento (Anaissa).** Resolver P0 (§1.3) → compra de prueba → quitar password cuando ella
+decida; avisa el día para respaldo antes/después. RAINVO desconecta el dev store viejo.
 
-**Fase D — Soporte.** RAINVO: 30 días de soporte por bugs del theme (no cambios nuevos). Después,
-Anaissa + su Claude con las reglas del repo; RAINVO por cotización.
+**Fase D — Soporte (2-sep → 2-oct-2026).** RAINVO: soporte por bugs del theme (no cambios nuevos),
+**respaldo semanal** (tag `respaldo/AAAA-MM-DD` en `main` + copia del theme en Admin) y **reporte al
+cierre** con las modificaciones registradas. Después: Anaissa + su Claude con las reglas del repo, o el
+servicio mensual de RAINVO (respaldos, reporte, soporte y seguridad) si lo contrata.
 
 ## 3. Cómo trabajar con Claude (para Anaissa)
 
@@ -144,7 +164,8 @@ Anaissa + su Claude con las reglas del repo; RAINVO por cotización.
 | CI | GitHub Actions (theme check) | Debe estar verde antes de mergear/pushear |
 | Dominio | `onpaper.mx` | Conectar en Settings → Domains |
 | Imágenes fuente | Drive "On Paper (WebP)" del taller + rama `archivo-imagenes` (`_import/files-package`, `admin-package`) | 264 mockups ya en Files; 71 swatches en `assets/` |
-| Catálogo de precios | `CATALOGO.pdf`, `CATALOGO_CAJAS.pdf` (Anaissa) + `_import/gen_variants_csv.py` | Los dummy están marcados en el generador |
+| Catálogo de precios | `CATALOGO.pdf`, `CATALOGO_CAJAS.pdf` (Anaissa) + `_import/gen_variants_csv.py` | Los dummy están marcados en el generador; el Admin puede ir por delante |
+| Plantillas legales | Drive RAINVO: "TÉRMINOS Y CONDICIONES DE - [Nombre de la Empresa].docx", "POLÍTICA DE PRIVACIDAD - [Nombre de la Empresa].docx" | Compartir con Anaissa; revisar con abogado |
 | Fuentes | Google Fonts (Source Serif Pro, Marcellus) | Sin cuenta |
 
 ## 5. Referencias rápidas

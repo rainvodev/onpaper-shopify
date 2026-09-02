@@ -123,3 +123,7 @@ shopify theme dev --store on-paper-t6vfjrak.myshopify.com   # preview local con 
   que coinciden con ellos: `op-variants.js` los empareja por nombre exacto.
 - No activar los productos con precios dummy (Libro de Firmas, Cajas, Carpetas, Porta Planos) en una
   tienda sin password hasta tener los montos reales.
+- No importar el CSV de precios con overwrite sin antes sincronizar el generador con el Admin: Anaissa
+  edita precios ahí y el import los pisaría (receta en `docs/usos.md`).
+- Monedas de la tienda: solo MXN, USD y EUR (acordado 2-sep-2026). Se configura en Settings → Markets, no
+  en el theme.

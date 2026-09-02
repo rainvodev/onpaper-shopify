@@ -47,7 +47,6 @@
   .resumen p { font-size: 1.12rem; margin: 0; max-width: none; }
   .resumen p strong { font-weight: 600; }
 
-  /* Semáforo de estado */
   .estado { display: grid; gap: 0; background: var(--superficie); border-radius: 1rem; overflow: hidden; }
   .estado-fila { display: grid; grid-template-columns: 9.5rem 1fr; gap: 1rem; align-items: start; padding: 1rem 1.5rem; border-top: 1px solid var(--linea); }
   .estado-fila:first-child { border-top: 0; }
@@ -60,24 +59,23 @@
   .pill--revisar { background: var(--pill-revisar-bg); color: var(--pill-revisar-fg); }
   .pill--pendiente { background: var(--pill-pend-bg); color: var(--pill-pend-fg); border-color: var(--pill-pend-borde); }
 
-  /* Lo que hizo Anaissa */
   ul.limpia { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; max-width: 68ch; }
   ul.limpia li { padding-left: 1.4rem; position: relative; }
   ul.limpia li::before { content: ""; position: absolute; left: 0; top: .7em; width: .5rem; height: .5rem; border-radius: 50%; background: var(--sage); }
 
-  /* Pasos */
   ol.pasos { list-style: none; counter-reset: paso; padding: 0; margin: 0; display: grid; gap: 1rem; }
   ol.pasos li { counter-increment: paso; display: grid; grid-template-columns: 2.6rem 1fr; gap: 1rem; background: var(--superficie); border-radius: 1rem; padding: 1.25rem 1.5rem 1.25rem 1.25rem; }
   ol.pasos li::before { content: counter(paso); font-family: var(--label); font-size: 1.4rem; line-height: 1; color: var(--sage); padding-top: .15rem; }
   ol.pasos p { margin: 0 0 .5em; max-width: none; }
   ol.pasos p:last-child { margin-bottom: 0; }
   .ruta { font-family: var(--label); font-size: .74rem; letter-spacing: .04em; background: var(--arena); color: var(--tinta); padding: .2em .6em; border-radius: 2rem; line-height: 2; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
-  .mini { width: 100%; border-collapse: collapse; font-size: .9rem; margin-top: .6rem; }
-  .mini th, .mini td { text-align: left; padding: .45rem .6rem; border-top: 1px solid var(--linea); vertical-align: top; }
-  .mini th { font-family: var(--label); text-transform: uppercase; letter-spacing: .08em; font-size: .64rem; font-weight: 400; color: var(--suave); border-top: 0; }
-  .tabla-scroll { overflow-x: auto; }
+  .tarjeta { font-variant-numeric: tabular-nums; letter-spacing: .06em; }
 
-  /* Decisiones */
+  .acuerdos { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
+  .acuerdo { background: var(--superficie); border-radius: 1rem; padding: 1.1rem 1.4rem; }
+  .acuerdo .tag { display: block; font-family: var(--label); text-transform: uppercase; letter-spacing: .1em; font-size: .64rem; color: var(--sage); margin-bottom: .35rem; }
+  .acuerdo p { margin: 0; font-size: .95rem; max-width: none; }
+
   .opciones { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
   .decision { margin-bottom: 1.75rem; }
   .decision > p { margin-bottom: .8rem; }
@@ -86,7 +84,6 @@
   .opcion .tag { display: block; font-family: var(--label); text-transform: uppercase; letter-spacing: .1em; font-size: .64rem; color: var(--sage); margin-bottom: .4rem; }
   .opcion p { margin: 0; font-size: .95rem; max-width: none; }
 
-  /* Diagrama de flujo */
   .flujo { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: .75rem; margin: 1.25rem 0 .75rem; }
   .nodo { background: var(--superficie); border-radius: 1rem; padding: 1rem 1.1rem; text-align: center; }
   .nodo strong { display: block; font-weight: 400; font-size: 1.05rem; }
@@ -97,7 +94,6 @@
   .flujo-abajo { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: .75rem; max-width: 40rem; margin: 0 auto 1.25rem; }
   .nota-flujo { font-size: .92rem; color: var(--suave); text-align: center; max-width: none; }
 
-  /* Modelo de trabajo */
   .roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
   .rol { background: var(--superficie); border-radius: 1rem; padding: 1.25rem 1.5rem; }
   .rol .tag { display: block; font-family: var(--label); text-transform: uppercase; letter-spacing: .1em; font-size: .64rem; color: var(--sage); margin-bottom: .4rem; }
@@ -134,13 +130,23 @@
 <main class="pagina">
   <p class="eyebrow">On Paper · Tu tienda en línea</p>
   <h1>Tu tienda ya está lista. <em>Así la vas a operar.</em></h1>
-  <p class="fecha">2 de septiembre de 2026 · preparado por RAINVO para Anaissa</p>
+  <p class="fecha">2 de septiembre de 2026 · actualizado después de nuestra llamada · preparado por RAINVO para Anaissa</p>
 
   <section class="resumen" aria-label="Resumen">
-    <p><strong>La tienda funciona.</strong> Todo el diseño está publicado y lo que cambias desde tu Admin se guarda solo; esta semana ya editaste el menú, el certificado y el pie de página, y quedó bien.</p>
-    <p><strong>Antes de abrirla al público faltan cuatro cosas:</strong> los precios de cuatro productos, revisar el certificado de regalo, dejar el inglés sin publicar hasta traducirlo, y decidir quién es dueña del código.</p>
-    <p><strong>De aquí en adelante:</strong> el contenido lo cambias tú en el editor, el diseño y las funciones nuevas se las pides a tu Claude, y RAINVO queda de respaldo 30 días.</p>
+    <p><strong>La tienda funciona y ya vive en onpaper.mx</strong>, con contraseña hasta que decidas abrirla. Casi todo lo que faltaba lo resolviste tú esta semana con tu Claude: imágenes, colecciones, menú, certificado, legales, inglés y dominio. Lo revisamos a fondo: todo en orden.</p>
+    <p><strong>Antes de quitar la contraseña quedan cosas tuyas, ninguna nos necesita:</strong> dejar solo pesos, dólares y euros; una compra de prueba sin cobro; el checkout con tu logo y colores; confirmar los precios definitivos.</p>
+    <p><strong>De aquí en adelante:</strong> el contenido lo cambias tú en el editor, el diseño y las funciones nuevas se las pides a tu Claude, y RAINVO queda de respaldo 30 días (hasta el 2 de octubre) con respaldos semanales y un reporte al final.</p>
   </section>
+
+  <h2>Acordado hoy en la llamada</h2>
+  <div class="acuerdos">
+    <div class="acuerdo"><span class="tag">Monedas</span><p>Solo pesos mexicanos, dólares y euros. Se quitan los demás países de Europa que se activaron solos.</p></div>
+    <div class="acuerdo"><span class="tag">Pagos</span><p>Shopify Payments, sin Mercado Pago ni Stripe. Tu tarjeta queda en trámite con tu banco.</p></div>
+    <div class="acuerdo"><span class="tag">Checkout</span><p>Se queda el diseño estándar, sin cambiar de plan; se personalizan logo y colores.</p></div>
+    <div class="acuerdo"><span class="tag">Lanzamiento</span><p>Terminas tus detalles, haces la compra de prueba y abres la tienda tú misma cuando estés lista.</p></div>
+    <div class="acuerdo"><span class="tag">Soporte</span><p>30 días de soporte sin costo desde hoy, con respaldos semanales y un reporte al cierre.</p></div>
+    <div class="acuerdo"><span class="tag">Cierre</span><p>Pago final acordado como platicamos; Gabriel avisa a Marijose que el proyecto terminó y que arranca el soporte.</p></div>
+  </div>
 
   <h2>Cómo está la tienda hoy</h2>
   <div class="estado">
@@ -150,96 +156,99 @@
     </div>
     <div class="estado-fila">
       <span class="pill pill--listo">Listo</span>
-      <div><h3>Precios reales en cinco productos</h3><p>Photobook Tradicional, Photobook Layflat, Bookcase, Memory Box y Fotos Impresas cobran exactamente lo del catálogo. El precio que ve el cliente es el que paga.</p></div>
-    </div>
-    <div class="estado-fila">
-      <span class="pill pill--pendiente">Pendiente de ti</span>
-      <div><h3>Precios de prueba en cuatro productos</h3><p>Libro de Firmas, Cajas Personalizadas, Carpetas y Porta Planos tienen montos inventados para poder probar la página, y hoy están activos. Ver el paso 1.</p></div>
+      <div><h3>Dominio onpaper.mx</h3><p>Ya lo conectaste. La tienda sigue cerrada con contraseña hasta que la abras (paso 7).</p></div>
     </div>
     <div class="estado-fila">
       <span class="pill pill--listo">Listo</span>
-      <div><h3>Colores y fotos por color</h3><p>Al elegir tela o vinipiel aparecen sus colores y la foto cambia al color real; con impresión vuelve la foto original. Faltan Rosa metálico y Azul metálico porque el taller aún no entrega sus fotos.</p></div>
+      <div><h3>Certificado de regalo</h3><p>Lo rediseñaste como producto: quien regala elige qué regalar y el precio cambia solo. Sin envío por paquetería; digital o recoger en oficina, con los nombres de quien regala y quien recibe.</p></div>
+    </div>
+    <div class="estado-fila">
+      <span class="pill pill--listo">Listo</span>
+      <div><h3>Colores y fotos por color</h3><p>Al elegir tela o vinipiel aparecen sus colores y la foto cambia al color real; con impresión vuelve la foto original. Faltan Rosa metálico y Azul metálico porque el taller aún no entrega sus fotos. Para prender o apagar materiales, ver el paso 6.</p></div>
     </div>
     <div class="estado-fila">
       <span class="pill pill--listo">Listo</span>
       <div><h3>Búsqueda, carrito y contacto</h3><p>La lupa del menú busca en vivo mientras escribes; el carrito se abre a un lado con su animación; el formulario de contacto llega a tu correo.</p></div>
     </div>
     <div class="estado-fila">
-      <span class="pill pill--revisar">Revisar</span>
-      <div><h3>Certificado de regalo</h3><p>Lo rediseñaste como un producto con diez opciones (paquetes de fotos, memory box, photobooks). Para que cobre lo correcto, cada opción necesita su precio en el producto. Ver el paso 2.</p></div>
+      <span class="pill pill--listo">Listo</span>
+      <div><h3>Pagos</h3><p>Shopify Payments activado. Pendiente solo lo que revises con tu banco.</p></div>
     </div>
     <div class="estado-fila">
       <span class="pill pill--revisar">Revisar</span>
-      <div><h3>Inglés</h3><p>Activaste el idioma inglés. Los botones y menús ya están traducidos, pero los productos y los textos del sitio siguen en español. Ver el paso 3.</p></div>
+      <div><h3>Precios</h3><p>Cinco productos cobran lo del catálogo. Libro de Firmas, Cajas, Carpetas y Porta Planos tenían montos de prueba; nos dijiste que ya ajustaste precios en el Admin. Confírmalo y sincroniza el archivo maestro (paso 5): si no, una importación futura los pisaría.</p></div>
     </div>
     <div class="estado-fila">
       <span class="pill pill--revisar">Revisar</span>
-      <div><h3>Políticas y textos legales</h3><p>El pie de página tiene apagado el enlace automático a las políticas. Hay que decidir desde dónde se llega a ellas. Ver el paso 4.</p></div>
+      <div><h3>Inglés y español</h3><p>Los dos idiomas ya funcionan y tu Claude corrigió las traducciones forzadas. Falta tu revisión letra por letra. Nosotros completamos dos textos que faltaban en el archivo de inglés y que dejaban un aviso técnico.</p></div>
+    </div>
+    <div class="estado-fila">
+      <span class="pill pill--revisar">Revisar</span>
+      <div><h3>Legales</h3><p>Términos, envíos y devoluciones, y aviso de privacidad ya están cargados: mezcla de nuestra plantilla general con tu información. Recomendación: que un abogado los revise (paso 4).</p></div>
     </div>
     <div class="estado-fila">
       <span class="pill pill--pendiente">Pendiente de ti</span>
-      <div><h3>Pagos, envíos, impuestos y dominio</h3><p>Son configuraciones de tu Admin que solo la dueña puede activar. Ver los pasos 5 y 6.</p></div>
+      <div><h3>Monedas</h3><p>Hoy aparecen todos los países de Europa. Acordamos dejar pesos, dólares y euros (paso 1).</p></div>
+    </div>
+    <div class="estado-fila">
+      <span class="pill pill--pendiente">Pendiente de ti</span>
+      <div><h3>Compra de prueba y checkout con tu marca</h3><p>Una compra sin cobro para ver que todo llegue bien, y el logo y los colores en la página de pago (pasos 2 y 3).</p></div>
     </div>
   </div>
 
   <h2>Lo que hiciste tú esta semana</h2>
   <p>Revisamos cada cambio que guardaste desde el Admin. Todo quedó bien y ya vive en la tienda:</p>
   <ul class="limpia">
-    <li>El menú de arriba: ahora eliges qué colecciones aparecen en el panel, el selector de moneda muestra el nombre del país y el enlace "Otros" lleva a las preguntas frecuentes.</li>
-    <li>El certificado de regalo con sus diez opciones, la nota de vigencia de seis meses y la entrega digital o en oficina.</li>
-    <li>El pie de página completo: teléfono, dirección con mapa, horario, redes sociales y WhatsApp. También el favicon y los textos del carrito.</li>
-    <li>Las fotos del inicio y el idioma inglés. Activar el inglés dejó un aviso técnico pendiente que ya corregimos; no tenías forma de verlo.</li>
+    <li>El dominio onpaper.mx conectado y las fotos del inicio cambiadas; "Photobook Collections" ahora es "Collections", como lo quieres a futuro.</li>
+    <li>El menú de arriba: eliges qué colecciones aparecen en el panel, el selector de moneda muestra el país y "Otros" lleva a las preguntas frecuentes.</li>
+    <li>El certificado de regalo con sus diez opciones y precio por opción, la nota de vigencia de seis meses y la entrega digital o en oficina.</li>
+    <li>El pie de página completo: teléfono, dirección con mapa, horario, redes y WhatsApp. El favicon y los textos del carrito.</li>
+    <li>Términos y condiciones, política de envíos y devoluciones, y aviso de privacidad, con tu información.</li>
+    <li>El idioma inglés, con la traducción revisada por tu Claude para que no sonara forzada.</li>
   </ul>
 
-  <h2>Qué necesito de ti antes de abrir la tienda</h2>
+  <h2>Qué sigue antes de abrir la tienda</h2>
   <ol class="pasos">
     <li>
       <div>
-        <h3>Mándanos los precios de los cuatro productos que faltan</h3>
-        <p>Mientras llegan, lo más seguro es dejar esos cuatro productos en borrador o mantener la contraseña de la tienda. Para ponerlos en borrador: <span class="ruta">Productos → el producto → Estado → Borrador</span>.</p>
-        <p>Esto es lo que necesitamos por producto, en pesos:</p>
-        <div class="tabla-scroll">
-          <table class="mini">
-            <thead><tr><th>Producto</th><th>Qué define el precio</th></tr></thead>
-            <tbody>
-              <tr><td>Libro de Firmas</td><td>Precio base · diferencia por tamaño (6) · tipo de hojas (en blanco, nombres impresos, nombres rotulados) · cantidad de hojas (hasta 20, 30, 40, 50)</td></tr>
-              <tr><td>Cajas Personalizadas</td><td>Precio base · material (tela, tela plastificada, papel texturizado) · tamaño (4) · medidas de herraje (sin, 1", 1.5", 2")</td></tr>
-              <tr><td>Carpetas</td><td>Igual que las cajas</td></tr>
-              <tr><td>Porta Planos</td><td>Precio por tamaño (6)</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p>También dinos si el USB y la placa de las cajas se cobran aparte o van incluidos.</p>
+        <h3>Deja solo pesos, dólares y euros</h3>
+        <p>Entra a <span class="ruta">Configuración → Mercados</span>. Conserva México (MXN), Estados Unidos (USD) y un solo mercado para Europa (EUR); elimina el resto de países. El selector de moneda del menú muestra solo lo que exista aquí. También puedes pedírselo a tu Claude con esas mismas palabras.</p>
       </div>
     </li>
     <li>
       <div>
-        <h3>Revisa el certificado de regalo</h3>
-        <p>Entra a <span class="ruta">Productos → Certificado de Regalo → Variantes</span>. Debe existir una opción llamada exactamente <strong>Producto</strong> con las mismas diez opciones que pusiste en la página, cada una con su precio. Si no está, el certificado cobra un solo precio sin importar lo que elija el cliente. Si prefieres, tu Claude lo arma contigo.</p>
+        <h3>Haz una compra de prueba sin cobro</h3>
+        <p>En <span class="ruta">Configuración → Pagos → Shopify Payments → Administrar</span> activa el <strong>modo de prueba</strong>. Compra como si fueras clienta con la tarjeta de prueba <span class="tarjeta">4242 4242 4242 4242</span>, cualquier fecha futura y cualquier CVV. Haz dos o tres pedidos distintos: un photobook con color y hotstamping, un certificado, algo con varias piezas. Revisa que el pedido llegue con toda la personalización y que recibas el correo. Al terminar, <strong>apaga el modo de prueba</strong>. Invita a dos o tres amigas a hacer lo mismo: ven cosas que una ya no ve.</p>
       </div>
     </li>
     <li>
       <div>
-        <h3>Deja el inglés sin publicar hasta traducirlo</h3>
-        <p>En <span class="ruta">Configuración → Idiomas</span> marca inglés como "No publicado". Cuando quieras publicarlo, se traducen productos y textos con la herramienta Translate &amp; Adapt de Shopify; un visitante en inglés hoy vería los botones en inglés y todo lo demás en español.</p>
+        <h3>Pon tu marca en la página de pago</h3>
+        <p>En <span class="ruta">Configuración → Finalizar compra → Personalizar</span> sube tu logo y elige los colores (crema y olive) y la tipografía. No hace falta cambiar de plan. El botón morado "Comprar con Shop" de la página de producto es de Shopify y no cambia de color; si te estorba, apágalo en <span class="ruta">Personalizar → página de producto → Botón comprar ahora</span>: el cliente sigue pagando igual desde el carrito.</p>
       </div>
     </li>
     <li>
       <div>
-        <h3>Decide dónde viven las políticas</h3>
-        <p>Opción sencilla: escribe privacidad, envíos, devoluciones y términos en <span class="ruta">Configuración → Políticas</span> y enciende "Mostrar políticas" en <span class="ruta">Personalizar → Pie de página</span>. Alternativa: páginas propias con la plantilla "legal", enlazadas desde el menú del pie. Las dos se ven igual.</p>
+        <h3>Revisa las legales con un abogado</h3>
+        <p>Lo que cargaste está bien armado, pero nuestra plantilla es general. Vale la pena que alguien la adapte a lo que vendes. La plantilla original que pediste: <a href="https://drive.google.com/file/d/17UOIk_uZnj0bBoWrOhSq0IsVkkhm2Fvw/view">Términos y condiciones</a> y <a href="https://drive.google.com/file/d/10gyBJWbEZevetEgqjfT1VOj7qGW4kJO-/view">Política de privacidad</a>. Confirma que se llegue a ellas desde el pie de página: <span class="ruta">Personalizar → Pie de página → Mostrar políticas</span> o desde uno de sus menús.</p>
       </div>
     </li>
     <li>
       <div>
-        <h3>Activa pagos, envíos e impuestos</h3>
-        <p><span class="ruta">Configuración → Pagos</span>: Shopify Payments en pesos. <span class="ruta">Configuración → Envíos</span>: nacional $300, Monterrey $100 y recoger en el taller sin costo. <span class="ruta">Configuración → Impuestos</span>: el IVA como lo indique tu contador.</p>
+        <h3>Confirma los precios definitivos</h3>
+        <p>Si ya cambiaste precios directamente en el Admin, dile a tu Claude: <em>"Sincroniza el archivo maestro de precios con lo que hay en el Admin"</em> (él te pedirá exportar los productos; toma dos minutos). Regla de oro: nunca importar el archivo de precios sin sincronizarlo antes, porque pisaría lo que pusiste. Si Libro de Firmas, Cajas, Carpetas o Porta Planos siguen con montos de prueba, ponlos en borrador (<span class="ruta">Productos → el producto → Estado → Borrador</span>) o mándanos los montos.</p>
       </div>
     </li>
     <li>
       <div>
-        <h3>Plan, transferencia, dominio y contraseña</h3>
-        <p>Tú activas el plan en <span class="ruta">Configuración → Plan</span>. Nosotros transferimos la tienda a <strong>taller@onpaper.mx</strong>. Conectas <strong>onpaper.mx</strong> en <span class="ruta">Configuración → Dominios</span>. Al final, con los pasos anteriores listos y un pedido de prueba hecho, quitamos la contraseña.</p>
+        <h3>Prende o apaga materiales</h3>
+        <p>En photobooks, libro de firmas, bookcase y memory box el material no cambia el precio: se edita en <span class="ruta">Personalizar → página del producto → bloque Material</span> (opciones separadas por coma), y cada paleta de colores tiene su campo "Mostrar para" con el material que la activa. En cajas, carpetas y porta planos el material sí define el precio: ahí se lo pides a tu Claude, que lo cambia en el archivo de precios.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h3>Abre la tienda</h3>
+        <p><span class="ruta">Tienda en línea → Preferencias → Contraseña</span>: quita la protección. Avísanos el día: hacemos un respaldo justo antes y otro justo después.</p>
       </div>
     </li>
   </ol>
@@ -265,7 +274,7 @@
 
   <div class="decision">
     <h3>Los títulos del inicio en inglés</h3>
-    <p>"Crafted with passion, designed for a lifetime", "Enduring, personal, unforgettable". Se quedaron en inglés como voz de la marca, pero el resto del sitio está en español.</p>
+    <p>"Crafted with passion, designed for a lifetime", "Enduring, personal, unforgettable". Se quedaron en inglés como voz de la marca, mientras el resto del sitio cambia de idioma con el selector.</p>
     <div class="opciones">
       <div class="opcion"><span class="tag">Opción A</span><h3>Se quedan en inglés</h3><p>Como estilo de marca. No requiere nada.</p></div>
       <div class="opcion"><span class="tag">Opción B</span><h3>Se traducen</h3><p>Tú los cambias en Personalizar o le pasas el texto a tu Claude.</p></div>
@@ -278,6 +287,15 @@
     <div class="opciones">
       <div class="opcion recomendada"><span class="tag">Recomendada para empezar</span><h3>Códigos de descuento</h3><p>Creas BODA2, BODA3 y BODA4 en <span class="ruta">Descuentos</span> y los das a la pareja. Sin costo.</p></div>
       <div class="opcion"><span class="tag">Alternativa</span><h3>App de descuentos</h3><p>Lo aplica solo en el carrito, pero tiene costo mensual.</p></div>
+    </div>
+  </div>
+
+  <div class="decision">
+    <h3>Después de los 30 días</h3>
+    <p>Lo decides al final del mes, con el reporte en la mano.</p>
+    <div class="opciones">
+      <div class="opcion"><span class="tag">Opción A</span><h3>Sigues sola con tu Claude</h3><p>Sin costo. Tú haces los cambios del día a día y nos escribes por cotización si algo grande se ofrece.</p></div>
+      <div class="opcion"><span class="tag">Opción B</span><h3>Servicio mensual de RAINVO</h3><p>Respaldos semanales, reporte mensual, soporte y seguridad, con un equipo asignado a On Paper. Lo platicamos cuando quieras.</p></div>
     </div>
   </div>
 
@@ -310,7 +328,7 @@
       <ul>
         <li>Textos y fotos de cualquier sección</li>
         <li>Orden de las secciones del inicio</li>
-        <li>El precio de una variante puntual</li>
+        <li>Materiales y opciones de un producto</li>
         <li>Menús, políticas, redes, horario</li>
         <li>Fotos de cada producto</li>
       </ul>
@@ -320,7 +338,7 @@
       <h3>Diseño y funciones</h3>
       <ul>
         <li>Una sección o un bloque nuevo</li>
-        <li>Cambiar precios de varios productos</li>
+        <li>Precios de varios productos y su archivo maestro</li>
         <li>Agregar un color o sus fotos</li>
         <li>Animaciones y ajustes de diseño</li>
         <li>Corregir algo que no funciona</li>
@@ -328,11 +346,12 @@
     </div>
     <div class="rol">
       <span class="tag">RAINVO</span>
-      <h3>Respaldo</h3>
+      <h3>Respaldo hasta el 2 de octubre</h3>
       <ul>
-        <li>30 días de soporte por errores del diseño</li>
-        <li>Transferencia de la tienda y del repositorio</li>
-        <li>Después, por cotización</li>
+        <li>Soporte por errores del diseño</li>
+        <li>Respaldo semanal y reporte al cierre</li>
+        <li>Transferencia del repositorio si la eliges</li>
+        <li>Después: tú sola o servicio mensual</li>
       </ul>
     </div>
   </div>
@@ -345,8 +364,9 @@
     <div>
       <h3>Ejemplos de lo que sí funciona</h3>
       <ul>
+        <li>"Deja solo pesos, dólares y euros en Mercados."</li>
+        <li>"Sincroniza el archivo maestro de precios con el Admin."</li>
         <li>"Agrega el color Guinda a la paleta de telas; aquí están sus fotos."</li>
-        <li>"Cambia los precios del Libro de Firmas según esta tabla."</li>
         <li>"En el celular el menú se ve cortado, aquí va una captura."</li>
         <li>"Quiero una sección de testimonios debajo de los más vendidos."</li>
       </ul>
@@ -354,6 +374,7 @@
     <div>
       <h3>Lo que no hay que pedirle</h3>
       <ul>
+        <li>Importar el archivo de precios sin sincronizarlo antes: borraría tus precios del Admin.</li>
         <li>Poner un precio "en la página" sin cambiarlo en las variantes: el cliente pagaría otra cosa.</li>
         <li>Cambiar el nombre de un color o de un tamaño "para que se vea mejor": el taller produce con esos nombres.</li>
         <li>Subir fotos pesadas al repositorio: van a Files, dentro de Shopify.</li>
@@ -362,17 +383,18 @@
     </div>
   </div>
 
-  <p class="contacto">Cualquier duda durante la transición: Gabriel, RAINVO · dev@rainvo.io. Esta página se actualiza en el mismo enlace conforme avancemos.</p>
+  <p class="contacto">Cualquier duda durante el soporte: Gabriel, RAINVO · dev@rainvo.io · WhatsApp. Esta página se actualiza en el mismo enlace conforme avancemos.</p>
 
   <details class="tecnico">
     <summary>Detalles técnicos (para RAINVO y tu Claude)</summary>
     <ul>
-      <li>Tienda: <code>on-paper-t6vfjrak.myshopify.com</code>. Dev store viejo <code>onpaper-fafjay65</code>: desconectar la integración GitHub y abandonar.</li>
+      <li>Tienda: <code>on-paper-t6vfjrak.myshopify.com</code> → dominio <code>onpaper.mx</code> conectado. Dev store viejo <code>onpaper-fafjay65</code>: desconectar la integración GitHub y abandonar.</li>
       <li>Repositorio: <code>github.com/rainvodev/onpaper-shopify</code>, rama <code>main</code> = producción; <code>archivo-imagenes</code> = respaldo de imágenes. Ramas <code>claude/*</code>: borrar.</li>
-      <li>Estado al 2-sep-2026: theme check 0 errores (9 warnings de fuentes aceptados); CI verde desde el commit <code>0e6e31c</code> tras completar <code>locales/en.json</code>.</li>
+      <li>Estado al 2-sep-2026: theme check 0 errores (9 warnings de fuentes aceptados); CI verde tras completar <code>locales/en.json</code>.</li>
       <li>Documentación: <code>CLAUDE.md</code> · <code>docs/handoff.md</code> · <code>docs/reglas.md</code> · <code>docs/styleguide.md</code> · <code>docs/componentes.md</code> · <code>docs/elementos.md</code> · <code>docs/usos.md</code> · <code>docs/migracion.md</code>.</li>
-      <li>Precios dummy: mapas <code>FIRMAS_*</code>, <code>CAJAS_*</code>, <code>CARP_*</code>, <code>PORTA_BASE</code>, <code>MAT3</code>, <code>HERRAJE</code>, <code>PLACA</code> en <code>_import/gen_variants_csv.py</code>; receta en <code>docs/usos.md</code>.</li>
-      <li>Certificado: <code>templates/product.giftcard.json</code>, bloque pills "Producto" (10 valores); requiere opción de variante homónima.</li>
+      <li>Precios: fuente <code>_import/gen_variants_csv.py</code> → <code>products-variants.csv</code>. Si Anaissa editó precios en el Admin, sincronizar el generador desde una exportación de productos antes de cualquier import con overwrite (receta en <code>docs/usos.md</code>).</li>
+      <li>Certificado: <code>templates/product.giftcard.json</code>, bloque pills "Producto" con opción de variante homónima (precio por opción confirmado en la llamada).</li>
+      <li>Soporte RAINVO: 2-sep → 2-oct-2026; respaldo semanal = tag <code>respaldo/AAAA-MM-DD</code> en <code>main</code>; reporte al cierre.</li>
     </ul>
   </details>
 </main>

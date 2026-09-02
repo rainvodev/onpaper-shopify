@@ -24,7 +24,7 @@ En el **store definitivo** (`on-paper-t6vfjrak.myshopify.com`):
 ## 2. Idioma, dominio y ajustes base
 
 - [ ] Settings → **Languages**: idioma principal = **Español** (requerido: el theme usa `locales/es.default.json` y `<html lang>` sale de aquí).
-- [ ] Settings → **Domains**: conectar `onpaper.mx` (y `www`).
+- [x] Settings → **Domains**: `onpaper.mx` conectado (Anaissa, sep-2026).
 - [ ] Settings → **Store details**: nombre, dirección (Río Orinoco 331 Ote., Del Valle, SPGG), correo remitente `taller@onpaper.mx`.
 - [ ] Theme editor → **Marca On Paper**: subir favicon y logo.
 
@@ -60,8 +60,10 @@ En el **store definitivo** (`on-paper-t6vfjrak.myshopify.com`):
 
 ## 5. Legal, pagos, envíos
 
-- [ ] Settings → **Policies**: escribir Privacidad, Devoluciones, Envíos y Términos. El footer las enlaza automáticamente en cuanto tienen contenido.
-- [ ] Settings → **Payments**: activar Shopify Payments (MXN) + métodos locales que apliquen.
+- [x] Settings → **Policies**: Privacidad, Envíos/Devoluciones y Términos cargados por Anaissa (plantilla RAINVO + su info). Pendiente: revisión con abogado y confirmar enlace desde el footer (`show_policies` o menú).
+- [x] Settings → **Payments**: Shopify Payments (decidido 2-sep; sin Mercado Pago/Stripe). Tarjeta en trámite con el banco.
+- [ ] Settings → **Markets**: dejar solo México (MXN), Estados Unidos (USD) y Europa (EUR); quitar el resto.
+- [ ] Settings → **Checkout → Customize**: logo, colores y tipografía de la marca (sin upgrade).
 - [ ] Settings → **Shipping**: tarifas del catálogo — **nacional $300**, **local MTY $100**, y **pickup gratis** (Local pickup: Río Orinoco 331 Ote., Del Valle, SPGG).
 - [ ] Settings → **Taxes**: IVA MX según el contador.
 - [ ] Settings → **Customer accounts**: habilitarlas (el header ya muestra "Mi cuenta" cuando están activas).
@@ -69,7 +71,7 @@ En el **store definitivo** (`on-paper-t6vfjrak.myshopify.com`):
 
 ## 6. Prueba end-to-end (antes de quitar el password)
 
-- [ ] Pedido de prueba por producto activo: el precio del PDP = carrito = checkout.
+- [ ] Pedido de prueba por producto activo con Shopify Payments en **modo de prueba** (tarjeta 4242…): PDP = carrito = checkout; apagar el modo al terminar.
 - [ ] Cambiar Material en un PDP → cambia la paleta de colores; elegir color → cambia la imagen (si ya hay imágenes con alt/asset).
 - [ ] Formulario de contacto envía y llega al correo.
 - [ ] Búsqueda y cuenta accesibles desde el header; políticas en el footer.
@@ -102,5 +104,5 @@ están en `BAND_*`/`FOTOS_PRICE`/`MEMORY_*` y ya coinciden con el catálogo.
 
 - Analytics: GA4 / Meta Pixel vía Customer Events (Admin → Settings → Customer events) — el theme no trae píxeles.
 - Captura de email / newsletter (hoy no hay formulario de suscripción).
-- Shopify Markets EN + multimoneda: el header ya trae los selectores; requiere extracción de strings a locales + Translate & Adapt (fase aparte).
+- ~~Shopify Markets EN + multimoneda~~ hecho por Anaissa (inglés publicado y revisado con su Claude; falta revisión fina). Monedas: limitar a MXN/USD/EUR.
 - ~~Predictive search~~ hecho: búsqueda inline en el header con resultados en vivo (sep-2026).

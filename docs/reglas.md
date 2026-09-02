@@ -36,6 +36,9 @@ detente y dilo antes de hacerlo.
   sea el de la variante es un precio falso.
 - **Cómo:** precios se cambian en `_import/gen_variants_csv.py` → regenerar CSV → importar con overwrite.
   `op-pricing.js` es un fallback vacío a propósito: no lo uses para cobrar.
+- **Ojo:** Anaissa también edita precios en el Admin. Si eso pasó, **el Admin manda**: sincroniza el
+  generador desde una exportación de productos antes de cualquier import con overwrite (receta en
+  `docs/usos.md`); de lo contrario el import pisa sus precios.
 
 ## 5. Nombres de opción y labels de bloque son idénticos
 
