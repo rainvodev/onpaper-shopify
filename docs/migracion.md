@@ -2,7 +2,7 @@
 
 > Runbook para dejar la tienda operando. El theme está completo en este repo;
 > todo lo de abajo es configuración de Admin/Shopify o insumos del cliente.
-> Actualizado: ago-2026.
+> Actualizado: sep-2026. Diagnóstico y plan de entrega: `docs/handoff.md`.
 
 ## 0. Dónde viven las imágenes ahora
 
@@ -33,7 +33,11 @@ En el **store definitivo** (`on-paper-t6vfjrak.myshopify.com`):
 - [ ] **Products → Import** `_import/products-variants.csv` con **"Overwrite any current products that have the same handle"** activado. Crea los 9 productos con 245 variantes:
   - `active` con **precios reales del catálogo**: photobook-tradicional, photobook-layflat, bookcase, memory-box, fotos-impresas.
   - `draft` con **precios dummy**: libro-de-firmas, cajas-personalizadas, carpetas, porta-planos. **No activarlos hasta reemplazar los montos** (ver §7).
-- [ ] **Gift card nativa**: Products → Gift cards → crear "Certificado de Regalo" con handle `certificado-de-regalo`, opción **`Valor`** y valores EXACTOS `$500, $1000, $1500, $2000, $3000` (denominaciones por confirmar con Anaissa). Asignarle el theme template **giftcard**. Nota: las gift cards de Shopify **no expiran** — la "vigencia de 6 meses" del catálogo debe resolverse como política/manual (decidir con Anaissa).
+- [x] **Certificado de Regalo** (decisión de Anaissa, sep-2026): es un **producto normal** con el
+  template `giftcard` y el bloque pills "Producto" (10 opciones). Pendiente verificar en Admin que el
+  producto tenga la opción de variante `Producto` con esos valores y sus precios; si no, cobra un único
+  precio. Se entrega manualmente (WhatsApp / oficina); vigencia de 6 meses manejada por el taller.
+  (La gift card nativa de Shopify quedó descartada.)
 - [ ] Verificar que **ningún** producto quede a $10.00 (import viejo).
 - [ ] Metafield `custom.max_qty` (entero) si se quiere limitar cantidad por pedido (p. ej. 5 en libros, 20 en cajas — el PDP ya lo respeta).
 - [ ] **Media por producto** (galería de 4 fotos por producto): subir las 4 de
@@ -50,7 +54,7 @@ En el **store definitivo** (`on-paper-t6vfjrak.myshopify.com`):
 
 ## 4. Colecciones, páginas y menús
 
-- [ ] Colecciones: **`best-sellers`** (alimenta el mega-menú y la sección del home) y **`photobooks`** (banner del home la enlaza; si no existe, el botón se oculta solo).
+- [x] Colecciones: hoy el header usa `all-products` (lista) y `frontpage` (best sellers); la sección del home usa `frontpage` y **`photobooks`** (banner del home la enlaza; si no existe, el botón se oculta solo).
 - [ ] Páginas: **`contacto`** (asignar template **page.contact**), **`others`** (la enlaza el nav), **FAQ** (template page.faq), y las legales que se quieran como página (template page.legal).
 - [ ] Menús (`main-menu`, `footer`): el footer usa sus dos link lists; las políticas se enlazan solas (ver §5).
 
@@ -99,4 +103,4 @@ están en `BAND_*`/`FOTOS_PRICE`/`MEMORY_*` y ya coinciden con el catálogo.
 - Analytics: GA4 / Meta Pixel vía Customer Events (Admin → Settings → Customer events) — el theme no trae píxeles.
 - Captura de email / newsletter (hoy no hay formulario de suscripción).
 - Shopify Markets EN + multimoneda: el header ya trae los selectores; requiere extracción de strings a locales + Translate & Adapt (fase aparte).
-- Predictive search (hoy la búsqueda es la página estándar).
+- ~~Predictive search~~ hecho: búsqueda inline en el header con resultados en vivo (sep-2026).

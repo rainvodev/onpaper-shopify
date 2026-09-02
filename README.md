@@ -1,52 +1,55 @@
 # On Paper — Theme Shopify
 
-Theme OS 2.0 custom de **On Paper** (taller artesanal de photobooks e impresión, Monterrey MX), construido sobre el **Skeleton** de Shopify + el framework **Lumos** de RAINVO.
+Theme OS 2.0 custom de **On Paper** (taller artesanal de photobooks e impresión, Monterrey MX), construido por RAINVO sobre el **Skeleton** de Shopify + el framework **Lumos**.
 
-- **Store actual (dev, temporal):** onpaper-fafjay65.myshopify.com — dev store NO transferible.
-- **Store definitivo:** `on-paper-t6vfjrak.myshopify.com`. Migración: ver `docs/migracion.md`.
-- **Transferencia al lanzamiento:** la tienda queda a nombre de taller@onpaper.mx (Anaissa activa el plan de pago).
+- **Tienda:** `on-paper-t6vfjrak.myshopify.com` (dominio `onpaper.mx` al lanzar). El dev store viejo `onpaper-fafjay65` se abandona.
+- **Propiedad:** al lanzamiento la tienda se transfiere a `taller@onpaper.mx`.
+- **Para Claude / nuevos colaboradores:** empieza por **`CLAUDE.md`** y **`docs/handoff.md`**.
+
+## Documentación
+
+| Archivo | Contenido |
+|---|---|
+| `CLAUDE.md` | Guía de entrada para Claude Code: reglas esenciales, estructura, comandos, convenciones |
+| `docs/handoff.md` | Diagnóstico del sitio y plan de entrega (sep-2026) |
+| `docs/reglas.md` | Reglas duras del proyecto y su porqué |
+| `docs/styleguide.md` | Marca: color, tipografía, espaciado, movimiento, voz |
+| `docs/componentes.md` | Arquitectura + catálogo de secciones, bloques, snippets, assets, templates |
+| `docs/elementos.md` | Elementos de UI con clases y estados |
+| `docs/usos.md` | Recetas: contenido, productos, precios, colores, idiomas, código |
+| `docs/migracion.md` | Runbook del Admin (checklist de configuración y lanzamiento) |
+| `docs/imagenes-spec.md` | Pipeline y convenciones de imágenes |
+| `docs/precios-spec.md`, `docs/productos.md` | Históricos (superados) |
 
 ## Modelo de deploy
 
-El repo se conecta a la tienda con la **integración GitHub de Shopify** (Admin → Online Store → Themes → Add theme → Connect from GitHub → rama `main`). Cada push a `main` se publica automáticamente en el theme conectado, y los cambios del editor de themes regresan como commits de `shopify[bot]`. **No hay build step**: todo es Liquid/CSS/JS committeado.
+El repo está conectado con la **integración GitHub de Shopify**: cada push a `main` se publica en el theme conectado, y los cambios del editor (Personalizar, idiomas, editor de código) regresan como commits de `shopify[bot]`. **No hay build step.** Antes de pushear: `git pull --no-rebase origin main` y `theme check` con 0 errores (el CI lo corre en cada push).
 
-Desarrollo local (opcional): Shopify CLI (`npm i -g @shopify/cli`), `shopify theme dev --store <store>` y `shopify theme check` (mismo check que corre el CI en cada push).
+Desarrollo local opcional: `npm i -g @shopify/cli`, `shopify theme dev --store on-paper-t6vfjrak.myshopify.com`, `shopify theme check`.
 
-## Precios y variantes (cómo funciona)
+## Precios y variantes
 
-**Todos los productos cobran por variantes nativas de Shopify.** La única fuente de verdad de precios es **`_import/products-variants.csv`** (245 variantes, 9 productos). El precio que se muestra en la página siempre es el de la variante seleccionada (`assets/op-variants.js`), así que precio mostrado = precio cobrado.
+**Todos los productos cobran por variantes nativas de Shopify.** La única fuente de precios es `_import/products-variants.csv`, generado por `_import/gen_variants_csv.py` (245 variantes, 9 productos). El PDP muestra el precio de la variante seleccionada (`assets/op-variants.js`): precio mostrado = precio cobrado. La personalización sin costo (Color, Hotstamping, títulos, links) viaja como line-item properties.
 
-Estado de los montos (catálogo oficial ago-2026):
-
-| Producto | Precios | Estado |
+| Producto | Precios | Estado en el CSV |
 |---|---|---|
-| Photobook Tradicional / Layflat, Bookcase, Memory Box, Fotos Impresas | **REALES** (tablas del catálogo) | `active` |
-| Libro de Firmas, Cajas Personalizadas, Carpetas, Porta Planos | **DUMMY** (pendientes de Anaissa) | `draft` — no publicar hasta tener montos |
-| Certificado de Regalo | Gift card **nativa** de Shopify | crear en Admin (no va por CSV) |
+| Photobook Tradicional / Layflat, Bookcase, Memory Box, Fotos Impresas | **Reales** (catálogo ago-2026) | `active` |
+| Libro de Firmas, Cajas Personalizadas, Carpetas, Porta Planos | **Dummy** (pendientes de Anaissa) | `draft` — no vender hasta tener montos |
+| Certificado de Regalo | Producto normal con bloque "Producto" (template `giftcard`) | Se gestiona en Admin |
 
-**Para reemplazar los dummy:** editar los mapas `FIRMAS_*`, `CAJAS_*`, `CARP_*`, `PORTA_*`/`MAT3`/`HERRAJE` en el generador (`docs/migracion.md` explica dónde vive), regenerar el CSV, re-importar en Admin con *Overwrite products with matching handles* y cambiar Status a `active`.
+Reemplazo de dummy: receta en `docs/usos.md` → "Cambiar precios".
 
-La personalización que no afecta precio (Color, Hotstamping, títulos, links de fotos) viaja como **line-item properties** y aparece en el pedido.
+## Paletas e imagen por color
 
-## Paletas y swap de imagen por color
+- Paletas oficiales del taller en `snippets/op-swatches.liquid`: Telas 26 · Vinipieles 18 (+2 metálicos ocultos hasta tener mockups) · Telas plastificadas 6 · Papel texturizado 14 · Hotstamping 7. Texturas en `assets/swatch-<paleta>-<slug>.webp`. **El nombre del color viaja al pedido: no renombrar.**
+- La paleta visible depende del Material (`show_for` del bloque swatch; `assets/op-product.js`).
+- Al elegir un color la imagen principal cambia al mockup `mockup-<material>-<tamaño>-<color>.webp` de Shopify Files (tamaño en convención ALTO×ANCHO del taller; el theme traduce), con fallbacks a assets y a la media del producto con `alt` = color. Con Impresión vuelve la foto original.
 
-- Paletas oficiales del catálogo en `snippets/op-swatches.liquid` (Telas 19 · Vinipieles 17 · Telas Plastificadas 6 · Papel Texturizado 14 · Hotstamping 8). El **nombre del color viaja al pedido**: no renombrar sin avisar al taller.
-- La paleta visible depende del Material elegido (setting `show_for` del bloque swatch; lógica en `assets/op-product.js`).
-- **Imagen por color:** al elegir un color, la imagen principal cambia a
-  1) la media del producto cuyo **alt = nombre exacto del color**, o
-  2) el asset **`assets/<handle>-<slug-del-color>.jpg`** (slug: minúsculas, sin acentos, espacios→`-`; ej. `libro-de-firmas-verde-militar.jpg`).
-  Si no existe ninguna, se conserva la imagen actual.
-- Texturas de swatches: subir a Admin → Content → Files como `swatch-<slug>.jpg` (slugs en `op-swatches.liquid`; se pueden exportar de los PDFs del catálogo).
+## Estructura
 
-## Estructura relevante
-
-- `sections/op-*.liquid` — kit custom On Paper (header mega-menú, footer, hero, contacto, FAQ, cart drawer…).
+- `sections/op-*.liquid` — kit On Paper (header con mega-menú y búsqueda, footer, hero, about, bookcase, galería, CTA, FAQ, contacto, cart drawer).
 - `sections/product.liquid` + `templates/product.<handle>.json` — página de producto por bloques.
-- `locales/es.default.json` — idioma principal **Español** (configurarlo también en Admin → Settings → Languages).
-- `_import/products-variants.csv` — import completo de productos + variantes.
-- `docs/migracion.md` — runbook de migración al store definitivo + checklist de operación.
-- `docs/precios-spec.md`, `docs/productos.md` — especificación histórica (ver notas de vigencia al inicio de cada uno).
-
-## Pendientes para operar
-
-La lista viva está en **`docs/migracion.md`** (checklist Admin + cliente). Resumen: montos reales de los 4 productos en draft, gift card nativa, migración al store definitivo, imágenes por color y texturas de swatches, páginas/colecciones/menús/políticas en Admin, pagos/envíos/impuestos, plan de pago y transferencia.
+- `assets/op-*.js` — header, producto, variantes, carrito, animación, transición, cursor.
+- `assets/brand.css` — tokens de marca (sobre `lumos.css`, que no se edita).
+- `locales/es.default.json` (principal) y `locales/en.json` (inglés).
+- `_import/` — CSV de productos, generador de precios, manifest de imágenes.

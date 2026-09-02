@@ -607,7 +607,8 @@
   },
   "404": {
     "not_found": "We can't find that page.",
-    "back_to_shopping": "Return to store"
+    "back_to_shopping": "Return to store",
+    "title": "404"
   },
   "blog": {
     "article_comments": "Comments",
@@ -615,7 +616,8 @@
     "comment_form_email": "Email",
     "comment_form_name": "Name",
     "comment_form_submit": "Publish",
-    "comment_form_title": "Leave a comment"
+    "comment_form_title": "Leave a comment",
+    "article_metadata_html": "{{ date }} by {{ author }}"
   },
   "cart": {
     "checkout": "Checkout",
@@ -646,7 +648,7 @@
     "language_label": "Language"
   },
   "password": {
-    "title": "Very soon",
+    "title": "Coming soon",
     "password": "Password",
     "enter": "Log in"
   },
