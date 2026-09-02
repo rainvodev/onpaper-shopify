@@ -36,7 +36,7 @@ la has terminado de presentar.
   Variantes"); qué decisión le toca y sus opciones; y al final, plegado, "Detalles técnicos" (archivos,
   commits, checks) para RAINVO.
 - **Cómo se ve:** usa la plantilla `docs/plantillas/reporte-anaissa.html` (marca de On Paper: crema,
-  olive, serif). Español de México, tuteo, sin jerga: "el menú de arriba", no "header-group.json".
+  olive, serif); `docs/plantillas/ejemplo-entrega-anaissa.html` es una página real completa como modelo. Español de México, tuteo, sin jerga: "el menú de arriba", no "header-group.json".
 - **Una página por tema, actualizada.** Republica a la misma URL en cada avance en vez de crear una
   página nueva por mensaje; así ella siempre abre el mismo link.
 - **Diseño y animación:** enséñale el resultado en la propia página (el botón, la sección, el mockup
