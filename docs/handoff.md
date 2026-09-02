@@ -100,8 +100,9 @@ runbook actualizado. Pendiente: sesión de 45 min con Anaissa: (1) Admin: produc
 (4) entrega de accesos (§4).
 
 **Fase B — Su Claude (1 día).** Opción recomendada: **Claude Code** (claude.ai/code o app) conectado al
-repo de GitHub. Pasos: transferir el repo `rainvodev/onpaper-shopify` a una cuenta/organización de On Paper
-(o agregar a Anaissa como colaboradora con permisos de administración); en el Admin, **reconectar el theme
+repo de GitHub. Pasos: **transferir** el repo `rainvodev/onpaper-shopify` a una organización de GitHub de
+On Paper (recomendado sobre "compartir": el deploy y el acceso de su Claude dejan de depender de RAINVO;
+RAINVO queda como colaborador externo durante el soporte); en el Admin, **reconectar el theme
 desde GitHub con su cuenta** (Themes → Add theme → Connect from GitHub → `main`) y retirar la conexión
 anterior; en Claude Code, abrir el repo: `CLAUDE.md` se lee solo y orienta la sesión. Si Anaissa sigue
 usando Claude desde el Admin/editor de código para retoques, está bien para contenido y ajustes
@@ -115,6 +116,10 @@ Anaissa + su Claude con las reglas del repo; RAINVO por cotización.
 
 ## 3. Cómo trabajar con Claude (para Anaissa)
 
+- **Regla de oro para su Claude: todo se le muestra en HTML, en su misma ventana.** Cada diagnóstico,
+  propuesta, cambio o decisión llega como una página renderizada (Artifacts) con resumen llano,
+  antes/después, pasos exactos del Admin y opciones; los detalles técnicos van plegados al final.
+  Plantilla: `docs/plantillas/reporte-anaissa.html`. Está como regla obligatoria en `CLAUDE.md`.
 - **Contenido** (textos, fotos, orden de secciones, precios de una variante puntual): editor de Shopify y
   Admin. No hace falta Claude.
 - **Código** (una sección nueva, un bloque nuevo, un color, una animación, un bug): pídeselo a Claude
@@ -122,8 +127,9 @@ Anaissa + su Claude con las reglas del repo; RAINVO por cotización.
 - **Precios** de varios productos o los dummy: pídele "cambia los precios de X según esta tabla" y él
   regenera el CSV; tú importas con overwrite. Nunca dejes que ponga precios "en el JS".
 - **Primer mensaje sugerido para una sesión nueva:**
-  "Lee CLAUDE.md y docs/handoff.md. Luego haz `git pull --no-rebase origin main` y dime en tres líneas
-  el estado del repo (último commit, theme check). Después te doy la tarea."
+  "Lee CLAUDE.md y docs/handoff.md. Luego haz `git pull --no-rebase origin main` y muéstrame en una
+  página HTML (con la plantilla de docs/plantillas) el estado de la tienda en lenguaje sencillo.
+  Después te doy la tarea."
 - **Cómo reportar un bug:** URL exacta, qué hiciste, qué esperabas, captura. Con eso Claude lo localiza.
 - **Qué no pedirle:** desactivar theme check, forzar push, subir imágenes pesadas al repo, instalar apps
   de diseño, renombrar colores u opciones de variantes "para que se vean mejor".

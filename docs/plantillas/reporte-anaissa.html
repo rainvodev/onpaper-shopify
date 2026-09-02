@@ -1,0 +1,93 @@
+<!--
+  On Paper — plantilla de reporte para Anaissa.
+  Uso (para Claude): copia este archivo, llena las secciones y publícalo como Artifact (o muéstralo
+  renderizado en la ventana). Español llano, sin jerga. Una página por tema; republica a la misma URL.
+  Secciones: Resumen · Qué cambió (antes/después) · Qué necesito de ti · Decisión · Detalles técnicos (plegado).
+  Es un archivo de docs/: no forma parte del theme (está en .shopifyignore).
+-->
+<title>On Paper · Reporte</title>
+<style>
+  :root {
+    --tinta: #5f604e; --sage: #b0b094; --crema: #f5f5ef; --blanco: #ffffff; --arena: #e5e1d9;
+    --linea: color-mix(in srgb, #5f604e 16%, transparent); --error: #a4472f;
+    --serif: "Source Serif Pro", Georgia, "Times New Roman", serif; --label: "Marcellus", Georgia, serif;
+  }
+  body { margin: 0; background: var(--crema); color: var(--tinta); font-family: var(--serif); line-height: 1.6; }
+  .pagina { max-width: 62rem; margin: 0 auto; padding: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 4vw, 2.5rem) 5rem; }
+  .eyebrow { font-family: var(--label); text-transform: uppercase; letter-spacing: .14em; font-size: .72rem; opacity: .65; margin: 0 0 .75rem; }
+  h1 { font-weight: 400; font-style: italic; font-size: clamp(1.8rem, 1.2rem + 2.2vw, 2.8rem); line-height: 1.15; color: var(--sage); margin: 0 0 .5rem; }
+  h1 em { color: var(--tinta); }
+  .fecha { font-size: .9rem; opacity: .7; margin: 0 0 2.5rem; }
+  h2 { font-family: var(--label); text-transform: uppercase; letter-spacing: .1em; font-size: .8rem; font-weight: 400; margin: 2.75rem 0 1rem; padding-bottom: .6rem; border-bottom: 1px solid var(--linea); }
+  p { margin: 0 0 1em; }
+  .resumen { font-size: 1.15rem; background: var(--blanco); padding: 1.5rem 1.75rem; border-radius: 1rem; }
+  .resumen p:last-child { margin: 0; }
+  .comparar { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .comparar figure { margin: 0; background: var(--blanco); border-radius: 1rem; overflow: hidden; }
+  .comparar figcaption { font-family: var(--label); text-transform: uppercase; letter-spacing: .1em; font-size: .7rem; padding: .75rem 1rem; border-bottom: 1px solid var(--linea); }
+  .comparar img, .comparar .muestra { display: block; width: 100%; }
+  .comparar .muestra { padding: 1.25rem; }
+  ol.pasos { padding-left: 1.4em; } ol.pasos li { margin-bottom: .6em; } ol.pasos li::marker { color: var(--sage); }
+  .ruta { font-family: var(--label); font-size: .78rem; letter-spacing: .04em; background: var(--arena); padding: .15em .55em; border-radius: 2rem; white-space: nowrap; }
+  .opciones { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; }
+  .opcion { background: var(--blanco); border-radius: 1rem; padding: 1.25rem 1.5rem; border: 1px solid transparent; }
+  .opcion.recomendada { border-color: var(--sage); }
+  .opcion h3 { font-weight: 400; font-size: 1.1rem; margin: 0 0 .4rem; }
+  .opcion .tag { font-family: var(--label); text-transform: uppercase; letter-spacing: .1em; font-size: .66rem; color: var(--sage); }
+  .aviso { border-left: 3px solid var(--error); padding: .5rem 1rem; background: var(--blanco); border-radius: 0 .75rem .75rem 0; }
+  .boton { display: inline-block; font-family: var(--label); text-transform: uppercase; letter-spacing: .1em; font-size: .76rem; color: #fff; background: var(--sage); border-radius: 2rem; padding: .8rem 1.6rem; text-decoration: none; }
+  .boton--outline { color: var(--tinta); background: transparent; border: 1px solid var(--tinta); }
+  details.tecnico { margin-top: 3rem; border-top: 1px solid var(--linea); padding-top: 1rem; font-size: .9rem; opacity: .85; }
+  details.tecnico summary { cursor: pointer; font-family: var(--label); text-transform: uppercase; letter-spacing: .1em; font-size: .74rem; }
+  details.tecnico code { font-size: .85em; background: var(--blanco); padding: .1em .4em; border-radius: .3em; }
+  @media (max-width: 640px) { .comparar { grid-template-columns: 1fr; } }
+</style>
+
+<main class="pagina">
+  <p class="eyebrow">On Paper · Tienda en línea</p>
+  <h1>Título corto del tema, <em>en itálica lo importante.</em></h1>
+  <p class="fecha">2 de septiembre de 2026 · preparado por Claude</p>
+
+  <section class="resumen">
+    <p><strong>En tres líneas:</strong> qué pasó o qué propongo, por qué importa para la tienda, y qué necesito de ti.</p>
+  </section>
+
+  <h2>Qué cambió</h2>
+  <div class="comparar">
+    <figure>
+      <figcaption>Antes</figcaption>
+      <div class="muestra">Captura, mockup o el elemento reproducido con los estilos reales de la tienda.</div>
+    </figure>
+    <figure>
+      <figcaption>Después</figcaption>
+      <div class="muestra">Lo mismo, ya con el cambio. Que se vea, no que se imagine.</div>
+    </figure>
+  </div>
+
+  <h2>Qué necesito de ti</h2>
+  <ol class="pasos">
+    <li>Entra a <span class="ruta">Admin → Productos → Libro de Firmas</span> y revisa …</li>
+    <li>Confirma … (si algo no coincide, mándame una captura).</li>
+  </ol>
+
+  <h2>Decisión</h2>
+  <div class="opciones">
+    <div class="opcion recomendada">
+      <span class="tag">Recomendada</span>
+      <h3>Opción A</h3>
+      <p>Qué implica, en una o dos frases. Qué gana la tienda.</p>
+    </div>
+    <div class="opcion">
+      <span class="tag">Alternativa</span>
+      <h3>Opción B</h3>
+      <p>Qué implica y qué se pierde.</p>
+    </div>
+  </div>
+
+  <p style="margin-top:1.5rem"><a class="boton" href="#">Ver en la tienda</a> &nbsp; <a class="boton boton--outline" href="#">Abrir el editor</a></p>
+
+  <details class="tecnico">
+    <summary>Detalles técnicos (para RAINVO)</summary>
+    <p>Archivos: <code>sections/…</code> · Commit: <code>abc1234</code> · Checks: theme check 0 errores, <code>node --check</code> OK.</p>
+  </details>
+</main>

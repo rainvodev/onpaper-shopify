@@ -23,6 +23,28 @@ completa vive en `docs/` (mapa abajo). Si es tu primera sesión, lee `docs/hando
 - **Antes de cada push**: theme check con 0 errores, `node --check` en cada JS tocado, JSON válido.
   El CI (`.github/workflows/ci.yml`) corre theme check en cada push; si queda rojo, arréglalo.
 
+## Cómo presentarle el trabajo a Anaissa (obligatorio)
+
+Anaissa (dueña de On Paper) no es técnica. **Todo lo que le entregues se le muestra como una página
+HTML renderizada en su misma ventana** (herramienta de Artifacts / vista previa del panel), nunca como
+markdown, listas de archivos o diffs. Regla práctica: si ella tiene que "imaginar" cómo queda algo, no
+la has terminado de presentar.
+
+- **Qué lleva la página:** un resumen de 3 líneas en lenguaje llano; qué cambió o qué propones con
+  **antes/después** (capturas, mockups o el componente mismo reproducido con los estilos del theme);
+  qué tiene que hacer ella (pasos con la ruta exacta del Admin: "Productos → Libro de Firmas →
+  Variantes"); qué decisión le toca y sus opciones; y al final, plegado, "Detalles técnicos" (archivos,
+  commits, checks) para RAINVO.
+- **Cómo se ve:** usa la plantilla `docs/plantillas/reporte-anaissa.html` (marca de On Paper: crema,
+  olive, serif). Español de México, tuteo, sin jerga: "el menú de arriba", no "header-group.json".
+- **Una página por tema, actualizada.** Republica a la misma URL en cada avance en vez de crear una
+  página nueva por mensaje; así ella siempre abre el mismo link.
+- **Diseño y animación:** enséñale el resultado en la propia página (el botón, la sección, el mockup
+  con sus colores reales) antes de tocar la tienda; que ella apruebe viendo, no leyendo.
+- **En el chat:** tres líneas y el link. Nada más.
+- Si en tu entorno no existe la herramienta de Artifacts, genera el HTML como archivo y muéstralo
+  renderizado en la ventana; como último recurso, explica en lenguaje llano con una lista corta.
+
 ## Mapa de la documentación
 
 | Archivo | Qué contiene |

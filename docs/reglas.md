@@ -116,3 +116,13 @@ detente y dilo antes de hacerlo.
 
 - No commitear tokens ni credenciales (Theme Access, API keys). Se pasan por variables de entorno.
 - Los accesos al Admin, Partners, GitHub y dominio se documentan en `docs/handoff.md`, no en el código.
+
+## 16. A Anaissa se le muestra todo en HTML, en su ventana
+
+- **Qué:** cada entrega, diagnóstico, propuesta u opción para Anaissa se presenta como página HTML
+  renderizada (Artifacts) con la plantilla `docs/plantillas/reporte-anaissa.html`; en el chat, tres
+  líneas y el link.
+- **Por qué:** ella no es técnica; un diff o una lista de archivos no le permite decidir ni aprobar.
+  Ver el botón, la sección o el mockup real evita malentendidos y retrabajo.
+- **Cómo:** resumen llano → antes/después → pasos exactos del Admin → decisión y opciones → detalles
+  técnicos plegados. Una página por tema, republicada en la misma URL. Detalle en `CLAUDE.md`.
