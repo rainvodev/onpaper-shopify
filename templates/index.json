@@ -24,17 +24,17 @@
             "image": "shopify://shop_images/personalizados-10.webp"
           }
         },
-        "slide-2": {
+        "slide_gcFP9J": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/09.webp"
+            "image": "shopify://shop_images/05.webp"
           }
         }
       },
       "block_order": [
         "slide_adVHqi",
         "slide-1",
-        "slide-2"
+        "slide_gcFP9J"
       ],
       "settings": {
         "overlay": 35,
