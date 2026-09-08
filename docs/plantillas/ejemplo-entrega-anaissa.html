@@ -1,32 +1,23 @@
-<title>Entrega On Paper</title>
+<title>Guía de tu tienda On Paper</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400;1,600&display=swap">
 <style>
   :root {
     --fondo: #f5f5ef; --superficie: #ffffff; --tinta: #5f604e; --sage: #b0b094; --arena: #e5e1d9;
-    --linea: rgba(95, 96, 78, 0.16); --suave: rgba(95, 96, 78, 0.72); --alerta: #a4472f;
-    --pill-listo-bg: #b0b094; --pill-listo-fg: #ffffff;
-    --pill-revisar-bg: #e5e1d9; --pill-revisar-fg: #5f604e;
-    --pill-pend-bg: transparent; --pill-pend-fg: #a4472f; --pill-pend-borde: #a4472f;
+    --linea: rgba(95, 96, 78, 0.16); --suave: rgba(95, 96, 78, 0.72);
     --serif: "Source Serif Pro", Georgia, "Times New Roman", serif;
     --label: "Marcellus", Georgia, "Times New Roman", serif;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --fondo: #2a2a24; --superficie: #3a3a31; --tinta: #f5f5ef; --sage: #b0b094; --arena: #4a4a3f;
-      --linea: rgba(245, 245, 239, 0.22); --suave: rgba(245, 245, 239, 0.72); --alerta: #e0917c;
-      --pill-listo-bg: #b0b094; --pill-listo-fg: #2a2a24;
-      --pill-revisar-bg: #4a4a3f; --pill-revisar-fg: #f5f5ef;
-      --pill-pend-fg: #e0917c; --pill-pend-borde: #e0917c;
+      --linea: rgba(245, 245, 239, 0.22); --suave: rgba(245, 245, 239, 0.72);
     }
   }
   :root[data-theme="dark"] {
     --fondo: #2a2a24; --superficie: #3a3a31; --tinta: #f5f5ef; --sage: #b0b094; --arena: #4a4a3f;
-    --linea: rgba(245, 245, 239, 0.22); --suave: rgba(245, 245, 239, 0.72); --alerta: #e0917c;
-    --pill-listo-bg: #b0b094; --pill-listo-fg: #2a2a24;
-    --pill-revisar-bg: #4a4a3f; --pill-revisar-fg: #f5f5ef;
-    --pill-pend-fg: #e0917c; --pill-pend-borde: #e0917c;
+    --linea: rgba(245, 245, 239, 0.22); --suave: rgba(245, 245, 239, 0.72);
   }
 
   * { box-sizing: border-box; }
@@ -36,54 +27,60 @@
   a { color: inherit; text-underline-offset: .2em; }
   a:focus-visible, summary:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
 
-  .eyebrow { font-family: var(--label); text-transform: uppercase; letter-spacing: .14em; font-size: .72rem; color: var(--suave); margin: 0 0 .9rem; }
+  .cabecera { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: .9rem; }
+  .eyebrow { font-family: var(--label); text-transform: uppercase; letter-spacing: .14em; font-size: .72rem; color: var(--suave); margin: 0; }
+  .tema { display: inline-flex; align-items: center; gap: .15rem; padding: .2rem; border: 1px solid var(--linea); border-radius: 2rem; background: var(--superficie); }
+  .tema button { display: inline-flex; align-items: center; gap: .4rem; font-family: var(--label); text-transform: uppercase; letter-spacing: .1em; font-size: .62rem; color: var(--suave); background: transparent; border: 0; border-radius: 2rem; padding: .45rem .8rem; cursor: pointer; line-height: 1; }
+  .tema button[aria-pressed="true"] { background: var(--sage); color: #fff; }
+  .tema button:focus-visible { outline: 2px solid var(--sage); outline-offset: 2px; }
+  .tema svg { width: 13px; height: 13px; flex: none; }
   h1 { font-weight: 400; font-style: italic; font-size: clamp(1.9rem, 1.2rem + 2.4vw, 3rem); line-height: 1.12; color: var(--tinta); margin: 0 0 .6rem; text-wrap: balance; max-width: 22ch; }
   h1 em { color: var(--sage); font-style: italic; }
-  .fecha { font-size: .92rem; color: var(--suave); margin: 0 0 2.75rem; }
-  h2 { font-family: var(--label); text-transform: uppercase; letter-spacing: .12em; font-size: .78rem; font-weight: 400; margin: 3rem 0 1.1rem; padding-bottom: .6rem; border-bottom: 1px solid var(--linea); }
+  .fecha { font-size: .92rem; color: var(--suave); margin: 0 0 2rem; }
+  .intro { font-size: 1.12rem; max-width: 62ch; margin-bottom: .5rem; }
+  h2 { font-family: var(--label); text-transform: uppercase; letter-spacing: .12em; font-size: .78rem; font-weight: 400; margin: 3.25rem 0 1.1rem; padding-bottom: .6rem; border-bottom: 1px solid var(--linea); }
   h3 { font-weight: 400; font-size: 1.15rem; margin: 0 0 .35rem; line-height: 1.3; }
+  h4 { font-family: var(--label); text-transform: uppercase; letter-spacing: .1em; font-size: .68rem; font-weight: 400; color: var(--sage); margin: 0 0 .4rem; }
 
-  .resumen { background: var(--superficie); border-radius: 1rem; padding: 1.5rem 1.75rem; display: grid; gap: .6rem; }
-  .resumen p { font-size: 1.12rem; margin: 0; max-width: none; }
-  .resumen p strong { font-weight: 600; }
+  /* Índice */
+  nav.indice ol { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: .35rem 1.5rem; font-size: .95rem; }
+  nav.indice a { text-decoration: none; border-bottom: 1px solid var(--linea); }
+  nav.indice a:hover { border-bottom-color: var(--tinta); }
 
-  .estado { display: grid; gap: 0; background: var(--superficie); border-radius: 1rem; overflow: hidden; }
-  .estado-fila { display: grid; grid-template-columns: 9.5rem 1fr; gap: 1rem; align-items: start; padding: 1rem 1.5rem; border-top: 1px solid var(--linea); }
-  .estado-fila:first-child { border-top: 0; }
-  .estado-fila > .pill { justify-self: start; }
-  .estado-fila > div, ol.pasos li > div { min-width: 0; }
-  .estado-fila h3 { font-size: 1.05rem; }
-  .estado-fila p { margin: 0; font-size: .95rem; color: var(--suave); max-width: none; }
-  .pill { display: inline-block; font-family: var(--label); text-transform: uppercase; letter-spacing: .1em; font-size: .64rem; line-height: 1; padding: .5em .85em; border-radius: 2rem; white-space: nowrap; margin-top: .25rem; border: 1px solid transparent; }
-  .pill--listo { background: var(--pill-listo-bg); color: var(--pill-listo-fg); }
-  .pill--revisar { background: var(--pill-revisar-bg); color: var(--pill-revisar-fg); }
-  .pill--pendiente { background: var(--pill-pend-bg); color: var(--pill-pend-fg); border-color: var(--pill-pend-borde); }
+  /* Tarjetas de páginas / componentes */
+  .cuadricula { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem; }
+  .tarjeta { background: var(--superficie); border-radius: 1rem; padding: 1.25rem 1.5rem; }
+  .tarjeta p { margin: 0; font-size: .95rem; max-width: none; }
+  .tarjeta p + p { margin-top: .5rem; }
+  .donde { display: block; margin-top: .6rem; font-size: .85rem; color: var(--suave); }
 
-  ul.limpia { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; max-width: 68ch; }
-  ul.limpia li { padding-left: 1.4rem; position: relative; }
-  ul.limpia li::before { content: ""; position: absolute; left: 0; top: .7em; width: .5rem; height: .5rem; border-radius: 50%; background: var(--sage); }
+  /* Lista de definiciones (componentes, bloques) */
+  .lista { background: var(--superficie); border-radius: 1rem; overflow: hidden; }
+  .fila { display: grid; grid-template-columns: 12rem 1fr; gap: 1rem; padding: .95rem 1.5rem; border-top: 1px solid var(--linea); align-items: start; }
+  .fila:first-child { border-top: 0; }
+  .fila > div { min-width: 0; }
+  .fila h3 { font-size: 1rem; margin: 0; }
+  .fila p { margin: 0; font-size: .93rem; color: var(--suave); max-width: none; }
 
-  ol.pasos { list-style: none; counter-reset: paso; padding: 0; margin: 0; display: grid; gap: 1rem; }
-  ol.pasos li { counter-increment: paso; display: grid; grid-template-columns: 2.6rem 1fr; gap: 1rem; background: var(--superficie); border-radius: 1rem; padding: 1.25rem 1.5rem 1.25rem 1.25rem; }
-  ol.pasos li::before { content: counter(paso); font-family: var(--label); font-size: 1.4rem; line-height: 1; color: var(--sage); padding-top: .15rem; }
-  ol.pasos p { margin: 0 0 .5em; max-width: none; }
-  ol.pasos p:last-child { margin-bottom: 0; }
+  /* Mecánica: pasos en línea */
+  .mecanica { display: grid; gap: 1rem; }
+  .mecanica .tarjeta h3 { margin-bottom: .5rem; }
+  .ejemplo { display: inline-block; background: var(--arena); border-radius: .5rem; padding: .35rem .7rem; font-size: .9rem; margin: .35rem .35rem 0 0; }
+
+  /* Recetas */
+  .recetas { display: grid; gap: .75rem; }
+  details.receta { background: var(--superficie); border-radius: 1rem; padding: 0 1.5rem; }
+  details.receta summary { cursor: pointer; padding: 1rem 0; font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+  details.receta summary::-webkit-details-marker { display: none; }
+  details.receta summary::after { content: "↓"; font-size: .85rem; color: var(--suave); flex: none; }
+  details.receta[open] summary::after { content: "↑"; }
+  details.receta .cuerpo { padding: 0 0 1.1rem; font-size: .95rem; }
+  details.receta .cuerpo p { max-width: none; margin-bottom: .6em; }
+  details.receta .cuerpo p:last-child { margin-bottom: 0; }
   .ruta { font-family: var(--label); font-size: .74rem; letter-spacing: .04em; background: var(--arena); color: var(--tinta); padding: .2em .6em; border-radius: 2rem; line-height: 2; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
-  .tarjeta { font-variant-numeric: tabular-nums; letter-spacing: .06em; }
+  .tarjetaprueba { font-variant-numeric: tabular-nums; letter-spacing: .06em; }
 
-  .acuerdos { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
-  .acuerdo { background: var(--superficie); border-radius: 1rem; padding: 1.1rem 1.4rem; }
-  .acuerdo .tag { display: block; font-family: var(--label); text-transform: uppercase; letter-spacing: .1em; font-size: .64rem; color: var(--sage); margin-bottom: .35rem; }
-  .acuerdo p { margin: 0; font-size: .95rem; max-width: none; }
-
-  .opciones { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
-  .decision { margin-bottom: 1.75rem; }
-  .decision > p { margin-bottom: .8rem; }
-  .opcion { background: var(--superficie); border-radius: 1rem; padding: 1.25rem 1.5rem; border: 1px solid transparent; }
-  .opcion.recomendada { border-color: var(--sage); }
-  .opcion .tag { display: block; font-family: var(--label); text-transform: uppercase; letter-spacing: .1em; font-size: .64rem; color: var(--sage); margin-bottom: .4rem; }
-  .opcion p { margin: 0; font-size: .95rem; max-width: none; }
-
+  /* Diagrama */
   .flujo { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: .75rem; margin: 1.25rem 0 .75rem; }
   .nodo { background: var(--superficie); border-radius: 1rem; padding: 1rem 1.1rem; text-align: center; }
   .nodo strong { display: block; font-weight: 400; font-size: 1.05rem; }
@@ -92,19 +89,17 @@
   .enlace { font-family: var(--label); font-size: .64rem; text-transform: uppercase; letter-spacing: .1em; color: var(--suave); text-align: center; line-height: 1.4; }
   .enlace svg { display: block; margin: 0 auto .3rem; }
   .flujo-abajo { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: .75rem; max-width: 40rem; margin: 0 auto 1.25rem; }
-  .nota-flujo { font-size: .92rem; color: var(--suave); text-align: center; max-width: none; }
-
-  .roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
-  .rol { background: var(--superficie); border-radius: 1rem; padding: 1.25rem 1.5rem; }
-  .rol .tag { display: block; font-family: var(--label); text-transform: uppercase; letter-spacing: .1em; font-size: .64rem; color: var(--sage); margin-bottom: .4rem; }
-  .rol ul { margin: .5rem 0 0; padding-left: 1.1rem; font-size: .95rem; }
-  .rol li { margin-bottom: .3rem; }
+  .nota { font-size: .92rem; color: var(--suave); max-width: 68ch; }
 
   .cita { background: var(--superficie); border-left: 3px solid var(--sage); border-radius: 0 1rem 1rem 0; padding: 1rem 1.4rem; font-style: italic; margin: 1rem 0 1.25rem; max-width: 68ch; }
   .dos { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem; }
   .dos h3 { font-size: 1.05rem; }
   .dos ul { margin: 0; padding-left: 1.1rem; font-size: .95rem; }
   .dos li { margin-bottom: .35rem; }
+
+  ol.proceso { padding-left: 1.3rem; margin: 0; max-width: 68ch; }
+  ol.proceso li { margin-bottom: .5rem; }
+  ol.proceso li::marker { color: var(--sage); font-family: var(--label); }
 
   .contacto { font-size: .95rem; color: var(--suave); margin-top: 2.5rem; }
   details.tecnico { margin-top: 3rem; border-top: 1px solid var(--linea); padding-top: 1rem; font-size: .9rem; color: var(--suave); }
@@ -113,288 +108,238 @@
   details.tecnico code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .84em; background: var(--superficie); padding: .1em .4em; border-radius: .3em; color: var(--tinta); }
 
   @media (max-width: 720px) {
-    .estado-fila { grid-template-columns: 1fr; gap: .4rem; }
+    .fila { grid-template-columns: 1fr; gap: .25rem; }
     .flujo { grid-template-columns: 1fr; }
     .enlace svg { transform: rotate(90deg); }
     .flujo-abajo { grid-template-columns: 1fr; }
-    ol.pasos li { grid-template-columns: 2rem 1fr; padding: 1rem 1.1rem; }
-    .resumen { padding: 1.25rem 1.3rem; }
-    .resumen p { font-size: 1.03rem; }
   }
   @media (prefers-reduced-motion: no-preference) {
-    details.tecnico[open] > *:not(summary) { animation: aparecer .3s ease; }
+    details[open] > *:not(summary) { animation: aparecer .25s ease; }
     @keyframes aparecer { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
   }
 </style>
 
 <main class="pagina">
-  <p class="eyebrow">On Paper · Tu tienda en línea</p>
-  <h1>Tu tienda ya está lista. <em>Así la vas a operar.</em></h1>
-  <p class="fecha">2 de septiembre de 2026 · actualizado después de nuestra llamada · preparado por RAINVO para Anaissa</p>
-
-  <section class="resumen" aria-label="Resumen">
-    <p><strong>La tienda funciona y ya vive en onpaper.mx</strong>, con contraseña hasta que decidas abrirla. Casi todo lo que faltaba lo resolviste tú esta semana con tu Claude: imágenes, colecciones, menú, certificado, legales, inglés y dominio. Lo revisamos a fondo: todo en orden.</p>
-    <p><strong>Antes de quitar la contraseña quedan cosas tuyas, ninguna nos necesita:</strong> dejar solo pesos, dólares y euros; una compra de prueba sin cobro; el checkout con tu logo y colores; confirmar los precios definitivos.</p>
-    <p><strong>De aquí en adelante:</strong> el contenido lo cambias tú en el editor, el diseño y las funciones nuevas se las pides a tu Claude, y RAINVO queda de respaldo 30 días (hasta el 2 de octubre) con respaldos semanales y un reporte al final.</p>
-  </section>
-
-  <h2>Acordado hoy en la llamada</h2>
-  <div class="acuerdos">
-    <div class="acuerdo"><span class="tag">Monedas</span><p>Solo pesos mexicanos, dólares y euros. Se quitan los demás países de Europa que se activaron solos.</p></div>
-    <div class="acuerdo"><span class="tag">Pagos</span><p>Shopify Payments, sin Mercado Pago ni Stripe. Tu tarjeta queda en trámite con tu banco.</p></div>
-    <div class="acuerdo"><span class="tag">Checkout</span><p>Se queda el diseño estándar, sin cambiar de plan; se personalizan logo y colores.</p></div>
-    <div class="acuerdo"><span class="tag">Lanzamiento</span><p>Terminas tus detalles, haces la compra de prueba y abres la tienda tú misma cuando estés lista.</p></div>
-    <div class="acuerdo"><span class="tag">Soporte</span><p>30 días de soporte sin costo desde hoy, con respaldos semanales y un reporte al cierre.</p></div>
-    <div class="acuerdo"><span class="tag">Cierre</span><p>Pago final acordado como platicamos; Gabriel avisa a Marijose que el proyecto terminó y que arranca el soporte.</p></div>
-  </div>
-
-  <h2>Cómo está la tienda hoy</h2>
-  <div class="estado">
-    <div class="estado-fila">
-      <span class="pill pill--listo">Listo</span>
-      <div><h3>Diseño de todas las páginas</h3><p>Inicio, productos, colecciones, búsqueda, carrito, contacto, preguntas frecuentes, legales y cuentas de cliente. Cada página respira igual en computadora y celular.</p></div>
-    </div>
-    <div class="estado-fila">
-      <span class="pill pill--listo">Listo</span>
-      <div><h3>Dominio onpaper.mx</h3><p>Ya lo conectaste. La tienda sigue cerrada con contraseña hasta que la abras (paso 7).</p></div>
-    </div>
-    <div class="estado-fila">
-      <span class="pill pill--listo">Listo</span>
-      <div><h3>Certificado de regalo</h3><p>Lo rediseñaste como producto: quien regala elige qué regalar y el precio cambia solo. Sin envío por paquetería; digital o recoger en oficina, con los nombres de quien regala y quien recibe.</p></div>
-    </div>
-    <div class="estado-fila">
-      <span class="pill pill--listo">Listo</span>
-      <div><h3>Colores y fotos por color</h3><p>Al elegir tela o vinipiel aparecen sus colores y la foto cambia al color real; con impresión vuelve la foto original. Faltan Rosa metálico y Azul metálico porque el taller aún no entrega sus fotos. Para prender o apagar materiales, ver el paso 6.</p></div>
-    </div>
-    <div class="estado-fila">
-      <span class="pill pill--listo">Listo</span>
-      <div><h3>Búsqueda, carrito y contacto</h3><p>La lupa del menú busca en vivo mientras escribes; el carrito se abre a un lado con su animación; el formulario de contacto llega a tu correo.</p></div>
-    </div>
-    <div class="estado-fila">
-      <span class="pill pill--listo">Listo</span>
-      <div><h3>Pagos</h3><p>Shopify Payments activado. Pendiente solo lo que revises con tu banco.</p></div>
-    </div>
-    <div class="estado-fila">
-      <span class="pill pill--revisar">Revisar</span>
-      <div><h3>Precios</h3><p>Cinco productos cobran lo del catálogo. Libro de Firmas, Cajas, Carpetas y Porta Planos tenían montos de prueba; nos dijiste que ya ajustaste precios en el Admin. Confírmalo y sincroniza el archivo maestro (paso 5): si no, una importación futura los pisaría.</p></div>
-    </div>
-    <div class="estado-fila">
-      <span class="pill pill--revisar">Revisar</span>
-      <div><h3>Inglés y español</h3><p>Los dos idiomas ya funcionan y tu Claude corrigió las traducciones forzadas. Falta tu revisión letra por letra. Nosotros completamos dos textos que faltaban en el archivo de inglés y que dejaban un aviso técnico.</p></div>
-    </div>
-    <div class="estado-fila">
-      <span class="pill pill--revisar">Revisar</span>
-      <div><h3>Legales</h3><p>Términos, envíos y devoluciones, y aviso de privacidad ya están cargados: mezcla de nuestra plantilla general con tu información. Recomendación: que un abogado los revise (paso 4).</p></div>
-    </div>
-    <div class="estado-fila">
-      <span class="pill pill--pendiente">Pendiente de ti</span>
-      <div><h3>Monedas</h3><p>Hoy aparecen todos los países de Europa. Acordamos dejar pesos, dólares y euros (paso 1).</p></div>
-    </div>
-    <div class="estado-fila">
-      <span class="pill pill--pendiente">Pendiente de ti</span>
-      <div><h3>Compra de prueba y checkout con tu marca</h3><p>Una compra sin cobro para ver que todo llegue bien, y el logo y los colores en la página de pago (pasos 2 y 3).</p></div>
+  <div class="cabecera">
+    <p class="eyebrow">On Paper · Guía de tu tienda</p>
+    <div class="tema" role="group" aria-label="Tema de la página">
+      <button type="button" data-tema="light" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Claro</button>
+      <button type="button" data-tema="dark" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>Oscuro</button>
     </div>
   </div>
+  <h1>Tu tienda, por dentro. <em>Cómo está hecha y cómo usarla.</em></h1>
+  <p class="fecha">Guía de referencia preparada por RAINVO · septiembre de 2026 · se actualiza en este mismo enlace</p>
 
-  <h2>Lo que hiciste tú esta semana</h2>
-  <p>Revisamos cada cambio que guardaste desde el Admin. Todo quedó bien y ya vive en la tienda:</p>
-  <ul class="limpia">
-    <li>El dominio onpaper.mx conectado y las fotos del inicio cambiadas; "Photobook Collections" ahora es "Collections", como lo quieres a futuro.</li>
-    <li>El menú de arriba: eliges qué colecciones aparecen en el panel, el selector de moneda muestra el país y "Otros" lleva a las preguntas frecuentes.</li>
-    <li>El certificado de regalo con sus diez opciones y precio por opción, la nota de vigencia de seis meses y la entrega digital o en oficina.</li>
-    <li>El pie de página completo: teléfono, dirección con mapa, horario, redes y WhatsApp. El favicon y los textos del carrito.</li>
-    <li>Términos y condiciones, política de envíos y devoluciones, y aviso de privacidad, con tu información.</li>
-    <li>El idioma inglés, con la traducción revisada por tu Claude para que no sonara forzada.</li>
-  </ul>
+  <p class="intro">Aquí está todo lo que construimos para On Paper: qué es cada pieza, cómo funciona por dentro y dónde se cambia cada cosa, ya sea desde tu editor de Shopify o pidiéndoselo a tu Claude. Es un archivo de ayuda, para consultar cuando lo necesites.</p>
 
-  <h2>Qué sigue antes de abrir la tienda</h2>
-  <ol class="pasos">
-    <li>
-      <div>
-        <h3>Deja solo pesos, dólares y euros</h3>
-        <p>Entra a <span class="ruta">Configuración → Mercados</span>. Conserva México (MXN), Estados Unidos (USD) y un solo mercado para Europa (EUR); elimina el resto de países. El selector de moneda del menú muestra solo lo que exista aquí. También puedes pedírselo a tu Claude con esas mismas palabras.</p>
+  <nav class="indice" aria-label="Contenido">
+    <ol>
+      <li><a href="#construimos">Qué construimos</a></li>
+      <li><a href="#pordentro">Cómo funciona por dentro</a></li>
+      <li><a href="#secciones">Las secciones del inicio</a></li>
+      <li><a href="#producto">La página de producto</a></li>
+      <li><a href="#elementos">Los elementos de tu marca</a></li>
+      <li><a href="#usar">Cómo usar tu tienda</a></li>
+      <li><a href="#claude">Cómo trabajar con tu Claude</a></li>
+      <li><a href="#trabajamos">Cómo lo trabajamos</a></li>
+      <li><a href="#soporte">Soporte</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="construimos">Qué construimos</h2>
+  <p>Un theme a la medida para Shopify, hecho desde cero sobre la base oficial de Shopify y nuestro sistema de diseño, con la marca de On Paper en cada pieza: la crema, el olive, la serif con itálicas, las cápsulas y las máscaras que se abren despacio. No usa apps de diseño ni plantillas compradas: todo lo que ves es tuyo.</p>
+  <div class="cuadricula">
+    <div class="tarjeta"><h3>Inicio</h3><p>Portada con fotos que rotan, "Nosotros", el bookcase que corre en cinta, un texto, el banner de colecciones, los más vendidos, la invitación a proyectos personalizados y la galería con el disco "Escríbenos" que sigue al cursor.</p></div>
+    <div class="tarjeta"><h3>Página de producto</h3><p>Galería de cuatro fotos, personalización por bloques (material, tamaño, color, hotstamping, textos, fotos…), precio que cambia en vivo, barra flotante para agregar al carrito y productos relacionados.</p></div>
+    <div class="tarjeta"><h3>Colecciones y búsqueda</h3><p>Grid de productos por colección, lista de colecciones, y una búsqueda desde el menú que muestra resultados mientras escribes.</p></div>
+    <div class="tarjeta"><h3>Carrito y pago</h3><p>Carrito que se abre a un lado con cada personalización visible, página de carrito completa con nota, y el checkout de Shopify con tu logo y colores.</p></div>
+    <div class="tarjeta"><h3>Menú y pie de página</h3><p>Menú con paneles de productos y colecciones, búsqueda, cuenta, carrito e idioma/moneda; en celular, un menú desplegable. Pie de página con contacto, dirección, horario, redes, WhatsApp y políticas.</p></div>
+    <div class="tarjeta"><h3>Páginas de apoyo</h3><p>Contacto con formulario, preguntas frecuentes en acordeón, legales con prosa cuidada, página no encontrada, portada "Muy pronto" y las cuentas de cliente (entrar, registrarse, pedidos, direcciones).</p></div>
+  </div>
+
+  <h2 id="pordentro">Cómo funciona por dentro</h2>
+  <div class="mecanica">
+    <div class="tarjeta">
+      <h3>El precio siempre es el de la variante</h3>
+      <p>Todo lo que cambia el precio (tamaño, número de fotos, tipo y cantidad de hojas, material en cajas y carpetas, herraje) es una <strong>variante</strong> de Shopify. Todo lo que no cambia el precio (color, hotstamping, títulos, nombres, link de fotos) viaja al pedido como <strong>personalización</strong>. Por eso el precio que ve tu clienta es exactamente el que paga, y en cada pedido te llega la ficha completa de lo que pidió.</p>
+      <span class="ejemplo">Photobook Tradicional · 11x14 · 151-250 fotos = $5,200</span><span class="ejemplo">Color: Verde militar · Hotstamping: Dorado · Título: "Camila &amp; Fernando"</span>
+    </div>
+    <div class="tarjeta">
+      <h3>Cada material trae su paleta</h3>
+      <p>Tela muestra los colores de tela; vinipiel, los de vinipiel; impresión no lleva color ni hotstamping. En cajas, carpetas y porta planos: tela, tela plastificada y papel texturizado, cada uno con lo suyo. Los nombres de los colores son los mismos que usa el taller, y así llegan en el pedido.</p>
+    </div>
+    <div class="tarjeta">
+      <h3>La foto cambia con el color</h3>
+      <p>Al elegir un color, la foto principal cambia al mockup real de ese material, tamaño y color (son las 264 fotos del taller, guardadas en los archivos de tu tienda). Si eliges impresión, vuelve la foto original del producto. Los tamaños en esos archivos siguen la convención del taller (alto por ancho) y la tienda los traduce sola.</p>
+    </div>
+    <div class="tarjeta">
+      <h3>Dos idiomas, tres monedas</h3>
+      <p>El selector del menú cambia idioma y moneda. Los textos del theme existen en español e inglés; los productos y páginas se traducen con la herramienta de traducción de Shopify. Las monedas que aparecen son las que existan en tus Mercados.</p>
+    </div>
+    <div class="tarjeta">
+      <h3>Una sola copia del diseño</h3>
+      <p>El diseño vive en un repositorio (una carpeta en la nube, en GitHub). Lo que guardas en el editor de Shopify se guarda también ahí, y lo que tu Claude cambia ahí se publica solo en la tienda. Nunca hay dos versiones.</p>
+      <div class="flujo" role="img" aria-label="El editor de Shopify y tu Claude escriben en el repositorio; el repositorio publica en la tienda.">
+        <div class="nodo"><strong>Tu editor de Shopify</strong><span>textos, fotos, precios, menús</span></div>
+        <div class="enlace"><svg width="44" height="18" viewBox="0 0 44 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 6h40M36 2l6 4-6 4"/><path d="M42 12H2M8 8l-6 4 6 4"/></svg>se sincronizan</div>
+        <div class="nodo"><strong>El repositorio</strong><span>la copia maestra</span></div>
+        <div class="enlace"><svg width="44" height="18" viewBox="0 0 44 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M42 9H2M8 5l-6 4 6 4"/></svg>escribe aquí</div>
+        <div class="nodo"><strong>Tu Claude</strong><span>diseño, funciones, colores nuevos</span></div>
       </div>
-    </li>
-    <li>
-      <div>
-        <h3>Haz una compra de prueba sin cobro</h3>
-        <p>En <span class="ruta">Configuración → Pagos → Shopify Payments → Administrar</span> activa el <strong>modo de prueba</strong>. Compra como si fueras clienta con la tarjeta de prueba <span class="tarjeta">4242 4242 4242 4242</span>, cualquier fecha futura y cualquier CVV. Haz dos o tres pedidos distintos: un photobook con color y hotstamping, un certificado, algo con varias piezas. Revisa que el pedido llegue con toda la personalización y que recibas el correo. Al terminar, <strong>apaga el modo de prueba</strong>. Invita a dos o tres amigas a hacer lo mismo: ven cosas que una ya no ve.</p>
+      <div class="flujo-abajo">
+        <div></div>
+        <div class="enlace"><svg width="18" height="40" viewBox="0 0 18 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 2v36M5 32l4 6 4-6"/></svg>se publica solo</div>
+        <div></div>
       </div>
-    </li>
-    <li>
-      <div>
-        <h3>Pon tu marca en la página de pago</h3>
-        <p>En <span class="ruta">Configuración → Finalizar compra → Personalizar</span> sube tu logo y elige los colores (crema y olive) y la tipografía. No hace falta cambiar de plan. El botón morado "Comprar con Shop" de la página de producto es de Shopify y no cambia de color; si te estorba, apágalo en <span class="ruta">Personalizar → página de producto → Botón comprar ahora</span>: el cliente sigue pagando igual desde el carrito.</p>
+      <div class="flujo-abajo">
+        <div></div>
+        <div class="nodo nodo--tienda"><strong>Tu tienda</strong><span>onpaper.mx</span></div>
+        <div></div>
       </div>
-    </li>
-    <li>
-      <div>
-        <h3>Revisa las legales con un abogado</h3>
-        <p>Lo que cargaste está bien armado, pero nuestra plantilla es general. Vale la pena que alguien la adapte a lo que vendes. La plantilla original que pediste: <a href="https://drive.google.com/file/d/17UOIk_uZnj0bBoWrOhSq0IsVkkhm2Fvw/view">Términos y condiciones</a> y <a href="https://drive.google.com/file/d/10gyBJWbEZevetEgqjfT1VOj7qGW4kJO-/view">Política de privacidad</a>. Confirma que se llegue a ellas desde el pie de página: <span class="ruta">Personalizar → Pie de página → Mostrar políticas</span> o desde uno de sus menús.</p>
-      </div>
-    </li>
-    <li>
-      <div>
-        <h3>Confirma los precios definitivos</h3>
-        <p>Si ya cambiaste precios directamente en el Admin, dile a tu Claude: <em>"Sincroniza el archivo maestro de precios con lo que hay en el Admin"</em> (él te pedirá exportar los productos; toma dos minutos). Regla de oro: nunca importar el archivo de precios sin sincronizarlo antes, porque pisaría lo que pusiste. Si Libro de Firmas, Cajas, Carpetas o Porta Planos siguen con montos de prueba, ponlos en borrador (<span class="ruta">Productos → el producto → Estado → Borrador</span>) o mándanos los montos.</p>
-      </div>
-    </li>
-    <li>
-      <div>
-        <h3>Prende o apaga materiales</h3>
-        <p>En photobooks, libro de firmas, bookcase y memory box el material no cambia el precio: se edita en <span class="ruta">Personalizar → página del producto → bloque Material</span> (opciones separadas por coma), y cada paleta de colores tiene su campo "Mostrar para" con el material que la activa. En cajas, carpetas y porta planos el material sí define el precio: ahí se lo pides a tu Claude, que lo cambia en el archivo de precios.</p>
-      </div>
-    </li>
-    <li>
-      <div>
-        <h3>Abre la tienda</h3>
-        <p><span class="ruta">Tienda en línea → Preferencias → Contraseña</span>: quita la protección. Avísanos el día: hacemos un respaldo justo antes y otro justo después.</p>
-      </div>
-    </li>
-  </ol>
-
-  <h2>Decisiones que te tocan</h2>
-
-  <div class="decision">
-    <h3>¿Quién es dueña del código de la tienda?</h3>
-    <p>El diseño vive en un repositorio (una carpeta en la nube, en GitHub) que se publica solo en tu tienda. Hoy ese repositorio es de RAINVO.</p>
-    <div class="opciones">
-      <div class="opcion recomendada">
-        <span class="tag">Recomendada</span>
-        <h3>On Paper es la dueña</h3>
-        <p>Creas una cuenta de GitHub de On Paper y te transferimos el repositorio. Tu tienda y tu Claude dejan de depender de nosotros; RAINVO conserva acceso solo durante el soporte. Toma media hora, con nuestra guía.</p>
-      </div>
-      <div class="opcion">
-        <span class="tag">Alternativa</span>
-        <h3>Se queda en RAINVO, con acceso para ti</h3>
-        <p>Más rápido hoy, pero si algo cambia de nuestro lado la tienda deja de recibir cambios. No lo recomendamos para el largo plazo.</p>
-      </div>
+      <p class="nota">Una sola regla práctica: no editen dos personas lo mismo al mismo tiempo, y todo cambio de diseño se revisa antes de publicarse.</p>
     </div>
   </div>
 
-  <div class="decision">
-    <h3>Los títulos del inicio en inglés</h3>
-    <p>"Crafted with passion, designed for a lifetime", "Enduring, personal, unforgettable". Se quedaron en inglés como voz de la marca, mientras el resto del sitio cambia de idioma con el selector.</p>
-    <div class="opciones">
-      <div class="opcion"><span class="tag">Opción A</span><h3>Se quedan en inglés</h3><p>Como estilo de marca. No requiere nada.</p></div>
-      <div class="opcion"><span class="tag">Opción B</span><h3>Se traducen</h3><p>Tú los cambias en Personalizar o le pasas el texto a tu Claude.</p></div>
-    </div>
+  <h2 id="secciones">Las secciones del inicio</h2>
+  <p>Cada sección se edita en <span class="ruta">Personalizar → clic en la sección</span>. Todas tienen "Espacio arriba" y "Espacio abajo", y las puedes reordenar, duplicar o quitar; desde "Agregar sección" aparece el kit completo.</p>
+  <div class="lista">
+    <div class="fila"><h3>Portada (Hero)</h3><div><p>Fotos que rotan con un título en dos líneas, botón y la etiqueta "More of us". Editas fotos, oscurecido, velocidad de rotación, texto y botón. La itálica se marca con <em>cursiva</em> en el editor.</p></div></div>
+    <div class="fila"><h3>Nosotros (About)</h3><div><p>Etiqueta pequeña, título en itálica y párrafo centrado. Editas los tres textos y su ancho.</p></div></div>
+    <div class="fila"><h3>Bookcase</h3><div><p>Cinta de fotos que corre sin fin y se detiene al pasar el cursor; el disco muestra el texto de cada foto y lleva a su link. Hasta seis fotos, cada una con su texto y link; velocidad ajustable.</p></div></div>
+    <div class="fila"><h3>Texto</h3><div><p>Un párrafo centrado con ancho ajustable y fondo claro u oscuro. Sirve para cualquier nota entre secciones.</p></div></div>
+    <div class="fila"><h3>Banner de colección</h3><div><p>Foto a todo lo ancho con título y botón. Si el botón no tiene link, se oculta solo.</p></div></div>
+    <div class="fila"><h3>Más vendidos</h3><div><p>Muestra los productos de la colección que elijas (hoy "frontpage"), con etiqueta, título y cuántos mostrar.</p></div></div>
+    <div class="fila"><h3>Invitación (CTA)</h3><div><p>Título, párrafo y botón centrados, con fondo claro, oscuro o del color que elijas. Hoy es "Proyectos personalizados".</p></div></div>
+    <div class="fila"><h3>Galería</h3><div><p>Mosaico de tres columnas; cada foto elige su columna y proporción. El disco que sigue al cursor lleva al contacto.</p></div></div>
+    <div class="fila"><h3>Preguntas frecuentes</h3><div><p>Acordeón de preguntas y respuestas; cada pregunta es un bloque. Vive en la página FAQ.</p></div></div>
+    <div class="fila"><h3>Contacto</h3><div><p>Formulario de Shopify que llega a tu correo, con columna lateral de WhatsApp y correo. Vive en la página de contacto.</p></div></div>
   </div>
 
-  <div class="decision">
-    <h3>El paquete de boda (descuento por dos, tres o más libros)</h3>
-    <p>Shopify en su plan básico no aplica descuentos escalonados por cantidad de forma automática.</p>
-    <div class="opciones">
-      <div class="opcion recomendada"><span class="tag">Recomendada para empezar</span><h3>Códigos de descuento</h3><p>Creas BODA2, BODA3 y BODA4 en <span class="ruta">Descuentos</span> y los das a la pareja. Sin costo.</p></div>
-      <div class="opcion"><span class="tag">Alternativa</span><h3>App de descuentos</h3><p>Lo aplica solo en el carrito, pero tiene costo mensual.</p></div>
-    </div>
+  <h2 id="producto">La página de producto</h2>
+  <p>Cada producto tiene su propia plantilla con bloques de personalización. Se editan en <span class="ruta">Personalizar → abrir el producto → bloques</span>: puedes cambiar textos y opciones, reordenarlos, quitar o agregar. Un solo cuidado: cuando un bloque corresponde a una variante (tamaño, número de fotos, hojas, material en cajas y carpetas, herraje), su nombre y sus opciones deben ser idénticos a los de la variante en el producto; si no, la tienda no sabe qué variante cobrar.</p>
+  <div class="lista">
+    <div class="fila"><h3>Título e intro</h3><div><p>El nombre del producto con itálica y el párrafo de entrada.</p></div></div>
+    <div class="fila"><h3>Acordeón</h3><div><p>"Detalles" y "Tiempo de envío": texto plegable, el primer párrafo en itálica.</p></div></div>
+    <div class="fila"><h3>Pills</h3><div><p>Opciones en cápsulas (Material). Opciones separadas por coma y una por defecto.</p></div></div>
+    <div class="fila"><h3>Color y hotstamping</h3><div><p>Círculos con la textura real de cada color. Eliges la paleta (telas, vinipieles, telas plastificadas, papel texturizado, hotstamping), el color por defecto y "Mostrar para": el material que activa esa paleta. El nombre del color elegido aparece junto al título del grupo.</p></div></div>
+    <div class="fila"><h3>Tamaño</h3><div><p>Rectángulos a escala real con su medida en pulgadas. Eliges el juego de tamaños (photobook, firmas y bookcase, memory box, carpetas, cajas, fotos) y una nota.</p></div></div>
+    <div class="fila"><h3>Lista desplegable</h3><div><p>Para opciones largas: número de fotos, tipo y cantidad de hojas.</p></div></div>
+    <div class="fila"><h3>Sí / No</h3><div><p>Opciones con punto: ventana de foto en portada, diseño interior, forma de entrega.</p></div></div>
+    <div class="fila"><h3>Texto, notas y link</h3><div><p>Campos para títulos, nombres, dedicatorias y el link de fotos (Drive o WeTransfer). Cada uno con su etiqueta, ejemplo y nota.</p></div></div>
+    <div class="fila"><h3>Cantidad</h3><div><p>Contador con mínimo y máximo, o lista desplegable; muestra un aviso al llegar al tope. El tope por producto se define con el campo "max_qty" del producto.</p></div></div>
+    <div class="fila"><h3>Nota</h3><div><p>Una aclaración en itálica debajo de cualquier campo ("¿Más de 350 fotos? Escríbenos…").</p></div></div>
+  </div>
+  <p class="nota" style="margin-top:1rem">Además: la galería muestra las cuatro fotos del producto (la primera es la principal), el botón "Agregar al carrito" abre el carrito lateral, la barra flotante aparece al hacer scroll, y "También te puede gustar" toma productos de la misma colección.</p>
+
+  <h2 id="elementos">Los elementos de tu marca</h2>
+  <p>Estas son las piezas visuales que se repiten en todo el sitio. Tu Claude las conoce por nombre y las reutiliza cuando le pides algo nuevo, para que todo siga viéndose como On Paper.</p>
+  <div class="cuadricula">
+    <div class="tarjeta"><h4>Colores</h4><p>Crema <strong>#F5F5EF</strong> de fondo, olive <strong>#5F604E</strong> para el texto y los bordes fuertes, sage <strong>#B0B094</strong> como acento (títulos, botón relleno, cápsula activa), arena <strong>#E5E1D9</strong> para etiquetas, y el tema oscuro del hero y el pie de página.</p></div>
+    <div class="tarjeta"><h4>Tipografía</h4><p><strong>Source Serif Pro</strong> para títulos y textos, con la itálica como acento; <strong>Marcellus</strong> en mayúsculas espaciadas para etiquetas, menú y botones. Los títulos nunca van en mayúsculas.</p></div>
+    <div class="tarjeta"><h4>Botones y campos</h4><p>Cápsulas redondeadas. Botón principal relleno en sage; botón secundario con borde en olive que se invierte al pasar el cursor; campos de texto también en cápsula, con borde suave.</p></div>
+    <div class="tarjeta"><h4>Selectores</h4><p>Cápsulas de opciones, círculos de color con textura real y anillo al elegir, rectángulos de tamaño a escala, puntos para sí/no, contador de cantidad.</p></div>
+    <div class="tarjeta"><h4>Tarjetas</h4><p>Foto vertical (4:5) que se acerca despacio al pasar el cursor, nombre en serif y precio discreto. Igual en colecciones, búsqueda, menú y productos relacionados.</p></div>
+    <div class="tarjeta"><h4>Movimiento</h4><p>Todo entra con un fundido suave al hacer scroll; los paneles del menú y el carrito se abren con una máscara; entre páginas hay una cortina crema breve; el bookcase corre en cinta. Todo se apaga solo para quien pide menos movimiento en su dispositivo.</p></div>
+    <div class="tarjeta"><h4>Disco del cursor</h4><p>El círculo translúcido que sigue al cursor en la galería y el bookcase, con el texto de cada foto.</p></div>
+    <div class="tarjeta"><h4>Prosa</h4><p>Las páginas de texto (legales, artículos, políticas) tienen ancho de lectura cómodo, encabezados en serif, listas con marcador sage y tablas con líneas finas. Se formatean solas al escribir en el editor.</p></div>
   </div>
 
-  <div class="decision">
-    <h3>Después de los 30 días</h3>
-    <p>Lo decides al final del mes, con el reporte en la mano.</p>
-    <div class="opciones">
-      <div class="opcion"><span class="tag">Opción A</span><h3>Sigues sola con tu Claude</h3><p>Sin costo. Tú haces los cambios del día a día y nos escribes por cotización si algo grande se ofrece.</p></div>
-      <div class="opcion"><span class="tag">Opción B</span><h3>Servicio mensual de RAINVO</h3><p>Respaldos semanales, reporte mensual, soporte y seguridad, con un equipo asignado a On Paper. Lo platicamos cuando quieras.</p></div>
-    </div>
+  <h2 id="usar">Cómo usar tu tienda</h2>
+  <p>Cada receta abre con un clic. Las rutas son las del Admin de Shopify en español.</p>
+  <div class="recetas">
+    <details class="receta"><summary>Cambiar textos o fotos de cualquier sección</summary><div class="cuerpo"><p><span class="ruta">Tienda en línea → Temas → Personalizar</span> → clic en la sección → edita. Los títulos aceptan <em>cursiva</em> para el acento. Las fotos se eligen del selector (van a tus archivos). Al guardar se publica al instante.</p></div></details>
+    <details class="receta"><summary>Agregar, quitar u ordenar secciones del inicio</summary><div class="cuerpo"><p>En Personalizar, "Agregar sección" muestra el kit: Hero, About, Bookcase, Texto, Banner, Más vendidos, CTA, Galería, FAQ, Contacto. Arrastra para reordenar. Cada sección tiene su espacio arriba y abajo.</p></div></details>
+    <details class="receta"><summary>Crear una página (legal, FAQ, contacto, otra)</summary><div class="cuerpo"><p><span class="ruta">Tienda en línea → Páginas → Agregar página</span>. Escribe con encabezados y listas: el theme los formatea. En "Plantilla del tema" elige <strong>legal</strong> (prosa), <strong>faq</strong> (acordeón editable en Personalizar) o <strong>contact</strong> (formulario). Para que aparezca en un menú: <span class="ruta">Navegación</span>.</p></div></details>
+    <details class="receta"><summary>Qué muestra el menú de arriba</summary><div class="cuerpo"><p><span class="ruta">Personalizar → Encabezado</span>: la colección que lista los productos (vacío = todos los publicados), la colección de "Best sellers" (tres productos a la derecha), las colecciones del panel, la etiqueta y el link de "Otros", y la búsqueda (mostrarla u ocultarla, textos). Un producto solo aparece si está activo y disponible en el canal Tienda en línea.</p></div></details>
+    <details class="receta"><summary>Pie de página, WhatsApp, redes, horario y políticas</summary><div class="cuerpo"><p><span class="ruta">Personalizar → Pie de página</span>. Los dos menús son listas de Navegación. "Mostrar políticas" enlaza automáticamente lo que escribas en <span class="ruta">Configuración → Políticas</span>; también puedes usar páginas propias con la plantilla legal.</p></div></details>
+    <details class="receta"><summary>Fotos de un producto</summary><div class="cuerpo"><p><span class="ruta">Productos → el producto → Contenido multimedia</span>: cuatro fotos, la primera es la principal (se ve en tarjetas, menú y al elegir impresión). No hay que tocar nada más.</p></div></details>
+    <details class="receta"><summary>Prender o apagar un material</summary><div class="cuerpo"><p>En photobooks, libro de firmas, bookcase y memory box el material no cambia el precio: <span class="ruta">Personalizar → página del producto → bloque Material</span>, opciones separadas por coma; cada paleta de colores tiene su "Mostrar para" con el material que la activa. En cajas, carpetas y porta planos el material sí define el precio: eso se lo pides a tu Claude, que lo cambia en el archivo de precios.</p></div></details>
+    <details class="receta"><summary>Cambiar el precio de un producto</summary><div class="cuerpo"><p>Un precio puntual: <span class="ruta">Productos → el producto → Variantes</span>. Varios productos o toda una tabla: pídeselo a tu Claude, que mantiene el archivo maestro de precios y te prepara la importación. Importante: si cambiaste precios en el Admin, dile a tu Claude "sincroniza el archivo maestro con el Admin" antes de cualquier importación, para que no se pisen.</p></div></details>
+    <details class="receta"><summary>Agregar un color nuevo a una paleta</summary><div class="cuerpo"><p>Necesita tres cosas: el nombre exacto del taller, la foto del círculo (textura) y los mockups por tamaño. Se lo pasas a tu Claude con las fotos y él lo agrega a la paleta y te dice qué archivos subir a <span class="ruta">Contenido → Archivos</span> y con qué nombre. Los de Rosa metálico y Azul metálico ya están preparados: solo faltan sus mockups.</p></div></details>
+    <details class="receta"><summary>El certificado de regalo</summary><div class="cuerpo"><p>Es un producto normal con el bloque "Producto": quien regala elige qué regalar y el precio es el de esa opción. Se edita como cualquier producto (opciones en Personalizar, precios en Variantes). Se entrega en digital o en oficina, sin paquetería.</p></div></details>
+    <details class="receta"><summary>Idiomas y monedas</summary><div class="cuerpo"><p>Idiomas: <span class="ruta">Configuración → Idiomas</span>; productos y páginas se traducen con Translate &amp; Adapt. Monedas y países: <span class="ruta">Configuración → Mercados</span>; el selector del menú muestra exactamente lo que exista ahí (hoy: pesos, dólares y euros).</p></div></details>
+    <details class="receta"><summary>El checkout con tu marca</summary><div class="cuerpo"><p><span class="ruta">Configuración → Finalizar compra → Personalizar</span>: logo, colores y tipografía, sin cambiar de plan. El botón morado "Comprar con Shop" es de Shopify y no cambia de color; si prefieres no mostrarlo, en <span class="ruta">Personalizar → página de producto → Botón comprar ahora</span> lo apagas y todo sigue funcionando desde el carrito.</p></div></details>
+    <details class="receta"><summary>Probar una compra sin cobrar</summary><div class="cuerpo"><p><span class="ruta">Configuración → Pagos → Shopify Payments → Administrar → Modo de prueba</span>. Compra con la tarjeta <span class="tarjetaprueba">4242 4242 4242 4242</span>, cualquier fecha futura y CVV. Revisa que el pedido llegue con toda la personalización y que recibas el correo. Al terminar, apaga el modo de prueba.</p></div></details>
+    <details class="receta"><summary>Límite de cantidad por pedido</summary><div class="cuerpo"><p>En el producto, el campo <strong>max_qty</strong> (Metacampos) define el máximo; la página lo respeta y avisa al llegar.</p></div></details>
+    <details class="receta"><summary>Abrir o cerrar la tienda al público</summary><div class="cuerpo"><p><span class="ruta">Tienda en línea → Preferencias → Protección con contraseña</span>. Si nos avisas el día, hacemos un respaldo justo antes.</p></div></details>
   </div>
 
-  <h2>Cómo se conectan las piezas</h2>
-  <p>Hay una sola copia del diseño y todos trabajan sobre ella. Lo que guardas en el editor se guarda también en el repositorio, y lo que tu Claude cambia en el repositorio se publica solo en la tienda.</p>
-  <div class="flujo" role="img" aria-label="El editor de Shopify y tu Claude escriben en el repositorio; el repositorio publica en la tienda.">
-    <div class="nodo"><strong>Tu editor de Shopify</strong><span>textos, fotos, precios, menús</span></div>
-    <div class="enlace"><svg width="44" height="18" viewBox="0 0 44 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 6h40M36 2l6 4-6 4"/><path d="M42 12H2M8 8l-6 4 6 4"/></svg>se sincronizan</div>
-    <div class="nodo"><strong>El repositorio</strong><span>la copia maestra del diseño</span></div>
-    <div class="enlace"><svg width="44" height="18" viewBox="0 0 44 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M42 9H2M8 5l-6 4 6 4"/></svg>escribe aquí</div>
-    <div class="nodo"><strong>Tu Claude</strong><span>diseño, funciones, colores nuevos</span></div>
-  </div>
-  <div class="flujo-abajo">
-    <div></div>
-    <div class="enlace"><svg width="18" height="40" viewBox="0 0 18 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 2v36M5 32l4 6 4-6"/></svg>se publica solo</div>
-    <div></div>
-  </div>
-  <div class="flujo-abajo">
-    <div></div>
-    <div class="nodo nodo--tienda"><strong>Tu tienda en línea</strong><span>onpaper.mx</span></div>
-    <div></div>
-  </div>
-  <p class="nota-flujo">Por eso las dos reglas de oro: nunca dos personas tocando lo mismo al mismo tiempo, y todo cambio de diseño se revisa antes de publicarse.</p>
-
-  <h2>Así vas a trabajar de ahora en adelante</h2>
-  <div class="roles">
-    <div class="rol">
-      <span class="tag">Tú, en el editor</span>
-      <h3>Contenido del día a día</h3>
-      <ul>
-        <li>Textos y fotos de cualquier sección</li>
-        <li>Orden de las secciones del inicio</li>
-        <li>Materiales y opciones de un producto</li>
-        <li>Menús, políticas, redes, horario</li>
-        <li>Fotos de cada producto</li>
-      </ul>
-    </div>
-    <div class="rol">
-      <span class="tag">Tu Claude, en el repositorio</span>
-      <h3>Diseño y funciones</h3>
-      <ul>
-        <li>Una sección o un bloque nuevo</li>
-        <li>Precios de varios productos y su archivo maestro</li>
-        <li>Agregar un color o sus fotos</li>
-        <li>Animaciones y ajustes de diseño</li>
-        <li>Corregir algo que no funciona</li>
-      </ul>
-    </div>
-    <div class="rol">
-      <span class="tag">RAINVO</span>
-      <h3>Respaldo hasta el 2 de octubre</h3>
-      <ul>
-        <li>Soporte por errores del diseño</li>
-        <li>Respaldo semanal y reporte al cierre</li>
-        <li>Transferencia del repositorio si la eliges</li>
-        <li>Después: tú sola o servicio mensual</li>
-      </ul>
-    </div>
-  </div>
-
-  <h2>Cómo pedirle algo a tu Claude</h2>
-  <p>Le hablas en español, como a una persona del equipo. Él ya tiene una guía dentro del repositorio con las reglas de tu tienda, y siempre te mostrará el resultado en una página como esta, con el antes y el después, para que apruebes viendo, no imaginando.</p>
+  <h2 id="claude">Cómo trabajar con tu Claude</h2>
+  <p>Tu Claude tiene dentro del repositorio una guía con las reglas de la tienda, la guía de estilo, el catálogo de componentes y las recetas de esta página. Cuando le pides algo, revisa esas reglas, hace el cambio y te muestra el resultado en una página como esta, con el antes y el después, para que apruebes viendo.</p>
   <p>Tu primer mensaje en cada sesión:</p>
-  <div class="cita">Lee CLAUDE.md y docs/handoff.md. Luego trae lo último del repositorio y muéstrame en una página el estado de la tienda en lenguaje sencillo. Después te doy la tarea.</div>
+  <div class="cita">Lee CLAUDE.md y docs/handoff.md. Luego trae lo último del repositorio y muéstrame en una página cómo está la tienda. Después te doy la tarea.</div>
   <div class="dos">
     <div>
-      <h3>Ejemplos de lo que sí funciona</h3>
+      <h3>Lo que le puedes pedir</h3>
       <ul>
-        <li>"Deja solo pesos, dólares y euros en Mercados."</li>
-        <li>"Sincroniza el archivo maestro de precios con el Admin."</li>
-        <li>"Agrega el color Guinda a la paleta de telas; aquí están sus fotos."</li>
-        <li>"En el celular el menú se ve cortado, aquí va una captura."</li>
         <li>"Quiero una sección de testimonios debajo de los más vendidos."</li>
+        <li>"Agrega el color Guinda a la paleta de telas; aquí están sus fotos."</li>
+        <li>"Cambia los precios del Libro de Firmas según esta tabla."</li>
+        <li>"Sincroniza el archivo maestro de precios con el Admin."</li>
+        <li>"En el celular el menú se ve cortado, aquí va una captura."</li>
+        <li>"Haz que el material se vea más brilloso en las fotos de vinipiel."</li>
       </ul>
     </div>
     <div>
-      <h3>Lo que no hay que pedirle</h3>
+      <h3>Lo que conviene evitar</h3>
       <ul>
-        <li>Importar el archivo de precios sin sincronizarlo antes: borraría tus precios del Admin.</li>
         <li>Poner un precio "en la página" sin cambiarlo en las variantes: el cliente pagaría otra cosa.</li>
-        <li>Cambiar el nombre de un color o de un tamaño "para que se vea mejor": el taller produce con esos nombres.</li>
-        <li>Subir fotos pesadas al repositorio: van a Files, dentro de Shopify.</li>
-        <li>Instalar apps de diseño: todo se construye dentro de la tienda.</li>
+        <li>Renombrar colores o tamaños "para que se vean mejor": el taller produce con esos nombres.</li>
+        <li>Importar el archivo de precios sin sincronizarlo antes con el Admin.</li>
+        <li>Subir fotos pesadas al repositorio: van a Archivos, dentro de Shopify.</li>
+        <li>Instalar apps de diseño: todo se construye dentro de tu tienda.</li>
       </ul>
     </div>
   </div>
 
-  <p class="contacto">Cualquier duda durante el soporte: Gabriel, RAINVO · dev@rainvo.io · WhatsApp. Esta página se actualiza en el mismo enlace conforme avancemos.</p>
+  <h2 id="trabajamos">Cómo lo trabajamos</h2>
+  <ol class="proceso">
+    <li><strong>Del diseño al kit.</strong> Tomamos el diseño de Adobe XD y lo convertimos en un kit de secciones reutilizables con tu marca, para componer cualquier página sin apps.</li>
+    <li><strong>Precios reales.</strong> Pasamos el catálogo a variantes de Shopify con un archivo maestro que genera las 245 combinaciones y valida que todo cuadre.</li>
+    <li><strong>Colores y fotos.</strong> Procesamos las paletas del taller (71 texturas) y los 264 mockups, con la convención de nombres que hace que la foto cambie sola con el color.</li>
+    <li><strong>Publicación continua.</strong> Conectamos el repositorio a tu tienda: cada cambio se publica solo y cada cambio que haces en el editor se guarda en el repositorio.</li>
+    <li><strong>Revisión automática.</strong> Cada cambio pasa por una revisión técnica antes de publicarse (un "theme check" que detecta errores) y un registro de todo lo que cambia.</li>
+    <li><strong>Documentación para tu Claude.</strong> Guía de estilo, catálogo de componentes, elementos, recetas y reglas, dentro del propio repositorio, para que cualquier Claude pueda continuar el trabajo con tu marca.</li>
+  </ol>
+
+  <h2 id="soporte">Soporte</h2>
+  <p>Del 2 de septiembre al 2 de octubre de 2026: soporte sin costo por cualquier error del diseño, un respaldo semanal de la tienda y un reporte al cierre con todo lo que cambió. Después, puedes seguir sola con tu Claude o contratar el servicio mensual de RAINVO (respaldos, reporte, soporte y seguridad). Si algo se atora: Gabriel por WhatsApp o en dev@rainvo.io.</p>
 
   <details class="tecnico">
     <summary>Detalles técnicos (para RAINVO y tu Claude)</summary>
     <ul>
-      <li>Tienda: <code>on-paper-t6vfjrak.myshopify.com</code> → dominio <code>onpaper.mx</code> conectado. Dev store viejo <code>onpaper-fafjay65</code>: desconectar la integración GitHub y abandonar.</li>
-      <li>Repositorio: <code>github.com/rainvodev/onpaper-shopify</code>, rama <code>main</code> = producción; <code>archivo-imagenes</code> = respaldo de imágenes. Ramas <code>claude/*</code>: borrar.</li>
-      <li>Estado al 2-sep-2026: theme check 0 errores (9 warnings de fuentes aceptados); CI verde tras completar <code>locales/en.json</code>.</li>
+      <li>Tienda: <code>on-paper-t6vfjrak.myshopify.com</code> → <code>onpaper.mx</code>. Repositorio: <code>github.com/rainvodev/onpaper-shopify</code>, rama <code>main</code> = producción; <code>archivo-imagenes</code> = respaldo de imágenes.</li>
+      <li>Theme: Skeleton + Lumos; kit <code>sections/op-*.liquid</code>; producto por bloques en <code>sections/product.liquid</code> + <code>templates/product.&lt;handle&gt;.json</code>; marca en <code>assets/brand.css</code>.</li>
+      <li>Precios: <code>_import/gen_variants_csv.py</code> → <code>_import/products-variants.csv</code>. El Admin manda: sincronizar antes de importar (receta en <code>docs/usos.md</code>).</li>
+      <li>Imágenes por color: Files <code>mockup-&lt;material&gt;-&lt;tamaño&gt;-&lt;color&gt;.webp</code> (tamaño en convención ALTO×ANCHO del taller, traducido en <code>op-product.js</code>); texturas <code>assets/swatch-*.webp</code>.</li>
       <li>Documentación: <code>CLAUDE.md</code> · <code>docs/handoff.md</code> · <code>docs/reglas.md</code> · <code>docs/styleguide.md</code> · <code>docs/componentes.md</code> · <code>docs/elementos.md</code> · <code>docs/usos.md</code> · <code>docs/migracion.md</code>.</li>
-      <li>Precios: fuente <code>_import/gen_variants_csv.py</code> → <code>products-variants.csv</code>. Si Anaissa editó precios en el Admin, sincronizar el generador desde una exportación de productos antes de cualquier import con overwrite (receta en <code>docs/usos.md</code>).</li>
-      <li>Certificado: <code>templates/product.giftcard.json</code>, bloque pills "Producto" con opción de variante homónima (precio por opción confirmado en la llamada).</li>
-      <li>Soporte RAINVO: 2-sep → 2-oct-2026; respaldo semanal = tag <code>respaldo/AAAA-MM-DD</code> en <code>main</code>; reporte al cierre.</li>
+      <li>Checks: theme check 0 errores (9 warnings de fuentes aceptados); CI en cada push. Soporte 2-sep → 2-oct-2026; respaldo semanal = tag <code>respaldo/AAAA-MM-DD</code>.</li>
     </ul>
   </details>
 </main>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var botones = document.querySelectorAll('.tema button');
+    function actual() {
+      var t = root.getAttribute('data-theme');
+      if (t === 'light' || t === 'dark') return t;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    function pintar() {
+      var t = actual();
+      botones.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-tema') === t ? 'true' : 'false'); });
+    }
+    function aplicar(t) {
+      root.setAttribute('data-theme', t);
+      try { localStorage.setItem('op-tema', t); } catch (e) {}
+      pintar();
+    }
+    try {
+      var guardado = localStorage.getItem('op-tema');
+      if (guardado === 'light' || guardado === 'dark') root.setAttribute('data-theme', guardado);
+    } catch (e) {}
+    botones.forEach(function (b) { b.addEventListener('click', function () { aplicar(b.getAttribute('data-tema')); }); });
+    pintar();
+  })();
+</script>

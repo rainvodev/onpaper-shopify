@@ -30,11 +30,13 @@ HTML renderizada en su misma ventana** (herramienta de Artifacts / vista previa 
 markdown, listas de archivos o diffs. Regla práctica: si ella tiene que "imaginar" cómo queda algo, no
 la has terminado de presentar.
 
-- **Qué lleva la página:** un resumen de 3 líneas en lenguaje llano; qué cambió o qué propones con
+- **Qué lleva la página:** un resumen de 3 líneas en lenguaje llano; qué se hizo o qué propones con
   **antes/después** (capturas, mockups o el componente mismo reproducido con los estilos del theme);
-  qué tiene que hacer ella (pasos con la ruta exacta del Admin: "Productos → Libro de Firmas →
-  Variantes"); qué decisión le toca y sus opciones; y al final, plegado, "Detalles técnicos" (archivos,
-  commits, checks) para RAINVO.
+  cómo funciona y dónde se edita (rutas del Admin: "Productos → Libro de Firmas → Variantes"); si una
+  decisión es genuinamente suya, sus opciones; y al final, plegado, "Detalles técnicos" (archivos,
+  commits, checks) para RAINVO. **Es un archivo de ayuda, no una lista de tareas para ella**: no le
+  hagas listas de "pendientes de ti" ni semáforos de lo que le falta; ella conoce su tienda. La guía de
+  referencia base es `docs/plantillas/ejemplo-entrega-anaissa.html` ("Guía de tu tienda").
 - **Cómo se ve:** usa la plantilla `docs/plantillas/reporte-anaissa.html` (marca de On Paper: crema,
   olive, serif); `docs/plantillas/ejemplo-entrega-anaissa.html` es una página real completa como modelo. Español de México, tuteo, sin jerga: "el menú de arriba", no "header-group.json".
 - **Una página por tema, actualizada.** Republica a la misma URL en cada avance en vez de crear una

@@ -136,10 +136,11 @@ servicio mensual de RAINVO (respaldos, reporte, soporte y seguridad) si lo contr
 
 ## 3. Cómo trabajar con Claude (para Anaissa)
 
-- **Regla de oro para su Claude: todo se le muestra en HTML, en su misma ventana.** Cada diagnóstico,
-  propuesta, cambio o decisión llega como una página renderizada (Artifacts) con resumen llano,
-  antes/después, pasos exactos del Admin y opciones; los detalles técnicos van plegados al final.
-  Plantilla: `docs/plantillas/reporte-anaissa.html`. Está como regla obligatoria en `CLAUDE.md`.
+- **Regla de oro para su Claude: todo se le muestra en HTML, en su misma ventana.** Cada cambio o
+  propuesta llega como una página renderizada (Artifacts) con resumen llano, antes/después, cómo
+  funciona y dónde se edita; los detalles técnicos van plegados al final. Son archivos de ayuda: nada de
+  listas de pendientes para ella. Plantilla: `docs/plantillas/reporte-anaissa.html`; guía de referencia
+  completa: `docs/plantillas/ejemplo-entrega-anaissa.html`. Está como regla obligatoria en `CLAUDE.md`.
 - **Contenido** (textos, fotos, orden de secciones, precios de una variante puntual): editor de Shopify y
   Admin. No hace falta Claude.
 - **Código** (una sección nueva, un bloque nuevo, un color, una animación, un bug): pídeselo a Claude

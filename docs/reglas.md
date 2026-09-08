@@ -127,5 +127,6 @@ detente y dilo antes de hacerlo.
   líneas y el link.
 - **Por qué:** ella no es técnica; un diff o una lista de archivos no le permite decidir ni aprobar.
   Ver el botón, la sección o el mockup real evita malentendidos y retrabajo.
-- **Cómo:** resumen llano → antes/después → pasos exactos del Admin → decisión y opciones → detalles
-  técnicos plegados. Una página por tema, republicada en la misma URL. Detalle en `CLAUDE.md`.
+- **Cómo:** resumen llano → qué se hizo, antes/después → cómo funciona y dónde se edita (rutas del
+  Admin) → opciones solo si la decisión es suya → detalles técnicos plegados. Es ayuda, no una lista de
+  tareas para ella. Una página por tema, republicada en la misma URL. Detalle en `CLAUDE.md`.
