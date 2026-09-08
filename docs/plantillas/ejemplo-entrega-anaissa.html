@@ -1,56 +1,58 @@
 <title>Guía de tu tienda On Paper</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400;1,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400;1,600&display=swap">
 <style>
   :root {
     --fondo: #f5f5ef; --superficie: #ffffff; --tinta: #5f604e; --sage: #b0b094; --arena: #e5e1d9;
-    --linea: rgba(95, 96, 78, 0.16); --suave: rgba(95, 96, 78, 0.72);
+    --linea: rgba(95, 96, 78, 0.16); --suave: rgba(95, 96, 78, 0.8);
     --serif: "Source Serif Pro", Georgia, "Times New Roman", serif;
+    --sans: "Source Sans 3", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --label: "Marcellus", Georgia, "Times New Roman", serif;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --fondo: #2a2a24; --superficie: #3a3a31; --tinta: #f5f5ef; --sage: #b0b094; --arena: #4a4a3f;
-      --linea: rgba(245, 245, 239, 0.22); --suave: rgba(245, 245, 239, 0.72);
+      --linea: rgba(245, 245, 239, 0.22); --suave: rgba(245, 245, 239, 0.8);
     }
   }
   :root[data-theme="dark"] {
     --fondo: #2a2a24; --superficie: #3a3a31; --tinta: #f5f5ef; --sage: #b0b094; --arena: #4a4a3f;
-    --linea: rgba(245, 245, 239, 0.22); --suave: rgba(245, 245, 239, 0.72);
+    --linea: rgba(245, 245, 239, 0.22); --suave: rgba(245, 245, 239, 0.8);
   }
 
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--fondo); color: var(--tinta); font-family: var(--serif); font-size: 1.02rem; line-height: 1.65; }
+  body { margin: 0; background: var(--fondo); color: var(--tinta); font-family: var(--sans); font-size: 1.08rem; line-height: 1.6; }
   .pagina { max-width: 62rem; margin: 0 auto; padding: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 4vw, 2.5rem) 5rem; }
   p { margin: 0 0 1em; max-width: 68ch; }
   a { color: inherit; text-underline-offset: .2em; }
   a:focus-visible, summary:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
 
   .cabecera { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: .9rem; }
-  .eyebrow { font-family: var(--label); text-transform: uppercase; letter-spacing: .14em; font-size: .72rem; color: var(--suave); margin: 0; }
+  .eyebrow { font-family: var(--label); text-transform: uppercase; letter-spacing: .14em; font-size: .78rem; color: var(--suave); margin: 0; }
   .tema { display: inline-flex; align-items: center; gap: .15rem; padding: .2rem; border: 1px solid var(--linea); border-radius: 2rem; background: var(--superficie); }
-  .tema button { display: inline-flex; align-items: center; gap: .4rem; font-family: var(--label); text-transform: uppercase; letter-spacing: .1em; font-size: .62rem; color: var(--suave); background: transparent; border: 0; border-radius: 2rem; padding: .45rem .8rem; cursor: pointer; line-height: 1; }
+  .tema button { display: inline-flex; align-items: center; gap: .4rem; font-family: var(--sans); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; color: var(--suave); background: transparent; border: 0; border-radius: 2rem; padding: .45rem .8rem; cursor: pointer; line-height: 1; }
   .tema button[aria-pressed="true"] { background: var(--sage); color: #fff; }
   .tema button:focus-visible { outline: 2px solid var(--sage); outline-offset: 2px; }
   .tema svg { width: 13px; height: 13px; flex: none; }
   h1 { font-weight: 400; font-style: italic; font-size: clamp(1.9rem, 1.2rem + 2.4vw, 3rem); line-height: 1.12; color: var(--tinta); margin: 0 0 .6rem; text-wrap: balance; max-width: 22ch; }
   h1 em { color: var(--sage); font-style: italic; }
   .fecha { font-size: .92rem; color: var(--suave); margin: 0 0 2rem; }
-  .intro { font-size: 1.12rem; max-width: 62ch; margin-bottom: .5rem; }
-  h2 { font-family: var(--label); text-transform: uppercase; letter-spacing: .12em; font-size: .78rem; font-weight: 400; margin: 3.25rem 0 1.1rem; padding-bottom: .6rem; border-bottom: 1px solid var(--linea); }
-  h3 { font-weight: 400; font-size: 1.15rem; margin: 0 0 .35rem; line-height: 1.3; }
-  h4 { font-family: var(--label); text-transform: uppercase; letter-spacing: .1em; font-size: .68rem; font-weight: 400; color: var(--sage); margin: 0 0 .4rem; }
+  .intro { font-size: 1.15rem; max-width: 62ch; margin-bottom: .5rem; }
+  h2 { font-family: var(--serif); font-weight: 400; font-size: 1.55rem; line-height: 1.25; margin: 3.25rem 0 1.1rem; padding-bottom: .6rem; border-bottom: 1px solid var(--linea); }
+  h1, h3 { font-family: var(--serif); }
+  h3 { font-weight: 400; font-size: 1.2rem; margin: 0 0 .35rem; line-height: 1.3; }
+  h4 { font-family: var(--sans); text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; font-weight: 600; color: var(--sage); margin: 0 0 .4rem; }
 
   /* Índice */
-  nav.indice ol { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: .35rem 1.5rem; font-size: .95rem; }
+  nav.indice ol { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: .35rem 1.5rem; font-size: 1rem; }
   nav.indice a { text-decoration: none; border-bottom: 1px solid var(--linea); }
   nav.indice a:hover { border-bottom-color: var(--tinta); }
 
   /* Tarjetas de páginas / componentes */
   .cuadricula { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem; }
   .tarjeta { background: var(--superficie); border-radius: 1rem; padding: 1.25rem 1.5rem; }
-  .tarjeta p { margin: 0; font-size: .95rem; max-width: none; }
+  .tarjeta p { margin: 0; font-size: 1rem; max-width: none; }
   .tarjeta p + p { margin-top: .5rem; }
   .donde { display: block; margin-top: .6rem; font-size: .85rem; color: var(--suave); }
 
@@ -59,51 +61,51 @@
   .fila { display: grid; grid-template-columns: 12rem 1fr; gap: 1rem; padding: .95rem 1.5rem; border-top: 1px solid var(--linea); align-items: start; }
   .fila:first-child { border-top: 0; }
   .fila > div { min-width: 0; }
-  .fila h3 { font-size: 1rem; margin: 0; }
-  .fila p { margin: 0; font-size: .93rem; color: var(--suave); max-width: none; }
+  .fila h3 { font-size: 1.1rem; margin: 0; }
+  .fila p { margin: 0; font-size: 1rem; color: var(--suave); max-width: none; }
 
   /* Mecánica: pasos en línea */
   .mecanica { display: grid; gap: 1rem; }
   .mecanica .tarjeta h3 { margin-bottom: .5rem; }
-  .ejemplo { display: inline-block; background: var(--arena); border-radius: .5rem; padding: .35rem .7rem; font-size: .9rem; margin: .35rem .35rem 0 0; }
+  .ejemplo { display: inline-block; background: var(--arena); border-radius: .5rem; padding: .35rem .7rem; font-size: .95rem; margin: .35rem .35rem 0 0; }
 
   /* Recetas */
   .recetas { display: grid; gap: .75rem; }
   details.receta { background: var(--superficie); border-radius: 1rem; padding: 0 1.5rem; }
-  details.receta summary { cursor: pointer; padding: 1rem 0; font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+  details.receta summary { cursor: pointer; padding: 1rem 0; font-size: 1.08rem; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
   details.receta summary::-webkit-details-marker { display: none; }
   details.receta summary::after { content: "↓"; font-size: .85rem; color: var(--suave); flex: none; }
   details.receta[open] summary::after { content: "↑"; }
-  details.receta .cuerpo { padding: 0 0 1.1rem; font-size: .95rem; }
+  details.receta .cuerpo { padding: 0 0 1.1rem; font-size: 1rem; }
   details.receta .cuerpo p { max-width: none; margin-bottom: .6em; }
   details.receta .cuerpo p:last-child { margin-bottom: 0; }
-  .ruta { font-family: var(--label); font-size: .74rem; letter-spacing: .04em; background: var(--arena); color: var(--tinta); padding: .2em .6em; border-radius: 2rem; line-height: 2; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .ruta { font-family: var(--sans); font-weight: 600; font-size: .86rem; letter-spacing: .01em; background: var(--arena); color: var(--tinta); padding: .2em .6em; border-radius: 2rem; line-height: 2; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
   .tarjetaprueba { font-variant-numeric: tabular-nums; letter-spacing: .06em; }
 
   /* Diagrama */
   .flujo { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: .75rem; margin: 1.25rem 0 .75rem; }
   .nodo { background: var(--superficie); border-radius: 1rem; padding: 1rem 1.1rem; text-align: center; }
   .nodo strong { display: block; font-weight: 400; font-size: 1.05rem; }
-  .nodo span { display: block; font-size: .82rem; color: var(--suave); margin-top: .2rem; }
+  .nodo span { display: block; font-size: .9rem; color: var(--suave); margin-top: .2rem; }
   .nodo--tienda { border: 1px solid var(--sage); }
-  .enlace { font-family: var(--label); font-size: .64rem; text-transform: uppercase; letter-spacing: .1em; color: var(--suave); text-align: center; line-height: 1.4; }
+  .enlace { font-family: var(--sans); font-weight: 600; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--suave); text-align: center; line-height: 1.4; }
   .enlace svg { display: block; margin: 0 auto .3rem; }
   .flujo-abajo { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: .75rem; max-width: 40rem; margin: 0 auto 1.25rem; }
-  .nota { font-size: .92rem; color: var(--suave); max-width: 68ch; }
+  .nota { font-size: .98rem; color: var(--suave); max-width: 68ch; }
 
-  .cita { background: var(--superficie); border-left: 3px solid var(--sage); border-radius: 0 1rem 1rem 0; padding: 1rem 1.4rem; font-style: italic; margin: 1rem 0 1.25rem; max-width: 68ch; }
+  .cita { background: var(--superficie); border-left: 3px solid var(--sage); border-radius: 0 1rem 1rem 0; padding: 1rem 1.4rem; font-family: var(--serif); font-style: italic; font-size: 1.08rem; margin: 1rem 0 1.25rem; max-width: 68ch; }
   .dos { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem; }
   .dos h3 { font-size: 1.05rem; }
-  .dos ul { margin: 0; padding-left: 1.1rem; font-size: .95rem; }
+  .dos ul { margin: 0; padding-left: 1.1rem; font-size: 1rem; }
   .dos li { margin-bottom: .35rem; }
 
   ol.proceso { padding-left: 1.3rem; margin: 0; max-width: 68ch; }
   ol.proceso li { margin-bottom: .5rem; }
   ol.proceso li::marker { color: var(--sage); font-family: var(--label); }
 
-  .contacto { font-size: .95rem; color: var(--suave); margin-top: 2.5rem; }
-  details.tecnico { margin-top: 3rem; border-top: 1px solid var(--linea); padding-top: 1rem; font-size: .9rem; color: var(--suave); }
-  details.tecnico summary { cursor: pointer; font-family: var(--label); text-transform: uppercase; letter-spacing: .1em; font-size: .72rem; color: var(--tinta); }
+  .contacto { font-size: 1rem; color: var(--suave); margin-top: 2.5rem; }
+  details.tecnico { margin-top: 3rem; border-top: 1px solid var(--linea); padding-top: 1rem; font-size: .95rem; color: var(--suave); }
+  details.tecnico summary { cursor: pointer; font-family: var(--sans); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; color: var(--tinta); }
   details.tecnico ul { padding-left: 1.1rem; }
   details.tecnico code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .84em; background: var(--superficie); padding: .1em .4em; border-radius: .3em; color: var(--tinta); }
 
