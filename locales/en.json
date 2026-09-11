@@ -644,7 +644,7 @@
     "use_at_checkout": "Use this gift card at checkout"
   },
   "localization": {
-    "country_label": "Country / Currency",
+    "country_label": "Currency",
     "language_label": "Language"
   },
   "password": {
