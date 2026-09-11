@@ -623,7 +623,8 @@
     "checkout": "Checkout",
     "title": "Cart",
     "update": "Update",
-    "remove": "Remove"
+    "remove": "Remove",
+    "add": "Add to cart"
   },
   "customers": {
     "login": {
