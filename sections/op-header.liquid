@@ -36,7 +36,7 @@
           {%- form 'localization', class: 'op-loc' -%}
             {%- assign op_seen = '' -%}<select name="country_code" class="op-loc_select" aria-label="Moneda" onchange="this.form.submit()">
               {%- for country in localization.available_countries -%}
-                <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>{{ country.name }} ({{ country.currency.iso_code }})</option>              {%- endfor -%}
+                {%- assign op_cur = country.currency.iso_code -%}{%- unless op_seen contains op_cur -%}<option value="{{ country.iso_code }}" {% if op_cur == localization.country.currency.iso_code %}selected{% endif %}>{{ op_cur }}</option>{%- assign op_seen = op_seen | append: op_cur | append: ',' -%}{%- endunless -%}              {%- endfor -%}
             </select>
           {%- endform -%}
         {%- endif -%}
