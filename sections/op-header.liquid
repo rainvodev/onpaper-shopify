@@ -34,7 +34,7 @@
       <div class="op-header_actions">
         {%- if localization.available_countries.size > 1 -%}
           {%- form 'localization', class: 'op-loc' -%}
-            <select name="country_code" class="op-loc_select" aria-label="País / moneda" onchange="this.form.submit()">
+            {%- assign op_seen = '' -%}<select name="country_code" class="op-loc_select" aria-label="Moneda" onchange="this.form.submit()">
               {%- for country in localization.available_countries -%}
                 <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>{{ country.name }} ({{ country.currency.iso_code }})</option>              {%- endfor -%}
             </select>
@@ -226,7 +226,7 @@
             {%- form 'localization', class: 'op-loc op-loc--drawer' -%}
               <label class="op-header_locrow">
                 <span>{{ 'localization.country_label' | t | default: 'País / moneda' }}</span>
-                <select name="country_code" class="op-loc_select" aria-label="País / moneda" onchange="this.form.submit()">
+                {%- assign op_seen = '' -%}<select name="country_code" class="op-loc_select" aria-label="Moneda" onchange="this.form.submit()">
                   {%- for country in localization.available_countries -%}
                     <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>{{ country.name }} · {{ country.currency.iso_code }}</option>
                   {%- endfor -%}
