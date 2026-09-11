@@ -25,7 +25,7 @@
   "cart": {
     "checkout": "Finalizar compra",
     "title": "Carrito",
-    "update": "Actualizar",
+    "add": "Agregar al carrito", "update": "Actualizar",
     "remove": "Quitar"
   },
   "customers": {
