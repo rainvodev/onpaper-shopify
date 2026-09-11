@@ -226,7 +226,7 @@
           {%- endif -%}
 
           <p class="op-product_add-error" data-op-add-error hidden></p>
-          <button type="submit" name="add" class="op-product_add">{{ section.settings.add_label | default: 'Agregar al carrito' }}</button>
+          <button type="submit" name="add" class="op-product_add">{%- if section.settings.add_label != blank -%}{{ section.settings.add_label }}{%- else -%}{{ 'cart.add' | t }}{%- endif -%}</button>
           {%- if section.settings.show_buy_now -%}{{ form | payment_button }}{%- endif -%}
         {%- endform -%}
       </div>
@@ -260,7 +260,7 @@
         <span class="op-product_sticky-title">{{ product.title }}</span>
         <span class="op-product_sticky-price" data-op-price-amount>{{ product.price | money }}</span>
       </div>
-      <button type="submit" name="add" form="opProductForm" class="op-product_sticky-add">{{ section.settings.add_label | default: 'Agregar al carrito' }}</button>
+      <button type="submit" name="add" form="opProductForm" class="op-product_sticky-add">{%- if section.settings.add_label != blank -%}{{ section.settings.add_label }}{%- else -%}{{ 'cart.add' | t }}{%- endif -%}</button>
     </div>
   </div>
 </section>
