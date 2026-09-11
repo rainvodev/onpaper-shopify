@@ -47,7 +47,7 @@
     "use_at_checkout": "Usa esta tarjeta de regalo al finalizar tu compra"
   },
   "localization": {
-    "country_label": "País / moneda",
+    "country_label": "Moneda",
     "language_label": "Idioma"
   },
   "password": {
