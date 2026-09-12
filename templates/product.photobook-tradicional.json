@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -26,7 +35,7 @@
       },
       "block_order": ["heading", "details", "shipping", "material", "size", "color_tela", "color_vinipiel", "hotstamping", "ventana", "interior", "titulo", "fotos", "fotos_nota", "link"],
       "settings": {
-        "personalize_heading": "Personaliza tu Photobook",
+        "add_label": "Agregar al carrito", "personalize_heading": "Personaliza tu Photobook",
         "qty_style": "dropdown",
         "qty_label": "Cantidad",
         "qty_note": "A partir de 6 libros o más, se requiere cotización personalizada.",
