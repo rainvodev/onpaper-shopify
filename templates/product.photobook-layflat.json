@@ -146,7 +146,7 @@
         "padding_bottom": 96,
         "back_label": "← Productos",
         "back_link": "",
-        "add_label": "Agregar al carrito", "personalize_heading": "Personaliza tu Photobook",
+        "personalize_heading": "Personaliza tu Photobook",
         "show_qty": true,
         "qty_label": "Cantidad",
         "qty_style": "dropdown",
