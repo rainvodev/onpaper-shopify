@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -22,7 +31,7 @@
       },
       "block_order": ["heading", "details", "shipping", "material", "size", "color_tela", "color_vinipiel", "hotstamping", "titulo", "fotos"],
       "settings": {
-        "personalize_heading": "Personaliza tu Memory Box",
+        "add_label": "Agregar al carrito", "personalize_heading": "Personaliza tu Memory Box",
         "qty_style": "dropdown",
         "qty_label": "Cantidad",
         "show_buy_now": true,
