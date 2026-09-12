@@ -33,7 +33,7 @@
         "fotos_nota": { "type": "note", "settings": { "text": "¿Más de 350 fotografías? Escríbenos y te hacemos una cotización personalizada." }},
         "link": { "type": "url", "settings": { "label": "Link de fotos (opcional)", "placeholder": "Ingresa el URL", "note": "*En caso de agregar fotos, solo se aceptan links en Google Drive o WeTransfer." }}
       },
-      "block_order": ["heading", "details", "shipping", "material", "size", "color_tela", "color_vinipiel", "hotstamping", "ventana", "interior", "titulo", "fotos", "fotos_nota", "link"],
+      "block_order": ["heading", "details", "shipping", "material", "size", "color_tela", "color_vinipiel", "hotstamping", "ventana", "interior", "titulo", "fotos", "link"],
       "settings": {
         "add_label": "Agregar al carrito", "personalize_heading": "Personaliza tu Photobook",
         "qty_style": "dropdown",
