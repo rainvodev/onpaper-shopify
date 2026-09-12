@@ -19,7 +19,7 @@
   endcase
   assign items = data | split: ','
 -%}
-<div class="op-product_sizes" data-op-picker data-prop="{{ property | escape }}">
+{%- assign maxd = 0 -%}{%- for it2 in items -%}{%- assign pp = it2 | split: 'x' -%}{%- assign wv = pp[0] | times: 1.0 -%}{%- assign hv = pp[1] | times: 1.0 -%}{%- if wv > maxd -%}{%- assign maxd = wv -%}{%- endif -%}{%- if hv > maxd -%}{%- assign maxd = hv -%}{%- endif -%}{%- endfor -%}<div class="op-product_sizes" data-op-picker data-prop="{{ property | escape }}">
   <input type="hidden" name="properties[{{ property }}]" value="{{ default | default: items.first }}">
   {%- for it in items -%}
     {%- assign p = it | split: 'x' -%}
