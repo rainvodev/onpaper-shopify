@@ -80,7 +80,7 @@
       }
     }
 
-    form.addEventListener('change', update);
+    function opFilter() { options.forEach(function (nm, ix) { var el = form.querySelector('[name="properties[' + nm + ']"]'); if (!el || el.tagName !== 'SELECT') return; Array.prototype.forEach.call(el.options, function (o) { var ok = variants.some(function (v) { if (v['option' + (ix + 1)] !== o.value) return false; for (var k = 0; k < options.length; k++) { if (k !== ix) { var sv = selectedValue(options[k]); if (sv != null && sv !== v['option' + (k + 1)]) return false; } } return true; }); o.hidden = !ok; o.disabled = !ok; }); if (el.options[el.selectedIndex] && el.options[el.selectedIndex].disabled) { for (var j = 0; j < el.options.length; j++) { if (!el.options[j].disabled) { el.selectedIndex = j; break; } } } }); } form.addEventListener('change', opFilter); opFilter(); form.addEventListener('change', update);
     update();
   }
 
