@@ -79,7 +79,7 @@
                 sum.appendChild(document.createTextNode(' '));
                 sum.appendChild(hint);
               }
-              hint.textContent = '(' + opt.getAttribute('data-val') + ')';
+              hint.textContent = '(' + (opt.getAttribute('data-label') || opt.getAttribute('data-val')) + ')';
             }
           }
           if (picker.hasAttribute('data-op-gift')) toggleGift(picker, opt.getAttribute('data-gift'));
