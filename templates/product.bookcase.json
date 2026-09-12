@@ -13,7 +13,7 @@
       "type": "product",
       "blocks": {
         "heading": { "type": "heading", "settings": {
-          "title": "<p>Book <em>Case</em></p>",
+          "title": "<p>Book<em>case</em></p>",
           "intro": "<p>Nuestros bookcases están hechas con el mismo material, diseño y cuidado que nuestros libros. Son literalmente el libro convertido en caja: mismas texturas, mismo estilo, misma personalización, pero en versión funda rígida.</p>"
         }},
         "details": { "type": "accordion", "settings": {
