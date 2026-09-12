@@ -29,7 +29,7 @@
         "hotstamping": { "type": "swatch", "settings": { "label": "Hotstamping", "palette": "hotstamping", "default": "Dorado", "collapsible": true }},
         "herraje": { "type": "dropdown", "settings": { "label": "Medidas de herraje", "options": "Sin Herraje, 1 Pulgada, 1.5 Pulgadas, 2 Pulgadas" }},
         "usb": { "type": "radio", "settings": { "label": "Espacio para USB", "options": "Sí, No", "default": "No" }},
-        "placa": { "type": "radio", "settings": { "label": "¿Cuentas con placa de logotipo?", "options": "Sí, No", "default": "Sí" }},
+        "placa": { "type": "radio", "settings": { "label": "¿Quieres placa de logotipo?", "options": "Sí, No", "default": "Sí" }},
         "logo": { "type": "url", "settings": { "label": "Agrega tu logotipo (opcional)", "placeholder": "Adjunta el link con el logotipo en formato PDF o PNG." }}
       },
       "block_order": ["heading", "details", "shipping", "material", "size", "color_tela", "color_plastificada", "color_papel", "hotstamping", "herraje", "usb", "placa", "logo"],

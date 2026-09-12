@@ -101,7 +101,7 @@
         "placa": {
           "type": "radio",
           "settings": {
-            "label": "¿Cuentas con placa de logotipo?",
+            "label": "¿Quieres placa de logotipo?",
             "options": "Sí, No",
             "default": "Sí",
             "note": ""
