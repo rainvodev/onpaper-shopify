@@ -31,6 +31,6 @@
     {%- assign nm = parts[0] -%}
     {%- assign hx = parts[1] -%}
     {%- assign fn = 'swatch-' | append: parts[2] | append: '.webp' -%}
-    {%- assign lbl = nm -%}{%- if request.locale.iso_code == 'en' -%}{%- for tr in i18n_en -%}{%- assign tp = tr | split: '>' -%}{%- if tp[0] == nm -%}{%- assign lbl = tp[1] -%}{%- break -%}{%- endif -%}{%- endfor -%}{%- endif -%}<button type="button" class="op-product_swatch{% if nm == default %} is-active{% endif %}" data-val="{{ nm | escape }}" data-label="{{ lbl | escape }}" title="{{ lbl | escape }}" aria-label="{{ lbl | escape }}" style="background-color: {{ hx }}; background-image: url({{ fn | asset_url }});"></button>
+    {%- assign lbl = nm -%}{%- if nm == 'Quemado' -%}{%- assign lbl = 'Quemado, hundido sin color' -%}{%- endif -%}{%- if request.locale.iso_code == 'en' -%}{%- for tr in i18n_en -%}{%- assign tp = tr | split: '>' -%}{%- if tp[0] == nm -%}{%- assign lbl = tp[1] -%}{%- break -%}{%- endif -%}{%- endfor -%}{%- endif -%}<button type="button" class="op-product_swatch{% if nm == default %} is-active{% endif %}" data-val="{{ nm | escape }}" data-label="{{ lbl | escape }}" title="{{ lbl | escape }}" aria-label="{{ lbl | escape }}" style="background-color: {{ hx }}; background-image: url({{ fn | asset_url }});"></button>
   {%- endfor -%}
 </div>
