@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -25,7 +34,7 @@
       },
       "block_order": ["heading", "details", "shipping", "material", "size", "color_tela", "color_plastificada", "color_papel", "hotstamping", "herraje", "usb", "placa", "logo"],
       "settings": {
-        "personalize_heading": "Personaliza tu Caja",
+        "add_label": "Agregar al carrito", "personalize_heading": "Personaliza tu Caja",
         "qty_style": "dropdown",
         "qty_label": "Cantidad de cajas",
         "qty_note": "A partir de 21 cajas o más, escríbenos para recibir cotización personalizada.",
