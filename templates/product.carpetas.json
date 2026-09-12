@@ -104,7 +104,7 @@
             "label": "¿Quieres placa de logotipo?",
             "options": "Sí, No",
             "default": "No",
-            "note": "Si eliges Sí, agrega también la pieza Placa de logotipo (850 MXN, máximo 10x10 cm). Se fabrica una sola vez."
+            "note": "Si eliges Sí, agrega también la pieza <a href=\"/products/placa-de-logotipo\">Placa de logotipo</a> (850 MXN, máximo 10x10 cm). Se fabrica una sola vez."
           }
         },
         "logo": {
