@@ -39,7 +39,7 @@
         "qty_style": "dropdown",
         "qty_label": "Cantidad",
         "qty_note": "A partir de 6 libros o más, se requiere cotización personalizada.",
-        "show_buy_now": true,
+        "show_buy_now": false,
         "show_related": true,
         "related_heading": "También te puede gustar…"
       }

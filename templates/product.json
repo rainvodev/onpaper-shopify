@@ -23,7 +23,7 @@
         "qty_min": 1,
         "qty_note": "",
         "add_label": "Agregar al carrito",
-        "show_buy_now": true,
+        "show_buy_now": false,
         "show_related": true,
         "related_heading": "También te puede gustar…"
       }

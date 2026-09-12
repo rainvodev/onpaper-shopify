@@ -153,7 +153,7 @@
         "qty_min": 1,
         "qty_note": "A partir de 6 libros o más, se requiere cotización personalizada.",
         "add_label": "Agregar al carrito",
-        "show_buy_now": true,
+        "show_buy_now": false,
         "show_related": true,
         "related_heading": "También te puede gustar…"
       }

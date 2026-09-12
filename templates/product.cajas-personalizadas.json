@@ -38,7 +38,7 @@
         "qty_style": "dropdown",
         "qty_label": "Cantidad de cajas",
         "qty_note": "A partir de 21 cajas o más, escríbenos para recibir cotización personalizada.",
-        "show_buy_now": true,
+        "show_buy_now": false,
         "show_related": true,
         "related_heading": "También te puede gustar…"
       }

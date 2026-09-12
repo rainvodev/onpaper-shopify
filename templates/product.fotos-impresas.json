@@ -30,7 +30,7 @@
         "qty_style": "stepper",
         "add_label": "Agregar al carrito", "qty_label": "Cantidad (mínimo 25 fotos)",
         "qty_min": 25,
-        "show_buy_now": true,
+        "show_buy_now": false,
         "show_related": true,
         "related_heading": "También te puede gustar…"
       }

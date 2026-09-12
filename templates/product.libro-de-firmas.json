@@ -37,7 +37,7 @@
         "add_label": "Agregar al carrito", "personalize_heading": "Personaliza tu Libro de Firmas",
         "qty_style": "dropdown",
         "qty_label": "Cantidad",
-        "show_buy_now": true,
+        "show_buy_now": false,
         "show_related": true,
         "related_heading": "También te puede gustar…"
       }
