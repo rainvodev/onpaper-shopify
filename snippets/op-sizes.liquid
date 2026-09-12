@@ -32,7 +32,7 @@
       {%- assign bh = 4.4 -%}
       {%- assign bw = 4.4 | times: w | divided_by: h -%}
     {%- endif -%}
-    <button type="button" class="op-product_size{% if it == default %} is-active{% endif %}" data-val="{{ it | escape }}">
+    {%- unless set == 'fotos' -%}{%- assign bw = 4.4 | times: w | divided_by: maxd -%}{%- assign bh = 4.4 | times: h | divided_by: maxd -%}{%- endunless -%}<button type="button" class="op-product_size{% if it == default %} is-active{% endif %}" data-val="{{ it | escape }}">
       <span class="op-product_size-box" style="--w: {{ bw }}rem; --h: {{ bh }}rem;"></span>
       <span class="op-product_size-label">{{ it }}&Prime;</span>
     </button>
