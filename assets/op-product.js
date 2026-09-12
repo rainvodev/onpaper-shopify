@@ -87,7 +87,7 @@
       });
     });
 
-    // Giftcard: mostrar pane A (producto) o B (monto)
+    root.querySelectorAll('.op-product_swatches').forEach(function (p) { var a = p.querySelector('.is-active[data-label]'); var g = p.closest('.op-product_grp'); var h = g && g.querySelector('.op-product_grp-hint'); if (a && h) h.textContent = '(' + a.getAttribute('data-label') + ')'; }); // Giftcard: mostrar pane A (producto) o B (monto)
     function toggleGift(picker, which) {
       var field = picker.closest('.op-product_field');
       if (!field) return;
