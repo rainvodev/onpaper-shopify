@@ -1,1 +1,36 @@
-|Cobre>Copper|Dorado>Gold|Quemado>Debossed (no foil)"
+{% comment %} On Paper — grid de swatches (Color / Hotstamping). Params: palette, property (= label),
+  default (nombre). PALETAS REALES del taller (carpeta Drive "On Paper (WebP)", ago-2026): el nombre
+  es el valor que viaja al carrito/pedido — no renombrar sin avisar al taller. El hex es el color
+  promedio muestreado de la textura real; la textura vive en el repo: assets/swatch-<paleta>-<slug>.webp.
+  El mismo slug del color forma la llave de la imagen de producto por color:
+  <handle>-<material>-<orientación>-<slug>.webp (ver op-product.js y docs/imagenes-spec.md). {% endcomment %}
+{%- liquid
+  case palette
+    when 'hotstamping'
+      assign data = "Quemado|#efede6|hotstamping-quemado;Dorado|#cbb572|hotstamping-dorado;Plateado|#c8c8c9|hotstamping-plateado;Cobre|#9e6c48|hotstamping-cobre-matte;Café matte|#615149|hotstamping-cafe-matte;Blanco matte|#dddce3|hotstamping-blanco-matte;Negro matte|#4a4b48|hotstamping-negro-matte"
+    when 'vinipieles'
+      assign data = "Nude|#ccbeae|vinipieles-nude;Avena|#d4cbbc|vinipieles-avena;Azul marino|#6b7580|vinipieles-azul-marino;Blanco|#e9e9e9|vinipieles-blanco;Blanco hueso|#dadbdc|vinipieles-blanco-hueso;Terracota|#8e7769|vinipieles-terracota;Café obscuro|#807771|vinipieles-cafe-obscuro;Café|#9e8f83|vinipieles-cafe;Crema|#dddbd9|vinipieles-crema;Gris obscuro|#7c7c7c|vinipieles-gris-obscuro;Gris|#828282|vinipieles-gris;Negro brilloso|#a6a7a9|vinipieles-negro-brilloso;Gris marmoleado|#b5b5b5|vinipieles-gris-marmoleado;Negro|#6e6f6f|vinipieles-negro;Vino|#886762|vinipieles-vino;Taupe|#9c9997|vinipieles-taupe;Verde militar|#858478|vinipieles-verde-militar;Verde|#868878|vinipieles-verde"
+      comment
+        OCULTOS hasta tener sus mockups (el taller no los entregó; ver docs/imagenes-spec.md):
+        ;Rosa metálico|#9e8682|vinipieles-rosa-metalico;Azul metálico|#576d8a|vinipieles-azul-metalico
+        Para restaurarlos: re-agregar esas dos entradas al final del string de vinipieles.
+      endcomment
+    when 'telas-plastificadas'
+      assign data = "Azul obscuro|#67696f|telas-plastificadas-azul-obscuro;Blanco|#edf1ec|telas-plastificadas-blanco;Gris claro|#cdcbc5|telas-plastificadas-gris-claro;Gris|#909493|telas-plastificadas-gris;Negro|#6e6d6a|telas-plastificadas-negro;Rojo|#ad7979|telas-plastificadas-rojo"
+    when 'papel-texturizado'
+      assign data = "Papel Negro|#5a5958|papel-texturizado-papel-negro;Papel Blanco|#f7f9fb|papel-texturizado-papel-blanco;Papel Azul|#597388|papel-texturizado-papel-azul;Papel Verde Crema|#cec6a0|papel-texturizado-papel-verde-crema;Papel Café Claro|#9d8267|papel-texturizado-papel-cafe-claro;Papel Café Obscuro|#6e584c|papel-texturizado-papel-cafe-obscuro;Papel Negro Textura Piel|#595a5c|papel-texturizado-papel-negro-textura-piel;Papel Gris|#99a3a4|papel-texturizado-papel-gris;Papel Verde Hoja|#77956a|papel-texturizado-papel-verde-hoja;Papel Negro Textura Plastificada|#3c3c3a|papel-texturizado-papel-negro-textura-plastificada;Papel Blanco Textura Plastificado|#e1e1dc|papel-texturizado-papel-blanco-textura-plastificado;Papel Vino Textura Plastificada|#6f353f|papel-texturizado-papel-vino-textura-plastificada;Papel Azul Textura Plastificada|#435281|papel-texturizado-papel-azul-textura-plastificada;Papel Verde Textura Plastificada|#3b5847|papel-texturizado-papel-verde-textura-plastificada"
+    else
+      assign data = "Negro|#444442|telas-negro;Café claro|#bb9e85|telas-cafe-claro;Mostaza obscuro|#a0704c|telas-mostaza-obscuro;Gris obscuro|#726d6b|telas-gris-obscuro;Azul marino|#495966|telas-azul-marino;Terracota|#995d45|telas-terracota;Ocre|#ac8b5a|telas-ocre;Vino|#79494c|telas-vino;Café obscuro|#5f5247|telas-cafe-obscuro;Arena|#baa694|telas-arena;Naranja|#d17150|telas-naranja;Onix|#555f61|telas-onix;Gris claro|#aeaaa5|telas-gris-claro;Blanco crema|#ebece7|telas-blanco-crema;Avena|#d2c6b3|telas-avena;Verde militar|#807f4c|telas-verde-militar;Lino almendra|#d0cbc5|telas-lino-almendra;Tela plastificada negra|#4a4845|telas-tela-plastificada-negra;Tela plastificada blanca|#eaefea|telas-tela-plastificada-blanca;Tela plastificada roja|#995657|telas-tela-plastificada-roja;Tela plastificada gris|#c3c0b9|telas-tela-plastificada-gris;Tela plastificada gris obscuro|#757977|telas-tela-plastificada-gris-obscuro;Tela plastificada azul marino|#535759|telas-tela-plastificada-azul-marino;Blanco brillo|#ece9da|telas-blanco-brillo;Gris claro brillo|#babbb7|telas-gris-claro-brillo;Gris brillo|#6d7071|telas-gris-brillo"
+  endcase
+  assign rows = data | split: ';'
+-%}
+{%- assign i18n_en = "Negro>Black|Café claro>Light brown|Mostaza obscuro>Dark mustard|Gris obscuro>Dark grey|Azul marino>Navy blue|Terracota>Terracotta|Ocre>Ochre|Vino>Burgundy|Café obscuro>Dark brown|Arena>Sand|Naranja>Orange|Onix>Onyx|Gris claro>Light grey|Blanco crema>Cream white|Avena>Oat|Verde militar>Army green|Lino almendra>Almond linen|Tela plastificada negra>Black coated fabric|Tela plastificada blanca>White coated fabric|Tela plastificada roja>Red coated fabric|Tela plastificada gris>Grey coated fabric|Tela plastificada gris obscuro>Dark grey coated fabric|Tela plastificada azul marino>Navy coated fabric|Blanco brillo>Glossy white|Gris claro brillo>Glossy light grey|Gris brillo>Glossy grey|Nude>Nude|Blanco>White|Blanco hueso>Bone white|Café>Brown|Crema>Cream|Gris>Grey|Negro brilloso>Glossy black|Gris marmoleado>Marbled grey|Taupe>Taupe|Verde>Green|Azul obscuro>Dark blue|Rojo>Red|Papel Negro>Black paper|Papel Blanco>White paper|Papel Azul>Blue paper|Papel Verde Crema>Cream green paper|Papel Café Claro>Light brown paper|Papel Café Obscuro>Dark brown paper|Papel Negro Textura Piel>Black paper, leather texture|Papel Gris>Grey paper|Papel Verde Hoja>Leaf green paper|Papel Negro Textura Plastificada>Black paper, coated texture|Papel Blanco Textura Plastificado>White paper, coated texture|Papel Vino Textura Plastificada>Burgundy paper, coated texture|Papel Azul Textura Plastificada>Blue paper, coated texture|Papel Verde Textura Plastificada>Green paper, coated texture|Café matte>Matte brown|Negro matte>Matte black|Plateado>Silver|Blanco matte>Matte white|Cobre matte>Matte copper|Dorado>Gold|Oro rosa>Rose gold" | split: '|' -%}<div class="op-product_swatches" data-op-picker data-prop="{{ property | escape }}">
+  <input type="hidden" name="properties[{{ property }}]" value="{{ default }}">
+  {%- for r in rows -%}
+    {%- assign parts = r | split: '|' -%}
+    {%- assign nm = parts[0] -%}
+    {%- assign hx = parts[1] -%}
+    {%- assign fn = 'swatch-' | append: parts[2] | append: '.webp' -%}
+    {%- assign lbl = nm -%}{%- if request.locale.iso_code == 'en' -%}{%- for tr in i18n_en -%}{%- assign tp = tr | split: '>' -%}{%- if tp[0] == nm -%}{%- assign lbl = tp[1] -%}{%- break -%}{%- endif -%}{%- endfor -%}{%- endif -%}<button type="button" class="op-product_swatch{% if nm == default %} is-active{% endif %}" data-val="{{ nm | escape }}" data-label="{{ lbl | escape }}" title="{{ lbl | escape }}" aria-label="{{ lbl | escape }}" style="background-color: {{ hx }}; background-image: url({{ fn | asset_url }});"></button>
+  {%- endfor -%}
+</div>
