@@ -73,7 +73,7 @@
               {%- if section.settings.shipping_note != blank -%}
                 <p class="op-cartpage_shipnote">{{ section.settings.shipping_note }}</p>
               {%- endif -%}
-              <button type="submit" name="checkout" class="op-cartpage_checkout">{{ section.settings.checkout_label | default: 'Finalizar compra' }}</button>
+              {%- if section.settings.cart_note != blank -%}<div class="op-cart_note">{{ section.settings.cart_note }}</div>{%- endif -%}<button type="submit" name="checkout" class="op-cartpage_checkout">{{ section.settings.checkout_label | default: 'Finalizar compra' }}</button>
               {%- if additional_checkout_buttons -%}
                 <div class="op-cartpage_addl">{{ content_for_additional_checkout_buttons }}</div>
               {%- endif -%}
