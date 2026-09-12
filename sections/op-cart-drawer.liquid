@@ -73,7 +73,7 @@
           <span>{{ section.settings.subtotal_label | default: 'Subtotal' }}</span>
           <span>{{ cart.total_price | money }}</span>
         </div>
-        <form action="{{ routes.cart_url }}" method="post">
+        {%- if section.settings.cart_note != blank -%}<div class="op-cart_note">{{ section.settings.cart_note }}</div>{%- endif -%}<form action="{{ routes.cart_url }}" method="post">
           <button type="submit" name="checkout" class="op-cart_checkout">{{ section.settings.checkout_label | default: 'Finalizar compra' }}</button>
         </form>
         <a href="{{ routes.cart_url }}" class="op-cart_view">{{ section.settings.view_label | default: 'Ver carrito' }}</a>
