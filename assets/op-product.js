@@ -287,7 +287,7 @@
       root.querySelectorAll('[name="properties[Color]"]').forEach(function (i) { if (!i.disabled) el = i; });
       return el ? el.value : null;
     }
-    if (form && (mediaList.length || ((imgBase || filesBase) && imgPrefix))) {
+    var OP_NO_MOCKUP = ['carpetas-', 'cajas-personalizadas-', 'porta-planos-']; if (form && OP_NO_MOCKUP.indexOf(imgPrefix) === -1 && (mediaList.length || ((imgBase || filesBase) && imgPrefix))) {
       form.addEventListener('change', function (e) {
         var name = e.target && e.target.name;
         if (name === 'properties[Color]') colorImage(e.target.value);
