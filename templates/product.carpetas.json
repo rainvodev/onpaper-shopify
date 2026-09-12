@@ -95,7 +95,7 @@
           "type": "dropdown",
           "settings": {
             "label": "Medidas de herraje",
-            "options": "Sin Herraje, 1 Pulgada, 1.5 Pulgadas, 2 Pulgadas"
+            "options": "1 Pulgada, 1.5 Pulgadas, 2 Pulgadas"
           }
         },
         "placa": {
