@@ -18,7 +18,7 @@
         }},
         "details": { "type": "accordion", "settings": {
           "heading": "Detalles",
-          "content": "<p>Protección, presentación y diseño en una sola pieza.</p><p>Están hechos a mano con materiales resistentes, su medida es de 60 x 90 cm y puedes elegir desde el material, hasta el estampado con logotipo, nombre, o frase. Son ideales para entregas de proyectos arquitectónicos o propuestas creativas.</p>"
+          "content": "<p>Protección, presentación y diseño en una sola pieza.</p><p>Están hechos a mano con materiales resistentes, su medida es de 60 x 7 cm y puedes elegir desde el material, hasta el estampado con logotipo, nombre, o frase. Son ideales para entregas de proyectos arquitectónicos o propuestas creativas.</p>"
         }},
         "shipping": { "type": "accordion", "settings": { "heading": "Tiempo de envío", "content": "<p>15 días hábiles.</p>" }},
         "material": { "type": "pills", "settings": { "label": "Material", "options": "Tela, Tela Plastificada, Papel Texturizado", "default": "Papel Texturizado", "collapsible": true }},
