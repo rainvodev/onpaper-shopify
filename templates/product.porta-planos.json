@@ -31,7 +31,7 @@
       },
       "block_order": ["heading", "details", "shipping", "material", "color_tela", "color_plastificada", "color_papel", "hotstamping", "placa", "logo"],
       "settings": {
-        "personalize_heading": "Personaliza tu Portaplano",
+        "add_label": "Agregar al carrito", "personalize_heading": "Personaliza tu Portaplano",
         "qty_style": "dropdown",
         "qty_label": "Cantidad de portaplanos",
         "qty_note": "A partir de 21 portaplanos o más, escríbenos para recibir cotización personalizada.",
