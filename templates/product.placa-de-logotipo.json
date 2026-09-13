@@ -1,0 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "product",
+      "settings": {
+        "padding_top": 52,
+        "padding_bottom": 96,
+        "back_label": "← Productos",
+        "back_link": "",
+        "personalize_heading": "Personaliza tu producto",
+        "show_qty": true,
+        "qty_label": "Cantidad",
+        "qty_style": "dropdown",
+        "qty_min": 1,
+        "qty_note": "",
+        "add_label": "Agregar al carrito",
+        "show_buy_now": false,
+        "show_related": true,
+        "related_heading": "También te puede gustar…"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
