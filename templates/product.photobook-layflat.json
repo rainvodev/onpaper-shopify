@@ -138,7 +138,7 @@
         "ventana",
         "titulo_p",
         "titulo_l",
-        "fotos",
+        "fotos", "copias", "copias_nota",
         "link"
       ],
       "settings": {
