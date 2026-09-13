@@ -106,7 +106,7 @@
       html += '<footer class="op-cart_foot"><div class="op-cart_subtotal"><span>' + esc(label(cur, 'subtotal', 'Subtotal'))
         + '</span><span>' + money(cart.total_price) + '</span></div>'
         + '<p class="op-cart_error" data-op-cart-error hidden></p>'
-        + '<form action="' + esc(cartUrl) + '" method="post"><button type="submit" name="checkout" class="op-cart_checkout">' + esc(label(cur, 'checkout', 'Finalizar compra')) + '</button></form>'
+        + (label(cur, 'note', '') ? '<div class="op-cart_note">' + label(cur, 'note', '') + '</div>' : '') + '<form action="' + esc(cartUrl) + '" method="post">' + (label(cur, 'terms', '') ? '<label class="op-cart_terms"><input type="checkbox" name="attributes[Acepto términos y condiciones]" value="Sí" required><span>' + label(cur, 'terms', '') + '</span></label>' : '') + '<button type="submit" name="checkout" class="op-cart_checkout">' + esc(label(cur, 'checkout', 'Finalizar compra')) + '</button></form>'
         + '<a href="' + esc(cartUrl) + '" class="op-cart_view">' + esc(label(cur, 'view', 'Ver carrito')) + '</a></footer>';
     }
     html += '</aside>';
