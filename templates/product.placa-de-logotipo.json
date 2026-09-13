@@ -10,7 +10,7 @@
 {
   "sections": {
     "main": {
-      "type": "product",
+      "type": "product", "blocks": { "heading": { "type": "heading", "settings": { "title": "<p>Placa de <em>logotipo</em></p>", "intro": "<p>La placa es el molde con el que se marca tu logotipo en caliente sobre la pieza. Se fabrica una sola vez y se guarda en el taller: en tus pedidos siguientes ya no vuelves a pagarla.</p>" } }, "details": { "type": "accordion", "settings": { "heading": "Detalles", "content": "<p>Medida máxima 10 x 10 cm.</p><p>Si pides varias piezas con el mismo logotipo, basta con una placa.</p><p>Se agrega junto con tu caja, carpeta o portaplanos.</p>" } }, "archivo": { "type": "accordion", "settings": { "heading": "Cómo mandar tu logotipo", "content": "<p>Mándanos tu logotipo en PDF o SVG, vectorizado y en una sola tinta.</p>" } }, "link": { "type": "url", "settings": { "label": "Link de tu logotipo", "placeholder": "Ingresa el URL", "note": "*Solo se aceptan links en Google Drive o WeTransfer. Si prefieres, escríbenos a taller@onpaper.mx." } } }, "block_order": ["heading", "details", "archivo", "link"],
       "settings": {
         "padding_top": 52,
         "padding_bottom": 96,
