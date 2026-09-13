@@ -114,7 +114,7 @@
           "type": "dropdown",
           "settings": {
             "label": "Número de fotos y páginas",
-            "options": "0-50 fotos (20-30 páginas), 0-100 fotos (40-50 páginas), 0-150 fotos (60-70 páginas), 0-200 fotos (80-90 páginas), 0-250 fotos (100 páginas)"
+            "options": "0-50 fotos (20-30 páginas), 0-100 fotos (40-50 páginas), 0-150 fotos (60-70 páginas), 0-200 fotos (80-90 páginas), 0-250 fotos (100 páginas)" } }, "copias": { "type": "dropdown", "settings": { "label": "Copias", "options": "Sin copia, 1 copia, 2 copias" } }, "copias_nota": { "type": "note", "settings": { "text": "Cada copia del mismo libro cuesta el 30% de su precio, no el 100%. Se imprime con el mismo diseño."
           }
         },
         "link": {
