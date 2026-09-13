@@ -21,7 +21,7 @@
         "qty_label": "Cantidad",
         "qty_style": "dropdown",
         "qty_min": 1,
-        "qty_note": "",
+        "qty_note": "Una sola placa sirve para todas las piezas con el mismo logotipo.",
         "add_label": "Agregar al carrito",
         "show_buy_now": false,
         "show_related": true,
