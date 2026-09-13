@@ -146,7 +146,7 @@
         "ventana",
         "interior",
         "titulo",
-        "fotos",
+        "fotos", "copias", "copias_nota",
         "link"
       ],
       "settings": {
