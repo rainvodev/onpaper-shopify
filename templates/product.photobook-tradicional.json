@@ -122,7 +122,7 @@
           "type": "dropdown",
           "settings": {
             "label": "Copias",
-            "options": "Sin copia, 1 copia, 2 copias"
+            "options": "Sin copia, 1 copia, 2 copias" } }, "copias_nota": { "type": "note", "settings": { "text": "Cada copia del mismo libro cuesta el 40% de su precio, no el 100%. Se imprime con el mismo diseño."
           }
         },
         "link": {
