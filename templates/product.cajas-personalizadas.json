@@ -32,7 +32,7 @@
         "placa": { "type": "radio", "settings": { "label": "¿Quieres placa de logotipo?", "options": "Sí, No", "default": "No", "note": "Todo el marcado en caliente (logotipo, nombre o frase) se hace con placa. Si eliges Sí y aún no tienes la tuya, agrega también la pieza <a href=\"/products/placa-de-logotipo\">Placa de logotipo</a> (850 MXN, máximo 10x10 cm). Se fabrica una sola vez y se guarda en el taller." }},
         "logo": { "type": "url", "settings": { "label": "Agrega tu logotipo (opcional)", "placeholder": "Adjunta el link con el logotipo en formato PDF o PNG." }}
       },
-      "block_order": ["heading", "details", "shipping", "material", "size", "color_tela", "color_plastificada", "color_papel", "hotstamping", "herraje", "usb", "placa", "logo"],
+      "block_order": ["heading", "details", "shipping", "material", "size", "color_tela", "color_plastificada", "color_papel", "hotstamping", "herraje", "usb", "placa"],
       "settings": {
         "add_label": "Agregar al carrito", "personalize_heading": "Personaliza tu Caja",
         "qty_style": "dropdown",
