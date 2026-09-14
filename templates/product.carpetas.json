@@ -125,9 +125,9 @@
         "color_tela",
         "color_plastificada",
         "color_papel",
-        "hotstamping",
         "herraje",
-        "placa"
+        "placa",
+        "hotstamping"
       ],
       "settings": {
         "padding_top": 64,
