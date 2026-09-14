@@ -15,7 +15,7 @@
     "foreground_color": "#5f604e",
     "input_corner_radius": 4,
     "favicon": "shopify://shop_images/favicon-on-paper-polaroid.png",
-    "sold_out_telas": "Ocre, Vino",
+    "sold_out_telas": "",
     "sold_out_hotstamping": "Dorado",
     "sections": {
       "op-cart-drawer": {
