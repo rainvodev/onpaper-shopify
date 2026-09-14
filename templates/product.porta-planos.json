@@ -25,7 +25,7 @@
         "color_tela": { "type": "swatch", "settings": { "label": "Color", "palette": "telas", "default": "Blanco crema", "show_for": "Tela", "collapsible": true }},
         "color_plastificada": { "type": "swatch", "settings": { "label": "Color", "palette": "telas-plastificadas", "default": "Blanco", "show_for": "Tela Plastificada", "collapsible": true }},
         "color_papel": { "type": "swatch", "settings": { "label": "Color", "palette": "papel-texturizado", "default": "Papel Blanco", "show_for": "Papel Texturizado", "collapsible": true }},
-        "hotstamping": { "type": "swatch", "settings": { "label": "Hotstamping", "palette": "hotstamping", "default": "Dorado", "collapsible": true }},
+        "hotstamping": { "type": "swatch", "settings": { "label": "Hotstamping", "palette": "hotstamping", "depends_on": "¿Quieres placa de logotipo?", "show_for": "Sí", "default": "Dorado", "collapsible": true }},
         "placa": { "type": "radio", "settings": { "label": "¿Quieres placa de logotipo?", "options": "Sí, No", "default": "No", "note": "Todo el marcado en caliente (logotipo, nombre o frase) se hace con placa. Si eliges Sí y aún no tienes la tuya, agrega también la pieza <a href=\"/products/placa-de-logotipo\">Placa de logotipo</a> (850 MXN, máximo 10x10 cm). Se fabrica una sola vez y se guarda en el taller." }},
         "logo": { "type": "url", "settings": { "label": "Agrega tu logotipo (opcional)", "placeholder": "Adjunta el link con el logotipo en formato PDF." }}
       },

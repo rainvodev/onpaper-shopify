@@ -86,7 +86,7 @@
           "type": "swatch",
           "settings": {
             "label": "Hotstamping",
-            "palette": "hotstamping",
+            "palette": "hotstamping", "depends_on": "¿Quieres placa de logotipo?", "show_for": "Sí",
             "default": "Dorado",
             "collapsible": true
           }
