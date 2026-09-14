@@ -16,7 +16,7 @@
     "input_corner_radius": 4,
     "favicon": "shopify://shop_images/favicon-on-paper-polaroid.png",
     "sold_out_telas": "Ocre, Vino",
-    "sold_out_hotstamping": "Plateado",
+    "sold_out_hotstamping": "Dorado",
     "sections": {
       "op-cart-drawer": {
         "type": "op-cart-drawer",
