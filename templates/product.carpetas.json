@@ -139,7 +139,7 @@
         "qty_label": "Cantidad de carpetas",
         "qty_style": "dropdown",
         "qty_min": 1,
-        "qty_note": "A partir de 11 carpetas o más, escríbenos para recibir cotización personalizada.",
+        "qty_note": "A partir de 6 piezas o más, escríbenos para recibir cotización personalizada.",
         "add_label": "Agregar al carrito",
         "show_buy_now": false,
         "show_related": true,
