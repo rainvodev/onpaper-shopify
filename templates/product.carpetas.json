@@ -127,8 +127,7 @@
         "color_papel",
         "hotstamping",
         "herraje",
-        "placa",
-        "logo"
+        "placa"
       ],
       "settings": {
         "padding_top": 64,
