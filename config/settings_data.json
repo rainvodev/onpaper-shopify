@@ -16,7 +16,7 @@
     "input_corner_radius": 4,
     "favicon": "shopify://shop_images/favicon-on-paper-polaroid.png",
     "sold_out_telas": "",
-    "sold_out_hotstamping": "Dorado",
+    "sold_out_hotstamping": "",
     "sections": {
       "op-cart-drawer": {
         "type": "op-cart-drawer",
