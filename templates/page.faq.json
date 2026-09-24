@@ -86,7 +86,7 @@
           "type": "item",
           "settings": {
             "question": "¿Qué formas de pago aceptan? ¿Puedo dar anticipo?",
-            "answer": "<p>Aceptamos tarjeta de crédito y débito en la tienda en línea, transferencias bancarias, depósitos, y efectivo o tarjeta con terminal en nuestra oficina. Los pedidos hechos por la página web se pagan en su totalidad al momento de la compra; la opción de anticipo del 50% está disponible únicamente para pedidos hechos directamente por WhatsApp.</p>"
+            "answer": "<p>En la tienda en línea el pago es con tarjeta de crédito o débito, por el total del pedido. Si nos escribes por WhatsApp aceptamos además transferencia, depósito, y efectivo o tarjeta con terminal en el taller; ahí también puedes dejar un anticipo del 50% y liquidar antes de la entrega.</p>"
           }
         },
         "item_Np394c": {
