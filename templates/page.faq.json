@@ -93,7 +93,7 @@
           "type": "item",
           "settings": {
             "question": "¿Cuánto cuesta el envío? ¿Puedo recoger en el taller?",
-            "answer": "<p>El costo del envío depende del destino y se te confirma al hacer tu pedido. La recolección en nuestro taller en San Pedro es sin costo, con cita previa, de lunes a viernes de 9:00 am a 5:30 pm. Si quieres saber el costo a tu ciudad antes de comprar, escríbenos por WhatsApp o correo.</p>"
+            "answer": "<p>El envío nacional es una tarifa única de $300 MXN a cualquier parte de la República, sin importar la ciudad. La recolección en nuestro taller en San Pedro es sin costo, con cita previa, de lunes a viernes de 9:00 am a 5:30 pm: elige la opción Retiro en el checkout. En pedidos por volumen, arriba del máximo que permite la página, el envío se cotiza aparte junto con la pieza.</p>"
           }
         },
         "item_nf4bMP": {
