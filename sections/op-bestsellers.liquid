@@ -25,7 +25,7 @@
             </a>
             <h3 class="op-best_title">{{ product.title }}</h3>
             {%- if product.price > 0 -%}
-              <p class="op-best_price"><em>from</em> {{ product.price | money }}</p>
+              <p class="op-best_price"><em>{% if request.locale.iso_code == 'en' %}from{% else %}desde{% endif %}</em> {{ product.price | money }}</p>
             {%- endif -%}
             {%- if section.settings.cta_label != blank -%}
               <a href="{{ product.url }}" class="op-best_cta">{{ section.settings.cta_label }}</a>
@@ -40,7 +40,7 @@
           <article class="op-best_card" data-reveal style="--reveal-delay: {{ forloop.index0 | times: 110 }}ms">
             <a href="#" class="op-best_media"><div class="op-best_img op-best_img--ph"></div></a>
             <h3 class="op-best_title">Producto {{ i }}</h3>
-            <p class="op-best_price"><em>from</em> $0.00 mxn</p>
+            <p class="op-best_price"><em>{% if request.locale.iso_code == 'en' %}from{% else %}desde{% endif %}</em> $0.00 mxn</p>
             {%- if section.settings.cta_label != blank -%}<a href="#" class="op-best_cta">{{ section.settings.cta_label }}</a>{%- endif -%}
           </article>
         {%- endfor -%}
