@@ -47,7 +47,7 @@
           "settings": {
             "label": "Tamaño",
             "set": "photobook",
-            "default": "14x11",
+            "default": "8x8",
             "note": "Medidas en Pulgadas",
             "collapsible": true
           }
