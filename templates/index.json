@@ -15,7 +15,7 @@
         "slide_adVHqi": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/home-hero-01.webp"
+            "image": "shopify://shop_images/home-hero-03.webp"
           }
         },
         "slide-1": {
@@ -41,7 +41,7 @@
         "autoplay": 6,
         "content_width": 40,
         "heading": "<p>Crafted with passion, <em>designed for a lifetime.</em></p>",
-        "subheading": "",
+        "subheading": "Fotolibros, cajas y libros de firmas hechos a mano en Monterrey, con tus fotos.",
         "cta_label": "Comprar ahora",
         "cta_link": "shopify://collections/all-products",
         "more_label": "More of us",
@@ -125,7 +125,7 @@
         "padding_bottom": 64,
         "ratio": "0.8",
         "speed": 35,
-        "strip_label": "Book case",
+        "strip_label": "Bookcase",
         "strip_link": "shopify://products/bookcase"
       }
     },
@@ -289,11 +289,11 @@
   },
   "order": [
     "main",
-    "about",
+    "bestsellers", "about",
     "bookcase",
     "about_note",
     "collection_banner",
-    "bestsellers",
+    
     "cta",
     "gallery"
   ]
